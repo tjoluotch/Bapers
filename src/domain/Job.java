@@ -36,7 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Job.findByCode", query = "SELECT j FROM Job j WHERE j.code = :code")
     , @NamedQuery(name = "Job.findByJobDescription", query = "SELECT j FROM Job j WHERE j.jobDescription = :jobDescription")
     , @NamedQuery(name = "Job.findByPrice", query = "SELECT j FROM Job j WHERE j.price = :price")
-    , @NamedQuery(name = "Job.findByJobDeadline", query = "SELECT j FROM Job j WHERE j.jobDeadline = :jobDeadline")})
+    , @NamedQuery(name = "Job.findByJobDeadline", query = "SELECT j FROM Job j WHERE j.jobDeadline = :jobDeadline")
+    , @NamedQuery(name = "Job.findByOrderID", query = "SELECT j FROM Job j WHERE j.orderID = :orderID")})
 public class Job implements Serializable {
 
     private static final long serialVersionUID = 1L;

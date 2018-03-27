@@ -40,19 +40,22 @@ public class DataManagerJDBCImpl implements DataManager{
         TypedQuery<Task> query = em.createNamedQuery("Task.findAll", Task.class);
         return query.getResultList();
     }
-
-    @Override
-    public Customer findCustomerByForename(String forename) {
-        TypedQuery<Customer> query = em.createNamedQuery("Customer.findByForename", Customer.class);
-        query.setParameter("forename", forename);
-        return query.getSingleResult();
-    }
     
     @Override
-    public Customer findCustomerBySurname(String surname) {
-        TypedQuery<Customer> query = em.createNamedQuery("Customer.findBySurname", Customer.class);
-        query.setParameter("surname", surname);
-        return query.getSingleResult();
+    public Customer findCustomerByName(String forename, String surname) {
+        if(surname == null){
+            TypedQuery<Customer> query = em.createNamedQuery("Customer.findByForename", Customer.class);
+            query.setParameter("forename", forename);
+            return query.getSingleResult();
+        } else if(forename == null){
+            TypedQuery<Customer> query = em.createNamedQuery("Customer.findBySurname", Customer.class);
+            query.setParameter("surname", surname);
+            return query.getSingleResult();
+        } else {
+            TypedQuery<Customer> query = em.createNamedQuery("Customer.findByName", Customer.class);
+            query.setParameter("forename", forename).setParameter("surname", surname);
+            return query.getSingleResult();
+        }
     }
 
     @Override
@@ -70,13 +73,47 @@ public class DataManagerJDBCImpl implements DataManager{
     }
 
     @Override
-    public List<Job> FindJobsByCustomer(Customer customer){
-        //ypedQuery<Job> query = em.createNamedQuery("")
-        return null;
+    public Staff findStaffByName(String forename, String surname) {
+        if(surname == null){
+            TypedQuery<Staff> query = em.createNamedQuery("Staff.findByForename", Staff.class);
+            query.setParameter("forename", forename);
+            return query.getSingleResult();
+        } else if(forename == null){
+            TypedQuery<Staff> query = em.createNamedQuery("Staff.findBySurname", Staff.class);
+            query.setParameter("surname", surname);
+            return query.getSingleResult();
+        } else {
+            TypedQuery<Staff> query = em.createNamedQuery("Staff.findByName", Staff.class);
+            query.setParameter("forename", forename).setParameter("surname", surname);
+            return query.getSingleResult();
+        }
     }
+
     @Override
-    public List<Job> FindJobsByStaff(Staff staff){
-        return null;
+    public Staff findStaffByUsername(String username) {
+        TypedQuery<Staff> query = em.createNamedQuery("Staff.findByUsername", Staff.class);
+        query.setParameter("username", username);
+        return query.getSingleResult();
+    }
+
+    @Override
+    public OrderTable findOrderByID(int ID) {
+        TypedQuery<OrderTable> query = em.createNamedQuery("OrderTable.findByOrderID", OrderTable.class);
+        query.setParameter("orderID", ID);
+        return query.getSingleResult();
+    }
+
+    @Override
+    public OrderTable findOrderByAccountNumber(String AccountNumber) {
+        TypedQuery<OrderTable> query = em.createNamedQuery("OrderTable.findByAccountNo", OrderTable.class);
+        query.setParameter("account_no", AccountNumber);
+        return query.getSingleResult();    }
+
+    @Override
+    public Job findJobByOrderID(int ID) {
+        TypedQuery<Job> query = em.createNamedQuery("Job.findByOrderID", Job.class);
+        query.setParameter("orderID", ID);
+        return query.getSingleResult();
     }
     
     @Override
@@ -85,27 +122,12 @@ public class DataManagerJDBCImpl implements DataManager{
         query.setParameter("code", code);
         return query.getSingleResult();
     }
-
+    
     @Override
     public Task findTaskById(String Id) {
         TypedQuery<Task> query = em.createNamedQuery("Task.findByTaskID", Task.class);
         query.setParameter("TaskID", Id);
         return query.getSingleResult();
-    }
-
-    @Override
-    public Staff findStaffByName(String forename, String surname) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Staff findStaffBySurname(String surname) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Staff findStaffByUsername(String username) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     @Override

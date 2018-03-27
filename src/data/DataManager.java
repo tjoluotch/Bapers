@@ -19,21 +19,22 @@ public interface DataManager {
     List<Job> AllJobs();
     List<Task> AllTasks();
     
-    List<Job> FindJobsByCustomer(Customer customer);
-    List<Job> FindJobsByStaff(Staff staff);
-    
-    Customer findCustomerByForename(String forename);
-    Customer findCustomerBySurname(String surname);
+    Customer findCustomerByName(String forename, String surname);
     Customer findCustomerByAccountNumber(String AccountNumber);
     Customer findCustomerByAccountHolderName(String AccountHolderName);
     
     Staff findStaffByName(String forename, String surname);
-    Staff findStaffBySurname(String surname);
     Staff findStaffByUsername(String username);
     
+    OrderTable findOrderByID(int ID);
+    OrderTable findOrderByAccountNumber(String AccountNumber);
+    
     Job findJobByCode(String code);
+    Job findJobByOrderID(int ID);
     
     Task findTaskById(String Id);
+    
+    
     
     void saveCustomer(Customer customer);
     void saveStaff(Staff staff);
