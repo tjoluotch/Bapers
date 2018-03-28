@@ -6,6 +6,8 @@
 package DB;
 
 import java.sql.*;
+import javax.annotation.Resource;
+import javax.sql.DataSource;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,22 +16,23 @@ import javax.swing.JOptionPane;
  */
 public class MyDBConn implements DBConnectivity {
        
-        public MyDBConn(){
-            
-        }
+        public MyDBConn(){}
+        
+        @Resource(mappedName="jdbc:mysql://localhost:3306/solsoft_DB") DataSource dataSource;
         Connection myConn = null;
         
-       @Override
+        @Override
         public Connection open_Connection() {
      
         String user = "root"; //Enter your user (normally root)
-        String pass = "root"; // Enter your password (for sheena it will be HPrules001)
+        String pass = "password"; // Enter your password (for sheena it will be HPrules001)
 
         try {
             // 1. Get a connection to database
             Class.forName("com.mysql.jdbc.Driver");
-            myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/solsoft_DB", user, pass);
-            JOptionPane.showMessageDialog(null, "Connected to the Database");
+            myConn = dataSource.getConnection(user, pass);
+            //myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/solsoft_DB", user, pass);
+            //JOptionPane.showMessageDialog(null, "Connected to the Database");
             return myConn;
         } catch (Exception exc) {
             exc.printStackTrace();
@@ -37,5 +40,12 @@ public class MyDBConn implements DBConnectivity {
             return myConn;
         } 
      }
+        
+        @Override 
+        public Connection getConnection() {
+            return myConn;
+        }
     
 }
+
+

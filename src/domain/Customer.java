@@ -59,7 +59,7 @@ public class Customer implements Serializable {
     private String address2;
     @Column(name = "Address3")
     private String address3;
-    @Column(name = "City")
+    @Column(name = "city")
     private String city;
     @Column(name = "postcode")
     private String postcode;

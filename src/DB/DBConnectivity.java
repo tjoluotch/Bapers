@@ -15,4 +15,6 @@ public interface DBConnectivity {
      
     Connection open_Connection();
         //void close_Connection() throws SQLException;
+    
+    Connection getConnection();
 }
