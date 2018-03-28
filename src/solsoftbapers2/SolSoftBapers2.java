@@ -7,7 +7,6 @@ package solsoftbapers2;
 
 import data.*;
 import domain.Customer;
-import java.util.List;
 
 
 public class SolSoftBapers2 {
@@ -34,12 +33,14 @@ public class SolSoftBapers2 {
         
         DataManagerImpl dm = new DataManagerImpl();
         
-        System.out.println(dm.findCustomerByName("Tony", null).getForename());
+       // for(Job j : dm.AllJobs()){
+         //   System.out.println(j.getCode());
+        //}
         
-        /*for(Customer c : dm.AllCustomers()){
+        for(Customer c : dm.AllCustomers()){
            String cust = "" + c.getForename() + " " + c.getSurname(); 
            System.out.println(cust);
-        }*/
+        }
         
     
 }
