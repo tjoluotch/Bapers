@@ -47,4 +47,14 @@ public class Controller {
         JOptionPane.showMessageDialog(null, ex);  
         }
     }
+    
+    public void addCustomer() {
+        conn = d.open_Connection();
+        
+        try {
+            
+            
+        } catch (Exception e) {
+        }
+    }
 }
