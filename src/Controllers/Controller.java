@@ -93,7 +93,7 @@ public class Controller {
             pst.setString(1, accNo);
             pst.setString(2, fN);
             pst.setString(3, lN);
-            pst.setString(4, uN);
+            //pst.setString(4, uN);
             pst.setString(5, stN);
             pst.setString(6, hsN);
             pst.setString(7, br);

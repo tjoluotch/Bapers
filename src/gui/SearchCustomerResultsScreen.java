@@ -28,16 +28,16 @@ public class SearchCustomerResultsScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        srcResultsArea = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Search Results Table");
-        jScrollPane1.setViewportView(jTextArea1);
+        srcResultsArea.setColumns(20);
+        srcResultsArea.setRows(5);
+        srcResultsArea.setText("Search Results Table");
+        jScrollPane1.setViewportView(srcResultsArea);
 
         jButton1.setText("Select");
 
@@ -113,6 +113,6 @@ public class SearchCustomerResultsScreen extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea srcResultsArea;
     // End of variables declaration//GEN-END:variables
 }
