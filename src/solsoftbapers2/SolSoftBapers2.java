@@ -37,12 +37,16 @@ public class SolSoftBapers2 {
          //   System.out.println(j.getCode());
         //}
         
+        
+        String cust2 = "" + dm.findCustomerByName("Alex", null).getSurname() + "\n";
+        System.out.println(cust2);
+        
         for(Customer c : dm.AllCustomers()){
-           String cust = "" + c.getForename() + " " + c.getSurname(); 
-           System.out.println(cust);
+           String cust1 = "" + c.getForename() + " " + c.getSurname() + "\n"; 
+           System.out.println(cust1);
         }
         
-    
+        
 }
     
 }

@@ -3,12 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Documents/GitHub/Bapers/src/data/DataManager.java</file>
+            <file>file:/E:/Documents/GitHub/Bapers/src/domain/Job.java</file>
+            <file>file:/E:/Documents/GitHub/Bapers/src/gui/Login.java</file>
             <file>file:/E:/Documents/GitHub/Bapers/src/solsoftbapers2/SolSoftBapers2.java</file>
-            <file>file:/E:/Documents/GitHub/Bapers/src/data/DataManagerImpl.java</file>
+            <file>file:/E:/Documents/GitHub/Bapers/src/META-INF/persistence.xml</file>
+            <file>file:/E:/Documents/GitHub/Bapers/src/gui/CustomerPaymentsScreen.java</file>
             <file>file:/E:/Documents/GitHub/Bapers/src/DB/MyDBConn.java</file>
             <file>file:/E:/Documents/GitHub/Bapers/src/DB/DBConnectivity.java</file>
+            <file>file:/E:/Documents/GitHub/Bapers/src/domain/OrderTable.java</file>
             <file>file:/E:/Documents/GitHub/Bapers/src/domain/Customer.java</file>
+            <file>file:/E:/Documents/GitHub/Bapers/src/gui/AdminToolsScreen.java</file>
         </group>
     </open-files>
 </project-private>
