@@ -49,7 +49,7 @@ public class Controller {
         }
     }
     
-    public void addCustomer() throws SQLException {
+    public void addCustomer(JTextField firstName, JTextField lastName, JTextField username, JTextField city, JTextField phoneNo, JTextField streetName, JTextField houseNo, JTextField borough, JTextField postcode) throws SQLException {
         conn = d.open_Connection();
         st = conn.createStatement();
         try {
