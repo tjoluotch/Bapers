@@ -17,6 +17,7 @@ import gui.*;
 public class Controller {
     MyDBConn d = new MyDBConn();
     Connection conn = null;
+    Statement st = null;
     PreparedStatement pst = null;
     ResultSet rs = null;
     
@@ -48,13 +49,15 @@ public class Controller {
         }
     }
     
-    public void addCustomer() {
+    public void addCustomer() throws SQLException {
         conn = d.open_Connection();
-        
+        st = conn.createStatement();
         try {
             
             
         } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(SQLException.class);
         }
     }
 }
