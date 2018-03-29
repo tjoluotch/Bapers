@@ -3,14 +3,27 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/tjay/NetBeansProjects/latestGitTProj/SolSoftBAPERS-master/src/data/DataManagerJDBCImpl.java</file>
-            <file>file:/Users/tjay/NetBeansProjects/latestGitTProj/SolSoftBAPERS-master/src/DB/MyDBConn.java</file>
-            <file>file:/Users/tjay/NetBeansProjects/latestGitTProj/SolSoftBAPERS-master/src/data/DataManager.java</file>
-            <file>file:/Users/tjay/NetBeansProjects/latestGitTProj/SolSoftBAPERS-master/src/service/BapersServiceImpl.java</file>
-            <file>file:/Users/tjay/NetBeansProjects/latestGitTProj/SolSoftBAPERS-master/src/service/BapersService.java</file>
-            <file>file:/Users/tjay/NetBeansProjects/latestGitTProj/SolSoftBAPERS-master/src/DB/DBConnectivity.java</file>
-            <file>file:/Users/tjay/NetBeansProjects/latestGitTProj/SolSoftBAPERS-master/src/solsoftbapers2/SolSoftBapers2.java</file>
-            <file>file:/Users/tjay/NetBeansProjects/latestGitTProj/SolSoftBAPERS-master/src/gui/HomeScreen.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/tprojLatest/Bapers/src/gui/Login.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/tprojLatest/Bapers/src/gui/BackupDatabaseScreen.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/tprojLatest/Bapers/src/gui/SearchAccountScreen.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/tprojLatest/Bapers/src/gui/CreateAccountScreenPriviliged.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/tprojLatest/Bapers/src/gui/PaymentManagementScreen.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/tprojLatest/Bapers/src/gui/Welcome.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/tprojLatest/Bapers/src/gui/ManageUsersSearchScreen.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/tprojLatest/Bapers/src/gui/SearchCustomerResultsScreen.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/tprojLatest/Bapers/src/gui/CustomerAccountScreen.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/tprojLatest/Bapers/src/gui/AddPaymentScreen.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/tprojLatest/Bapers/src/Controllers/Controller.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/tprojLatest/Bapers/src/gui/ManageUsersModifyScreen.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/tprojLatest/Bapers/src/gui/CreateAccountScreen.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/tprojLatest/Bapers/src/gui/ReceptionistStartScreen.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/tprojLatest/Bapers/src/gui/CreateNewOrderScreen.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/tprojLatest/Bapers/src/gui/OfficeManagerStartScreen.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/tprojLatest/Bapers/src/gui/PaymentRemindersScreen.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/tprojLatest/Bapers/src/gui/ManageCustomerScreen.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/tprojLatest/Bapers/src/gui/AddUserAccountScreen.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/tprojLatest/Bapers/src/solsoftbapers2/SolSoftBapers2.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/tprojLatest/Bapers/src/gui/PrivacyTest.java</file>
         </group>
     </open-files>
 </project-private>

@@ -158,11 +158,7 @@ public class CreateAccountScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void createAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountActionPerformed
-        try {
-            c.addCustomer(firstName, surname, userName, townCity, phoneNo, streetName, houseNo, borough, postcode);
-        } catch (SQLException ex) {
-            Logger.getLogger(CreateAccountScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
+      c.addCustomer(firstName, surname, userName, townCity, phoneNo, streetName, houseNo, borough, postcode);
         
     }//GEN-LAST:event_createAccountActionPerformed
 

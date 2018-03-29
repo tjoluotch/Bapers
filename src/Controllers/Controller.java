@@ -10,7 +10,9 @@ import java.sql.*;
 import javax.swing.*;
 import gui.*;
 import java.util.Random;
-
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author tjay
@@ -40,8 +42,8 @@ public class Controller {
             if (rs.next()) {
                 JOptionPane.showMessageDialog(null, "Welcome");
                 //Code for changing to the next page
-                Welcome w=new Welcome ();
-                w.setVisible(true);
+                //Welcome w=new Welcome ();
+                //w.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null,"Invalid credentials, Please enter correct credentials!", "Access Denied", JOptionPane.ERROR_MESSAGE);
             } 
@@ -50,7 +52,9 @@ public class Controller {
         }
     }
     
-    public void addCustomer(JTextField firstName, JTextField lastName, JTextField username, JTextField city, JTextField phoneNo, JTextField streetName, JTextField houseNo, JTextField borough, JTextField postcode) throws SQLException {
+    public void addCustomer(JTextField firstName, JTextField lastName, JTextField username, 
+                            JTextField city, JTextField phoneNo, JTextField streetName, 
+                            JTextField houseNo, JTextField borough, JTextField postcode) {
         conn = d.open_Connection();
         //st = conn.createStatement();
         
@@ -69,7 +73,8 @@ public class Controller {
         String custPrefix = "ACC";
         
          Random rand = new Random();
-         int n = rand.nextInt(999) + 100;
+         int n = rand.nextInt(9999999) + 1000000;
+        
         
         String customerNu = Integer.toString(n);
         
@@ -77,12 +82,14 @@ public class Controller {
         
         int defValued = 0;
         
+        String sql = "INSERT INTO Customer VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        
        
         
         try {
             //st.executeUpdate("INSERT INTO Customer " +  "VALUES (" + custPrefix + customerNu + "," + " " + fN + "," + " " + lN + "," + " " + uN + "," + " " + stN + "," + " " + hsN + "," + " " + br + "," + " " + cty + "," + " " + pc + "," + " " + phN + "," + " " + "0" + "," + " " + "none)");
-            String sql = "INSERT INTO Customer (account_no, forename, surname, account_holder_name, Address1, Address2, Address3, Town/City, postcode, phone, valued_customer, discount_type)" + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             pst = conn.prepareStatement(sql);
+            
             pst.setString(1, accNo);
             pst.setString(2, fN);
             pst.setString(3, lN);
@@ -95,12 +102,23 @@ public class Controller {
             pst.setString(10, phN);
             pst.setInt(11, defValued);
             pst.setString(12, "none");
-            pst.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Customer Created Successfully!");
-            
+            pst.execute();
+           
+            JOptionPane.showMessageDialog(null, "Customer Created Successfully!");      
         } catch (Exception e) {
             e.printStackTrace();
            
         }
+    }
+    
+    
+    public void viewChanger(JFrame oldView, JFrame newView) {
+        oldView.setVisible(false);
+        try {
+            TimeUnit.SECONDS.sleep(1);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Controller.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        newView.setVisible(true);
     }
 }
