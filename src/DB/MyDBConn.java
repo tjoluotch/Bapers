@@ -29,7 +29,7 @@ public class MyDBConn implements DBConnectivity {
             // 1. Get a connection to database
             Class.forName("com.mysql.jdbc.Driver");
             myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/solsoft_DB", user, pass);
-            JOptionPane.showMessageDialog(null, "Connected to the Database");
+//            JOptionPane.showMessageDialog(null, "Connected to the Database");
             return myConn;
         } catch (Exception exc) {
             exc.printStackTrace();
