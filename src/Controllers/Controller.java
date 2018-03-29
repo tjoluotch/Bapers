@@ -6,6 +6,9 @@
 package Controllers;
 
 import DB.*;
+import data.DataManagerImpl;
+import domain.Customer;
+import domain.Staff;
 import java.sql.*;
 import javax.swing.*;
 import gui.*;
@@ -15,10 +18,6 @@ import gui.*;
  * @author tjay
  */
 public class Controller {
-    MyDBConn d = new MyDBConn();
-    Connection conn = null;
-    PreparedStatement pst = null;
-    ResultSet rs = null;
     
     public Controller() {
     }
@@ -26,16 +25,15 @@ public class Controller {
     //not yet tested by michal standards
     public void loginSystem(JTextField username, JPasswordField password) {
         
-       conn = d.open_Connection();
+       DataManagerImpl dm = new DataManagerImpl();
        String user = username.getText();
        String pass = new String (password.getPassword());
-        String Sql = "Select * from Staff where username=? and password=?";
+       
+       //password for all staff in DB is null
+       Staff staff;
         try{
-            pst = conn.prepareStatement(Sql);
-            pst.setString(1, user);
-            pst.setString(2, pass);
-            rs = pst.executeQuery();
-            if (rs.next()) {
+            staff = dm.findStaffByUsername(user);
+            if (staff.getPassword().compareTo(pass) == 0) {
                 JOptionPane.showMessageDialog(null, "Welcome");
                 //Code for changing to the next page
                 Welcome w=new Welcome ();
@@ -46,5 +44,12 @@ public class Controller {
         } catch (Exception ex) {
         JOptionPane.showMessageDialog(null, ex);  
         }
+    }
+    
+    public void addCustomer(){
+        Customer newCust = new Customer();
+        DataManagerImpl dm = new DataManagerImpl();
+        
+        dm.saveCustomer(newCust);
     }
 }
