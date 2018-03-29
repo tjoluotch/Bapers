@@ -33,11 +33,8 @@ public class SolSoftBapers2 {
         
         DataManagerImpl dm = new DataManagerImpl();
         
-       // for(Job j : dm.AllJobs()){
-         //   System.out.println(j.getCode());
-        //}
         
-        
+        //Query database for Customer by name
         String cust2 = "" + dm.findCustomerByName("Alex", null).getSurname() + "\n";
         System.out.println(cust2);
         
@@ -46,6 +43,7 @@ public class SolSoftBapers2 {
            System.out.println(cust1);
         }
         
+                
         
 }
     
