@@ -3,7 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bapersgui;
+package gui;
+import Controllers.*;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,6 +18,7 @@ public class CreateAccountScreen extends javax.swing.JFrame {
     /**
      * Creates new form CreateAccountScreen
      */
+    Controller c = new Controller();
     public CreateAccountScreen() {
         initComponents();
     }
@@ -44,66 +49,31 @@ public class CreateAccountScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         firstName.setText("First Name");
-        firstName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                firstNameActionPerformed(evt);
-            }
-        });
 
         surname.setText("Surname");
-        surname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                surnameActionPerformed(evt);
-            }
-        });
 
         houseNo.setText("House No");
-        houseNo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                houseNoActionPerformed(evt);
-            }
-        });
 
         phoneNo.setText("Contact Number");
-        phoneNo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                phoneNoActionPerformed(evt);
-            }
-        });
 
         postcode.setText("Postcode");
-        postcode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postcodeActionPerformed(evt);
-            }
-        });
 
         streetName.setText("Street Name");
-        streetName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                streetNameActionPerformed(evt);
-            }
-        });
 
         townCity.setText("City");
-        townCity.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                townCityActionPerformed(evt);
-            }
-        });
 
         createAccount.setText("Create Account");
+        createAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createAccountActionPerformed(evt);
+            }
+        });
 
         Title.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Titile", "Mr", "Mrs", "Ms", "Miss", "Master", " " }));
 
         logo.setText("SolSoft BAPERS");
 
         userName.setText("User Name");
-        userName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userNameActionPerformed(evt);
-            }
-        });
 
         cancel.setText("Cancel");
 
@@ -187,37 +157,14 @@ public class CreateAccountScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void firstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_firstNameActionPerformed
-
-    private void surnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_surnameActionPerformed
-
-    private void houseNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_houseNoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_houseNoActionPerformed
-
-    private void phoneNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneNoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_phoneNoActionPerformed
-
-    private void postcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postcodeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_postcodeActionPerformed
-
-    private void streetNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_streetNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_streetNameActionPerformed
-
-    private void townCityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_townCityActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_townCityActionPerformed
-
-    private void userNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userNameActionPerformed
+    private void createAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountActionPerformed
+        try {
+            c.addCustomer(firstName, surname, userName, townCity, phoneNo, streetName, houseNo, borough, postcode);
+        } catch (SQLException ex) {
+            Logger.getLogger(CreateAccountScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_createAccountActionPerformed
 
     /**
      * @param args the command line arguments

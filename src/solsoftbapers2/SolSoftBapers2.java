@@ -12,6 +12,7 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /**
  *
  * @author tjay
@@ -23,8 +24,8 @@ public class SolSoftBapers2 {
      */
     public static void main(String[] args) {
         
-        //Login l = new Login();
-     
+        
+    
          
        
     
