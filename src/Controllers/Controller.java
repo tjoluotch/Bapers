@@ -5,11 +5,9 @@
  */
 package Controllers;
 
-import DB.*;
 import data.DataManagerImpl;
 import domain.Customer;
 import domain.Staff;
-import java.sql.*;
 import javax.swing.*;
 import gui.*;
 
