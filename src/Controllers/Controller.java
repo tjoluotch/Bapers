@@ -16,6 +16,9 @@ import gui.*;
  * @author tjay
  */
 public class Controller {
+    //Empty Staff object to be "filled" by the staff member typing in their username
+    Staff staff;
+    DataManagerImpl dm;
     
     public Controller() {
     }
@@ -23,12 +26,11 @@ public class Controller {
     //not yet tested by michal standards
     public void loginSystem(JTextField username, JPasswordField password) {
         
-       DataManagerImpl dm = new DataManagerImpl();
+       dm = new DataManagerImpl();
        String user = username.getText();
        String pass = new String (password.getPassword());
        
        //password for all staff in DB is null
-       Staff staff;
         try{
             staff = dm.findStaffByUsername(user);
             if (staff.getPassword().compareTo(pass) == 0) {
@@ -44,10 +46,8 @@ public class Controller {
         }
     }
     
-    public void addCustomer(){
-        Customer newCust = new Customer();
-        DataManagerImpl dm = new DataManagerImpl();
-        
-        dm.saveCustomer(newCust);
+    public void logoutSystem(){
+        staff = new Staff();
     }
+    
 }
