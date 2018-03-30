@@ -5,6 +5,7 @@
  */
 package solsoftbapers2;
 
+import Controllers.Controller;
 import data.*;
 import domain.Customer;
 
@@ -17,22 +18,22 @@ public class SolSoftBapers2 {
     
     
     
+    
+    
     public static void main(String[] args) {
+        Controller controller = new Controller();
+        controller.loginSystem();
         
-        //JPA EXAMPLE
-        
+    }
+    
+    //JPA EXAMPLE
+    public void connectionCheck(){
         DataManagerImpl dm = new DataManagerImpl();
-        
-        //Query database for Customer by name
-        String cust2 = "" + dm.findCustomerByName("Alex", null).getSurname() + "\n";
-        System.out.println(cust2);
-        
+        //methods called from a DataManagerImpl object return objects of the respective type
         for(Customer c : dm.AllCustomers()){
            String cust1 = "" + c.getForename() + " " + c.getSurname() + "\n"; 
            System.out.println(cust1);
-        }        
-        
-        
+        }
     }
     
 }
