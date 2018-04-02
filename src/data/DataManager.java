@@ -20,8 +20,8 @@ public interface DataManager {
     List<Task> AllTasks();
     
     Customer findCustomerByName(String forename, String surname);
-    Customer findCustomerByAccountNumber(String AccountNumber);
     Customer findCustomerByAccountHolderName(String AccountHolderName);
+    Customer findCustomerByAccountNumber(String AccountNumber);
     
     Staff findStaffByName(String forename, String surname);
     Staff findStaffByUsername(String username);

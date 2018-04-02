@@ -8,6 +8,8 @@ package data;
 import domain.*;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
@@ -15,10 +17,12 @@ import javax.persistence.TypedQuery;
  *
  * @author DanTe
  */
-public class DataManagerJDBCImpl implements DataManager{
+public class DataManagerImpl implements DataManager{
     
+    EntityManagerFactory emf = Persistence.createEntityManagerFactory("BapersPU");
+   
     @PersistenceContext 
-    private EntityManager em;
+    private EntityManager em = emf.createEntityManager();
     
     @Override
     public List<Customer> AllCustomers(){

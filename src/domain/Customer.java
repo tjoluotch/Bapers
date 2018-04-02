@@ -53,13 +53,13 @@ public class Customer implements Serializable {
     private String surname;
     @Column(name = "account_holder_name")
     private String accountHolderName;
-    @Column(name = "Address1")
+    @Column(name = "address1")
     private String address1;
-    @Column(name = "Address2")
+    @Column(name = "address2")
     private String address2;
-    @Column(name = "Address3")
+    @Column(name = "address3")
     private String address3;
-    @Column(name = "City")
+    @Column(name = "city")
     private String city;
     @Column(name = "postcode")
     private String postcode;
