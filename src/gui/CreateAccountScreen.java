@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bapersgui;
+package gui;
+
 
 /**
  *
@@ -14,6 +15,9 @@ public class CreateAccountScreen extends javax.swing.JFrame {
     /**
      * Creates new form CreateAccountScreen
      */
+    
+    
+    
     public CreateAccountScreen() {
         initComponents();
     }

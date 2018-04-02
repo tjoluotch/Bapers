@@ -35,8 +35,5 @@ public class BAPACCT {
         customer.setValuedCustomer(Boolean.FALSE);
         
         dm.saveCustomer(customer);
-    }
-    
-    
-    
+    }    
 }
