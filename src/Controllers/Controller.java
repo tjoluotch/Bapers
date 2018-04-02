@@ -6,6 +6,7 @@
 package Controllers;
 
 import DB.*;
+import Staff.Staff;
 import java.sql.*;
 import javax.swing.*;
 import gui.*;
@@ -22,6 +23,7 @@ public class Controller {
     PreparedStatement pst = null;
     ResultSet rs = null;
     private Component rootPane;
+    Staff staff;
     
     public Controller() {
     }
@@ -48,20 +50,29 @@ public class Controller {
                     String s1 = rs.getString("role");
                     String un = rs.getString("username");
                     if(uOption.equalsIgnoreCase("Office Manager") && s1.equalsIgnoreCase("Office Manager")) {
-                        OfficeManagerStartScreen om = new OfficeManagerStartScreen(un);
+                        staff = new Staff(rs.getString("username"), rs.getString("forename"), rs.getString("surname"), rs.getString("role"));
+                        OfficeManagerStartScreen om = new OfficeManagerStartScreen(staff);
+                        
+                        om.setStaff(staff);
                         om.setVisible(true);
+                        
+                        
+                        
                     }
                     if(uOption.equalsIgnoreCase("Shift Manager")&& s1.equalsIgnoreCase("Shift Manager")) {
                         ShifManagerStartScreen sm = new ShifManagerStartScreen(un);
                         sm.setVisible(true);
+                        staff = new Staff(rs.getString("username"), rs.getString("forename"), rs.getString("surname"), rs.getString("role"));
                     }
                     if(uOption.equalsIgnoreCase("Receptionist")&& s1.equalsIgnoreCase("Receptionist")) {
                         ReceptionistStartScreen rp = new ReceptionistStartScreen(un);
                         rp.setVisible(true);
+                        staff = new Staff(rs.getString("username"), rs.getString("forename"), rs.getString("surname"), rs.getString("role"));
                     }
                     if(uOption.equalsIgnoreCase("Technician")&& s1.equalsIgnoreCase("Technician")) {
                         TechnicianStartScreen tc = new TechnicianStartScreen(un);
                         tc.setVisible(true);
+                        staff = new Staff(rs.getString("username"), rs.getString("forename"), rs.getString("surname"), rs.getString("role"));
                     }
 //                    if( uOption != s1) {
 //                        JOptionPane.showMessageDialog(rootPane, "Invalid User Type! Please Select Correct User.", "Invalid User Type Error", 1);

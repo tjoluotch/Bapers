@@ -45,6 +45,12 @@ Controller c = new Controller();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        txtpassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtpasswordActionPerformed(evt);
+            }
+        });
+
         jLabel2.setText("Password");
 
         LoginButton.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
@@ -56,6 +62,12 @@ Controller c = new Controller();
         });
 
         jLabel1.setText("Username");
+
+        txtusername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtusernameActionPerformed(evt);
+            }
+        });
 
         DropDown.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Receptionist", "Technician", "Shift Manager", "Office Manager" }));
         DropDown.addActionListener(new java.awt.event.ActionListener() {
@@ -180,6 +192,14 @@ Controller c = new Controller();
         //Cancel Button:
         System.exit(0);
     }//GEN-LAST:event_CancelButtonActionPerformed
+
+    private void txtpasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtpasswordActionPerformed
+
+    private void txtusernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtusernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtusernameActionPerformed
 
     /**
      * @param args the command line arguments

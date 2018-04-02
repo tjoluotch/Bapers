@@ -23,7 +23,7 @@ public class MyDBConn implements DBConnectivity {
         public Connection open_Connection() {
      
         String user = "root"; //Enter your user (normally root)
-        String pass = "root"; // Enter your password (for sheena it will be HPrules001)
+        String pass = "chicken"; // Enter your password (for sheena it will be HPrules001)
 
         try {
             // 1. Get a connection to database
