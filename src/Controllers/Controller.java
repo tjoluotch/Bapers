@@ -24,18 +24,24 @@ public class Controller {
     }
     
     //not yet tested by michal standards
-    public void loginSystem(JTextField username, JPasswordField password) {
+    public void loginSystem(JTextField username, JPasswordField password, JComboBox box) {
         
        dm = new DataManagerImpl();
        String user = username.getText();
        String pass = new String (password.getPassword());
+       String role = new String(box.getSelectedItem().toString());
        
        //password for all staff in DB is null
         try{
             staff = dm.findStaffByUsername(user);
-            if (staff.getPassword().compareTo(pass) == 0) {
+            if (staff.getPassword().compareTo(pass) == 0&& staff.getRole().compareTo(role) == 0) {
                 JOptionPane.showMessageDialog(null, "Welcome");
                 //Code for changing to the next page
+                
+                if(role.compareToIgnoreCase("Office Manager")==0){
+                    OfficeManagerStartScreen screen = new OfficeManagerStartScreen();
+                    screen.setStaff(staff);
+                }
                 Welcome w=new Welcome ();
                 w.setVisible(true);
             } else {

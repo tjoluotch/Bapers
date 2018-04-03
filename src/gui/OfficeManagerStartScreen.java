@@ -5,6 +5,8 @@
  */
 package gui;
 
+import domain.Staff;
+
 /**
  *
  * @author Tweetie Pie
@@ -14,6 +16,8 @@ public class OfficeManagerStartScreen extends javax.swing.JFrame {
     /**
      * Creates new form OfficeManagerStartScreen
      */
+    
+    Staff staff;
     public OfficeManagerStartScreen() {
         initComponents();
     }
