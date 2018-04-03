@@ -29,6 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Staff.findAll", query = "SELECT s FROM Staff s")
     , @NamedQuery(name = "Staff.findByUsername", query = "SELECT s FROM Staff s WHERE s.username = :username")
+    , @NamedQuery(name = "Staff.findByPassword", query = "SELECT s FROM Staff s WHERE s.password = :password")
     , @NamedQuery(name = "Staff.findByFirstName", query = "SELECT s FROM Staff s WHERE s.firstName = :firstName")
     , @NamedQuery(name = "Staff.findBySurname", query = "SELECT s FROM Staff s WHERE s.surname = :surname")
     , @NamedQuery(name = "Staff.findByRole", query = "SELECT s FROM Staff s WHERE s.role = :role")})
@@ -39,7 +40,9 @@ public class Staff implements Serializable {
     @Basic(optional = false)
     @Column(name = "username")
     private String username;
-    @Column(name = "first_name")
+    @Column(name = "password")
+    private String password;
+    @Column(name = "forename")
     private String firstName;
     @Column(name = "surname")
     private String surname;
@@ -62,6 +65,14 @@ public class Staff implements Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
+    
+    public String getPassword(){
+        return password;
+    }
+    
+    public void setPassword(String password){
+        this.password = password;
+    }    
 
     public String getFirstName() {
         return firstName;

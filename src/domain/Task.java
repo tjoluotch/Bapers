@@ -42,7 +42,7 @@ public class Task implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "TaskID")
+    @Column(name = "taskID")
     private Integer taskID;
     @Column(name = "description")
     private String description;

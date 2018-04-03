@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "OrderTable.findByTotalPrice", query = "SELECT o FROM OrderTable o WHERE o.totalPrice = :totalPrice")
     , @NamedQuery(name = "OrderTable.findBySpecialInstructions", query = "SELECT o FROM OrderTable o WHERE o.specialInstructions = :specialInstructions")
     , @NamedQuery(name = "OrderTable.findByStatus", query = "SELECT o FROM OrderTable o WHERE o.status = :status")
-    , @NamedQuery(name = "OrderTable.findByPaymentdetailID", query = "SELECT o FROM OrderTable o WHERE o.paymentdetailID = :paymentdetailID")
+    //, @NamedQuery(name = "OrderTable.findByPaymentdetailID", query = "SELECT o FROM OrderTable o WHERE o.paymentdetailID = :paymentdetailID")
     , @NamedQuery(name = "OrderTable.findByDateSubmitted", query = "SELECT o FROM OrderTable o WHERE o.dateSubmitted = :dateSubmitted")})
 public class OrderTable implements Serializable {
 
@@ -54,8 +54,8 @@ public class OrderTable implements Serializable {
     private String specialInstructions;
     @Column(name = "status")
     private String status;
-    @Column(name = "payment_detailID")
-    private String paymentdetailID;
+    //@Column(name = "payment_detailID")
+    //private String paymentdetailID;
     @Column(name = "date_submitted")
     @Temporal(TemporalType.DATE)
     private Date dateSubmitted;
@@ -107,11 +107,12 @@ public class OrderTable implements Serializable {
     }
 
     public String getPaymentdetailID() {
-        return paymentdetailID;
+        //return paymentdetailID;
+        return null;
     }
 
     public void setPaymentdetailID(String paymentdetailID) {
-        this.paymentdetailID = paymentdetailID;
+        //this.paymentdetailID = paymentdetailID;
     }
 
     public Date getDateSubmitted() {
