@@ -50,4 +50,13 @@ public class Controller {
         staff = new Staff();
     }
     
+    //JPA EXAMPLE
+    public void connectionCheck(){
+        //methods called from a DataManagerImpl object return objects of the respective type
+        for(Customer c : dm.AllCustomers()){
+           String cust1 = "" + c.getForename() + " " + c.getSurname() + "\n"; 
+           System.out.println(cust1);
+        }
+    }
+    
 }
