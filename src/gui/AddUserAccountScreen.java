@@ -212,7 +212,9 @@ DataManagerImpl dm = new DataManagerImpl();
         else{
         BAPADMN save = new BAPADMN(dm);
         save.createUserAccount(username, firstName, surname, job, password);
+        JOptionPane.showMessageDialog(null, "New Staff Account Created");
         this.dispose();
+        
         }
        
     }//GEN-LAST:event_jButton2ActionPerformed

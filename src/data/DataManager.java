@@ -25,6 +25,7 @@ public interface DataManager {
     
     Staff findStaffByName(String forename, String surname);
     Staff findStaffByUsername(String username);
+    List<Staff> searchStaffByUsername(String username);
     
     OrderTable findOrderByID(int ID);
     OrderTable findOrderByAccountNumber(String AccountNumber);

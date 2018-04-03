@@ -34,4 +34,9 @@ public class BAPADMN {
         dm.saveStaff(staff);
         
     }
+    
+    public void searchStaff(String search){
+        Staff staff = dm.findStaffByUsername(search);
+        
+    }
 }

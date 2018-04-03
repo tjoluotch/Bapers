@@ -99,6 +99,13 @@ public class DataManagerImpl implements DataManager{
         query.setParameter("username", username);
         return query.getSingleResult();
     }
+    
+    @Override
+    public List <Staff> searchStaffByUsername(String username) {
+        TypedQuery<Staff> query = em.createNamedQuery("Staff.searchByUsername", Staff.class);
+        query.setParameter("username", username);
+        return query.getResultList();
+    }
 
     @Override
     public OrderTable findOrderByID(int ID) {
