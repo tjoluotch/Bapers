@@ -21,12 +21,13 @@ public class Controller {
     DataManagerImpl dm;
     
     public Controller() {
+        dm = new DataManagerImpl();
     }
     
     //not yet tested by michal standards
     public void loginSystem(JTextField username, JPasswordField password) {
         
-       dm = new DataManagerImpl();
+       
        String user = username.getText();
        String pass = new String (password.getPassword());
        
