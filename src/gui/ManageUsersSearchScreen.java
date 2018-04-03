@@ -5,7 +5,9 @@
  */
 package gui;
 
+import Controllers.BAPADMN;
 import TableModels.StaffTableModel;
+import data.DataManagerImpl;
 import domain.Staff;
 import java.util.List;
 
@@ -16,6 +18,9 @@ import java.util.List;
 public class ManageUsersSearchScreen extends javax.swing.JFrame {
 StaffTableModel model;
 List<Staff> slist;
+DataManagerImpl dm = new DataManagerImpl();
+int row;
+Staff staff;
 
     /**
      * Creates new form ManageUsersSearchScreen
@@ -46,10 +51,20 @@ List<Staff> slist;
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton1.setText("Modify");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Back");
 
         jTable1.setModel(new StaffTableModel(slist));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -82,6 +97,24 @@ List<Staff> slist;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        
+        row = jTable1.getSelectedRow();
+        String username = jTable1.getValueAt(row, 0).toString();
+        BAPADMN bp = new BAPADMN(dm);
+        staff = bp.modifyStaff(username);
+        
+        
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+         ManageUsersModifyScreen screen = new ManageUsersModifyScreen(staff);
+         screen.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

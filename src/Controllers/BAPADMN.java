@@ -44,4 +44,17 @@ public class BAPADMN {
         screen.setVisible(true);
         
     }
+    
+    public Staff modifyStaff(String search){
+        
+       Staff staff= dm.findStaffByUsername(search);
+       
+       return staff;
+       
+        
+        
+    }
+    
+    
+    
 }

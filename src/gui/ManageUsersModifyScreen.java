@@ -3,18 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bapersgui;
+package gui;
+
+import domain.Staff;
 
 /**
  *
  * @author Tweetie Pie
  */
 public class ManageUsersModifyScreen extends javax.swing.JFrame {
-
+Staff staff;
+int num;
     /**
      * Creates new form ManageUsersModifyScreen
      */
     public ManageUsersModifyScreen() {
+        initComponents();
+    }
+    
+    public ManageUsersModifyScreen(Staff staff) {
+        this.staff = staff;
         initComponents();
     }
 
@@ -39,16 +47,27 @@ public class ManageUsersModifyScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextField1.setText("First Name");
+        jTextField1.setText(staff.getFirstName());
 
-        jTextField2.setText("Surname");
+        jTextField2.setText(staff.getSurname());
         jTextField2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField2ActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Job", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Job", "Receptionist", "Technician", "Shift Manager", "Office Manager" }));
+        String item;
+
+        for(int i = 0; i < jComboBox1.getItemCount(); i++){
+            item = jComboBox1.getItemAt(i);
+            if (item.compareToIgnoreCase(staff.getRole())==0){
+                num = i;
+                break;
+            }
+        }
+        jComboBox1.setSelectedIndex(num);
+        jComboBox1.setToolTipText("");
 
         jLabel1.setText("Password");
 
@@ -63,7 +82,7 @@ public class ManageUsersModifyScreen extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("UserName");
+        jLabel2.setText(staff.getUsername());
 
         jButton3.setText("Deleate Account");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
