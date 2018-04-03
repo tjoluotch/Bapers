@@ -206,7 +206,7 @@ DataManagerImpl dm = new DataManagerImpl();
         // TODO add your handling code here:
         if(username == null | firstName == null| password == null ){
             JOptionPane.showMessageDialog(null,"Invalid credentials, Please enter correct credentials!", "Access Denied", JOptionPane.ERROR_MESSAGE);
-            this.dispose();
+            
         }
         
         else{
