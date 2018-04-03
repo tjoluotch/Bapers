@@ -8,8 +8,10 @@ package Controllers;
 import data.DataManagerImpl;
 import domain.JobLine;
 import domain.Staff;
+import gui.ManageUsersSearchScreen;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -36,7 +38,10 @@ public class BAPADMN {
     }
     
     public void searchStaff(String search){
-        Staff staff = dm.findStaffByUsername(search);
+        
+        List <Staff> staffList =dm.searchStaffByUsername(search);
+        ManageUsersSearchScreen screen = new ManageUsersSearchScreen(staffList);
+        screen.setVisible(true);
         
     }
 }

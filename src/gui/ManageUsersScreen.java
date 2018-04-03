@@ -5,6 +5,7 @@
  */
 package gui;
 
+import Controllers.BAPADMN;
 import data.DataManagerImpl;
 import domain.Staff;
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
  */
 public class ManageUsersScreen extends javax.swing.JFrame {
     String searchTerm;
+    DataManagerImpl dm = new DataManagerImpl();
 
     /**
      * Creates new form ManageUserAccountsScreen
@@ -113,10 +115,8 @@ public class ManageUsersScreen extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         
-        DataManagerImpl db = new DataManagerImpl();
-        List <Staff> staffList =db.searchStaffByUsername(searchTerm);
-        ManageUsersSearchScreen screen = new ManageUsersSearchScreen(staffList);
-        screen.setVisible(rootPaneCheckingEnabled);
+        BAPADMN bp = new BAPADMN(dm);
+        bp.searchStaff(searchTerm);
         this.dispose();
         
         
