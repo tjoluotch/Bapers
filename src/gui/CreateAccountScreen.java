@@ -5,6 +5,8 @@
  */
 package gui;
 
+import Controllers.BAPACCT;
+import data.DataManagerImpl;
 
 /**
  *
@@ -15,8 +17,8 @@ public class CreateAccountScreen extends javax.swing.JFrame {
     /**
      * Creates new form CreateAccountScreen
      */
-    
-    
+    DataManagerImpl dm = new DataManagerImpl();
+    BAPACCT c = new BAPACCT(dm);
     
     public CreateAccountScreen() {
         initComponents();

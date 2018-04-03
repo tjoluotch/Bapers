@@ -111,7 +111,8 @@ public class DataManagerImpl implements DataManager{
     public OrderTable findOrderByAccountNumber(String AccountNumber) {
         TypedQuery<OrderTable> query = em.createNamedQuery("OrderTable.findByAccountNo", OrderTable.class);
         query.setParameter("account_no", AccountNumber);
-        return query.getSingleResult();    }
+        return query.getSingleResult();    
+    }
 
     @Override
     public Job findJobByOrderID(int ID) {

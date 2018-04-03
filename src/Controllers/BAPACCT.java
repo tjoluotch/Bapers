@@ -15,9 +15,11 @@ import domain.Customer;
 //Assign Job number
 public class BAPACCT {
     DataManagerImpl dm;
+    
     public BAPACCT(DataManagerImpl dm){
         this.dm = dm;
     }
+    
     public void createNewCustomer(String accountNo, String forename, String surname, String accountHolderName, 
             String address1, String address2, String address3, String city, String postcode, String phone){
         Customer customer = new Customer();
