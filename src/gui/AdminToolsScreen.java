@@ -105,7 +105,7 @@ public class AdminToolsScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         AddUserAccountScreen user = new AddUserAccountScreen();
         user.setVisible(rootPaneCheckingEnabled);
-        this.dispose();
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

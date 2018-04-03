@@ -7,6 +7,7 @@ package gui;
 
 import Controllers.BAPADMN;
 import data.DataManagerImpl;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,7 +18,8 @@ String firstName;
 String surname;
 String username;
 String job;
-DataManagerImpl dm;
+String password;
+DataManagerImpl dm = new DataManagerImpl();
     /**
      * Creates new form AddUserAccountScreen
      */
@@ -88,6 +90,14 @@ DataManagerImpl dm;
         });
 
         jPasswordField1.setText("jPasswordField1");
+        jPasswordField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jPasswordField1FocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jPasswordField1FocusLost(evt);
+            }
+        });
 
         usernameField.setText("Username");
         usernameField.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
@@ -194,8 +204,16 @@ DataManagerImpl dm;
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        if(username == null | firstName == null| password == null ){
+            JOptionPane.showMessageDialog(null,"Invalid credentials, Please enter correct credentials!", "Access Denied", JOptionPane.ERROR_MESSAGE);
+            this.dispose();
+        }
         
+        else{
         BAPADMN save = new BAPADMN(dm);
+        save.createUserAccount(username, firstName, surname, job, password);
+        this.dispose();
+        }
        
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -278,6 +296,27 @@ DataManagerImpl dm;
         // TODO add your handling code here: 
         job = (String)jComboBox1.getSelectedItem();
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jPasswordField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordField1FocusGained
+        // TODO add your handling code here:
+        String pass = new String(jPasswordField1.getPassword());
+        if(pass.compareTo("jPasswordField1")==0){
+            jPasswordField1.setText("");
+        }
+        
+        else {
+            
+            password = pass;
+            
+        }
+        
+    }//GEN-LAST:event_jPasswordField1FocusGained
+
+    private void jPasswordField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jPasswordField1FocusLost
+        // TODO add your handling code here:
+        String pass = new String(jPasswordField1.getPassword());
+        password = pass;
+    }//GEN-LAST:event_jPasswordField1FocusLost
 
     /**
      * @param args the command line arguments

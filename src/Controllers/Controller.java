@@ -39,11 +39,12 @@ public class Controller {
                 //Code for changing to the next page
                 
                 if(role.compareToIgnoreCase("Office Manager")==0){
-                    OfficeManagerStartScreen screen = new OfficeManagerStartScreen();
-                    screen.setStaff(staff);
+                    OfficeManagerStartScreen screen = new OfficeManagerStartScreen(staff);
+                    screen.setVisible(true);
+                    
                 }
-                Welcome w=new Welcome ();
-                w.setVisible(true);
+                //Welcome w=new Welcome ();
+                //w.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null,"Invalid credentials, Please enter correct credentials!", "Access Denied", JOptionPane.ERROR_MESSAGE);
             } 

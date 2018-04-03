@@ -6,6 +6,10 @@
 package Controllers;
 
 import data.DataManagerImpl;
+import domain.JobLine;
+import domain.Staff;
+import java.util.ArrayList;
+import java.util.Collection;
 
 /**
  *
@@ -17,7 +21,17 @@ public class BAPADMN {
     public BAPADMN(DataManagerImpl dm){
         this.dm = dm;
     }
-    public void createUserAccount(){
+    public void createUserAccount(String username, String forname, String surname, String role, String password){
+        Staff staff = new Staff();
+        staff.setUsername(username);
+        staff.setFirstName(forname);
+        staff.setSurname(surname);
+        staff.setRole(role);
+        staff.setPassword(password);
+        Collection<JobLine> jobLineCollection = new ArrayList();
+        staff.setJobLineCollection(jobLineCollection);
+        
+        dm.saveStaff(staff);
         
     }
 }
