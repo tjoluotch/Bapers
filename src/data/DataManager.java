@@ -7,6 +7,7 @@ package data;
 
 import java.util.List;
 import domain.*;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -14,10 +15,12 @@ import domain.*;
  */
 public interface DataManager {
     
-    List<Customer> AllCustomers();
-    List<Staff> AllStaff();
-    List<Job> AllJobs();
-    List<Task> AllTasks();
+    EntityManager getEntityManager();
+    
+    List<Customer> allCustomers();
+    List<Staff> allStaff();
+    List<Job> allJobs();
+    List<Task> allTasks();
     
     Customer findCustomerByName(String forename, String surname);
     Customer findCustomerByAccountHolderName(String AccountHolderName);

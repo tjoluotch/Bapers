@@ -25,22 +25,27 @@ public class DataManagerImpl implements DataManager{
     private EntityManager em = emf.createEntityManager();
     
     @Override
-    public List<Customer> AllCustomers(){
+    public EntityManager getEntityManager(){
+        return em;
+    }
+    
+    @Override
+    public List<Customer> allCustomers(){
         TypedQuery<Customer> query = em.createNamedQuery("Customer.findAll", Customer.class);
         return query.getResultList();
     } 
     @Override
-    public List<Staff> AllStaff(){
+    public List<Staff> allStaff(){
         TypedQuery<Staff> query = em.createNamedQuery("Staff.findAll", Staff.class);
         return query.getResultList();
     }
     @Override
-    public List<Job> AllJobs(){
+    public List<Job> allJobs(){
         TypedQuery<Job> query = em.createNamedQuery("Job.findAll", Job.class);
         return query.getResultList();
     }
     @Override
-    public List<Task> AllTasks(){
+    public List<Task> allTasks(){
         TypedQuery<Task> query = em.createNamedQuery("Task.findAll", Task.class);
         return query.getResultList();
     }

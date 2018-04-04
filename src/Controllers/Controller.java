@@ -6,6 +6,7 @@
 package Controllers;
 
 import data.DataManagerImpl;
+import javax.persistence.*;
 import domain.Customer;
 import domain.Staff;
 import javax.swing.*;
@@ -54,7 +55,10 @@ public class Controller {
     //JPA EXAMPLE
     public void connectionCheck(){
         //methods called from a DataManagerImpl object return objects of the respective type
-        for(Customer c : dm.AllCustomers()){
+        for(Customer c : dm.allCustomers()){
+           //Concurrency control system:
+           dm.getEntityManager().lock(c, LockModeType.OPTIMISTIC); //OPTIMISTIC IS FOR READING DATABASE
+           //dm.getEntityManager().lock(c, LockModeType.OPTIMISTIC_FORCE_INCREMENT); IS FOR WRITING TO DATABSE
            String cust1 = "" + c.getForename() + " " + c.getSurname() + "\n"; 
            System.out.println(cust1);
         }
