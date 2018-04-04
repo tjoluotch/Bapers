@@ -18,6 +18,10 @@ import javax.persistence.TypedQuery;
  * @author DanTe
  */
 public class DataManagerImpl implements DataManager{
+
+    public EntityManager getEm() {
+        return em;
+    }
     
     EntityManagerFactory emf = Persistence.createEntityManagerFactory("BapersPU");
    
@@ -154,4 +158,25 @@ public class DataManagerImpl implements DataManager{
     public void saveJob(Job job){em.persist(job);}
     @Override
     public void saveTask(Task task){em.persist(task);}
-}
+
+    @Override
+    public boolean updateStaffRecord(String username, String firstName, String surname, String password, String role) {
+        
+    
+        TypedQuery<Staff> query = em.createNamedQuery("Staff.updateStaff", Staff.class);
+        query.setParameter("firstName", firstName);
+        query.setParameter("surname", surname);
+        query.setParameter("password", password);
+        query.setParameter("role", role);
+        query.setParameter("username", username);
+        query.executeUpdate();
+        
+        return true;//To change body of generated methods, choose Tools | Templates.
+    }
+    
+        
+    }
+        
+    
+    
+

@@ -27,6 +27,7 @@ public interface DataManager {
     Staff findStaffByUsername(String username);
     List<Staff> searchStaffByUsername(String username);
     
+    
     OrderTable findOrderByID(int ID);
     OrderTable findOrderByAccountNumber(String AccountNumber);
     
@@ -41,4 +42,5 @@ public interface DataManager {
     void saveStaff(Staff staff);
     void saveJob(Job job);
     void saveTask(Task task);
+    public boolean updateStaffRecord(String username, String firstName, String surname, String password, String role);
 }

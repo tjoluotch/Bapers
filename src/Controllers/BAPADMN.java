@@ -20,6 +20,11 @@ import java.util.List;
 public class BAPADMN {
     
     DataManagerImpl dm;
+    Staff staffs;
+    
+    public BAPADMN(){
+        
+    }
     public BAPADMN(DataManagerImpl dm){
         this.dm = dm;
     }
@@ -51,6 +56,21 @@ public class BAPADMN {
        
        return staff;
        
+        
+        
+    }
+    
+    public void updateStaff(String username, String firstName, String surname, String password, String role){
+        dm = new DataManagerImpl();
+      
+        staffs = dm.getEm().find(Staff.class, username);
+        dm.getEm().getTransaction().begin();
+        staffs.setFirstName(firstName);
+        staffs.setSurname(surname);
+        staffs.setPassword(password);
+        staffs.setRole(role);
+        dm.getEm().getTransaction().commit();
+        
         
         
     }
