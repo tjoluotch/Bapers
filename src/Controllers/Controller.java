@@ -57,11 +57,17 @@ public class Controller {
         //methods called from a DataManagerImpl object return objects of the respective type
         for(Customer c : dm.allCustomers()){
            //Concurrency control system:
-           dm.getEntityManager().lock(c, LockModeType.OPTIMISTIC); //OPTIMISTIC IS FOR READING DATABASE
+           //dm.getEntityManager().lock(c, LockModeType.OPTIMISTIC); //OPTIMISTIC IS FOR READING DATABASE
            //dm.getEntityManager().lock(c, LockModeType.OPTIMISTIC_FORCE_INCREMENT); IS FOR WRITING TO DATABSE
-           String cust1 = "" + c.getForename() + " " + c.getSurname() + "\n"; 
+           String cust1 = c.getForename() + " " + c.getSurname() + "\n"; 
+           //dm.getEntityManager().flush(); //updates the database
            System.out.println(cust1);
         }
     }
+    
+    public void Receptionist(){
+        BAPACCT acct = new BAPACCT(dm);
+        //acct.createNewCustomer("2", "Peter", "Parker", "Parker.Inc", "20 Ingram Street", "Manhattan", null, "New York", "N3WY0RK", "12345");
+        }
     
 }

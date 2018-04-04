@@ -6,8 +6,6 @@
 package solsoftbapers2;
 
 import Controllers.Controller;
-import data.*;
-import domain.Customer;
 
 
 public class SolSoftBapers2 {
@@ -23,6 +21,7 @@ public class SolSoftBapers2 {
     public static void main(String[] args) {
         Controller controller = new Controller();
         //controller.loginSystem();
+        
         controller.connectionCheck();
     }
     

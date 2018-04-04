@@ -37,5 +37,6 @@ public class BAPACCT {
         customer.setValuedCustomer(Boolean.FALSE);
         
         dm.saveCustomer(customer);
+        System.out.println("Customer " + customer.getForename() + " " + customer.getSurname() + " has been added to the database.");
     }    
 }
