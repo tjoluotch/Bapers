@@ -117,7 +117,7 @@ public class ManageUsersScreen extends javax.swing.JFrame {
         
         BAPADMN bp = new BAPADMN(dm);
         bp.searchStaff(searchTerm);
-        this.dispose();
+        
         
         
     }//GEN-LAST:event_jButton2ActionPerformed

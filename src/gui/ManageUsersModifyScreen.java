@@ -7,6 +7,7 @@ package gui;
 
 import Controllers.BAPADMN;
 import domain.Staff;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,6 +16,11 @@ import domain.Staff;
 public class ManageUsersModifyScreen extends javax.swing.JFrame {
 Staff staff;
 int num;
+String staffUname ;
+String staffFname ;
+String staffSname ;
+String staffrole ;
+String staffPass ;
     /**
      * Creates new form ManageUsersModifyScreen
      */
@@ -24,6 +30,11 @@ int num;
     
     public ManageUsersModifyScreen(Staff staff) {
         this.staff = staff;
+        staffUname = staff.getUsername();
+        staffFname = staff.getFirstName();
+        staffSname = staff.getSurname();
+        staffrole = staff.getRole();
+        staffPass = staff.getPassword();
         initComponents();
     }
 
@@ -75,6 +86,11 @@ int num;
         password.setText("jPasswordField1");
 
         jButton1.setText("Cancel");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Save Account");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -155,15 +171,31 @@ int num;
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        
-        BAPADMN bp = new BAPADMN();
         String pass = new String(password.getPassword());
+        if(username.getText().compareTo(staffUname) == 0 && firstName.getText().compareTo(staffFname) == 0 && surname.getText().compareTo(staffSname)==0 && jobsBox.getSelectedItem().toString().compareToIgnoreCase(staffrole)==0 &&pass.compareTo(staffPass)==0 ){
+            JOptionPane.showMessageDialog(this,"No changes made to Account.","Modify failed",JOptionPane.ERROR_MESSAGE);
+        }
+        
+        else{
+        BAPADMN bp = new BAPADMN();
+        
         bp.updateStaff(username.getText(), firstName.getText(), surname.getText(), pass, jobsBox.getSelectedItem().toString());
+        JOptionPane.showMessageDialog(this,"Staff Record Updated");
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here
+       BAPADMN bp = new BAPADMN();
+       bp.deleteStaff(username.getText());
+        
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -92,7 +92,7 @@ Staff staff;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         pack();
@@ -114,6 +114,7 @@ Staff staff;
         
          ManageUsersModifyScreen screen = new ManageUsersModifyScreen(staff);
          screen.setVisible(true);
+         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
