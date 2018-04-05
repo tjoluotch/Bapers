@@ -9,6 +9,7 @@ import domain.*;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.LockModeType;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -142,24 +143,29 @@ public class DataManagerImpl implements DataManager{
     
     @Override
     public void saveCustomer(Customer customer){
+        em.lock(customer, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
         em.getTransaction().begin();
         em.persist(customer);
         em.getTransaction().commit();
     }
     @Override
     public void saveStaff(Staff staff){
+        em.lock(staff, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
         em.getTransaction().begin();
         em.persist(staff);
         em.getTransaction().commit();
     }
     @Override
     public void saveJob(Job job){
+        
+        em.lock(job, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
         em.getTransaction().begin();
         em.persist(job);
         em.getTransaction().commit();
     }
     @Override
     public void saveTask(Task task){
+        em.lock(task, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
         em.getTransaction().begin();
         em.persist(task);
         em.getTransaction().commit();

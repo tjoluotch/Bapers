@@ -21,7 +21,6 @@ public class SolSoftBapers2 {
     public static void main(String[] args) {
         Controller controller = new Controller();
         //controller.loginSystem();
-        
         controller.connectionCheck();
     }
     

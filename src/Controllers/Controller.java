@@ -58,7 +58,7 @@ public class Controller {
         for(Customer c : dm.allCustomers()){
            //Concurrency control system:
            //dm.getEntityManager().lock(c, LockModeType.OPTIMISTIC); //OPTIMISTIC IS FOR READING DATABASE
-           //dm.getEntityManager().lock(c, LockModeType.OPTIMISTIC_FORCE_INCREMENT); IS FOR WRITING TO DATABSE
+           //dm.getEntityManager().lock(c, LockModeType.OPTIMISTIC_FORCE_INCREMENT); //IS FOR WRITING TO DATABSE
            String cust1 = c.getForename() + " " + c.getSurname() + "\n"; 
            //dm.getEntityManager().flush(); //updates the database
            System.out.println(cust1);
