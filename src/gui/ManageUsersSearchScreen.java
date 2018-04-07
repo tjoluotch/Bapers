@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class ManageUsersSearchScreen extends javax.swing.JFrame {
 StaffTableModel model;
-List<Staff> slist;
+List<Staff> slist=null;
 DataManagerImpl dm = new DataManagerImpl();
 int row;
 Staff staff;
@@ -58,6 +58,11 @@ Staff staff;
         });
 
         jButton2.setText("Back");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new StaffTableModel(slist));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -116,6 +121,11 @@ Staff staff;
          screen.setVisible(true);
          this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

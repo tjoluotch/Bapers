@@ -6,6 +6,7 @@
 package data;
 
 import domain.*;
+import java.sql.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -172,6 +173,13 @@ public class DataManagerImpl implements DataManager{
         query.executeUpdate();
         
         return true;//To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public List <JobLine> individualReport(Date date) {
+        TypedQuery<JobLine> query = em.createNamedQuery("JobLine.indPerformanceReport", JobLine.class);
+        query.setParameter("date", date);
+        return query.getResultList();
     }
     
         

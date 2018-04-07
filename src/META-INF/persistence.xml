@@ -4,16 +4,16 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>domain.PaymentDetail</class>
     <class>domain.Task</class>
-    <class>domain.Staff</class>
     <class>domain.JobLine</class>
     <class>domain.OrderTable</class>
     <class>domain.Job</class>
     <class>domain.Customer</class>
+    <class>domain.Staff</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/solsoft_DB"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="lol"/> 
+      <property name="javax.persistence.jdbc.password" value="chicken"/>
     </properties>
   </persistence-unit>
 </persistence>

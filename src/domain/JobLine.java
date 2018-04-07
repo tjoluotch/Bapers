@@ -31,6 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "JobLine.findAll", query = "SELECT j FROM JobLine j")
     , @NamedQuery(name = "JobLine.findByJoblineID", query = "SELECT j FROM JobLine j WHERE j.joblineID = :joblineID")
     , @NamedQuery(name = "JobLine.findByDate", query = "SELECT j FROM JobLine j WHERE j.date = :date")
+    , @NamedQuery(name = "JobLine.indPerformanceReport", query = "SELECT j FROM JobLine j  WHERE j.date = :date ORDER BY j.completedBy ASC, j.startTime ASC ")
     , @NamedQuery(name = "JobLine.findByStartTime", query = "SELECT j FROM JobLine j WHERE j.startTime = :startTime")
     , @NamedQuery(name = "JobLine.findByEndTime", query = "SELECT j FROM JobLine j WHERE j.endTime = :endTime")})
 public class JobLine implements Serializable {

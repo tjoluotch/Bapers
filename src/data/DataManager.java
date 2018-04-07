@@ -7,6 +7,7 @@ package data;
 
 import java.util.List;
 import domain.*;
+import java.sql.Date;
 
 /**
  *
@@ -43,4 +44,5 @@ public interface DataManager {
     void saveJob(Job job);
     void saveTask(Task task);
     public boolean updateStaffRecord(String username, String firstName, String surname, String password, String role);
+    public List <JobLine> individualReport(Date date);
 }

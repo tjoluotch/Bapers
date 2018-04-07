@@ -11,11 +11,14 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -24,7 +27,9 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author DanTe
  */
 @Entity
-@Table(name = "staff")
+@Table(name = "staff",indexes={
+    @Index(name = "staff_idx", columnList="forname,password,role,surname", unique=true)
+})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Staff.findAll", query = "SELECT s FROM Staff s")
@@ -52,6 +57,9 @@ public class Staff implements Serializable {
     private String role;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "completedBy")
     private Collection<JobLine> jobLineCollection;
+    @Version
+    @Column(name = "version")
+    protected int version=0;
 
     public Staff() {
     }

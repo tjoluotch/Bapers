@@ -101,7 +101,7 @@ String staffPass ;
 
         username.setText(staff.getUsername());
 
-        jButton3.setText("Deleate Account");
+        jButton3.setText("Delete Account");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -181,13 +181,17 @@ String staffPass ;
         
         bp.updateStaff(username.getText(), firstName.getText(), surname.getText(), pass, jobsBox.getSelectedItem().toString());
         JOptionPane.showMessageDialog(this,"Staff Record Updated");
+        this.dispose();
         }
+        
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here
        BAPADMN bp = new BAPADMN();
        bp.deleteStaff(username.getText());
+       this.dispose();
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
