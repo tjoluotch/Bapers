@@ -3,7 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bapersgui;
+package gui;
+
+import Controllers.BAPREPT;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,12 +41,12 @@ public class StaffReportsScreen extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        monthly = new javax.swing.JRadioButton();
+        quarterly = new javax.swing.JRadioButton();
+        yearly = new javax.swing.JRadioButton();
+        custom = new javax.swing.JCheckBox();
+        startDate = new javax.swing.JTextField();
+        endDate = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -43,22 +54,59 @@ public class StaffReportsScreen extends javax.swing.JFrame {
         jTextField1.setText("Username");
 
         jButton1.setText("Create");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancel");
 
-        jRadioButton1.setText(" Month");
+        monthly.setText(" Month");
+        monthly.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                monthlyActionPerformed(evt);
+            }
+        });
 
-        jRadioButton2.setText(" Quarter");
+        quarterly.setText(" Quarter");
+        quarterly.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quarterlyActionPerformed(evt);
+            }
+        });
 
-        jRadioButton3.setText("Year");
+        yearly.setText("Year");
+        yearly.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                yearlyActionPerformed(evt);
+            }
+        });
 
-        jCheckBox1.setText("Custom Range");
+        custom.setText("Custom Range");
+        custom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customActionPerformed(evt);
+            }
+        });
 
-        jTextField4.setText("Start date");
+        startDate.setEditable(false);
+        startDate.setText("Start date");
+        startDate.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                startDateFocusGained(evt);
+            }
+        });
 
-        jTextField5.setText("End date");
+        endDate.setEditable(false);
+        endDate.setText("End date");
+        endDate.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                endDateFocusGained(evt);
+            }
+        });
 
-        jLabel1.setText("Layout: dd/mm/yyyy");
+        jLabel1.setText(" dd/mm/yyyy");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,22 +124,24 @@ public class StaffReportsScreen extends javax.swing.JFrame {
                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jCheckBox1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(custom, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(monthly)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(quarterly)))
+                                .addGap(17, 17, 17)
+                                .addComponent(yearly))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField4)
-                                    .addComponent(jTextField5)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jRadioButton2)))
-                        .addGap(1, 1, 1)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jRadioButton3)
-                            .addComponent(jLabel1))))
-                .addContainerGap(139, Short.MAX_VALUE))
+                                    .addComponent(startDate)
+                                    .addComponent(endDate))
+                                .addGap(51, 51, 51)
+                                .addComponent(jLabel1)))))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,26 +150,239 @@ public class StaffReportsScreen extends javax.swing.JFrame {
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton3))
+                    .addComponent(monthly)
+                    .addComponent(quarterly)
+                    .addComponent(yearly))
                 .addGap(18, 18, 18)
-                .addComponent(jCheckBox1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(31, 31, 31))
+                .addComponent(custom)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton1)
+                            .addComponent(jButton2))
+                        .addGap(31, 31, 31))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void monthlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthlyActionPerformed
+        // TODO add your handling code here:
+        if (yearly.isSelected()){
+            yearly.setSelected(false);
+        }
+        if (quarterly.isSelected()){
+            quarterly.setSelected(false);
+        }
+    }//GEN-LAST:event_monthlyActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        if(monthly.isSelected()){
+            
+            LocalDateTime  now = LocalDateTime.now();
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
+            String currentDate = dtf.format(now);
+            String currentMonth = currentDate.substring(3, 5);
+            String currentYear = currentDate.substring(6, 10);
+            String sDate = "01/" + currentMonth +"/"+ currentYear;
+           
+            
+            BAPREPT rp = new BAPREPT();
+            try {
+                rp.createMonthlyReport(sDate, currentDate);
+            } catch (IOException ex) {
+                Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+               
+            
+        }
+        
+        if(quarterly.isSelected()){
+            
+            LocalDateTime  now = LocalDateTime.now();
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
+            String currentDate = dtf.format(now);
+            String currentMonth = currentDate.substring(3, 5);
+            String currentYear = currentDate.substring(6, 10);
+            String sDate = new String();
+            String quarter = new String();
+            String q = new String();
+            
+            String [] firstQuarter = {"01", "02", "03"};
+            String [] secondQuarter = {"04", "05", "06"};
+            String [] thirdQuarter = {"07", "08", "09"};
+            String [] fourthQuarter = {"10", "11", "12"};
+            
+            for(String date: firstQuarter){
+                if(date.compareTo(currentMonth)==0){
+                     sDate = "01/01/"+ currentYear;
+                     quarter = "1st_Quarter";
+                     q = "1st Quarter";
+                }
+            }
+            
+            for(String date: secondQuarter){
+                if(date.compareTo(currentMonth)==0){
+                     sDate = "01/04/"+ currentYear;
+                     quarter = "2nd_Quarter";
+                     q = "2nd Quarter";
+                }
+            }
+            
+            for(String date: thirdQuarter){
+                if(date.compareTo(currentMonth)==0){
+                     sDate = "01/07/"+ currentYear;
+                     quarter = "3rd_Quarter";
+                     q = "3rd Quarter";
+                     
+                }
+            }
+            
+            for(String date: fourthQuarter){
+                if(date.compareTo(currentMonth)==0){
+                     sDate = "01/10/"+ currentYear;
+                     quarter = "4th_Quarter";
+                     q = "4th Quarter";
+                }
+            }
+            
+            BAPREPT rp = new BAPREPT();
+            try {
+                rp.createQuarterlyReport(sDate, currentDate,quarter,q);
+            } catch (IOException ex) {
+                Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+        
+        if(yearly.isSelected()){
+            LocalDateTime  now = LocalDateTime.now();
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy"); 
+            String currentDate = dtf.format(now);
+            String currentYear = currentDate.substring(6, 10);
+            String sDate = "01/01/" + currentYear;
+            
+            BAPREPT rp = new BAPREPT();
+            try {
+                rp.createYearlyReport(sDate, currentDate);
+            } catch (IOException ex) {
+                Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            
+        }
+        
+        if(custom.isSelected()){
+              boolean date1 = false ;
+              boolean date2 = false;
+            
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                sdf.setLenient(false);
+                
+//                if (!startDate.getText().equals(sdf.format(date1)) | !endDate.getText().equals(sdf.format(date1))) {
+//                     date1 = null;
+//                     date2 = null;
+//                }
+                try {
+                    sdf.parse(startDate.getText().trim());
+                    date1 = true;
+                } catch (ParseException pe) {
+                     date1 = false;
+                 }
+                
+                try {
+                    sdf.parse(endDate.getText().trim());
+                    date2 = true;
+                } catch (ParseException pe) {
+                     date1 = false;
+                 }
+                            
+
+            
+            if (date1 == false | date2 == false) {
+                // Invalid date format
+                 JOptionPane.showMessageDialog(this,"Please enter a valid date","Invalid Date Error",JOptionPane.ERROR_MESSAGE);
+            } else {
+                   BAPREPT rp = new BAPREPT();
+                  try {
+                      rp.createIndividualReport(startDate.getText(), endDate.getText());
+                  } catch (IOException ex) {
+                      Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
+                  }
+            }
+        }
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void quarterlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quarterlyActionPerformed
+            // TODO add your handling code here:
+            if(monthly.isSelected()){
+                monthly.setSelected(false);
+            }
+            
+            if(yearly.isSelected()){
+                yearly.setSelected(false);
+            }
+    }//GEN-LAST:event_quarterlyActionPerformed
+
+    private void yearlyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_yearlyActionPerformed
+        // TODO add your handling code here:
+        if(monthly.isSelected()){
+            monthly.setSelected(false);
+        }
+        
+        if(quarterly.isSelected()){
+            quarterly.setSelected(false);
+        }
+    }//GEN-LAST:event_yearlyActionPerformed
+
+    private void customActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customActionPerformed
+        // TODO add your handling code here:
+        
+        if(custom.isSelected() == true){
+            startDate.setEditable(true);
+            endDate.setEditable(true);
+            monthly.setSelected(false);
+            quarterly.setSelected(false);
+            yearly.setSelected(false);
+        }
+        
+        
+        else{
+            
+            startDate.setEditable(false);
+            endDate.setEditable(false);
+            
+        }
+    }//GEN-LAST:event_customActionPerformed
+
+    private void startDateFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_startDateFocusGained
+        // TODO add your handling code here:
+        if (startDate.isEditable()){
+             startDate.setText("");
+        }
+       
+    }//GEN-LAST:event_startDateFocusGained
+
+    private void endDateFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_endDateFocusGained
+        // TODO add your handling code here:
+        
+        if(endDate.isEditable()){
+         endDate.setText("");   
+        }
+        
+    }//GEN-LAST:event_endDateFocusGained
 
     /**
      * @param args the command line arguments
@@ -158,15 +421,15 @@ public class StaffReportsScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox custom;
+    private javax.swing.JTextField endDate;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JRadioButton monthly;
+    private javax.swing.JRadioButton quarterly;
+    private javax.swing.JTextField startDate;
+    private javax.swing.JRadioButton yearly;
     // End of variables declaration//GEN-END:variables
 }

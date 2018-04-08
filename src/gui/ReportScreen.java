@@ -38,7 +38,7 @@ public class ReportScreen extends javax.swing.JFrame {
         }
         
         BAPREPT bp = new BAPREPT();
-        bp.createIndividualReportSingleDate("13/01/2018");
+        
         System.out.println();
         initComponents();
     }

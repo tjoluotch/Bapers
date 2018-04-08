@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -18,12 +19,15 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author DanTe
  */
+//SELECT * FROM Products
+//WHERE Price BETWEEN 10 AND 20
 @Entity
 @Table(name = "job_line")
 @XmlRootElement
@@ -31,34 +35,36 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "JobLine.findAll", query = "SELECT j FROM JobLine j")
     , @NamedQuery(name = "JobLine.findByJoblineID", query = "SELECT j FROM JobLine j WHERE j.joblineID = :joblineID")
     , @NamedQuery(name = "JobLine.findByDate", query = "SELECT j FROM JobLine j WHERE j.date = :date")
-    , @NamedQuery(name = "JobLine.indPerformanceReport", query = "SELECT j FROM JobLine j  WHERE j.date = :date ORDER BY j.completedBy ASC, j.startTime ASC ")
+    
     , @NamedQuery(name = "JobLine.findByStartTime", query = "SELECT j FROM JobLine j WHERE j.startTime = :startTime")
     , @NamedQuery(name = "JobLine.findByEndTime", query = "SELECT j FROM JobLine j WHERE j.endTime = :endTime")})
 public class JobLine implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
+     @Id
     @Basic(optional = false)
     @Column(name = "Job_lineID")
     private Integer joblineID;
-    @Column(name = "date")
     @Temporal(TemporalType.DATE)
-    private Date date;
-    @Column(name = "start_time")
-    @Temporal(TemporalType.TIME)
-    private Date startTime;
-    @Column(name = "end_time")
-    @Temporal(TemporalType.TIME)
-    private Date endTime;
-    @JoinColumn(name = "code", referencedColumnName = "code")
+    private Date jobDeadline;
+    @Size(max = 100)
+    @Column(name = "special instructions")
+    private String specialInstructions;
+    @Size(max = 20)
+    @Column(name = "reminder_status")
+    private String reminderStatus;
+    @JoinColumn(name = "job_code", referencedColumnName = "code")
     @ManyToOne(optional = false)
-    private Job code;
-    @JoinColumn(name = "completed_by", referencedColumnName = "username")
+    private Job jobCode;
+    @JoinColumn(name = "orderID", referencedColumnName = "orderID")
     @ManyToOne(optional = false)
-    private Staff completedBy;
-    @JoinColumn(name = "TaskID", referencedColumnName = "TaskID")
+    private OrderTable orderID;
+    @JoinColumn(name = "payment_detailID", referencedColumnName = "payment_detailID")
     @ManyToOne(optional = false)
-    private Task taskID;
+    private PaymentDetail paymentdetailID;
+
+    private static final long serialVersionUID = 1L;
+    
+    
 
     public JobLine() {
     }
@@ -75,54 +81,7 @@ public class JobLine implements Serializable {
         this.joblineID = joblineID;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
-
-    public Job getCode() {
-        return code;
-    }
-
-    public void setCode(Job code) {
-        this.code = code;
-    }
-
-    public Staff getCompletedBy() {
-        return completedBy;
-    }
-
-    public void setCompletedBy(Staff completedBy) {
-        this.completedBy = completedBy;
-    }
-
-    public Task getTaskID() {
-        return taskID;
-    }
-
-    public void setTaskID(Task taskID) {
-        this.taskID = taskID;
-    }
-
+   
     @Override
     public int hashCode() {
         int hash = 0;
@@ -146,6 +105,56 @@ public class JobLine implements Serializable {
     @Override
     public String toString() {
         return "domain.JobLine[ joblineID=" + joblineID + " ]";
+    }
+
+    
+
+    public Date getJobDeadline() {
+        return jobDeadline;
+    }
+
+    public void setJobDeadline(Date jobDeadline) {
+        this.jobDeadline = jobDeadline;
+    }
+
+    public String getSpecialInstructions() {
+        return specialInstructions;
+    }
+
+    public void setSpecialInstructions(String specialInstructions) {
+        this.specialInstructions = specialInstructions;
+    }
+
+    public String getReminderStatus() {
+        return reminderStatus;
+    }
+
+    public void setReminderStatus(String reminderStatus) {
+        this.reminderStatus = reminderStatus;
+    }
+
+    public Job getJobCode() {
+        return jobCode;
+    }
+
+    public void setJobCode(Job jobCode) {
+        this.jobCode = jobCode;
+    }
+
+    public OrderTable getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(OrderTable orderID) {
+        this.orderID = orderID;
+    }
+
+    public PaymentDetail getPaymentdetailID() {
+        return paymentdetailID;
+    }
+
+    public void setPaymentdetailID(PaymentDetail paymentdetailID) {
+        this.paymentdetailID = paymentdetailID;
     }
     
 }

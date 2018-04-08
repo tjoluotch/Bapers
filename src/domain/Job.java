@@ -21,6 +21,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -39,6 +40,11 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Job.findByJobDeadline", query = "SELECT j FROM Job j WHERE j.jobDeadline = :jobDeadline")
     , @NamedQuery(name = "Job.findByOrderID", query = "SELECT j FROM Job j WHERE j.orderID = :orderID")})
 public class Job implements Serializable {
+
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "version", nullable = false)
+    private long version;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -138,6 +144,14 @@ public class Job implements Serializable {
     @Override
     public String toString() {
         return "domain.Job[ code=" + code + " ]";
+    }
+
+    public long getVersion() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
     }
     
 }

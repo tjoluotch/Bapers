@@ -44,5 +44,6 @@ public interface DataManager {
     void saveJob(Job job);
     void saveTask(Task task);
     public boolean updateStaffRecord(String username, String firstName, String surname, String password, String role);
-    public List <JobLine> individualReport(Date date);
+    public List <TaskLine> individualReport(Date date);
+     public List <TaskLine> individualReportBetween(Date startDate, Date endDate);
 }

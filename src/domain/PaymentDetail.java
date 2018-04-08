@@ -6,19 +6,25 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -34,6 +40,19 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "PaymentDetail.findByType", query = "SELECT p FROM PaymentDetail p WHERE p.type = :type")
     , @NamedQuery(name = "PaymentDetail.findByLast4digits", query = "SELECT p FROM PaymentDetail p WHERE p.last4digits = :last4digits")})
 public class PaymentDetail implements Serializable {
+
+    @Id
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "payment_detailID", nullable = false, length = 45)
+    private String paymentdetailID;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "version", nullable = false)
+    private long version;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "paymentdetailID")
+    private Collection<JobLine> jobLineCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -122,5 +141,43 @@ public class PaymentDetail implements Serializable {
     public String toString() {
         return "domain.PaymentDetail[ orderID=" + orderID + " ]";
     }
+
+    public PaymentDetail(String paymentdetailID) {
+        this.paymentdetailID = paymentdetailID;
+    }
+
+    public PaymentDetail(String paymentdetailID, long version) {
+        this.paymentdetailID = paymentdetailID;
+        this.version = version;
+    }
+
+    public String getPaymentdetailID() {
+        return paymentdetailID;
+    }
+
+    public void setPaymentdetailID(String paymentdetailID) {
+        this.paymentdetailID = paymentdetailID;
+    }
+
+    public long getVersion() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
+    }
+
+    @XmlTransient
+    public Collection<JobLine> getJobLineCollection() {
+        return jobLineCollection;
+    }
+
+    public void setJobLineCollection(Collection<JobLine> jobLineCollection) {
+        this.jobLineCollection = jobLineCollection;
+    }
+
+   
+
+    
     
 }

@@ -176,9 +176,17 @@ public class DataManagerImpl implements DataManager{
     }
     
     @Override
-    public List <JobLine> individualReport(Date date) {
-        TypedQuery<JobLine> query = em.createNamedQuery("JobLine.indPerformanceReport", JobLine.class);
+    public List <TaskLine> individualReport(Date date) {
+        TypedQuery<TaskLine> query = em.createNamedQuery("TaskLine.findPerformanceReport", TaskLine.class);
         query.setParameter("date", date);
+        return query.getResultList();
+    }
+    
+    @Override
+    public List <TaskLine> individualReportBetween(Date startDate, Date endDate) {
+        TypedQuery<TaskLine> query = em.createNamedQuery("TaskLine.findBetweenDates", TaskLine.class);
+        query.setParameter("startDate", startDate);
+        query.setParameter("endDate", endDate);
         return query.getResultList();
     }
     

@@ -22,6 +22,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -41,6 +43,18 @@ import javax.xml.bind.annotation.XmlTransient;
     //, @NamedQuery(name = "OrderTable.findByPaymentdetailID", query = "SELECT o FROM OrderTable o WHERE o.paymentdetailID = :paymentdetailID")
     , @NamedQuery(name = "OrderTable.findByDateSubmitted", query = "SELECT o FROM OrderTable o WHERE o.dateSubmitted = :dateSubmitted")})
 public class OrderTable implements Serializable {
+
+    @Size(max = 20)
+    @Column(name = "payment_status", length = 20)
+    private String paymentStatus;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "version", nullable = false)
+    private long version;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderID")
+    private Collection<PaymentDetail> paymentDetailCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderID")
+    private Collection<JobLine> jobLineCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -171,6 +185,40 @@ public class OrderTable implements Serializable {
     @Override
     public String toString() {
         return "domain.OrderTable[ orderID=" + orderID + " ]";
+    }
+
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+    public long getVersion() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
+    }
+
+    @XmlTransient
+    public Collection<PaymentDetail> getPaymentDetailCollection() {
+        return paymentDetailCollection;
+    }
+
+    public void setPaymentDetailCollection(Collection<PaymentDetail> paymentDetailCollection) {
+        this.paymentDetailCollection = paymentDetailCollection;
+    }
+
+    @XmlTransient
+    public Collection<JobLine> getJobLineCollection() {
+        return jobLineCollection;
+    }
+
+    public void setJobLineCollection(Collection<JobLine> jobLineCollection) {
+        this.jobLineCollection = jobLineCollection;
     }
     
 }
