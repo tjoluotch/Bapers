@@ -11,7 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.NamedQueries;
@@ -19,53 +18,74 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author DanTe
+ * @author Daniel
  */
 @Entity
-@Table(name = "staff",indexes={
-    @Index(name = "staff_idx", columnList="forname,password,role,surname", unique=true)
-})
+@Table(name = "staff",indexes={@Index(name = "staff_idx", columnList="forname,password,role,surname", unique=true)})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Staff.findAll", query = "SELECT s FROM Staff s")
-    , @NamedQuery(name = "Staff.searchByUsername", query = "SELECT s FROM Staff s WHERE s.username LIKE CONCAT('%',:username,'%')")
-    , @NamedQuery(name = "Staff.findByUsername", query = "SELECT s FROM Staff s WHERE s.username = :username")    
+    , @NamedQuery(name = "Staff.findByUsername", query = "SELECT s FROM Staff s WHERE s.username = :username")
     , @NamedQuery(name = "Staff.findByPassword", query = "SELECT s FROM Staff s WHERE s.password = :password")
-    , @NamedQuery(name = "Staff.findByFirstName", query = "SELECT s FROM Staff s WHERE s.firstName = :firstName")
+    , @NamedQuery(name = "Staff.findByForename", query = "SELECT s FROM Staff s WHERE s.forename = :forename")
     , @NamedQuery(name = "Staff.findBySurname", query = "SELECT s FROM Staff s WHERE s.surname = :surname")
     , @NamedQuery(name = "Staff.findByRole", query = "SELECT s FROM Staff s WHERE s.role = :role")
-    , @NamedQuery(name = "Staff.updateStaff", query = "UPDATE  Staff SET firstName =:firstName, surname = :surname, password = password, role=role" +" WHERE username = username")})
+    , @NamedQuery(name = "Staff.findByVersion", query = "SELECT s FROM Staff s WHERE s.version = :version")
+    , @NamedQuery(name = "Staff.findByLoggedOn", query = "SELECT s FROM Staff s WHERE s.loggedOn = :loggedOn")})
 public class Staff implements Serializable {
+
+    @Basic(optional = false)
+    @NotNull
+    @Version
+    @Column(name = "version")
+    private long version;
+    @OneToMany(mappedBy = "completedBy")
+    private Collection<TaskLine> taskLineCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
     @Column(name = "username")
     private String username;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 20)
     @Column(name = "password")
     private String password;
+    @Size(max = 30)
     @Column(name = "forename")
-    private String firstName;
+    private String forename;
+    @Size(max = 30)
     @Column(name = "surname")
     private String surname;
+    @Size(max = 20)
     @Column(name = "role")
     private String role;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "completedBy")
     private Collection<JobLine> jobLineCollection;
-    @Version
-    @Column(name = "version")
-    protected int version=0;
+    @Column(name = "logged_on")
+    private Boolean loggedOn;
 
     public Staff() {
     }
 
     public Staff(String username) {
         this.username = username;
+    }
+
+    public Staff(String username, String password, int version) {
+        this.username = username;
+        this.password = password;
+        this.version = version;
     }
 
     public String getUsername() {
@@ -75,21 +95,21 @@ public class Staff implements Serializable {
     public void setUsername(String username) {
         this.username = username;
     }
-    
-    public String getPassword(){
+
+    public String getPassword() {
         return password;
     }
-    
-    public void setPassword(String password){
-        this.password = password;
-    }    
 
-    public String getFirstName() {
-        return firstName;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public String getForename() {
+        return forename;
+    }
+
+    public void setForename(String forename) {
+        this.forename = forename;
     }
 
     public String getSurname() {
@@ -108,15 +128,25 @@ public class Staff implements Serializable {
         this.role = role;
     }
 
-    @XmlTransient
+
+    /* version field isn't meant to be changed manually.
+    public void setVersion(int version) {
+        this.version = version;
+    }
+*/
+    public Boolean getLoggedOn() {
+        return loggedOn;
+    }
+
+    public void setLoggedOn(Boolean loggedOn) {
+        this.loggedOn = loggedOn;
+    }
+
+     @XmlTransient
     public Collection<JobLine> getJobLineCollection() {
         return jobLineCollection;
     }
-
-    public void setJobLineCollection(Collection<JobLine> jobLineCollection) {
-        this.jobLineCollection = jobLineCollection;
-    }
-
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -140,6 +170,23 @@ public class Staff implements Serializable {
     @Override
     public String toString() {
         return "domain.Staff[ username=" + username + " ]";
+    }
+
+    public long getVersion() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
+    }
+
+    @XmlTransient
+    public Collection<TaskLine> getTaskLineCollection() {
+        return taskLineCollection;
+    }
+
+    public void setTaskLineCollection(Collection<TaskLine> taskLineCollection) {
+        this.taskLineCollection = taskLineCollection;
     }
     
 }

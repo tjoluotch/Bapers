@@ -18,13 +18,14 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Tweetie Pie
+ * @author Daniel
  */
 @Entity
 @Table(name = "task_line")
@@ -42,7 +43,7 @@ public class TaskLine implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "task_lineID", nullable = false)
+    @Column(name = "task_lineID")
     private Integer tasklineID;
     @Column(name = "start_time")
     @Temporal(TemporalType.TIMESTAMP)
@@ -51,19 +52,20 @@ public class TaskLine implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date endTime;
     @Size(max = 10)
-    @Column(name = "shelf", length = 10)
+    @Column(name = "shelf")
     private String shelf;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "version", nullable = false)
+    @Version
+    @Column(name = "version")
     private long version;
     @JoinColumn(name = "completed_by", referencedColumnName = "username")
     @ManyToOne
     private Staff completedBy;
-    @JoinColumn(name = "taskID", referencedColumnName = "taskID", nullable = false)
+    @JoinColumn(name = "taskID", referencedColumnName = "taskID")
     @ManyToOne(optional = false)
     private Task taskID;
-    @JoinColumn(name = "job_lineID", referencedColumnName = "job_lineID", nullable = false)
+    @JoinColumn(name = "job_lineID", referencedColumnName = "job_lineID")
     @ManyToOne(optional = false)
     private JobLine joblineID;
 

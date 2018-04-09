@@ -9,15 +9,14 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -29,62 +28,65 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author DanTe
+ * @author Daniel
  */
 @Entity
 @Table(name = "payment_detail")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "PaymentDetail.findAll", query = "SELECT p FROM PaymentDetail p")
-    , @NamedQuery(name = "PaymentDetail.findByOrderID", query = "SELECT p FROM PaymentDetail p WHERE p.orderID = :orderID")
+    , @NamedQuery(name = "PaymentDetail.findByPaymentdetailID", query = "SELECT p FROM PaymentDetail p WHERE p.paymentdetailID = :paymentdetailID")
     , @NamedQuery(name = "PaymentDetail.findByExpiryDate", query = "SELECT p FROM PaymentDetail p WHERE p.expiryDate = :expiryDate")
     , @NamedQuery(name = "PaymentDetail.findByType", query = "SELECT p FROM PaymentDetail p WHERE p.type = :type")
-    , @NamedQuery(name = "PaymentDetail.findByLast4digits", query = "SELECT p FROM PaymentDetail p WHERE p.last4digits = :last4digits")})
+    , @NamedQuery(name = "PaymentDetail.findByLast4digits", query = "SELECT p FROM PaymentDetail p WHERE p.last4digits = :last4digits")
+    , @NamedQuery(name = "PaymentDetail.findByVersion", query = "SELECT p FROM PaymentDetail p WHERE p.version = :version")})
 public class PaymentDetail implements Serializable {
-
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @Column(name = "payment_detailID", nullable = false, length = 45)
-    private String paymentdetailID;
-    @Basic(optional = false)
-    @NotNull
-    @Version
-    @Column(name = "version", nullable = false)
-    private long version;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "paymentdetailID")
-    private Collection<JobLine> jobLineCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "orderID")
-    private Integer orderID;
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "payment_detailID")
+    private String paymentdetailID;
     @Column(name = "expiry_date")
     @Temporal(TemporalType.DATE)
     private Date expiryDate;
+    @Size(max = 10)
     @Column(name = "type")
     private String type;
+    @Size(max = 4)
     @Column(name = "last4digits")
     private String last4digits;
-    @JoinColumn(name = "orderID", referencedColumnName = "orderID", insertable = false, updatable = false)
-    @OneToOne(optional = false)
-    private OrderTable orderTable;
+    @Basic(optional = false)
+    @NotNull
+    @Version
+    @Column(name = "version")
+    private long version;
+    @JoinColumn(name = "orderID", referencedColumnName = "orderID")
+    @ManyToOne(optional = false)
+    private OrderTable orderID;
+    @OneToMany(mappedBy = "paymentdetailID")
+    private Collection<JobLine> jobLineCollection;
 
     public PaymentDetail() {
     }
 
-    public PaymentDetail(Integer orderID) {
-        this.orderID = orderID;
+    public PaymentDetail(String paymentdetailID) {
+        this.paymentdetailID = paymentdetailID;
     }
 
-    public Integer getOrderID() {
-        return orderID;
+    public PaymentDetail(String paymentdetailID, long version) {
+        this.paymentdetailID = paymentdetailID;
+        this.version = version;
     }
 
-    public void setOrderID(Integer orderID) {
-        this.orderID = orderID;
+    public String getPaymentdetailID() {
+        return paymentdetailID;
+    }
+
+    public void setPaymentdetailID(String paymentdetailID) {
+        this.paymentdetailID = paymentdetailID;
     }
 
     public Date getExpiryDate() {
@@ -111,62 +113,20 @@ public class PaymentDetail implements Serializable {
         this.last4digits = last4digits;
     }
 
-    public OrderTable getOrderTable() {
-        return orderTable;
-    }
-
-    public void setOrderTable(OrderTable orderTable) {
-        this.orderTable = orderTable;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (orderID != null ? orderID.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PaymentDetail)) {
-            return false;
-        }
-        PaymentDetail other = (PaymentDetail) object;
-        if ((this.orderID == null && other.orderID != null) || (this.orderID != null && !this.orderID.equals(other.orderID))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "domain.PaymentDetail[ orderID=" + orderID + " ]";
-    }
-
-    public PaymentDetail(String paymentdetailID) {
-        this.paymentdetailID = paymentdetailID;
-    }
-
-    public PaymentDetail(String paymentdetailID, long version) {
-        this.paymentdetailID = paymentdetailID;
-        this.version = version;
-    }
-
-    public String getPaymentdetailID() {
-        return paymentdetailID;
-    }
-
-    public void setPaymentdetailID(String paymentdetailID) {
-        this.paymentdetailID = paymentdetailID;
-    }
-
     public long getVersion() {
         return version;
     }
 
     public void setVersion(long version) {
         this.version = version;
+    }
+
+    public OrderTable getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(OrderTable orderID) {
+        this.orderID = orderID;
     }
 
     @XmlTransient
@@ -178,8 +138,29 @@ public class PaymentDetail implements Serializable {
         this.jobLineCollection = jobLineCollection;
     }
 
-   
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (paymentdetailID != null ? paymentdetailID.hashCode() : 0);
+        return hash;
+    }
 
-    
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof PaymentDetail)) {
+            return false;
+        }
+        PaymentDetail other = (PaymentDetail) object;
+        if ((this.paymentdetailID == null && other.paymentdetailID != null) || (this.paymentdetailID != null && !this.paymentdetailID.equals(other.paymentdetailID))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "domain.PaymentDetail[ paymentdetailID=" + paymentdetailID + " ]";
+    }
     
 }

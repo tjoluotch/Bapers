@@ -56,5 +56,4 @@ public class Controller {
     public void logoutSystem(){
         staff = new Staff();
     }
-    
 }
