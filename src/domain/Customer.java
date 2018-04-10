@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Customer.findByAccountHolderName", query = "SELECT c FROM Customer c WHERE c.accountHolderName = :accountHolderName")
     , @NamedQuery(name = "Customer.findByAddress1", query = "SELECT c FROM Customer c WHERE c.address1 = :address1")
     , @NamedQuery(name = "Customer.findByAddress2", query = "SELECT c FROM Customer c WHERE c.address2 = :address2")
+    , @NamedQuery(name = "Customer.findByAddress3", query = "SELECT c FROM Customer c WHERE c.address3 = :address3")
     , @NamedQuery(name = "Customer.findByCity", query = "SELECT c FROM Customer c WHERE c.city = :city")
     , @NamedQuery(name = "Customer.findByPostcode", query = "SELECT c FROM Customer c WHERE c.postcode = :postcode")
     , @NamedQuery(name = "Customer.findByPhone", query = "SELECT c FROM Customer c WHERE c.phone = :phone")
@@ -56,6 +57,8 @@ public class Customer implements Serializable {
     private String address1;
     @Column(name = "address2")
     private String address2;
+    @Column(name = "address3")
+    private String address3;
     @Column(name = "city")
     private String city;
     @Column(name = "postcode")
@@ -123,7 +126,15 @@ public class Customer implements Serializable {
     public void setAddress2(String address2) {
         this.address2 = address2;
     }
-    
+
+    public String getAddress3() {
+        return address3;
+    }
+
+    public void setAddress3(String address3) {
+        this.address3 = address3;
+    }
+
     public String getCity() {
         return city;
     }
