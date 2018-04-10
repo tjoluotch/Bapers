@@ -18,13 +18,14 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
- * @author Tweetie Pie
+ * * @author Tweetie Pie
+ 
  */
 @Entity
 @Table(name = "task_line")
@@ -37,6 +38,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "TaskLine.findByShelf", query = "SELECT t FROM TaskLine t WHERE t.shelf = :shelf")
     , @NamedQuery(name = "TaskLine.findPerformanceReport", query = "SELECT j FROM TaskLine j  WHERE j.startTime = :startTime ORDER BY j.completedBy ASC, j.startTime ASC ")
     , @NamedQuery(name = "TaskLine.findBetweenDates", query = "SELECT t FROM TaskLine t WHERE t.startTime BETWEEN :startDate AND :endDate ORDER BY t.completedBy ASC,  t.startTime ASC")
+    , @NamedQuery(name = "TaskLine.findBetweenDates2", query = "SELECT t FROM TaskLine t WHERE t.startTime BETWEEN :startDate AND :endDate ORDER BY   t.startTime ASC")
     , @NamedQuery(name = "TaskLine.findSummaryReport", query = "SELECT t FROM TaskLine t WHERE t.startTime BETWEEN :startDATE AND :endDATE ORDER BY CASE WHEN t.taskID.department = 'Copy Room' THEN 'Copy Room' WHEN t.taskID.department = 'Development Area' THEN 'Development Area' WHEN t.taskID.department = 'Packing Departments' THEN 'Packing Departments' WHEN t.taskID.department = 'Finishing Room' THEN 'Finishing Room'\n" +
 
 "                   ELSE '' END" )  
@@ -62,6 +64,7 @@ public class TaskLine implements Serializable {
     private String shelf;
     @Basic(optional = false)
     @NotNull
+    @Version
     @Column(name = "version")
     private long version;
     @JoinColumn(name = "completed_by", referencedColumnName = "username")
