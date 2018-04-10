@@ -165,7 +165,7 @@ public class DataManagerImpl implements DataManager{
         
     
         TypedQuery<Staff> query = em.createNamedQuery("Staff.updateStaff", Staff.class);
-        query.setParameter("firstName", firstName);
+        query.setParameter("forename", firstName);
         query.setParameter("surname", surname);
         query.setParameter("password", password);
         query.setParameter("role", role);
@@ -178,7 +178,7 @@ public class DataManagerImpl implements DataManager{
     @Override
     public List <TaskLine> individualReport(Date date) {
         TypedQuery<TaskLine> query = em.createNamedQuery("TaskLine.findPerformanceReport", TaskLine.class);
-        query.setParameter("date", date);
+        query.setParameter("startTime", date);
         return query.getResultList();
     }
     
@@ -189,6 +189,15 @@ public class DataManagerImpl implements DataManager{
         query.setParameter("endDate", endDate);
         return query.getResultList();
     }
+
+    @Override
+    public List<TaskLine> summaryReports(Date startDate, Date endDate) {
+        TypedQuery<TaskLine> query = em.createNamedQuery("TaskLine.findBetweenDates2", TaskLine.class);
+        query.setParameter("startDate", startDate);
+        query.setParameter("endDate", endDate);
+        return query.getResultList();
+    }
+    
     
         
     }

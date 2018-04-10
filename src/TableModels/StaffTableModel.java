@@ -61,7 +61,7 @@ public class StaffTableModel extends AbstractTableModel{
             case 0:
                 return staff.getUsername();
             case 1:
-                return staff.getFirstName();
+                return staff.getForename();
             case 2: 
                 return staff.getSurname();
             case 3:

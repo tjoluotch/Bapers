@@ -35,14 +35,21 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "TaskLine.findByStartTime", query = "SELECT t FROM TaskLine t WHERE t.startTime = :startTime")
     , @NamedQuery(name = "TaskLine.findByEndTime", query = "SELECT t FROM TaskLine t WHERE t.endTime = :endTime")
     , @NamedQuery(name = "TaskLine.findByShelf", query = "SELECT t FROM TaskLine t WHERE t.shelf = :shelf")
+    , @NamedQuery(name = "TaskLine.findPerformanceReport", query = "SELECT j FROM TaskLine j  WHERE j.startTime = :startTime ORDER BY j.completedBy ASC, j.startTime ASC ")
+    , @NamedQuery(name = "TaskLine.findBetweenDates", query = "SELECT t FROM TaskLine t WHERE t.startTime BETWEEN :startDate AND :endDate ORDER BY t.completedBy ASC,  t.startTime ASC")
+    , @NamedQuery(name = "TaskLine.findSummaryReport", query = "SELECT t FROM TaskLine t WHERE t.startTime BETWEEN :startDATE AND :endDATE ORDER BY CASE WHEN t.taskID.department = 'Copy Room' THEN 'Copy Room' WHEN t.taskID.department = 'Development Area' THEN 'Development Area' WHEN t.taskID.department = 'Packing Departments' THEN 'Packing Departments' WHEN t.taskID.department = 'Finishing Room' THEN 'Finishing Room'\n" +
+
+"                   ELSE '' END" )  
     , @NamedQuery(name = "TaskLine.findByVersion", query = "SELECT t FROM TaskLine t WHERE t.version = :version")})
 public class TaskLine implements Serializable {
 
+   // CASE WHEN (t.taskID.department = 'Copy Room') THEN t.endTime ) AS copy_room,WHEN (t.taskID.department = 'Development Area') THEN t.endTime ) AS development_area ELSE DESC
+    
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "task_lineID", nullable = false)
+    @Column(name = "task_lineID")
     private Integer tasklineID;
     @Column(name = "start_time")
     @Temporal(TemporalType.TIMESTAMP)
@@ -51,19 +58,19 @@ public class TaskLine implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date endTime;
     @Size(max = 10)
-    @Column(name = "shelf", length = 10)
+    @Column(name = "shelf")
     private String shelf;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "version", nullable = false)
+    @Column(name = "version")
     private long version;
     @JoinColumn(name = "completed_by", referencedColumnName = "username")
     @ManyToOne
     private Staff completedBy;
-    @JoinColumn(name = "taskID", referencedColumnName = "taskID", nullable = false)
+    @JoinColumn(name = "taskID", referencedColumnName = "taskID")
     @ManyToOne(optional = false)
     private Task taskID;
-    @JoinColumn(name = "job_lineID", referencedColumnName = "job_lineID", nullable = false)
+    @JoinColumn(name = "job_lineID", referencedColumnName = "job_lineID")
     @ManyToOne(optional = false)
     private JobLine joblineID;
 

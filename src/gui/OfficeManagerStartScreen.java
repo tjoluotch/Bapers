@@ -85,7 +85,7 @@ public class OfficeManagerStartScreen extends javax.swing.JFrame {
 
         jLabel2.setText(staff.getUsername());
 
-        jLabel3.setText(staff.getFirstName() + " " + staff.getSurname());
+        jLabel3.setText(staff.getForename() + " " + staff.getSurname());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

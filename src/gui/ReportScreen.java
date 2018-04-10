@@ -9,8 +9,10 @@ import Controllers.BAPADMN;
 import Controllers.BAPREPT;
 import data.DataManagerImpl;
 import domain.JobLine;
+import domain.TaskLine;
 import java.io.IOException;
 import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
@@ -25,19 +27,20 @@ public class ReportScreen extends javax.swing.JFrame {
     /**
      * Creates new form ReportScreen
      */
-    public ReportScreen() throws IOException {
+    public ReportScreen() throws IOException, ParseException {
         DataManagerImpl dm = new DataManagerImpl();
-        List<JobLine> line = dm.individualReport(Date.valueOf("2018-01-13"));
+        List<TaskLine> line = dm.summaryReports(Date.valueOf("2018-01-01"),Date.valueOf("2018-04-13"));
         
-        for(int i = 0; i < line.size(); i++){
-            SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-            JobLine g = line.get(i);
-            
-            System.out.println(g.getCompletedBy().getFirstName() + " " + g.getCompletedBy().getSurname() + " " + g.getTaskID().getTaskID() + " " + g.getCode().getCode()+ " " + localDateFormat.format(g.getStartTime()) + " " + formatter.format(g.getDate()));
-        }
-        
-        BAPREPT bp = new BAPREPT();
+//        for(int i = 0; i < line.size(); i++){
+//            SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
+//            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+//            TaskLine g = line.get(i);
+//            
+//            System.out.println(g.getCompletedBy().getForename() + " " + g.getCompletedBy().getSurname() + " " + g.getTaskID().getTaskID() + " " + g.getJoblineID().getJobCode().getCode()+ " " + localDateFormat.format(g.getStartTime()) + " " + formatter.format(g.getEndTime()));
+//        }
+//        
+     BAPREPT bp = new BAPREPT();
+     bp.createSummaryReport("01/01/2018", "18/04/2018");
         
         System.out.println();
         initComponents();
@@ -142,6 +145,8 @@ public class ReportScreen extends javax.swing.JFrame {
                 try {
                     new ReportScreen().setVisible(true);
                 } catch (IOException ex) {
+                    Logger.getLogger(ReportScreen.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
                     Logger.getLogger(ReportScreen.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }

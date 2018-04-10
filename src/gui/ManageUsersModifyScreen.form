@@ -90,9 +90,12 @@
     <Component class="javax.swing.JTextField" name="firstName">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code="staff.getFirstName()" type="code"/>
+          <Connection code="staff.getForename()" type="code"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="firstNameActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="surname">
       <Properties>

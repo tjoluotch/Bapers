@@ -55,12 +55,11 @@ public class BAPADMN {
         dm = new DataManagerImpl();
         Staff staff = new Staff();
         staff.setUsername(username);
-        staff.setFirstName(forname);
+        staff.setForename(forname);
         staff.setSurname(surname);
         staff.setRole(role);
         staff.setPassword(password);
-        Collection<JobLine> jobLineCollection = new ArrayList();
-        staff.setJobLineCollection(jobLineCollection);
+        
         
         dm.saveStaff(staff);
         
@@ -86,7 +85,7 @@ public class BAPADMN {
         
     }
     
-    public void updateStaff(String username, String firstName, String surname, String password, String role){
+    public void updateStaff(String username, String Forename, String surname, String password, String role){
         dm = new DataManagerImpl();
       
         
@@ -94,7 +93,7 @@ public class BAPADMN {
         staffs = dm.getEm().find(Staff.class, username);
         dm.getEm().lock(staffs, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
         dm.getEm().flush();
-        staffs.setFirstName(firstName);
+        staffs.setForename(Forename);
         staffs.setSurname(surname);
         staffs.setPassword(password);
         staffs.setRole(role);

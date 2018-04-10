@@ -1,1 +1,12 @@
 /build/
+<<<<<<< HEAD
+<<<<<<< HEAD
+/dist/
+=======
+*.properties
+*.xml
+>>>>>>> 56c1c57e566f40ccb8bbb59a2fe6e46baad4e188
+=======
+*.properties
+*.xml
+>>>>>>> 56c1c57e566f40ccb8bbb59a2fe6e46baad4e188

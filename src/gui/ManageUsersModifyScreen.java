@@ -31,7 +31,7 @@ String staffPass ;
     public ManageUsersModifyScreen(Staff staff) {
         this.staff = staff;
         staffUname = staff.getUsername();
-        staffFname = staff.getFirstName();
+        staffFname = staff.getForename();
         staffSname = staff.getSurname();
         staffrole = staff.getRole();
         staffPass = staff.getPassword();
@@ -59,7 +59,12 @@ String staffPass ;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        firstName.setText(staff.getFirstName());
+        firstName.setText(staff.getForename());
+        firstName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                firstNameActionPerformed(evt);
+            }
+        });
 
         surname.setText(staff.getSurname());
         surname.addActionListener(new java.awt.event.ActionListener() {
@@ -200,6 +205,10 @@ String staffPass ;
         
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void firstNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_firstNameActionPerformed
 
     /**
      * @param args the command line arguments

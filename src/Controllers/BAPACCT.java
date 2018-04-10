@@ -18,6 +18,7 @@ public class BAPACCT {
     public BAPACCT(DataManagerImpl dm){
         this.dm = dm;
     }
+    
     public void createNewCustomer(String accountNo, String forename, String surname, String accountHolderName, 
             String address1, String address2, String address3, String city, String postcode, String phone){
         Customer customer = new Customer();
@@ -28,12 +29,12 @@ public class BAPACCT {
         customer.setAccountHolderName(accountHolderName);
         customer.setAddress1(address1);
         customer.setAddress2(address2);
-        customer.setAddress3(address3);
         customer.setCity(city);
         customer.setPostcode(postcode);
         customer.setPhone(phone);
         customer.setValuedCustomer(Boolean.FALSE);
         
         dm.saveCustomer(customer);
+        System.out.println("Customer " + customer.getForename() + " " + customer.getSurname() + " has been added to the database.");
     }    
 }
