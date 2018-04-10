@@ -18,10 +18,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Daniel
+ * @author DanTe
  */
 @Entity
 @Table(name = "order_table")
@@ -38,35 +38,45 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "OrderTable.findAll", query = "SELECT o FROM OrderTable o")
     , @NamedQuery(name = "OrderTable.findByOrderID", query = "SELECT o FROM OrderTable o WHERE o.orderID = :orderID")
     , @NamedQuery(name = "OrderTable.findByTotalPrice", query = "SELECT o FROM OrderTable o WHERE o.totalPrice = :totalPrice")
-    , @NamedQuery(name = "OrderTable.findByPaymentStatus", query = "SELECT o FROM OrderTable o WHERE o.paymentStatus = :paymentStatus")
-    , @NamedQuery(name = "OrderTable.findByDateSubmitted", query = "SELECT o FROM OrderTable o WHERE o.dateSubmitted = :dateSubmitted")
-    , @NamedQuery(name = "OrderTable.findByVersion", query = "SELECT o FROM OrderTable o WHERE o.version = :version")})
+    , @NamedQuery(name = "OrderTable.findBySpecialInstructions", query = "SELECT o FROM OrderTable o WHERE o.specialInstructions = :specialInstructions")
+    , @NamedQuery(name = "OrderTable.findByStatus", query = "SELECT o FROM OrderTable o WHERE o.status = :status")
+    //, @NamedQuery(name = "OrderTable.findByPaymentdetailID", query = "SELECT o FROM OrderTable o WHERE o.paymentdetailID = :paymentdetailID")
+    , @NamedQuery(name = "OrderTable.findByDateSubmitted", query = "SELECT o FROM OrderTable o WHERE o.dateSubmitted = :dateSubmitted")})
 public class OrderTable implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "orderID")
-    private Integer orderID;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "total_price")
-    private Float totalPrice;
     @Size(max = 20)
-    @Column(name = "payment_status")
+    @Column(name = "payment_status", length = 20)
     private String paymentStatus;
-    @Column(name = "date_submitted")
-    @Temporal(TemporalType.DATE)
-    private Date dateSubmitted;
     @Basic(optional = false)
     @NotNull
-    @Version
-    @Column(name = "version")
+    @Column(name = "version", nullable = false)
     private long version;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderID")
     private Collection<PaymentDetail> paymentDetailCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderID")
     private Collection<JobLine> jobLineCollection;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @Basic(optional = false)
+    @Column(name = "orderID")
+    private Integer orderID;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "total_price")
+    private Float totalPrice;
+    @Column(name = "special_instructions")
+    private String specialInstructions;
+    @Column(name = "status")
+    private String status;
+    //@Column(name = "payment_detailID")
+    //private String paymentdetailID;
+    @Column(name = "date_submitted")
+    @Temporal(TemporalType.DATE)
+    private Date dateSubmitted;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "orderTable")
+    private PaymentDetail paymentDetail;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderID")
+    private Collection<Job> jobCollection;
     @JoinColumn(name = "account_no", referencedColumnName = "account_no")
     @ManyToOne
     private Customer accountNo;
@@ -76,11 +86,6 @@ public class OrderTable implements Serializable {
 
     public OrderTable(Integer orderID) {
         this.orderID = orderID;
-    }
-
-    public OrderTable(Integer orderID, long version) {
-        this.orderID = orderID;
-        this.version = version;
     }
 
     public Integer getOrderID() {
@@ -99,12 +104,29 @@ public class OrderTable implements Serializable {
         this.totalPrice = totalPrice;
     }
 
-    public String getPaymentStatus() {
-        return paymentStatus;
+    public String getSpecialInstructions() {
+        return specialInstructions;
     }
 
-    public void setPaymentStatus(String paymentStatus) {
-        this.paymentStatus = paymentStatus;
+    public void setSpecialInstructions(String specialInstructions) {
+        this.specialInstructions = specialInstructions;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getPaymentdetailID() {
+        //return paymentdetailID;
+        return null;
+    }
+
+    public void setPaymentdetailID(String paymentdetailID) {
+        //this.paymentdetailID = paymentdetailID;
     }
 
     public Date getDateSubmitted() {
@@ -115,30 +137,21 @@ public class OrderTable implements Serializable {
         this.dateSubmitted = dateSubmitted;
     }
 
-    public long getVersion() {
-        return version;
+    public PaymentDetail getPaymentDetail() {
+        return paymentDetail;
     }
 
-    public void setVersion(long version) {
-        this.version = version;
-    }
-
-    @XmlTransient
-    public Collection<PaymentDetail> getPaymentDetailCollection() {
-        return paymentDetailCollection;
-    }
-
-    public void setPaymentDetailCollection(Collection<PaymentDetail> paymentDetailCollection) {
-        this.paymentDetailCollection = paymentDetailCollection;
+    public void setPaymentDetail(PaymentDetail paymentDetail) {
+        this.paymentDetail = paymentDetail;
     }
 
     @XmlTransient
-    public Collection<JobLine> getJobLineCollection() {
-        return jobLineCollection;
+    public Collection<Job> getJobCollection() {
+        return jobCollection;
     }
 
-    public void setJobLineCollection(Collection<JobLine> jobLineCollection) {
-        this.jobLineCollection = jobLineCollection;
+    public void setJobCollection(Collection<Job> jobCollection) {
+        this.jobCollection = jobCollection;
     }
 
     public Customer getAccountNo() {
@@ -172,6 +185,40 @@ public class OrderTable implements Serializable {
     @Override
     public String toString() {
         return "domain.OrderTable[ orderID=" + orderID + " ]";
+    }
+
+    public String getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(String paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+    public long getVersion() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
+    }
+
+    @XmlTransient
+    public Collection<PaymentDetail> getPaymentDetailCollection() {
+        return paymentDetailCollection;
+    }
+
+    public void setPaymentDetailCollection(Collection<PaymentDetail> paymentDetailCollection) {
+        this.paymentDetailCollection = paymentDetailCollection;
+    }
+
+    @XmlTransient
+    public Collection<JobLine> getJobLineCollection() {
+        return jobLineCollection;
+    }
+
+    public void setJobLineCollection(Collection<JobLine> jobLineCollection) {
+        this.jobLineCollection = jobLineCollection;
     }
     
 }

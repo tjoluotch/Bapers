@@ -7,24 +7,27 @@ package domain;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Version;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Daniel
+ * @author DanTe
  */
 @Entity
 @Table(name = "job")
@@ -34,28 +37,32 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Job.findByCode", query = "SELECT j FROM Job j WHERE j.code = :code")
     , @NamedQuery(name = "Job.findByJobDescription", query = "SELECT j FROM Job j WHERE j.jobDescription = :jobDescription")
     , @NamedQuery(name = "Job.findByPrice", query = "SELECT j FROM Job j WHERE j.price = :price")
-    , @NamedQuery(name = "Job.findByVersion", query = "SELECT j FROM Job j WHERE j.version = :version")})
+    , @NamedQuery(name = "Job.findByJobDeadline", query = "SELECT j FROM Job j WHERE j.jobDeadline = :jobDeadline")
+    , @NamedQuery(name = "Job.findByOrderID", query = "SELECT j FROM Job j WHERE j.orderID = :orderID")})
 public class Job implements Serializable {
+
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "version", nullable = false)
+    private long version;
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 10)
     @Column(name = "code")
     private String code;
-    @Size(max = 45)
     @Column(name = "job_description")
     private String jobDescription;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "price")
     private Float price;
-    @Basic(optional = false)
-    @NotNull
-    @Version
-    @Column(name = "version")
-    private long version;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "jobCode")
+    @Column(name = "job_deadline")
+    @Temporal(TemporalType.DATE)
+    private Date jobDeadline;
+    @JoinColumn(name = "orderID", referencedColumnName = "orderID")
+    @ManyToOne(optional = false)
+    private OrderTable orderID;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "code")
     private Collection<JobLine> jobLineCollection;
 
     public Job() {
@@ -63,11 +70,6 @@ public class Job implements Serializable {
 
     public Job(String code) {
         this.code = code;
-    }
-
-    public Job(String code, long version) {
-        this.code = code;
-        this.version = version;
     }
 
     public String getCode() {
@@ -94,12 +96,20 @@ public class Job implements Serializable {
         this.price = price;
     }
 
-    public long getVersion() {
-        return version;
+    public Date getJobDeadline() {
+        return jobDeadline;
     }
 
-    public void setVersion(long version) {
-        this.version = version;
+    public void setJobDeadline(Date jobDeadline) {
+        this.jobDeadline = jobDeadline;
+    }
+
+    public OrderTable getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(OrderTable orderID) {
+        this.orderID = orderID;
     }
 
     @XmlTransient
@@ -134,6 +144,14 @@ public class Job implements Serializable {
     @Override
     public String toString() {
         return "domain.Job[ code=" + code + " ]";
+    }
+
+    public long getVersion() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
     }
     
 }

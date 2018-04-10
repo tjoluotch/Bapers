@@ -6,53 +6,44 @@
 package domain;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Version;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Daniel
+ * @author DanTe
  */
+//SELECT * FROM Products
+//WHERE Price BETWEEN 10 AND 20
 @Entity
 @Table(name = "job_line")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "JobLine.findAll", query = "SELECT j FROM JobLine j")
     , @NamedQuery(name = "JobLine.findByJoblineID", query = "SELECT j FROM JobLine j WHERE j.joblineID = :joblineID")
-    , @NamedQuery(name = "JobLine.findByJobDeadline", query = "SELECT j FROM JobLine j WHERE j.jobDeadline = :jobDeadline")
-    , @NamedQuery(name = "JobLine.findBySpecialInstructions", query = "SELECT j FROM JobLine j WHERE j.specialInstructions = :specialInstructions")
-    , @NamedQuery(name = "JobLine.findByReminderStatus", query = "SELECT j FROM JobLine j WHERE j.reminderStatus = :reminderStatus")
-    , @NamedQuery(name = "JobLine.findByVersion", query = "SELECT j FROM JobLine j WHERE j.version = :version")})
+    , @NamedQuery(name = "JobLine.findByDate", query = "SELECT j FROM JobLine j WHERE j.date = :date")
+    
+    , @NamedQuery(name = "JobLine.findByStartTime", query = "SELECT j FROM JobLine j WHERE j.startTime = :startTime")
+    , @NamedQuery(name = "JobLine.findByEndTime", query = "SELECT j FROM JobLine j WHERE j.endTime = :endTime")})
 public class JobLine implements Serializable {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "joblineID")
-    private Collection<TaskLine> taskLineCollection;
-
-    private static final long serialVersionUID = 1L;
-    @Id
+     @Id
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "job_lineID")
+    @Column(name = "Job_lineID")
     private Integer joblineID;
-    @Column(name = "job_deadline")
     @Temporal(TemporalType.DATE)
     private Date jobDeadline;
     @Size(max = 100)
@@ -61,11 +52,6 @@ public class JobLine implements Serializable {
     @Size(max = 20)
     @Column(name = "reminder_status")
     private String reminderStatus;
-    @Basic(optional = false)
-    @NotNull
-    @Version
-    @Column(name = "version")
-    private long version;
     @JoinColumn(name = "job_code", referencedColumnName = "code")
     @ManyToOne(optional = false)
     private Job jobCode;
@@ -73,19 +59,18 @@ public class JobLine implements Serializable {
     @ManyToOne(optional = false)
     private OrderTable orderID;
     @JoinColumn(name = "payment_detailID", referencedColumnName = "payment_detailID")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private PaymentDetail paymentdetailID;
+
+    private static final long serialVersionUID = 1L;
+    
+    
 
     public JobLine() {
     }
 
     public JobLine(Integer joblineID) {
         this.joblineID = joblineID;
-    }
-
-    public JobLine(Integer joblineID, long version) {
-        this.joblineID = joblineID;
-        this.version = version;
     }
 
     public Integer getJoblineID() {
@@ -96,62 +81,7 @@ public class JobLine implements Serializable {
         this.joblineID = joblineID;
     }
 
-    public Date getJobDeadline() {
-        return jobDeadline;
-    }
-
-    public void setJobDeadline(Date jobDeadline) {
-        this.jobDeadline = jobDeadline;
-    }
-
-    public String getSpecialInstructions() {
-        return specialInstructions;
-    }
-
-    public void setSpecialInstructions(String specialInstructions) {
-        this.specialInstructions = specialInstructions;
-    }
-
-    public String getReminderStatus() {
-        return reminderStatus;
-    }
-
-    public void setReminderStatus(String reminderStatus) {
-        this.reminderStatus = reminderStatus;
-    }
-
-    public long getVersion() {
-        return version;
-    }
-
-    public void setVersion(long version) {
-        this.version = version;
-    }
-
-    public Job getJobCode() {
-        return jobCode;
-    }
-
-    public void setJobCode(Job jobCode) {
-        this.jobCode = jobCode;
-    }
-
-    public OrderTable getOrderID() {
-        return orderID;
-    }
-
-    public void setOrderID(OrderTable orderID) {
-        this.orderID = orderID;
-    }
-
-    public PaymentDetail getPaymentdetailID() {
-        return paymentdetailID;
-    }
-
-    public void setPaymentdetailID(PaymentDetail paymentdetailID) {
-        this.paymentdetailID = paymentdetailID;
-    }
-
+   
     @Override
     public int hashCode() {
         int hash = 0;
@@ -177,13 +107,54 @@ public class JobLine implements Serializable {
         return "domain.JobLine[ joblineID=" + joblineID + " ]";
     }
 
-    @XmlTransient
-    public Collection<TaskLine> getTaskLineCollection() {
-        return taskLineCollection;
+    
+
+    public Date getJobDeadline() {
+        return jobDeadline;
     }
 
-    public void setTaskLineCollection(Collection<TaskLine> taskLineCollection) {
-        this.taskLineCollection = taskLineCollection;
+    public void setJobDeadline(Date jobDeadline) {
+        this.jobDeadline = jobDeadline;
+    }
+
+    public String getSpecialInstructions() {
+        return specialInstructions;
+    }
+
+    public void setSpecialInstructions(String specialInstructions) {
+        this.specialInstructions = specialInstructions;
+    }
+
+    public String getReminderStatus() {
+        return reminderStatus;
+    }
+
+    public void setReminderStatus(String reminderStatus) {
+        this.reminderStatus = reminderStatus;
+    }
+
+    public Job getJobCode() {
+        return jobCode;
+    }
+
+    public void setJobCode(Job jobCode) {
+        this.jobCode = jobCode;
+    }
+
+    public OrderTable getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(OrderTable orderID) {
+        this.orderID = orderID;
+    }
+
+    public PaymentDetail getPaymentdetailID() {
+        return paymentdetailID;
+    }
+
+    public void setPaymentdetailID(PaymentDetail paymentdetailID) {
+        this.paymentdetailID = paymentdetailID;
     }
     
 }
