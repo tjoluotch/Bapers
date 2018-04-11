@@ -12,13 +12,14 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -44,13 +45,11 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "JobLine.findByVersion", query = "SELECT j FROM JobLine j WHERE j.version = :version")})
 public class JobLine implements Serializable {
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "joblineID")
-    private Collection<TaskLine> taskLineCollection;
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
+    @GeneratedValue(strategy=GenerationType.IDENTITY )
     @Column(name = "job_lineID")
     private Integer joblineID;
     @Column(name = "job_deadline")
@@ -67,6 +66,8 @@ public class JobLine implements Serializable {
     @Version
     @Column(name = "version")
     private long version;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "joblineID")
+    private Collection<TaskLine> taskLineCollection;
     @JoinColumn(name = "job_code", referencedColumnName = "code")
     @ManyToOne(optional = false)
     private Job jobCode;
@@ -74,7 +75,7 @@ public class JobLine implements Serializable {
     @ManyToOne(optional = false)
     private OrderTable orderID;
     @JoinColumn(name = "payment_detailID", referencedColumnName = "payment_detailID")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private PaymentDetail paymentdetailID;
     @OneToMany(mappedBy = "job_lineID")
     private Collection<JobLine> jobLineCollection;
@@ -139,6 +140,15 @@ public class JobLine implements Serializable {
         this.version = version;
     }
 
+    @XmlTransient
+    public Collection<TaskLine> getTaskLineCollection() {
+        return taskLineCollection;
+    }
+
+    public void setTaskLineCollection(Collection<TaskLine> taskLineCollection) {
+        this.taskLineCollection = taskLineCollection;
+    }
+
     public Job getJobCode() {
         return jobCode;
     }
@@ -186,15 +196,6 @@ public class JobLine implements Serializable {
     @Override
     public String toString() {
         return "domain.JobLine[ joblineID=" + joblineID + " ]";
-    }
-
-    @XmlTransient
-    public Collection<TaskLine> getTaskLineCollection() {
-        return taskLineCollection;
-    }
-
-    public void setTaskLineCollection(Collection<TaskLine> taskLineCollection) {
-        this.taskLineCollection = taskLineCollection;
     }
     
 }

@@ -37,7 +37,7 @@ public interface DataManager {
     Job findJobByCode(String code);
     Job findJobByOrderID(int ID);
     
-    Task findTaskById(String Id);
+    Task findTaskById(int Id);
     
     
     
@@ -49,7 +49,8 @@ public interface DataManager {
     void saveJob(Job job);
     
     void saveTask(Task task);
-    
+
+    public void saveOrder(OrderTable order);
     public boolean updateStaffRecord(String username, String firstName, String surname, String password, String role);
     public List <TaskLine> individualReport(Date date);
      public List <TaskLine> individualReportBetween(Date startDate, Date endDate);

@@ -77,7 +77,7 @@ public class DataManagerImpl implements DataManager{
     @Override
     public Customer findCustomerByAccountNumber(String AccountNumber) {
         TypedQuery<Customer> query = em.createNamedQuery("Customer.findByAccountNo", Customer.class);
-        query.setParameter("account_no", AccountNumber);
+        query.setParameter("accountNo", AccountNumber);
         return query.getSingleResult();
     }
 
@@ -140,9 +140,9 @@ public class DataManagerImpl implements DataManager{
     }
     
     @Override
-    public Task findTaskById(String Id) {
+    public Task findTaskById(int Id) {
         TypedQuery<Task> query = em.createNamedQuery("Task.findByTaskID", Task.class);
-        query.setParameter("TaskID", Id);
+        query.setParameter("taskID", Id);
         return query.getSingleResult();
     }
     
@@ -162,6 +162,15 @@ public class DataManagerImpl implements DataManager{
     public void saveStaff(Staff staff){
         em.getTransaction().begin();
         em.persist(staff);
+        em.getTransaction().commit();
+        
+    }
+    
+    
+    @Override
+    public void saveOrder(OrderTable order){
+        em.getTransaction().begin();
+        em.persist(order);
         em.getTransaction().commit();
         
     }

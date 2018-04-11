@@ -7,10 +7,12 @@ package domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -47,6 +49,7 @@ public class PaymentDetail implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
+    @GeneratedValue(strategy=GenerationType.IDENTITY )
     @Column(name = "payment_detailID")
     private String paymentDetailID;
     @Column(name = "expiry_date")
@@ -66,9 +69,8 @@ public class PaymentDetail implements Serializable {
     @JoinColumn(name = "orderID", referencedColumnName = "orderID")
     @ManyToOne(optional = false)
     private OrderTable orderID;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "payment_detailID")
-    private JobLine jobLine;
-
+    @OneToMany(mappedBy = "paymentdetailID")
+    private Collection<JobLine> jobLineCollection;
     public PaymentDetail() {
     }
 
@@ -129,24 +131,13 @@ public class PaymentDetail implements Serializable {
         this.orderID = orderID;
     }
 
-    /*
-    public Collection<PaymentDetail> getPaymentDetailCollection() {
-        return paymentDetailCollection;
-    }
-
-    public void setPaymentDetailCollection(Collection<PaymentDetail> paymentDetailCollection) {
-        this.paymentDetailCollection = paymentDetailCollection;
-    }
-*/
-    
-
     @XmlTransient
-    public JobLine getJobLine() {
-        return jobLine;
+    public Collection<JobLine> getJobLineCollection() {
+        return jobLineCollection;
     }
 
-    public void setJobLine(JobLine jobLine) {
-        this.jobLine = jobLine;
+    public void setJobLineCollection(Collection<JobLine> jobLineCollection) {
+        this.jobLineCollection = jobLineCollection;
     }
 
     @Override
