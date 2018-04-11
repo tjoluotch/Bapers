@@ -20,30 +20,25 @@ import java.util.List;
 import java.util.Spliterator;
 import java.util.function.Consumer;
 
-import javax.swing.*;
-
 /**
  * @author Daniel
  */
 //Accept Job at reception
 //Assign Job number
 public class BAPACCT {
-
-   DataManagerImpl dm;
-    
-       
+  
     Collection<TaskLine> tLines = new LinkedList();
     Collection<JobLine> jCollection = new LinkedList();
     
      public BAPACCT(){
-       dm = new DataManagerImpl();
+        
     }
     
     
     
     
     public void createNewCustomer(String accountNo, String forename, String surname, String accountHolderName, 
-        String address1, String address2, String address3, String city, String postcode, String phone){
+            String address1, String address2, String address3, String city, String postcode, String phone){
         Customer customer = new Customer();
         
         customer.setAccountNo(accountNo);
@@ -56,10 +51,10 @@ public class BAPACCT {
         customer.setPostcode(postcode);
         customer.setPhone(phone);
         customer.setValuedCustomer(Boolean.FALSE);
+        DataManagerImpl dm = new DataManagerImpl();
         dm.saveCustomer(customer);
         System.out.println("Customer " + customer.getForename() + " " + customer.getSurname() + " has been added to the database.");
-    }
-        
+    }    
     
     
      public void createOrder( Collection<JobLine> jColl , Customer accountNo){ 
@@ -68,6 +63,7 @@ public class BAPACCT {
         order.setPaymentDetailCollection(paymentDetails);
         
         for(JobLine j: jColl){
+            
             j.setOrderID(order);
         }
         order.setJobLineCollection(jColl);
@@ -75,14 +71,21 @@ public class BAPACCT {
         dateSubmitted.setTime(System.currentTimeMillis());
         order.setDateSubmitted(dateSubmitted);
         
+        
         float price = 0;
         
         for( JobLine j: jColl){
             price += j.getJobCode().getPrice();
         }
+        
         order.setTotalPrice(price);
+        
+        
+        
+        DataManagerImpl dm = new DataManagerImpl();
         dm.saveOrder(order);
         
+        //jl.setJobCode(jobCode);
     }  
      
      
@@ -103,8 +106,8 @@ public class BAPACCT {
              
          }
                  
-                 
-             
+        Collection<JobLine> jobLinesCopy = new LinkedList();
+        jobLinesCopy = jCollection;
              
         
          
@@ -121,11 +124,10 @@ public class BAPACCT {
                  createTaskColl(t1,j);
                  createTaskColl(t2,j);
                  createTaskColl(t3,j);
-                 j.setTaskLineCollection(tLines);
                  
-                 
-                 
-                 
+                 JobLine j2 = j;
+                 j2.setTaskLineCollection(tLines);
+                 jobLinesCopy.add(j2);
              }
              else if(jcode.compareTo("ACN54")==0){
                  tLines = new LinkedList();
@@ -135,11 +137,10 @@ public class BAPACCT {
                  createTaskColl(t1,j);
                  createTaskColl(t2,j);
                  createTaskColl(t3,j);
-                 j.setTaskLineCollection(tLines);
-                 jCollection.add(j);
                  
-                 
-                 
+                 JobLine j2 = j;
+                 j2.setTaskLineCollection(tLines);
+                 jobLinesCopy.add(j2);                 
              }
              else if(jcode.compareTo("ACT108")==0){
                  tLines = new LinkedList();
@@ -149,8 +150,10 @@ public class BAPACCT {
                  createTaskColl(t1,j);
                  createTaskColl(t2,j);
                  createTaskColl(t3,j);
-                 j.setTaskLineCollection(tLines);
-                 jCollection.add(j);
+                 
+                 JobLine j2 = j;
+                 j2.setTaskLineCollection(tLines);
+                 jobLinesCopy.add(j2);
                  
                  
                  
@@ -163,10 +166,10 @@ public class BAPACCT {
                  createTaskColl(t1,j);
                  createTaskColl(t2,j);
                  createTaskColl(t3,j);
-                 j.setTaskLineCollection(tLines);
-                 jCollection.add(j);
                  
-                 
+                 JobLine j2 = j;
+                 j2.setTaskLineCollection(tLines);
+                 jobLinesCopy.add(j);
                  
              }
             else if(jcode.compareTo("B108")==0){
@@ -175,8 +178,9 @@ public class BAPACCT {
                  int t2 = 3;
                  createTaskColl(t1,j);
                  createTaskColl(t2,j);
-                 j.setTaskLineCollection(tLines);
-                 jCollection.add(j);
+                 JobLine j2 = j;
+                 j2.setTaskLineCollection(tLines);
+                 jobLinesCopy.add(j2);
                  
                  
                  
@@ -187,15 +191,13 @@ public class BAPACCT {
                 int t2 = 3;
                 createTaskColl(t1,j);
                 createTaskColl(t2,j);
-                j.setTaskLineCollection(tLines);
-                jCollection.add(j);
+                JobLine j2 = j;
+                j2.setTaskLineCollection(tLines);
+                jobLinesCopy.add(j2);
             }
         }
-            
-         
-         
-         
-         return jCollection;
+        
+        return jobLinesCopy;
          
      }
      
@@ -207,9 +209,5 @@ public class BAPACCT {
                   l1.setTaskID(t1);
                   l1.setJoblineID(j);
                   tLines.add(l1);
-         
-         
-         
-         
-}
+        }
 }
