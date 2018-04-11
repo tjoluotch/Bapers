@@ -10,8 +10,8 @@ import be.quodlibet.boxable.Cell;
 import be.quodlibet.boxable.Row;
 import be.quodlibet.boxable.utils.PDStreamUtils;
 import data.DataManagerImpl;
-import domain.TaskLine
-        ;
+import domain.TaskLine;
+        
 import domain.TaskLine;
 import java.awt.Color;
 import java.io.IOException;

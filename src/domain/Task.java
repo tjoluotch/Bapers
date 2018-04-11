@@ -6,16 +6,20 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,6 +37,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Task.findByExpectedDuration", query = "SELECT t FROM Task t WHERE t.expectedDuration = :expectedDuration")
     , @NamedQuery(name = "Task.findByVersion", query = "SELECT t FROM Task t WHERE t.version = :version")})
 public class Task implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "taskID")
+    private Collection<TaskLine> taskLineCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -139,6 +146,15 @@ public class Task implements Serializable {
     @Override
     public String toString() {
         return "domain.Task[ taskID=" + taskID + " ]";
+    }
+
+    @XmlTransient
+    public Collection<TaskLine> getTaskLineCollection() {
+        return taskLineCollection;
+    }
+
+    public void setTaskLineCollection(Collection<TaskLine> taskLineCollection) {
+        this.taskLineCollection = taskLineCollection;
     }
     
 }

@@ -6,8 +6,10 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -15,12 +17,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -57,6 +61,8 @@ public class JobLine implements Serializable {
     @NotNull
     @Column(name = "version")
     private long version;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "joblineID")
+    private Collection<TaskLine> taskLineCollection;
     @JoinColumn(name = "job_code", referencedColumnName = "code")
     @ManyToOne(optional = false)
     private Job jobCode;
@@ -64,7 +70,7 @@ public class JobLine implements Serializable {
     @ManyToOne(optional = false)
     private OrderTable orderID;
     @JoinColumn(name = "payment_detailID", referencedColumnName = "payment_detailID")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private PaymentDetail paymentdetailID;
 
     public JobLine() {
@@ -117,6 +123,15 @@ public class JobLine implements Serializable {
 
     public void setVersion(long version) {
         this.version = version;
+    }
+
+    @XmlTransient
+    public Collection<TaskLine> getTaskLineCollection() {
+        return taskLineCollection;
+    }
+
+    public void setTaskLineCollection(Collection<TaskLine> taskLineCollection) {
+        this.taskLineCollection = taskLineCollection;
     }
 
     public Job getJobCode() {

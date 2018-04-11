@@ -10,7 +10,7 @@
     <class>domain.Customer</class>
     <class>domain.Staff</class>
     <class>domain.TaskLine</class>
-    <class>domain.PaymentDetail_1</class>
+
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/solsoft_DB"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

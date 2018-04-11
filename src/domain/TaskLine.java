@@ -18,14 +18,13 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * * @author Tweetie Pie
- 
+ *
+ * @author Tweetie Pie
  */
 @Entity
 @Table(name = "task_line")
@@ -45,8 +44,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "TaskLine.findByVersion", query = "SELECT t FROM TaskLine t WHERE t.version = :version")})
 public class TaskLine implements Serializable {
 
-   // CASE WHEN (t.taskID.department = 'Copy Room') THEN t.endTime ) AS copy_room,WHEN (t.taskID.department = 'Development Area') THEN t.endTime ) AS development_area ELSE DESC
-    
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -64,7 +61,6 @@ public class TaskLine implements Serializable {
     private String shelf;
     @Basic(optional = false)
     @NotNull
-    @Version
     @Column(name = "version")
     private long version;
     @JoinColumn(name = "completed_by", referencedColumnName = "username")
