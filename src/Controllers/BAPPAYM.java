@@ -6,6 +6,7 @@
 package Controllers;
 
 import data.DataManagerImpl;
+import javax.swing.JFrame;
 
 /**
  *
