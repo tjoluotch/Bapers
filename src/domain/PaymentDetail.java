@@ -6,8 +6,8 @@
 package domain;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Collection;
+import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +22,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -49,9 +48,9 @@ public class PaymentDetail implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "paymentID")
-    private String paymentDetailID;
+    @GeneratedValue(strategy=GenerationType.IDENTITY )
+    @Column(name = "payment_detailID")
+    private String paymentdetailID;
     @Column(name = "expiry_date")
     @Temporal(TemporalType.DATE)
     private Date expiryDate;
@@ -63,35 +62,32 @@ public class PaymentDetail implements Serializable {
     private String last4digits;
     @Basic(optional = false)
     @NotNull
-    @Version
     @Column(name = "version")
     private long version;
     @JoinColumn(name = "orderID", referencedColumnName = "orderID")
     @ManyToOne(optional = false)
     private OrderTable orderID;
-    
-    //BUGS
-    @OneToMany(mappedBy = "paymentDetailID")
+    @OneToMany(mappedBy = "paymentdetailID")
     private Collection<JobLine> jobLineCollection;
-    
+
     public PaymentDetail() {
     }
 
-    public PaymentDetail(String paymentDetailID) {
-        this.paymentDetailID = paymentDetailID;
+    public PaymentDetail(String paymentdetailID) {
+        this.paymentdetailID = paymentdetailID;
     }
 
-    public PaymentDetail(String paymentDetailID, long version) {
-        this.paymentDetailID = paymentDetailID;
+    public PaymentDetail(String paymentdetailID, long version) {
+        this.paymentdetailID = paymentdetailID;
         this.version = version;
     }
 
     public String getPaymentdetailID() {
-        return paymentDetailID;
+        return paymentdetailID;
     }
 
-    public void setPaymentdetailID(String paymentDetailID) {
-        this.paymentDetailID = paymentDetailID;
+    public void setPaymentdetailID(String paymentdetailID) {
+        this.paymentdetailID = paymentdetailID;
     }
 
     public Date getExpiryDate() {
@@ -150,7 +146,7 @@ public class PaymentDetail implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (paymentDetailID != null ? paymentDetailID.hashCode() : 0);
+        hash += (paymentdetailID != null ? paymentdetailID.hashCode() : 0);
         return hash;
     }
 
@@ -161,7 +157,7 @@ public class PaymentDetail implements Serializable {
             return false;
         }
         PaymentDetail other = (PaymentDetail) object;
-        if ((this.paymentDetailID == null && other.paymentDetailID != null) || (this.paymentDetailID != null && !this.paymentDetailID.equals(other.paymentDetailID))) {
+        if ((this.paymentdetailID == null && other.paymentdetailID != null) || (this.paymentdetailID != null && !this.paymentdetailID.equals(other.paymentdetailID))) {
             return false;
         }
         return true;
@@ -169,7 +165,7 @@ public class PaymentDetail implements Serializable {
 
     @Override
     public String toString() {
-        return "domain.PaymentDetail[ paymentdetailID=" + paymentDetailID + " ]";
+        return "domain.PaymentDetail[ paymentdetailID=" + paymentdetailID + " ]";
     }
     
 }

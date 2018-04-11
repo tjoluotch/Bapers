@@ -23,7 +23,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -63,7 +62,6 @@ public class JobLine implements Serializable {
     private String reminderStatus;
     @Basic(optional = false)
     @NotNull
-    @Version
     @Column(name = "version")
     private long version;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "joblineID")
@@ -74,11 +72,9 @@ public class JobLine implements Serializable {
     @JoinColumn(name = "orderID", referencedColumnName = "orderID")
     @ManyToOne(optional = false)
     private OrderTable orderID;
-    
-    //BUGS
     @JoinColumn(name = "payment_detailID", referencedColumnName = "payment_detailID")
     @ManyToOne
-    private PaymentDetail paymentDetailID;
+    private PaymentDetail paymentdetailID;
 
     public JobLine() {
     }
@@ -158,11 +154,11 @@ public class JobLine implements Serializable {
     }
 
     public PaymentDetail getPaymentdetailID() {
-        return paymentDetailID;
+        return paymentdetailID;
     }
 
-    public void setPaymentdetailID(PaymentDetail paymentDetailID) {
-        this.paymentDetailID = paymentDetailID;
+    public void setPaymentdetailID(PaymentDetail paymentdetailID) {
+        this.paymentdetailID = paymentdetailID;
     }
 
     @Override

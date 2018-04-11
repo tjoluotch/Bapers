@@ -11,14 +11,11 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -45,7 +42,6 @@ public class Task implements Serializable {
     private Collection<TaskLine> taskLineCollection;
 
     private static final long serialVersionUID = 1L;
-    @GeneratedValue(strategy=GenerationType.IDENTITY )
     @Id
     @Basic(optional = false)
     @NotNull
@@ -64,7 +60,6 @@ public class Task implements Serializable {
     private Integer expectedDuration;
     @Basic(optional = false)
     @NotNull
-    @Version
     @Column(name = "version")
     private long version;
 
