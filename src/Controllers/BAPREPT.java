@@ -20,6 +20,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.LinkedList;
 import java.util.List;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -58,7 +59,7 @@ public class BAPREPT {
         long copynTotal = 0;
         long developmentnTotal = 0;
         long packingnTotal = 0;
-        long finishingdnTotal = 0;
+        long finishingnTotal = 0;
         long copyTotal = 0;
         long developmentTotal = 0;
         long packingTotal = 0;
@@ -1072,7 +1073,11 @@ public class BAPREPT {
         
         drawSummaryTable(listn,page,doc, contentStream);
         
+        contentStream = new PDPageContentStream(doc, page, AppendMode.APPEND, false);
         
+        
+        drawSummaryReportTotal(page, doc, contentStream, date1 , date2);
+
         
         
         contentStream.close();
@@ -1139,8 +1144,14 @@ public class BAPREPT {
                                 long shift1 = ds2.getTime() - t.getStartTime().getTime();
                                 long shift2 = ns.getTime() - ds2.getTime() ;
                                 copyd1 += duration -shift1;
+                                copyd1Total += duration - shift1;
+                                copyTotal += duration - shift1;
                                 copyd2+= ns.getTime() - ds2.getTime();
+                                copyd2Total += ns.getTime() - ds2.getTime();
+                                copyTotal += ns.getTime()-ds2.getTime();
                                 copyn += (t.getEndTime().getTime() - ns.getTime());
+                                copynTotal += (t.getEndTime().getTime() - ns.getTime());
+                                copyTotal += (t.getEndTime().getTime()- ns.getTime());
                             }
                             
                         }
@@ -1149,13 +1160,19 @@ public class BAPREPT {
                             
                             if(t.getEndTime().before(ns)){
                                 copyd2+= duration; 
+                                copyd2Total+= duration;
+                                copyTotal += duration;
                             }
                             
                             else if(t.getEndTime().after(ns) && t.getEndTime().before(ns2)){
                               
                                 long shift1 = ns.getTime() -t.getStartTime().getTime();
                                 copyd2 += shift1 ;
+                                copyd2Total += shift1;
+                                copyTotal += shift1; 
                                 copyn+= (t.getEndTime().getTime() - ns.getTime());
+                                copynTotal += (t.getEndTime().getTime() - ns.getTime());
+                                copyTotal += (t.getEndTime().getTime() - ns.getTime());
                             }
                            
                         }
@@ -1165,6 +1182,8 @@ public class BAPREPT {
                             
                             
                            copyn+= duration; 
+                           copynTotal+= duration;
+                           copyTotal += duration;
                         }
                         
                     }
@@ -1194,20 +1213,34 @@ public class BAPREPT {
                             
                             if(t.getEndTime().before(ds2)){
                                 developmentd1+= duration;
+                                developmentd1Total += duration;
+                                developmentTotal += duration;
                             }
                             
                             else if(t.getEndTime().after(ds2) && t.getEndTime().before(ns)){
                                 long shift1 = ds2.getTime() -t.getStartTime().getTime();
                                 developmentd1 += shift1;
+                                developmentd1Total += shift1;
+                                developmentTotal += shift1;
+                                developmentTotal += shift1;
                                 developmentd2+= (t.getEndTime().getTime() - ds2.getTime());
+                                developmentd2Total += (t.getEndTime().getTime() - ds2.getTime());
+                                developmentTotal += (t.getEndTime().getTime() - ds2.getTime());
+                                
                             }
                             
                             else if(t.getEndTime().after(ns) && t.getEndTime().before(ns2)){
                                 long shift1 = ds2.getTime() - t.getStartTime().getTime();
                                 long shift2 = ns.getTime() - ds2.getTime();
                                 developmentd1 += shift1;
+                                developmentd1Total+= shift1;
+                                developmentTotal += shift1;
                                 developmentd2+= ns.getTime() - ds2.getTime();
+                                developmentd2Total+= ns.getTime() - ds2.getTime();
+                                developmentTotal = ns.getTime() - ds2.getTime();
                                 developmentn +=  (t.getEndTime().getTime() - ns.getTime());
+                                developmentnTotal += (t.getEndTime().getTime() - ns.getTime());
+                                developmentTotal+= (t.getEndTime().getTime() - ns.getTime());
                             }
                             
                         }
@@ -1216,13 +1249,20 @@ public class BAPREPT {
                             
                             if(t.getEndTime().before(ns)){
                                 developmentd2+= duration; 
+                                developmentd2Total += duration;
+                                developmentTotal += duration;
                             }
                             
                             else if(t.getEndTime().after(ns)){
                               
                                 long shift1 = ns.getTime() -t.getStartTime().getTime();
                                 developmentd2 += shift1;
+                                developmentd2Total+= shift1;
+                                developmentTotal+= shift1;
                                 developmentn+= (t.getEndTime().getTime() - ns.getTime());
+                                developmentnTotal += (t.getEndTime().getTime() - ns.getTime());
+                                developmentTotal += (t.getEndTime().getTime() - ns.getTime());
+                                
                             }
                            
                         }
@@ -1232,6 +1272,8 @@ public class BAPREPT {
                             
                             
                            developmentn+= duration; 
+                           developmentnTotal += duration;
+                           developmentTotal += duration;
                         }
                         
                         
@@ -1262,20 +1304,32 @@ public class BAPREPT {
                             
                             if(t.getEndTime().before(ds2)){
                                 packingd1+= duration;
+                                packingd1Total += duration;
+                                packingTotal += duration;
                             }
                             
                             else if(t.getEndTime().after(ds2) && t.getEndTime().before(ns)){
                                 long shift1 = ds2.getTime() -t.getStartTime().getTime();
                                 packingd1 += shift1;
+                                packingd1Total += shift1;
+                                packingTotal += shift1;
                                 packingd2+= (t.getEndTime().getTime() - ds2.getTime());
+                                packingd2Total += (t.getEndTime().getTime() - ds2.getTime());
+                                packingTotal += (t.getEndTime().getTime() - ds2.getTime());
                             }
                             
                             else if(t.getEndTime().after(ns) && t.getEndTime().before(ns2)){
                                 long shift1 = ds2.getTime() - t.getStartTime().getTime();
                                 long shift2 = ns.getTime() - ds2.getTime();
                                 packingd1 += shift1;
+                                packingd1Total += shift1;
+                                packingTotal += shift1;
                                 packingd2+= ns.getTime() - ds2.getTime();
+                                packingd2Total += ns.getTime() - ds2.getTime();
+                                packingTotal+= ns.getTime() - ds2.getTime();
                                 packingn += (t.getEndTime().getTime() - ns.getTime());
+                                packingnTotal+= (t.getEndTime().getTime() - ns.getTime());
+                                packingTotal += (t.getEndTime().getTime() - ns.getTime());
                             }
                             
                         }
@@ -1284,13 +1338,19 @@ public class BAPREPT {
                             
                             if(t.getEndTime().before(ns)){
                                 packingd2+= duration; 
+                                packingd2Total+= duration;
+                                packingTotal += duration;
                             }
                             
                             else if(t.getEndTime().after(ns)){
                               
                                 long shift1 = ns.getTime() -t.getStartTime().getTime();
                                 packingd2 += shift1;
+                                packingd2Total += shift1;
+                                packingTotal += shift1;
                                 packingn+= (t.getEndTime().getTime() - ns.getTime());
+                                packingnTotal += (t.getEndTime().getTime() - ns.getTime());
+                                packingTotal += (t.getEndTime().getTime()-ns.getTime());
                             }
                            
                         }
@@ -1300,6 +1360,8 @@ public class BAPREPT {
                             
                             
                            packingn+= duration; 
+                           packingnTotal += duration;
+                           packingTotal+= duration;
                         }
                         
                     }
@@ -1329,20 +1391,33 @@ public class BAPREPT {
                             
                             if(t.getEndTime().before(ds2)){
                                 finishingd1+= duration;
+                                finishingd1Total += duration;
+                                finishingTotal += duration;
                             }
                             
                             else if(t.getEndTime().after(ds2) && t.getEndTime().before(ns)){
                                 long shift1 = ds2.getTime() -t.getStartTime().getTime();
                                 finishingd1 += shift1;
+                                finishingd1Total += shift1;
+                                finishingTotal += shift1;
                                 finishingd2+= (t.getEndTime().getTime() - ds2.getTime());
+                                finishingd2Total += (t.getEndTime().getTime()-ds2.getTime());
+                                finishingTotal += (t.getEndTime().getTime() - ds2.getTime());
                             }
                             
                             else if(t.getEndTime().after(ns) && t.getEndTime().before(ns2)){
                                 long shift1 = ds2.getTime() - t.getStartTime().getTime();
                                 long shift2 = ns.getTime() - ds2.getTime();
                                 finishingd1 += shift1;
+                                finishingd1Total += shift1;
+                                finishingTotal += shift1;
                                 finishingd2+= ns.getTime() - ds2.getTime();
+                                finishingd2Total += ns.getTime()-ds2.getTime();
+                                finishingTotal += ns.getTime()- ds2.getTime();
                                 finishingn += (t.getEndTime().getTime() - ns.getTime());
+                                finishingnTotal += (t.getEndTime().getTime()- ns.getTime());
+                                finishingTotal += ( t.getEndTime().getTime() - ns.getTime());
+                                
                             }
                             
                         }
@@ -1351,13 +1426,19 @@ public class BAPREPT {
                             
                             if(t.getEndTime().before(ns)){
                                 finishingd2+= duration; 
+                                finishingd2Total += duration;
+                                finishingTotal += duration;
                             }
                             
                             else if(t.getEndTime().after(ns)){
                               
                                 long shift1 = ns.getTime() -t.getStartTime().getTime();
                                 finishingd2 += shift1;
+                                finishingd2Total += shift1;
+                                finishingTotal += shift1;
                                 finishingn+= (t.getEndTime().getTime() - ns.getTime());
+                                finishingnTotal += (t.getEndTime().getTime()-ns.getTime());
+                                finishingTotal+= (t.getEndTime().getTime() - ns.getTime());
                             }
                            
                         }
@@ -1367,6 +1448,8 @@ public class BAPREPT {
                             
                             
                            finishingn+= duration; 
+                           finishingnTotal += duration;
+                           finishingTotal+= duration;
                         }
                     }
                     
@@ -1489,6 +1572,92 @@ public class BAPREPT {
         doc.addPage(page);
         table.draw();
         contentStream.close();
+    }
+    
+    
+    public void drawSummaryReportTotal(PDPage page, PDDocument doc,PDPageContentStream contentStream, String date1, String date2) throws IOException{
+        page = new PDPage();
+        List<String[]> list = new LinkedList();
+        String [] colNames = new String[5];
+        colNames[0] = " ";
+        colNames [1] = "Copy Room";
+        colNames [2] = "Development";
+        colNames [3] = "Packing";
+        colNames [4] = "Finishing";
+         list.add(colNames);
+         String [] d1Row = new String[5];
+         d1Row[0] = "Day Shift 1";
+         d1Row[1] = String.valueOf((int) ((copyd1Total / (1000 * 60 * 60)))) + " hrs " + (int) ((copyd1Total / (1000 * 60)) % 60) + " mins";
+         d1Row[2] = String.valueOf((int) ((developmentd1Total / (1000 * 60 * 60)))) + " hrs " + (int) ((developmentd1Total / (1000 * 60)) % 60) + " mins";
+         d1Row[3] = String.valueOf((int) ((packingd1Total / (1000 * 60 * 60)))) + " hrs " + (int) ((packingd1Total / (1000 * 60)) % 60) + " mins";
+         d1Row[4] = String.valueOf((int) ((finishingd1Total / (1000 * 60 * 60)))) + " hrs " + (int) ((finishingd1Total / (1000 * 60)) % 60) + " mins";
+         list.add(d1Row);
+         
+         
+         String [] d2Row = new String[5];
+         d2Row[0] = "Day Shift 2";
+         d2Row[1] = String.valueOf((int) ((copyd2Total / (1000 * 60 * 60)))) + " hrs " + (int) ((copyd2Total / (1000 * 60)) % 60) + " mins";
+         d2Row[2] = String.valueOf((int) ((developmentd2Total / (1000 * 60 * 60)))) + " hrs " + (int) ((developmentd2Total / (1000 * 60)) % 60) + " mins";
+         d2Row[3] = String.valueOf((int) ((packingd2Total / (1000 * 60 * 60)))) + " hrs " + (int) ((packingd2Total / (1000 * 60)) % 60) + " mins";
+         d2Row[4] = String.valueOf((int) ((finishingd2Total / (1000 * 60 * 60)))) + " hrs " + (int) ((finishingd2Total / (1000 * 60)) % 60) + " mins";
+         list.add(d2Row);
+         
+         
+         
+         String [] nRow = new String[5];
+         nRow[0] = "Night Shift";
+         nRow[1] = String.valueOf((int) ((copynTotal / (1000 * 60 * 60)))) + " hrs " + (int) ((copynTotal / (1000 * 60)) % 60) + " mins";
+         nRow[2] = String.valueOf((int) ((developmentnTotal / (1000 * 60 * 60)))) + " hrs " + (int) ((developmentnTotal / (1000 * 60)) % 60) + " mins";
+         nRow[3] = String.valueOf((int) ((packingnTotal / (1000 * 60 * 60)))) + " hrs " + (int) ((packingnTotal / (1000 * 60)) % 60) + " mins";
+         nRow[4] = String.valueOf((int) ((finishingnTotal / (1000 * 60 * 60)))) + " hrs " + (int) ((finishingnTotal / (1000 * 60)) % 60) + " mins";
+         list.add(nRow);
+         
+         
+         
+         
+         String [] totalRow = new String[5];
+         totalRow[0] = "Total";
+         totalRow[1] = String.valueOf((int) ((copyTotal / (1000 * 60 * 60)))) + " hrs " + (int) ((copyTotal / (1000 * 60)) % 60) + " mins";
+         totalRow[2] = String.valueOf((int) ((developmentTotal / (1000 * 60 * 60)))) + " hrs " + (int) ((developmentTotal / (1000 * 60)) % 60) + " mins";
+         totalRow[3] = String.valueOf((int) ((packingTotal / (1000 * 60 * 60)))) + " hrs " + (int) ((packingTotal / (1000 * 60)) % 60) + " mins";
+         totalRow[4] = String.valueOf((int) ((finishingTotal / (1000 * 60 * 60)))) + " hrs " + (int) ((finishingTotal / (1000 * 60)) % 60) + " mins";
+         list.add(totalRow);
+         
+         
+        float margin = 50;
+        float yStartNewPage = page.getMediaBox().getHeight() - (2 * margin) -150;
+        float tableWidth = page.getMediaBox().getWidth() - (2 * margin);
+
+        float bottomMargin = 70;
+        float yPosition = 700;
+        
+        BaseTable table = new BaseTable(yPosition, yStartNewPage, bottomMargin, tableWidth, margin, doc, page, true, true);
+        Row<PDPage> titleRow = table.createRow(15f);
+        Cell<PDPage> cell = titleRow.createCell(100, "Total for Period (" + date1 + " - " + date2 + ")");
+        cell.setFont(PDType1Font.HELVETICA_BOLD);
+        
+        for (String[] fact : list) {
+            
+             if (table.getCurrentPage() != page) {
+                doc.addPage(page);
+                contentStream.close();
+                page = table.getCurrentPage();
+                contentStream = new PDPageContentStream(doc, page, AppendMode.APPEND, false);
+
+                contentStream.beginText();
+            }
+            Row<PDPage> row = table.createRow(10f);
+            cell = row.createCell((100 / 5f), fact[0]);
+            for (int i = 1; i < fact.length; i++) {
+                cell = row.createCell((100 / 5f), fact[i]);
+            }
+        }
+         
+         doc.addPage(page);
+        table.draw();
+        contentStream.close();
+         
+        
     }
     
     public void createCustomerReport(String accNo, String date1, String date2){
