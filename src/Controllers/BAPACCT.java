@@ -61,11 +61,16 @@ public class BAPACCT {
             List<PaymentDetail> paymentDetails = new LinkedList();
         OrderTable order = new OrderTable();
         order.setPaymentDetailCollection(paymentDetails);
+        
+        for(JobLine j: jColl){
+            
+            j.setOrderID(order);
+        }
         order.setJobLineCollection(jColl);
         Date dateSubmitted = new Date();
         dateSubmitted.setTime(System.currentTimeMillis());
         order.setDateSubmitted(dateSubmitted);
-        order.setAccountNo(accountNo);
+        
         
         float price = 0;
         

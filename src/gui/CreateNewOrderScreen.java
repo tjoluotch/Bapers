@@ -361,6 +361,7 @@ public class CreateNewOrderScreen extends javax.swing.JFrame {
         
         BAPACCT act = new BAPACCT();
          Collection<JobLine> jCollection = act.createJobLines(Date.valueOf(newDate1), jList, instructions.getText());
+         act.createOrder(jCollection, c);
         
         
         
