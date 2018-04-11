@@ -208,6 +208,16 @@ public class DataManagerImpl implements DataManager{
     }
     
     
+    @Override
+    public List<TaskLine> searchbyStartTime(){
+        TypedQuery<TaskLine> query = em.createNamedQuery("TaskLine.findByNullStartTime", TaskLine.class);
+        
+        return query.getResultList();
+    }
+    
+    
+            
+    
         
     }
         
