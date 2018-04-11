@@ -3,14 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/tjay/NetBeansProjects/Bapers/src/gui/ReportScreen.java</file>
-            <file>file:/Users/tjay/NetBeansProjects/Bapers/src/domain/Job.java</file>
-            <file>file:/Users/tjay/NetBeansProjects/Bapers/src/domain/TaskLine.java</file>
-            <file>file:/Users/tjay/NetBeansProjects/Bapers/src/domain/JobLine.java</file>
-            <file>file:/Users/tjay/NetBeansProjects/Bapers/src/domain/Task.java</file>
-            <file>file:/Users/tjay/NetBeansProjects/Bapers/src/Controllers/BAPACCT.java</file>
-            <file>file:/Users/tjay/NetBeansProjects/Bapers/src/Controllers/BAPADMN.java</file>
-            <file>file:/Users/tjay/NetBeansProjects/Bapers/src/Controllers/BAPREPT.java</file>
+            <file>file:/E:/Documents/GitHub/Bapers/src/Controllers/BAPACCT.java</file>
+            <file>file:/E:/Documents/GitHub/Bapers/src/gui/AddPaymentScreen.java</file>
+            <file>file:/E:/Documents/GitHub/Bapers/src/Controllers/BAPPAYM.java</file>
+            <file>file:/E:/Documents/GitHub/Bapers/src/domain/PaymentDetail.java</file>
+            <file>file:/E:/Documents/GitHub/Bapers/src/domain/OrderTable.java</file>
         </group>
     </open-files>
 </project-private>

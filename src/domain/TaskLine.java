@@ -50,7 +50,7 @@ public class TaskLine implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @GeneratedValue(strategy=GenerationType.IDENTITY )
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "task_lineID")
     private Integer tasklineID;
     @Column(name = "start_time")

@@ -74,19 +74,11 @@ public class JobLine implements Serializable {
     @JoinColumn(name = "orderID", referencedColumnName = "orderID")
     @ManyToOne(optional = false)
     private OrderTable orderID;
+    
+    //BUGS
     @JoinColumn(name = "payment_detailID", referencedColumnName = "payment_detailID")
     @ManyToOne
-    private PaymentDetail paymentdetailID;
-    @OneToMany(mappedBy = "job_lineID")
-    private Collection<JobLine> jobLineCollection;
-
-    public Collection<JobLine> getJobLineCollection() {
-        return jobLineCollection;
-    }
-
-    public void setJobLineCollection(Collection<JobLine> jobLineCollection) {
-        this.jobLineCollection = jobLineCollection;
-    }
+    private PaymentDetail paymentDetailID;
 
     public JobLine() {
     }
@@ -166,11 +158,11 @@ public class JobLine implements Serializable {
     }
 
     public PaymentDetail getPaymentdetailID() {
-        return paymentdetailID;
+        return paymentDetailID;
     }
 
-    public void setPaymentdetailID(PaymentDetail paymentdetailID) {
-        this.paymentdetailID = paymentdetailID;
+    public void setPaymentdetailID(PaymentDetail paymentDetailID) {
+        this.paymentDetailID = paymentDetailID;
     }
 
     @Override

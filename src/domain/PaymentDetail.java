@@ -49,8 +49,8 @@ public class PaymentDetail implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @GeneratedValue(strategy=GenerationType.IDENTITY )
-    @Column(name = "payment_detailID")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "paymentID")
     private String paymentDetailID;
     @Column(name = "expiry_date")
     @Temporal(TemporalType.DATE)
@@ -69,8 +69,11 @@ public class PaymentDetail implements Serializable {
     @JoinColumn(name = "orderID", referencedColumnName = "orderID")
     @ManyToOne(optional = false)
     private OrderTable orderID;
-    @OneToMany(mappedBy = "paymentdetailID")
+    
+    //BUGS
+    @OneToMany(mappedBy = "paymentDetailID")
     private Collection<JobLine> jobLineCollection;
+    
     public PaymentDetail() {
     }
 
