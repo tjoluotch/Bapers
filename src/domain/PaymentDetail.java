@@ -6,7 +6,6 @@
 package domain;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -17,7 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -67,7 +66,7 @@ public class PaymentDetail implements Serializable {
     @JoinColumn(name = "orderID", referencedColumnName = "orderID")
     @ManyToOne(optional = false)
     private OrderTable orderID;
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "payment_detailID")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "payment_detailID")
     private JobLine jobLine;
 
     public PaymentDetail() {

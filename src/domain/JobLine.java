@@ -74,7 +74,7 @@ public class JobLine implements Serializable {
     @ManyToOne(optional = false)
     private OrderTable orderID;
     @JoinColumn(name = "payment_detailID", referencedColumnName = "payment_detailID")
-    @OneToOne(optional = false)
+    @ManyToOne(optional = false)
     private PaymentDetail paymentdetailID;
     @OneToMany(mappedBy = "job_lineID")
     private Collection<JobLine> jobLineCollection;
