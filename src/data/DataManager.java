@@ -55,4 +55,5 @@ public interface DataManager {
     public List <TaskLine> individualReport(Date date);
      public List <TaskLine> individualReportBetween(Date startDate, Date endDate);
      public List<TaskLine> summaryReports(Date startDate, Date endDate);
+     public List<TaskLine> searchbyStartTime();
 }

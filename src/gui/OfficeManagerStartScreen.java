@@ -5,6 +5,8 @@
  */
 package gui;
 
+import Controllers.BAPPROC;
+import data.DataManagerImpl;
 import domain.Staff;
 
 /**
@@ -147,6 +149,9 @@ public class OfficeManagerStartScreen extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        DataManagerImpl dm = new DataManagerImpl();
+        BAPPROC pr = new BAPPROC();
+        pr.getTaskList();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
