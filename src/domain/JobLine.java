@@ -21,6 +21,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -62,6 +63,7 @@ public class JobLine implements Serializable {
     private String reminderStatus;
     @Basic(optional = false)
     @NotNull
+    @Version
     @Column(name = "version")
     private long version;
     @JoinColumn(name = "job_code", referencedColumnName = "code")

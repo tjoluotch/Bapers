@@ -16,6 +16,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -51,6 +52,7 @@ public class Job implements Serializable {
     private Float price;
     @Basic(optional = false)
     @NotNull
+    @Version
     @Column(name = "version")
     private long version;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "jobCode")

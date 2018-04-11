@@ -5,10 +5,25 @@
  */
 package Controllers;
 
+import data.DataManagerImpl;
+
 /**
  *
  * @author Daniel
  */
 public class BAPPAYM {
+    
+    DataManagerImpl dm;
+    JFrame frame;
+    
+    public BAPPAYM(DataManagerImpl dm){
+        this.dm = dm;
+    }
+    
+    public BAPPAYM(DataManagerImpl dm, JFrame frame){
+        this.dm = dm;
+        this.frame = frame;
+    }
+  
     
 }

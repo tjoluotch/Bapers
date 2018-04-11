@@ -21,6 +21,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -60,6 +61,7 @@ public class PaymentDetail implements Serializable {
     private String last4digits;
     @Basic(optional = false)
     @NotNull
+    @Version
     @Column(name = "version")
     private long version;
     @JoinColumn(name = "orderID", referencedColumnName = "orderID")
