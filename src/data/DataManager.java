@@ -21,6 +21,8 @@ public interface DataManager {
     List<Task> AllTasks();
     
     Customer findCustomerByName(String forename, String surname);
+   
+    //this lower method is dum find better search principle
     Customer findCustomerByAccountHolderName(String AccountHolderName);
     Customer findCustomerByAccountNumber(String AccountNumber);
     

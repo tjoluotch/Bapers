@@ -8,6 +8,8 @@ package Controllers;
 import data.DataManagerImpl;
 import domain.Customer;
 
+import javax.swing.*;
+
 /**
  * @author Daniel
  */
@@ -15,8 +17,8 @@ import domain.Customer;
 //Assign Job number
 public class BAPACCT {
     DataManagerImpl dm;
-    public BAPACCT(DataManagerImpl dm){
-        this.dm = dm;
+    public BAPACCT(){
+       
     }
     
     public void createNewCustomer(String accountNo, String forename, String surname, String accountHolderName, 
@@ -44,5 +46,12 @@ public class BAPACCT {
         
         dm.deleteCustomer(customer);
         System.out.println("Customer " + customer.getForename() + " " + customer.getSurname() + " has been deleted from the database.");
-    }    
+    }
+
+    public void searchCustomerByName(JTextField name) {
+        String firstName = name.getText();
+        //String lastName = sName.getText();
+        
+      dm.findCustomerByName(firstName, null);
+    }
 }
