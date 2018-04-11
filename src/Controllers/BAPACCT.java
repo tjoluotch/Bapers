@@ -68,7 +68,6 @@ public class BAPACCT {
         order.setPaymentDetailCollection(paymentDetails);
         
         for(JobLine j: jColl){
-            
             j.setOrderID(order);
         }
         order.setJobLineCollection(jColl);
@@ -76,26 +75,14 @@ public class BAPACCT {
         dateSubmitted.setTime(System.currentTimeMillis());
         order.setDateSubmitted(dateSubmitted);
         
-        
         float price = 0;
         
         for( JobLine j: jColl){
             price += j.getJobCode().getPrice();
         }
-        
         order.setTotalPrice(price);
-        
-        
-        
-        DataManagerImpl dm = new DataManagerImpl();
         dm.saveOrder(order);
         
-        
-       
-        
-        
-        
-        //jl.setJobCode(jobCode);
     }  
      
      
