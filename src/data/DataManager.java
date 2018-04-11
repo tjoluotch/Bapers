@@ -40,9 +40,14 @@ public interface DataManager {
     
     
     void saveCustomer(Customer customer);
+    void deleteCustomer(Customer customer);
+    
     void saveStaff(Staff staff);
+    
     void saveJob(Job job);
+    
     void saveTask(Task task);
+    
     public boolean updateStaffRecord(String username, String firstName, String surname, String password, String role);
     public List <TaskLine> individualReport(Date date);
      public List <TaskLine> individualReportBetween(Date startDate, Date endDate);

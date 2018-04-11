@@ -20,7 +20,7 @@ public class BAPACCT {
     }
     
     public void createNewCustomer(String accountNo, String forename, String surname, String accountHolderName, 
-            String address1, String address2, String address3, String city, String postcode, String phone){
+        String address1, String address2, String address3, String city, String postcode, String phone){
         Customer customer = new Customer();
         
         customer.setAccountNo(accountNo);
@@ -36,5 +36,13 @@ public class BAPACCT {
         
         dm.saveCustomer(customer);
         System.out.println("Customer " + customer.getForename() + " " + customer.getSurname() + " has been added to the database.");
+    }
+
+    public void deleteCustomer(){
+        Customer customer = new Customer();
+        
+        
+        dm.deleteCustomer(customer);
+        System.out.println("Customer " + customer.getForename() + " " + customer.getSurname() + " has been deleted from the database.");
     }    
 }

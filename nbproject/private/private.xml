@@ -3,26 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/slydogg/Documents/Bapers/Bapers/src/data/DataManagerImpl.java</file>
-            <file>file:/C:/Users/slydogg/Documents/Bapers/Bapers/src/domain/TaskLine.java</file>
-            <file>file:/C:/Users/slydogg/Documents/Bapers/Bapers/src/domain/Customer.java</file>
-            <file>file:/C:/Users/slydogg/Documents/Bapers/Bapers/src/Controllers/BAPADMN.java</file>
-            <file>file:/C:/Users/slydogg/Documents/Bapers/Bapers/src/gui/OfficeManagerStartScreen.java</file>
-            <file>file:/C:/Users/slydogg/Documents/Bapers/Bapers/src/data/DataManager.java</file>
-            <file>file:/C:/Users/slydogg/Documents/Bapers/Bapers/src/domain/JobLine.java</file>
-            <file>file:/C:/Users/slydogg/Documents/Bapers/Bapers/src/META-INF/persistence.xml</file>
-            <file>file:/C:/Users/slydogg/Documents/Bapers/Bapers/src/Controllers/BAPREPT.java</file>
-            <file>file:/C:/Users/slydogg/Documents/Bapers/Bapers/src/gui/ManageUsersModifyScreen.java</file>
-            <file>file:/C:/Users/slydogg/Documents/Bapers/Bapers/src/TableModels/StaffTableModel.java</file>
-            <file>file:/C:/Users/slydogg/Documents/Bapers/Bapers/src/domain/Task.java</file>
-            <file>file:/C:/Users/slydogg/Documents/Bapers/Bapers/src/gui/ReportScreen.java</file>
-            <file>file:/C:/Users/slydogg/Documents/Bapers/Bapers/src/Controllers/BAPACCT.java</file>
-            <file>file:/C:/Users/slydogg/Documents/Bapers/Bapers/src/domain/OrderTable.java</file>
-            <file>file:/C:/Users/slydogg/Documents/Bapers/Bapers/build/generated-sources/ap-source-output/domain/Staff_.java</file>
-            <file>file:/C:/Users/slydogg/Documents/Bapers/Bapers/src/gui/CustomerReportsScreen.java</file>
-            <file>file:/C:/Users/slydogg/Documents/Bapers/Bapers/src/domain/PaymentDetail.java</file>
-            <file>file:/C:/Users/slydogg/Documents/Bapers/Bapers/src/domain/Job.java</file>
-            <file>file:/C:/Users/slydogg/Documents/Bapers/Bapers/src/domain/Staff.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/Bapers/src/gui/ReportScreen.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/Bapers/src/domain/Job.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/Bapers/src/domain/TaskLine.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/Bapers/src/domain/JobLine.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/Bapers/src/domain/Task.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/Bapers/src/Controllers/BAPACCT.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/Bapers/src/Controllers/BAPADMN.java</file>
+            <file>file:/Users/tjay/NetBeansProjects/Bapers/src/Controllers/BAPREPT.java</file>
         </group>
     </open-files>
 </project-private>
