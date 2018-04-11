@@ -18,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -73,8 +74,18 @@ public class JobLine implements Serializable {
     @ManyToOne(optional = false)
     private OrderTable orderID;
     @JoinColumn(name = "payment_detailID", referencedColumnName = "payment_detailID")
-    @ManyToOne(optional = false)
+    @OneToOne(optional = false)
     private PaymentDetail paymentdetailID;
+    @OneToMany(mappedBy = "job_lineID")
+    private Collection<JobLine> jobLineCollection;
+
+    public Collection<JobLine> getJobLineCollection() {
+        return jobLineCollection;
+    }
+
+    public void setJobLineCollection(Collection<JobLine> jobLineCollection) {
+        this.jobLineCollection = jobLineCollection;
+    }
 
     public JobLine() {
     }

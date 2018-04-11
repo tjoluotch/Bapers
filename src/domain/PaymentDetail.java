@@ -17,7 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -49,7 +49,7 @@ public class PaymentDetail implements Serializable {
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "payment_detailID")
-    private String paymentdetailID;
+    private String paymentDetailID;
     @Column(name = "expiry_date")
     @Temporal(TemporalType.DATE)
     private Date expiryDate;
@@ -66,31 +66,28 @@ public class PaymentDetail implements Serializable {
     private long version;
     @JoinColumn(name = "orderID", referencedColumnName = "orderID")
     @ManyToOne(optional = false)
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderID")
-    private Collection<PaymentDetail> paymentDetailCollection;
     private OrderTable orderID;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "paymentdetailID")
-    private Collection<JobLine> jobLineCollection;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "payment_detailID")
+    private JobLine jobLine;
 
     public PaymentDetail() {
     }
 
-    public PaymentDetail(String paymentdetailID) {
-        this.paymentdetailID = paymentdetailID;
+    public PaymentDetail(String paymentDetailID) {
+        this.paymentDetailID = paymentDetailID;
     }
 
-    public PaymentDetail(String paymentdetailID, long version) {
-        this.paymentdetailID = paymentdetailID;
+    public PaymentDetail(String paymentDetailID, long version) {
+        this.paymentDetailID = paymentDetailID;
         this.version = version;
     }
 
     public String getPaymentdetailID() {
-        return paymentdetailID;
+        return paymentDetailID;
     }
 
-    public void setPaymentdetailID(String paymentdetailID) {
-        this.paymentdetailID = paymentdetailID;
+    public void setPaymentdetailID(String paymentDetailID) {
+        this.paymentDetailID = paymentDetailID;
     }
 
     public Date getExpiryDate() {
@@ -133,6 +130,7 @@ public class PaymentDetail implements Serializable {
         this.orderID = orderID;
     }
 
+    /*
     public Collection<PaymentDetail> getPaymentDetailCollection() {
         return paymentDetailCollection;
     }
@@ -140,22 +138,22 @@ public class PaymentDetail implements Serializable {
     public void setPaymentDetailCollection(Collection<PaymentDetail> paymentDetailCollection) {
         this.paymentDetailCollection = paymentDetailCollection;
     }
-    
+*/
     
 
     @XmlTransient
-    public Collection<JobLine> getJobLineCollection() {
-        return jobLineCollection;
+    public JobLine getJobLine() {
+        return jobLine;
     }
 
-    public void setJobLineCollection(Collection<JobLine> jobLineCollection) {
-        this.jobLineCollection = jobLineCollection;
+    public void setJobLine(JobLine jobLine) {
+        this.jobLine = jobLine;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (paymentdetailID != null ? paymentdetailID.hashCode() : 0);
+        hash += (paymentDetailID != null ? paymentDetailID.hashCode() : 0);
         return hash;
     }
 
@@ -166,7 +164,7 @@ public class PaymentDetail implements Serializable {
             return false;
         }
         PaymentDetail other = (PaymentDetail) object;
-        if ((this.paymentdetailID == null && other.paymentdetailID != null) || (this.paymentdetailID != null && !this.paymentdetailID.equals(other.paymentdetailID))) {
+        if ((this.paymentDetailID == null && other.paymentDetailID != null) || (this.paymentDetailID != null && !this.paymentDetailID.equals(other.paymentDetailID))) {
             return false;
         }
         return true;
@@ -174,7 +172,7 @@ public class PaymentDetail implements Serializable {
 
     @Override
     public String toString() {
-        return "domain.PaymentDetail[ paymentdetailID=" + paymentdetailID + " ]";
+        return "domain.PaymentDetail[ paymentdetailID=" + paymentDetailID + " ]";
     }
     
 }
