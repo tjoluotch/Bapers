@@ -139,6 +139,10 @@ public class PaymentDetail implements Serializable {
     public void setJobLineCollection(Collection<JobLine> jobLineCollection) {
         this.jobLineCollection = jobLineCollection;
     }
+    
+    public void addJobLine(JobLine jobLine){
+        jobLineCollection.add(jobLine);
+    }
 
     @Override
     public int hashCode() {
