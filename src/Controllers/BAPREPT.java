@@ -942,7 +942,7 @@ public class BAPREPT {
         
         
         
-        String day1 = date1.substring(0, 2);
+        String day1 = date1.substring(1, 2);
         String month1 = date1.substring(3, 5);
         String year1 = date1.substring(6, 10);
         String newDate1 = year1 + "-" + month1 + "-" + day1;

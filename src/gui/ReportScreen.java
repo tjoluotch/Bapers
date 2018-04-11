@@ -28,8 +28,7 @@ public class ReportScreen extends javax.swing.JFrame {
      * Creates new form ReportScreen
      */
     public ReportScreen() throws IOException, ParseException {
-        DataManagerImpl dm = new DataManagerImpl();
-        List<TaskLine> line = dm.summaryReports(Date.valueOf("2018-01-01"),Date.valueOf("2018-04-13"));
+        
         
 //        for(int i = 0; i < line.size(); i++){
 //            SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm:ss");
@@ -39,8 +38,7 @@ public class ReportScreen extends javax.swing.JFrame {
 //            System.out.println(g.getCompletedBy().getForename() + " " + g.getCompletedBy().getSurname() + " " + g.getTaskID().getTaskID() + " " + g.getJoblineID().getJobCode().getCode()+ " " + localDateFormat.format(g.getStartTime()) + " " + formatter.format(g.getEndTime()));
 //        }
 //        
-     BAPREPT bp = new BAPREPT();
-     bp.createSummaryReport("01/01/2018", "18/04/2018");
+    
         
         System.out.println();
         initComponents();
