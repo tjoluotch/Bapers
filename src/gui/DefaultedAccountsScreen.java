@@ -36,7 +36,7 @@ public class DefaultedAccountsScreen extends javax.swing.JFrame {
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
-        jTextArea1.setText("List of Defaulted Accounta");
+        jTextArea1.setText("List of Defaulted Account");
         jScrollPane1.setViewportView(jTextArea1);
 
         jButton1.setText("Modify");
