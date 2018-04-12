@@ -239,18 +239,13 @@ public class CreateNewOrderScreen extends javax.swing.JFrame {
             job.setJobDescription("5 x 4 B& W copy negatives");
             descField.setText(job.getJobDescription());
             jLabel4.setText("£"+String.valueOf(job.getPrice()));
-            
-           
         }
-        
         if(jComboBox1.getSelectedItem().toString().compareTo("ACN54")==0){
-            
             quantity.setValue(0);
             job.setPrice(19f);
             job.setJobDescription("5 x 4 Colour copy negatives");
             descField.setText(job.getJobDescription());
             jLabel4.setText("£"+String.valueOf(job.getPrice()));
-            
         }
         
         
