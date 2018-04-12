@@ -113,10 +113,12 @@ public class BAPACCT {
                  
                  
              
-             
+          Collection<JobLine> jCollection2 = new LinkedList();
+          jCollection2 = jCollection;
+          
         
          
-         for (JobLine j : jCollection){
+         for (JobLine j : new LinkedList<JobLine>(jCollection)){
              
              String jcode = j.getJobCode().getCode();
              
@@ -126,10 +128,15 @@ public class BAPACCT {
                  int t1 = 1;
                  int t2 = 2;
                  int t3 = 3;
+                 
                  createTaskColl(t1,j);
                  createTaskColl(t2,j);
                  createTaskColl(t3,j);
-                 j.setTaskLineCollection(tLines);
+                 
+                JobLine j2 = new JobLine();
+                 j2 = j;
+                 j2.setTaskLineCollection(tLines);
+                 jCollection.add(j2);
                  
                  
                  
@@ -143,8 +150,10 @@ public class BAPACCT {
                  createTaskColl(t1,j);
                  createTaskColl(t2,j);
                  createTaskColl(t3,j);
-                 j.setTaskLineCollection(tLines);
-                 jCollection.add(j);
+                 JobLine j2 = new JobLine();
+                 j2 = j;
+                 j2.setTaskLineCollection(tLines);
+                 jCollection.add(j2);
                  
                  
                  
@@ -157,8 +166,10 @@ public class BAPACCT {
                  createTaskColl(t1,j);
                  createTaskColl(t2,j);
                  createTaskColl(t3,j);
-                 j.setTaskLineCollection(tLines);
-                 jCollection.add(j);
+                 JobLine j2 = new JobLine();
+                 j2 = j;
+                 j2.setTaskLineCollection(tLines);
+                 jCollection.add(j2);
                  
                  
                  
@@ -171,8 +182,10 @@ public class BAPACCT {
                  createTaskColl(t1,j);
                  createTaskColl(t2,j);
                  createTaskColl(t3,j);
-                 j.setTaskLineCollection(tLines);
-                 jCollection.add(j);
+                 JobLine j2 = new JobLine();
+                 j2 = j;
+                 j2.setTaskLineCollection(tLines);
+                 jCollection.add(j2);
                  
                  
                  
@@ -183,8 +196,10 @@ public class BAPACCT {
                  int t2 = 3;
                  createTaskColl(t1,j);
                  createTaskColl(t2,j);
-                 j.setTaskLineCollection(tLines);
-                 jCollection.add(j);
+                 JobLine j2 = new JobLine();
+                 j2 = j;
+                 j2.setTaskLineCollection(tLines);
+                 jCollection.add(j2);
                  
                  
                  
@@ -195,7 +210,9 @@ public class BAPACCT {
                 int t2 = 3;
                 createTaskColl(t1,j);
                 createTaskColl(t2,j);
-                j.setTaskLineCollection(tLines);
+                JobLine j2 = new JobLine();
+                 j2 = j;
+                 j2.setTaskLineCollection(tLines);
                 jCollection.add(j);
             }
         }

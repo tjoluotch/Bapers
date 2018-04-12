@@ -6,14 +6,21 @@
 package gui;
 
 import Controllers.BAPACCT;
+import Controllers.BAPREPT;
 import data.DataManagerImpl;
 import domain.Customer;
 import domain.Job;
 import domain.JobLine;
+import java.io.IOException;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -297,7 +304,7 @@ public class CreateNewOrderScreen extends javax.swing.JFrame {
            if(jComboBox1.getSelectedItem().toString().compareTo("B108")==0){
             
                quantity.setValue(0);
-            job.setPrice(96f);
+            job.setPrice(8.3f);
             job.setJobDescription("10 x 8 processing");
             descField.setText(job.getJobDescription());
             jLabel4.setText("£"+String.valueOf(job.getPrice()));
@@ -307,7 +314,7 @@ public class CreateNewOrderScreen extends javax.swing.JFrame {
            if(jComboBox1.getSelectedItem().toString().compareTo("C108")==0){
             
             quantity.setValue(0);
-            job.setPrice(96f);
+            job.setPrice(8.3f);
             job.setJobDescription("10 x 8 C41 processing");
             descField.setText(job.getJobDescription());
             jLabel4.setText("£"+String.valueOf(job.getPrice()));
@@ -352,16 +359,56 @@ public class CreateNewOrderScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_date1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+
         // TODO add your handling code here:
+        
+        
+        
+        
         String day1 = date1.getText().substring(0, 2);
         String month1 = date1.getText().substring(3, 5);
         String year1 = date1.getText().substring(6, 10);
         String newDate1 = year1 + "-" + month1 + "-" + day1;
         
         
-        BAPACCT act = new BAPACCT();
-         Collection<JobLine> jCollection = act.createJobLines(Date.valueOf(newDate1), jList, instructions.getText());
-         act.createOrder(jCollection, c);
+        
+               boolean dates = false ;
+              boolean date2 = false;
+            
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                sdf.setLenient(false);
+                
+//                if (!startDate.getText().equals(sdf.format(date1)) | !endDate.getText().equals(sdf.format(date1))) {
+//                     date1 = null;
+//                     date2 = null;
+//                }
+                try {
+                    sdf.parse(date1.getText().trim());
+                    dates = true;
+                } catch (ParseException pe) {
+                     dates = false;
+                 }
+                
+                
+                            
+
+            
+            if (dates == false) {
+                // Invalid date format
+                 JOptionPane.showMessageDialog(this,"Please enter a valid date","Invalid Date Error",JOptionPane.ERROR_MESSAGE);
+            } else {
+                   BAPREPT rp = new BAPREPT();
+                   BAPACCT act = new BAPACCT();
+                   Collection<JobLine> jCollection = act.createJobLines(Date.valueOf(newDate1), jList, instructions.getText());
+                   act.createOrder(jCollection, c);
+                   JOptionPane.showMessageDialog(this,"Job added to Job Center","",JOptionPane.INFORMATION_MESSAGE);
+                   ReceptionistStartScreen sn = new ReceptionistStartScreen();
+                   sn.setVisible(true);
+                   this.dispose();
+            }
+        
+        
         
         
         

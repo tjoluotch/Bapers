@@ -43,6 +43,12 @@ public class Controller {
                     screen.setVisible(true);
                     
                 }
+                
+                if(role.compareToIgnoreCase("Shift Manager")==0){
+                    ShiftManagerStartScreen screen = new ShiftManagerStartScreen(staff);
+                    screen.setVisible(true);
+                    
+                }
                 //Welcome w=new Welcome ();
                 //w.setVisible(true);
             } else {
