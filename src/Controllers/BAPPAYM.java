@@ -51,8 +51,7 @@ public class BAPPAYM {
         payment.setLast4digits(last4);
         payment.addJobLine(job);
         payment.setOrderID(job.getOrderID());
-    }
-    
+    } 
     
     //cash payments
     //for whole order
