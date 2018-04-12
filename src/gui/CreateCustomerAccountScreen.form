@@ -202,7 +202,7 @@
             <StringItem index="3" value="Ms"/>
             <StringItem index="4" value="Miss"/>
             <StringItem index="5" value="Master"/>
-            <StringItem index="6" value=" "/>
+            <StringItem index="6" value=""/>
           </StringArray>
         </Property>
       </Properties>

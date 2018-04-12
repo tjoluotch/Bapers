@@ -41,7 +41,9 @@ public class Controller {
                 if(role.compareToIgnoreCase("Office Manager")==0){
                     OfficeManagerStartScreen screen = new OfficeManagerStartScreen(staff);
                     screen.setVisible(true);
-                    
+                }
+                if(role.compareToIgnoreCase("Shift Manager")==0){
+                    ShiftManagerStartScreen screen = new ShiftManagerStartScreen(staff);
                 }
                 //Welcome w=new Welcome ();
                 //w.setVisible(true);

@@ -32,6 +32,9 @@ public class BAPPAYM {
         this.frame = frame;
     }
   
+    
+    
+    //CREATE PAYMENTDETAIL METHODS
     //card payments
     //for whole order
     public void createPayment(OrderTable order, String last4, Date expiryDate){

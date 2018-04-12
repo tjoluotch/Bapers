@@ -111,7 +111,7 @@ public class BAPACCT {
              
         
          
-         for (JobLine j : jCollection){
+         for (JobLine j : new LinkedList<JobLine>(jCollection)){
              
              String jcode = j.getJobCode().getCode();
              
