@@ -9,9 +9,10 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -47,6 +48,7 @@ public class PaymentDetail implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
+    @GeneratedValue(strategy=GenerationType.IDENTITY )
     @Column(name = "payment_detailID")
     private String paymentdetailID;
     @Column(name = "expiry_date")
@@ -64,11 +66,8 @@ public class PaymentDetail implements Serializable {
     private long version;
     @JoinColumn(name = "orderID", referencedColumnName = "orderID")
     @ManyToOne(optional = false)
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderID")
-    private Collection<PaymentDetail> paymentDetailCollection;
     private OrderTable orderID;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "paymentdetailID")
+    @OneToMany(mappedBy = "paymentdetailID")
     private Collection<JobLine> jobLineCollection;
 
     public PaymentDetail() {
@@ -130,16 +129,6 @@ public class PaymentDetail implements Serializable {
     public void setOrderID(OrderTable orderID) {
         this.orderID = orderID;
     }
-
-    public Collection<PaymentDetail> getPaymentDetailCollection() {
-        return paymentDetailCollection;
-    }
-
-    public void setPaymentDetailCollection(Collection<PaymentDetail> paymentDetailCollection) {
-        this.paymentDetailCollection = paymentDetailCollection;
-    }
-    
-    
 
     @XmlTransient
     public Collection<JobLine> getJobLineCollection() {

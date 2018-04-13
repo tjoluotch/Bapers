@@ -16,7 +16,8 @@ import javax.swing.*;
 //Accept Job at reception
 //Assign Job number
 public class BAPACCT {
-    DataManagerImpl dm;
+    
+    DataManagerImpl dm = new DataManagerImpl();
     public BAPACCT(){
        
     }
@@ -48,10 +49,11 @@ public class BAPACCT {
         System.out.println("Customer " + customer.getForename() + " " + customer.getSurname() + " has been deleted from the database.");
     }
 
-    public void searchCustomerByName(JTextField name) {
+    public Customer searchCustomerByName(JTextField name) {
         String firstName = name.getText();
         //String lastName = sName.getText();
         
-      dm.findCustomerByName(firstName, null);
+      Customer c = dm.findCustomerByName(firstName, null);
+      return c;
     }
 }
