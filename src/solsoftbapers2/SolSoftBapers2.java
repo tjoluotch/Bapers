@@ -5,7 +5,7 @@
  */
 package solsoftbapers2;
 
-import Controllers.Controller;
+import Controllers.*;
 import data.*;
 import domain.Customer;
 
@@ -21,12 +21,17 @@ public class SolSoftBapers2 {
     
     
     public static void main(String[] args) {
-        Controller controller = new Controller();
-      
+        //Controller controller = new Controller();
+        String test = "(trevor12345)";
+        BAPCUST b = new BAPCUST();
+        b.discountRegexp(test);
+        
+        
         
     }
     
-    //JPA EXAMPLE
+/*    
+//JPA EXAMPLE
     public void connectionCheck(){
         DataManagerImpl dm = new DataManagerImpl();
         //methods called from a DataManagerImpl object return objects of the respective type
@@ -35,5 +40,6 @@ public class SolSoftBapers2 {
            System.out.println(cust1);
         }
     }
+*/
     
 }
