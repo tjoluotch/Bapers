@@ -108,9 +108,7 @@ public class SearchForCustomerScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_srcAccNameTxtFieldActionPerformed
 
     private void srcAccNameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srcAccNameButtonActionPerformed
-            //bapacct.searchCustomerByName(srcAccNameTxtField);
-            
-            
+              
     }//GEN-LAST:event_srcAccNameButtonActionPerformed
 
     private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
