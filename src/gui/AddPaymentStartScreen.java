@@ -5,17 +5,33 @@
  */
 package gui;
 
+import data.DataManagerImpl;
+import domain.Customer;
+import domain.OrderTable;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Tweetie Pie
  */
-public class AddPaymentScreen extends javax.swing.JFrame {
+public class AddPaymentStartScreen extends javax.swing.JFrame {
 
     /**
      * Creates new form MakePaymentScreen
      */
-    public AddPaymentScreen() {
+    DataManagerImpl dm = new DataManagerImpl();
+    Customer customer = dm.findCustomerByName("David", "Rhind");
+    
+    
+    
+    public AddPaymentStartScreen() {
         initComponents();
+    }
+    
+    public AddPaymentStartScreen(Customer customer){
+        initComponents();
+        this.customer = customer;
     }
 
     /**
@@ -37,10 +53,25 @@ public class AddPaymentScreen extends javax.swing.JFrame {
         jButton2.setText("Cancel");
 
         jButton3.setText("Pay For Order");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Pay For Single Job");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("Pay For Multiple Jobs");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,6 +107,25 @@ public class AddPaymentScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    //pay for order
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        List<OrderTable> orderList = new ArrayList(customer.getOrderTableCollection());
+        AddPaymentForOrderScreen nextScreen = new AddPaymentForOrderScreen(orderList);
+        nextScreen.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    //pay for multiple jobs
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    //pay for single job
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -93,21 +143,23 @@ public class AddPaymentScreen extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddPaymentScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddPaymentStartScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddPaymentScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddPaymentStartScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddPaymentScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddPaymentStartScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddPaymentScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AddPaymentStartScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddPaymentScreen().setVisible(true);
+                new AddPaymentStartScreen().setVisible(true);
             }
         });
     }

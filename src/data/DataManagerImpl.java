@@ -83,7 +83,7 @@ public class DataManagerImpl implements DataManager{
 
     @Override
     public Staff findStaffByName(String forename, String surname) {
-        if(surname == null){
+        if(surname.contentEquals("")){
             TypedQuery<Staff> query = em.createNamedQuery("Staff.findByForename", Staff.class);
             query.setParameter("forename", forename);
             return query.getSingleResult();
