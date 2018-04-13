@@ -105,29 +105,32 @@ public class BAPACCT {
             jCollection.add(f);
              
          }
-                 
-        Collection<JobLine> jobLinesCopy = new LinkedList();
-        jobLinesCopy = jCollection;
+
              
+          Collection<JobLine> jCollection2 = new LinkedList();
+          jCollection2 = jCollection;
+          
         
          
          for (JobLine j : new LinkedList<JobLine>(jCollection)){
              
              String jcode = j.getJobCode().getCode();
-             
+             JobLine j2;
              
              if(jcode.compareTo("ABN54")==0){
                  tLines = new LinkedList();
                  int t1 = 1;
                  int t2 = 2;
                  int t3 = 3;
+                 
                  createTaskColl(t1,j);
                  createTaskColl(t2,j);
                  createTaskColl(t3,j);
+
                  
-                 JobLine j2 = j;
+                 j2 = j;
                  j2.setTaskLineCollection(tLines);
-                 jobLinesCopy.add(j2);
+                 jCollection.add(j2);
              }
              else if(jcode.compareTo("ACN54")==0){
                  tLines = new LinkedList();
@@ -137,10 +140,9 @@ public class BAPACCT {
                  createTaskColl(t1,j);
                  createTaskColl(t2,j);
                  createTaskColl(t3,j);
-                 
-                 JobLine j2 = j;
+                 j2 = j;
                  j2.setTaskLineCollection(tLines);
-                 jobLinesCopy.add(j2);                 
+                 jCollection.add(j2);      
              }
              else if(jcode.compareTo("ACT108")==0){
                  tLines = new LinkedList();
@@ -151,12 +153,9 @@ public class BAPACCT {
                  createTaskColl(t2,j);
                  createTaskColl(t3,j);
                  
-                 JobLine j2 = j;
+                 j2 = j;
                  j2.setTaskLineCollection(tLines);
-                 jobLinesCopy.add(j2);
-                 
-                 
-                 
+                 jCollection.add(j2);
              }
              else if(jcode.compareTo("ACT35")==0){
                  tLines = new LinkedList();
@@ -167,9 +166,9 @@ public class BAPACCT {
                  createTaskColl(t2,j);
                  createTaskColl(t3,j);
                  
-                 JobLine j2 = j;
+                 j2 = j;
                  j2.setTaskLineCollection(tLines);
-                 jobLinesCopy.add(j);
+                 jCollection.add(j2);
                  
              }
             else if(jcode.compareTo("B108")==0){
@@ -178,9 +177,10 @@ public class BAPACCT {
                  int t2 = 3;
                  createTaskColl(t1,j);
                  createTaskColl(t2,j);
-                 JobLine j2 = j;
+                 
+                 j2 = j;
                  j2.setTaskLineCollection(tLines);
-                 jobLinesCopy.add(j2);
+                 jCollection.add(j2);
                  
                  
                  
@@ -191,13 +191,13 @@ public class BAPACCT {
                 int t2 = 3;
                 createTaskColl(t1,j);
                 createTaskColl(t2,j);
-                JobLine j2 = j;
-                j2.setTaskLineCollection(tLines);
-                jobLinesCopy.add(j2);
+                 j2 = j;
+                 j2.setTaskLineCollection(tLines);
+                jCollection.add(j);
             }
         }
         
-        return jobLinesCopy;
+        return jCollection;
          
      }
      
