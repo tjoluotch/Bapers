@@ -216,6 +216,14 @@ public class DataManagerImpl implements DataManager{
     }
     
     
+    @Override
+    public List<Staff> searchAllStaff(){
+        TypedQuery<Staff> query = em.createNamedQuery("Staff.findAllStaff", Staff.class);
+        
+        return query.getResultList();
+    }
+    
+    
             
     
         

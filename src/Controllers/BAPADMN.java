@@ -13,7 +13,9 @@ import domain.JobLine;
 import domain.Staff;
 import gui.ManageUsersSearchScreen;
 import java.awt.Color;
+import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -95,7 +97,10 @@ public class BAPADMN {
         dm.getEm().flush();
         staffs.setForename(Forename);
         staffs.setSurname(surname);
-        staffs.setPassword(password);
+        if(password.compareTo("jPasswordField1")!=0){
+           staffs.setPassword(password); 
+        }
+        
         staffs.setRole(role);
         dm.getEm().getTransaction().commit();
         
@@ -130,7 +135,59 @@ public class BAPADMN {
         
     }
     
-   
+    public void backupDB( String fileName) throws IOException, InterruptedException{
+        
+        Process runtimeProcess;
+        String savePath =   fileName+".sql\"";
+         String executeCmd = "\"C:\\Program Files\\MySQL\\MySQL Workbench 6.3 CE\\mysqldump.exe\" -u " + "root" + " -p" + "chicken" + " --add-drop-database -B " + "solsoft_DB" + " -r " + savePath;
+        try{
+            
+            runtimeProcess = Runtime.getRuntime().exec(executeCmd);
+            int processComplete = runtimeProcess.waitFor();
+ 
+            if (processComplete == 0) {
+                System.out.println("Backup created successfully");
+             
+            } else {
+                System.out.println("Could not create the backup");
+            }
+        
+        
+         
+         
+  
+        
+        
+          }catch (IOException ex) {
+        JOptionPane.showMessageDialog(null, "Error at Backup Restore" + ex.getMessage());
+    }
+  }
+    
+   public boolean restoreDB(String source){
+       
+       String[] executeCmd = new String[]{"C:\\Program Files\\MySQL\\MySQL Workbench 6.3 CE\\mysql.exe","solsoft_DB", "--user=" + "root", "--password=" + "chicken", "-e", " source " + source};
+       
+        
+ 
+        Process runtimeProcess;
+        try {
+ 
+            runtimeProcess = Runtime.getRuntime().exec(executeCmd);
+            int processComplete = runtimeProcess.waitFor();
+ 
+            if (processComplete == 0) {
+                System.out.println("Backup restored successfully");
+                return true;
+            } else {
+                System.out.println("Could not restore the backup");
+            }
+        } catch (Exception ex) {
+             JOptionPane.showMessageDialog(null, "Could not restore backup" + ex.getMessage());
+        }
+ 
+        return false;
+       
+   }
     
     
     

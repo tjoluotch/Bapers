@@ -5,6 +5,10 @@
  */
 package gui;
 
+import data.DataManagerImpl;
+import domain.Staff;
+import java.util.List;
+
 /**
  *
  * @author Tweetie Pie
@@ -53,6 +57,11 @@ public class AdminToolsScreen extends javax.swing.JFrame {
 
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton3.setText("Database Tools");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jButton4.setText("Back");
@@ -110,7 +119,7 @@ public class AdminToolsScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         
          
-         
+         this.dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -129,7 +138,17 @@ public class AdminToolsScreen extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        DataManagerImpl dm = new DataManagerImpl();
+        List<Staff> slist = dm.AllStaff();
+        ViewStaffScreen screen = new ViewStaffScreen(slist);
+        screen.setVisible(true);
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        DatabaseToolsScreen screen = new DatabaseToolsScreen();
+        screen.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments

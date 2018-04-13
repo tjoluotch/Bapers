@@ -45,7 +45,7 @@ public class SummaryReportScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        endDate.setText("Date");
+        endDate.setText("End Date");
         endDate.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 endDateFocusGained(evt);
@@ -65,8 +65,13 @@ public class SummaryReportScreen extends javax.swing.JFrame {
         });
 
         jButton2.setText("Cancel");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
-        startDate.setText("Date");
+        startDate.setText("Start Date");
         startDate.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 startDateFocusGained(evt);
@@ -196,6 +201,11 @@ public class SummaryReportScreen extends javax.swing.JFrame {
         
         endDate.setText("");
     }//GEN-LAST:event_endDateFocusGained
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

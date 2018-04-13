@@ -5,6 +5,10 @@
  */
 package bapersgui;
 
+import Controllers.BAPADMN;
+import java.io.IOException;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Tweetie Pie
@@ -27,9 +31,15 @@ public class RestoreDatabaseScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jFileChooser1 = new javax.swing.JFileChooser();
+        fileChooser = new javax.swing.JFileChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        fileChooser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fileChooserActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -37,19 +47,48 @@ public class RestoreDatabaseScreen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(fileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void fileChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileChooserActionPerformed
+        // TODO add your handling code here:
+        if (evt.getActionCommand().equals("ApproveSelection")) {
+    
+     
+        BAPADMN bp = new BAPADMN();
+    
+        
+        String source = fileChooser.getSelectedFile().getAbsolutePath();
+        bp.restoreDB(source);
+            
+            JOptionPane.showMessageDialog(null, "The following Database has been restored: "+ fileChooser.getSelectedFile(),"Resotoration successful.",JOptionPane.OK_OPTION);
+        
+       System.out.println("Save as file: ") ;
+       this.dispose();
+    }
+        
+        if (evt.getActionCommand().equals("CancelSelection")) {
+   
+   this.dispose();
+            
+            
+        
+      
+    }
+        
+        
+    }//GEN-LAST:event_fileChooserActionPerformed
 
     /**
      * @param args the command line arguments
@@ -88,6 +127,6 @@ public class RestoreDatabaseScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JFileChooser jFileChooser1;
+    private javax.swing.JFileChooser fileChooser;
     // End of variables declaration//GEN-END:variables
 }

@@ -35,6 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Staff.findByPassword", query = "SELECT s FROM Staff s WHERE s.password = :password")
     , @NamedQuery(name = "Staff.findByFirstName", query = "SELECT s FROM Staff s WHERE s.forename = :forename")
     , @NamedQuery(name = "Staff.findBySurname", query = "SELECT s FROM Staff s WHERE s.surname = :surname")
+    , @NamedQuery(name = "Staff.findAllStaff", query = "SELECT s FROM Staff s")
     , @NamedQuery(name = "Staff.findByRole", query = "SELECT s FROM Staff s WHERE s.role = :role")
     , @NamedQuery(name = "Staff.updateStaff", query = "UPDATE  Staff SET forename =:forename, surname = :surname, password = password, role=role" +" WHERE username = username")})
 public class Staff implements Serializable {
