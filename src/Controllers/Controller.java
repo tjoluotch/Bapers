@@ -49,13 +49,25 @@ public class Controller {
                     screen.setVisible(true);
                     
                 }
+                
+                if(role.compareToIgnoreCase("Receptionist")==0){
+                    ShiftManagerStartScreen screen = new ShiftManagerStartScreen(staff);
+                    screen.setVisible(true);
+                    
+                }
+                
+                if(role.compareToIgnoreCase("Technician")==0){
+                    ShiftManagerStartScreen screen = new ShiftManagerStartScreen(staff);
+                    screen.setVisible(true);
+                    
+                }
                 //Welcome w=new Welcome ();
                 //w.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null,"Invalid credentials, Please enter correct credentials!", "Access Denied", JOptionPane.ERROR_MESSAGE);
             } 
         } catch (Exception ex) {
-        JOptionPane.showMessageDialog(null, ex);  
+        JOptionPane.showMessageDialog(null,"Invalid credentials, Please enter correct credentials!", "Access Denied", JOptionPane.ERROR_MESSAGE);
         }
     }
     
