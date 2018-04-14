@@ -49,6 +49,8 @@ public interface DataManager {
     void saveJob(Job job);
     
     void saveTask(Task task);
+    
+    void savePayment(PaymentDetail payment);
 
     public void saveOrder(OrderTable order);
     public boolean updateStaffRecord(String username, String firstName, String surname, String password, String role);

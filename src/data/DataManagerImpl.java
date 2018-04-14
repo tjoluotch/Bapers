@@ -163,7 +163,6 @@ public class DataManagerImpl implements DataManager{
         em.getTransaction().begin();
         em.persist(staff);
         em.getTransaction().commit();
-        
     }
     
     
@@ -172,17 +171,31 @@ public class DataManagerImpl implements DataManager{
         em.getTransaction().begin();
         em.persist(order);
         em.getTransaction().commit();
-        
     }
+    
     @Override
-    public void saveJob(Job job){em.persist(job);}
+    public void saveJob(Job job){
+        em.getTransaction().begin();
+        em.persist(job);
+        em.getTransaction().commit();
+    }
+    
     @Override
-    public void saveTask(Task task){em.persist(task);}
+    public void saveTask(Task task){
+        em.getTransaction().begin();
+        em.persist(task);
+        em.getTransaction().commit();
+    }
+    
+    @Override
+    public void savePayment(PaymentDetail payment){
+        em.getTransaction().begin();
+        em.persist(payment);
+        em.getTransaction().commit();
+    }
 
     @Override
     public boolean updateStaffRecord(String username, String firstName, String surname, String password, String role) {
-        
-    
         TypedQuery<Staff> query = em.createNamedQuery("Staff.updateStaff", Staff.class);
         query.setParameter("forename", firstName);
         query.setParameter("surname", surname);
@@ -190,7 +203,6 @@ public class DataManagerImpl implements DataManager{
         query.setParameter("role", role);
         query.setParameter("username", username);
         query.executeUpdate();
-        
         return true;//To change body of generated methods, choose Tools | Templates.
     }
     

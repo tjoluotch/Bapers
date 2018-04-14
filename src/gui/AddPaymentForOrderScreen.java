@@ -5,11 +5,15 @@
  */
 package gui;
 
+import Controllers.BAPPAYM;
 import TableModels.OrdersTableModel;
+import data.DataManagerImpl;
 import domain.OrderTable;
-import domain.PaymentDetail;
 import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -21,6 +25,8 @@ public class AddPaymentForOrderScreen extends javax.swing.JFrame {
      * Creates new form AddPaymentForOrderScreen
      */
     
+    DataManagerImpl dm = new DataManagerImpl();
+    BAPPAYM paym = new BAPPAYM(dm);
     List<OrderTable> orderList;
     OrderTable selectedOrder;
     OrdersTableModel ordersTableModel; 
@@ -48,8 +54,8 @@ public class AddPaymentForOrderScreen extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        expiryDateField = new javax.swing.JTextField();
+        last4Field = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
@@ -77,9 +83,9 @@ public class AddPaymentForOrderScreen extends javax.swing.JFrame {
 
         jLabel1.setText("Payment Type");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        last4Field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                last4FieldActionPerformed(evt);
             }
         });
 
@@ -109,8 +115,8 @@ public class AddPaymentForOrderScreen extends javax.swing.JFrame {
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField1)
+                    .addComponent(last4Field)
+                    .addComponent(expiryDateField)
                     .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,11 +138,11 @@ public class AddPaymentForOrderScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(expiryDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(last4Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton1)
@@ -152,19 +158,42 @@ public class AddPaymentForOrderScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void last4FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_last4FieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_last4FieldActionPerformed
 
+    //submit button
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        //FOR CARD PAYMENTS
         if((jComboBox1.getSelectedItem().toString()).equals("Card")){
-            PaymentDetail payment = new PaymentDetail();
             String day = "00/";
-            String month = jTextField1.getText().substring(0,2);
-            String year = jTextField1.getText().substring(3,5);
-            String expiryDate = year + "-" + month + "-" + day;
-            payment.setExpiryDate(Date.valueOf(expiryDate));
+            String month = expiryDateField.getText().substring(0,2);
+            String year = expiryDateField.getText().substring(3,6);
+            String expiryDate = year + "-" + month + "-" + day;      
+            boolean dates = false;
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/yy");
+            sdf.setLenient(false);
+            try{
+                sdf.parse(expiryDateField.getText().trim());
+                dates = true;
+            } catch (ParseException pe) { dates = false; }
+            
+            if(dates == false){
+                JOptionPane.showMessageDialog(this,"Please enter a valid date","Invalid Date Error",JOptionPane.ERROR_MESSAGE);
+            } else {
+                //ERROR HERE:
+                paym.createPayment(selectedOrder, last4Field.getText(), Date.valueOf(expiryDate));
+                // IT DOESN'T LIKE THE DATE
+                JOptionPane.showMessageDialog(this,"Card Payment added","",JOptionPane.INFORMATION_MESSAGE);
+            }
+        } 
+        //FOR CASH PAYMENTS
+        else if ((jComboBox1.getSelectedItem().toString()).equals("Cash")){
+            paym.createPayment(selectedOrder);
+            JOptionPane.showMessageDialog(this,"Cash Payment added","",JOptionPane.INFORMATION_MESSAGE);
         }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
@@ -173,8 +202,7 @@ public class AddPaymentForOrderScreen extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int selectedRowIndex = jTable1.getSelectedRow();
-        //selectedOrder = ordersTableModel.g
-        
+        selectedOrder = orderList.get(jTable1.convertRowIndexToModel(selectedRowIndex));
     }//GEN-LAST:event_jTable1MouseClicked
 
     /**
@@ -213,6 +241,7 @@ public class AddPaymentForOrderScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField expiryDateField;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -221,7 +250,6 @@ public class AddPaymentForOrderScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField last4Field;
     // End of variables declaration//GEN-END:variables
 }

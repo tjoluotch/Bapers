@@ -365,6 +365,7 @@ public class CreateNewOrderScreen extends javax.swing.JFrame {
         String month1 = date1.getText().substring(3, 5);
         String year1 = date1.getText().substring(6, 10);
         String newDate1 = year1 + "-" + month1 + "-" + day1;
+        System.out.println(newDate1);
         
         
         

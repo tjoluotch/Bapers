@@ -186,4 +186,10 @@ public class JobLine implements Serializable {
         return "domain.JobLine[ joblineID=" + joblineID + " ]";
     }
     
+    public boolean isPaidFor(){
+        if(paymentdetailID != null){
+            return true;
+        } else { return false; }
+    }
+    
 }
