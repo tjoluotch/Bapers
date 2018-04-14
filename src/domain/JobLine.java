@@ -5,6 +5,7 @@
  */
 package domain;
 
+import data.DataManagerImpl;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
@@ -27,7 +28,6 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-
 /**
  *
  * @author Tweetie Pie
@@ -190,6 +190,5 @@ public class JobLine implements Serializable {
         if(paymentdetailID != null){
             return true;
         } else { return false; }
-    }
-    
+    }   
 }

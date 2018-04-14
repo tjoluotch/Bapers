@@ -49,10 +49,11 @@ public class BAPPAYM {
     }
     
     //for jobs
-    public void createPayment(List<JobLine> jobs, String last4, String expiryDate){ //NEED TO UPDATE EXPIRY DATE
+    public void createPayment(List<JobLine> jobs, String last4, Date expiryDate){ //NEED TO UPDATE EXPIRY DATE
         PaymentDetail payment = new PaymentDetail();
         payment.setType("Card");
-        payment.setExpiryDate(java.sql.Date.valueOf(expiryDate));
+        //payment.setExpiryDate(java.sql.Date.valueOf(expiryDate));
+        payment.setExpiryDate(expiryDate);
         payment.setLast4digits(last4);
         OrderTable orderID = null;
         for(JobLine job : jobs){

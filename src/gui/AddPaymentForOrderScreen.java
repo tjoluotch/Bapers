@@ -171,7 +171,7 @@ public class AddPaymentForOrderScreen extends javax.swing.JFrame {
             String year = expiryDateField.getText().substring(3,6);
             String expiryDate = year + "-" + month + "-" + day;      
             boolean dates = false;
-            SimpleDateFormat sdf = new SimpleDateFormat("MM/yy");
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/yyyy");
             sdf.setLenient(false);
             try{
                 sdf.parse(expiryDateField.getText().trim());
@@ -184,13 +184,13 @@ public class AddPaymentForOrderScreen extends javax.swing.JFrame {
                 //ERROR HERE:
                 paym.createPayment(selectedOrder, last4Field.getText(), Date.valueOf(expiryDate));
                 // IT DOESN'T LIKE THE DATE
-                JOptionPane.showMessageDialog(this,"Card Payment added","",JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this,"Card Payment for order added","",JOptionPane.INFORMATION_MESSAGE);
             }
         } 
         //FOR CASH PAYMENTS
         else if ((jComboBox1.getSelectedItem().toString()).equals("Cash")){
             paym.createPayment(selectedOrder);
-            JOptionPane.showMessageDialog(this,"Cash Payment added","",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this,"Cash Payment for order added","",JOptionPane.INFORMATION_MESSAGE);
         }
         
         

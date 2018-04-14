@@ -7,6 +7,7 @@ package TableModels;
 
 import data.DataManagerImpl;
 import domain.JobLine;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -26,24 +27,25 @@ public class JobsTableModel extends AbstractTableModel {
              case 1:
                return String.class;
              case 2:
-               return String.class;
-             case 3:
-               return String.class;
-             case 4:
-               return String.class;
-             case 5:
-               return String.class;
-             
+               return String.class;     
              }
              return null;
          //To change body of generated methods, choose Tools | Templates.
     }
     
     private List<JobLine> li;
-    private String[] columnNames = {"Job ID", "Price", "Department", "Expected Duration", "Job Deadline" , "Special Instructions"};
+    private String[] columnNames = {"Job ID", "Price", "Description"};
 
+    public JobsTableModel(){
+        li = new ArrayList<JobLine>();
+    }
+    
     public JobsTableModel(List<JobLine> li) {
         this.li = li;
+    }
+    
+    public void update(List<JobLine> jobs){
+        li = jobs;
     }
 
     @Override
@@ -58,27 +60,20 @@ public class JobsTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 6; //To change body of generated methods, choose Tools | Templates.
+        return 3; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         JobLine jl = li.get(rowIndex);
         switch(columnIndex){
-            /*
             case 0:
-                return jl.getTaskID().getTaskID().toString();
+                return jl.getJoblineID();
             case 1:
-                return jl.getTaskID().getDescription();
+                return jl.getJobCode().getPrice();
             case 2: 
-                return jl.getTaskID().getDepartment();
-            case 3:
-                return jl.getTaskID().getExpectedDuration();
-            case 4:
-                return jl.getJoblineID().getJobDeadline();
-            case 5:
-                return jl.getJoblineID().getSpecialInstructions();
-        */
+                return jl.getJobCode().getJobDescription();
+            
         }
         
        return null;

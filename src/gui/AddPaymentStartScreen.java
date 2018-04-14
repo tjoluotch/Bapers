@@ -101,7 +101,6 @@ public class AddPaymentStartScreen extends javax.swing.JFrame {
     
     //pay for order
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-       
         AddPaymentForOrderScreen nextScreen = new AddPaymentForOrderScreen(orderList);
         nextScreen.setVisible(true);
         this.dispose();
@@ -109,14 +108,17 @@ public class AddPaymentStartScreen extends javax.swing.JFrame {
 
     //pay for jobs
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        
         List<JobLine> jobList = new ArrayList();
         for(OrderTable orderTable : orderList){
+            if(orderTable.getPaymentStatus() == null || !orderTable.getPaymentStatus().equals("Complete") ){
             for(JobLine jobLine : orderTable.getJobLineCollection()){
-                jobList.add(jobLine);
+                if(!jobLine.isPaidFor()){ jobList.add(jobLine); }
+            }
             }
         }
-        
+        AddPaymentForJobsScreen nextScreen = new AddPaymentForJobsScreen(jobList);
+        nextScreen.setVisible(true);
+        this.dispose();        
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
