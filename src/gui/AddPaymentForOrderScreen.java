@@ -166,10 +166,11 @@ public class AddPaymentForOrderScreen extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //FOR CARD PAYMENTS
         if((jComboBox1.getSelectedItem().toString()).equals("Card")){
-            String day = "00/";
+            String day = "01";
             String month = expiryDateField.getText().substring(0,2);
-            String year = expiryDateField.getText().substring(3,6);
-            String expiryDate = year + "-" + month + "-" + day;      
+            String year = expiryDateField.getText().substring(3,7);
+            String expiryDate = year + "-" + month + "-" + day;    
+            System.out.println(expiryDate);
             boolean dates = false;
             SimpleDateFormat sdf = new SimpleDateFormat("MM/yyyy");
             sdf.setLenient(false);

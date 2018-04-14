@@ -110,7 +110,7 @@ public class AddPaymentStartScreen extends javax.swing.JFrame {
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         List<JobLine> jobList = new ArrayList();
         for(OrderTable orderTable : orderList){
-            if(orderTable.getPaymentStatus() == null || !orderTable.getPaymentStatus().equals("Complete") ){
+            if(orderTable.getPaymentStatus() == null || !orderTable.getPaymentStatus().equals("Complete")){
             for(JobLine jobLine : orderTable.getJobLineCollection()){
                 if(!jobLine.isPaidFor()){ jobList.add(jobLine); }
             }
