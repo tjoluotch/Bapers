@@ -46,26 +46,27 @@ public class OrderTable implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Column(name = "orderID")
+    @Column(nullable = false)
     private Integer orderID;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "total_price")
+    @Column(name = "total_price", precision = 12)
     private Float totalPrice;
     @Size(max = 20)
-    @Column(name = "payment_status")
+    @Column(name = "payment_status", length = 20)
     private String paymentStatus;
     @Column(name = "date_submitted")
     @Temporal(TemporalType.DATE)
     private Date dateSubmitted;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "version")
+    @Column(nullable = false)
     private long version;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderID")
     private Collection<PaymentDetail> paymentDetailCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderID")
+    private Collection<Alert> alertCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderID")
     private Collection<JobLine> jobLineCollection;
     @JoinColumn(name = "account_no", referencedColumnName = "account_no")
@@ -131,6 +132,15 @@ public class OrderTable implements Serializable {
 
     public void setPaymentDetailCollection(Collection<PaymentDetail> paymentDetailCollection) {
         this.paymentDetailCollection = paymentDetailCollection;
+    }
+
+    @XmlTransient
+    public Collection<Alert> getAlertCollection() {
+        return alertCollection;
+    }
+
+    public void setAlertCollection(Collection<Alert> alertCollection) {
+        this.alertCollection = alertCollection;
     }
 
     @XmlTransient

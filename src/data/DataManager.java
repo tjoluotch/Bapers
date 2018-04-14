@@ -51,5 +51,7 @@ public interface DataManager {
      public List<TaskLine> summaryReports(Date startDate, Date endDate);
      public List<TaskLine> searchbyStartTime();
      public List<Staff> searchAllStaff();
+     public void saveAlert(Alert a);
+     public List<Alert> findAlerts();
      
 }

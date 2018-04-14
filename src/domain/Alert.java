@@ -13,10 +13,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -25,31 +25,36 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Tweetie Pie
  */
 @Entity
-@Table(name = "alert")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Alert.findAll", query = "SELECT a FROM Alert a")
     , @NamedQuery(name = "Alert.findByAlertID", query = "SELECT a FROM Alert a WHERE a.alertID = :alertID")
-    , @NamedQuery(name = "Alert.findByDescription", query = "SELECT a FROM Alert a WHERE a.description = :description")
-    , @NamedQuery(name = "Alert.findByTarget", query = "SELECT a FROM Alert a WHERE a.target = :target")})
+    , @NamedQuery(name = "Alert.findByTarget", query = "SELECT a FROM Alert a WHERE a.target = :target")
+    , @NamedQuery(name = "Alert.findByBeenSeen", query = "SELECT a FROM Alert a WHERE a.beenSeen = :beenSeen")})
 public class Alert implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "alertID")
+    @Column(nullable = false)
     private Integer alertID;
-    @Size(max = 45)
-    @Column(name = "description")
+    @Lob
+    @Size(max = 2147483647)
+    @Column(length = 2147483647)
     private String description;
     @Size(max = 45)
-    @Column(name = "target")
+    @Column(length = 45)
     private String target;
-    @JoinColumn(name = "account_no", referencedColumnName = "account_no")
+    @Column(name = "been_seen")
+    private Short beenSeen;
+    @JoinColumn(name = "account_no", referencedColumnName = "account_no", nullable = false)
     @ManyToOne(optional = false)
     private Customer accountNo;
-    @JoinColumn(name = "orderID", referencedColumnName = "orderID")
+    @JoinColumn(name = "joblineID", referencedColumnName = "job_lineID", nullable = false)
+    @ManyToOne(optional = false)
+    private JobLine joblineID;
+    @JoinColumn(name = "orderID", referencedColumnName = "orderID", nullable = false)
     @ManyToOne(optional = false)
     private OrderTable orderID;
 
@@ -84,12 +89,28 @@ public class Alert implements Serializable {
         this.target = target;
     }
 
+    public Short getBeenSeen() {
+        return beenSeen;
+    }
+
+    public void setBeenSeen(Short beenSeen) {
+        this.beenSeen = beenSeen;
+    }
+
     public Customer getAccountNo() {
         return accountNo;
     }
 
     public void setAccountNo(Customer accountNo) {
         this.accountNo = accountNo;
+    }
+
+    public JobLine getJoblineID() {
+        return joblineID;
+    }
+
+    public void setJoblineID(JobLine joblineID) {
+        this.joblineID = joblineID;
     }
 
     public OrderTable getOrderID() {

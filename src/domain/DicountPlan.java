@@ -39,20 +39,20 @@ public class DicountPlan implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "dicount_planID")
+    @Column(name = "dicount_planID", nullable = false)
     private Integer dicountplanID;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "rate")
+    @Column(precision = 12)
     private Float rate;
     @Column(name = "is_flexible")
     private Short isFlexible;
     @Size(max = 45)
-    @Column(name = "variable_rate")
+    @Column(name = "variable_rate", length = 45)
     private String variableRate;
-    @JoinColumn(name = "account_no", referencedColumnName = "account_no")
+    @JoinColumn(name = "account_no", referencedColumnName = "account_no", nullable = false)
     @ManyToOne(optional = false)
     private Customer accountNo;
-    @JoinColumn(name = "taskID", referencedColumnName = "taskID")
+    @JoinColumn(name = "taskID", referencedColumnName = "taskID", nullable = false)
     @ManyToOne(optional = false)
     private Task taskID;
 

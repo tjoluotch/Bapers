@@ -7,6 +7,7 @@ package gui;
 
 import Controllers.BAPREPT;
 import gui.StaffReportsScreen;
+import java.awt.print.PrinterException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -189,6 +190,8 @@ public class SummaryReportScreen extends javax.swing.JFrame {
                   } catch (IOException ex) {
                       Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
                   } catch (ParseException ex) {
+                 Logger.getLogger(SummaryReportScreen.class.getName()).log(Level.SEVERE, null, ex);
+             } catch (PrinterException ex) {
                  Logger.getLogger(SummaryReportScreen.class.getName()).log(Level.SEVERE, null, ex);
              }
             }

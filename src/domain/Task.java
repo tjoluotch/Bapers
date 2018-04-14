@@ -6,23 +6,25 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Tweetie Pie
  */
 @Entity
-@Table(name = "task")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Task.findAll", query = "SELECT t FROM Task t")
@@ -38,23 +40,27 @@ public class Task implements Serializable {
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(name = "taskID")
+    @Column(nullable = false)
     private Integer taskID;
     @Size(max = 45)
-    @Column(name = "description")
+    @Column(length = 45)
     private String description;
     @Size(max = 45)
-    @Column(name = "department")
+    @Column(length = 45)
     private String department;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "price")
+    @Column(precision = 12)
     private Float price;
     @Column(name = "expected_duration")
     private Integer expectedDuration;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "version")
+    @Column(nullable = false)
     private long version;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "taskID")
+    private Collection<DicountPlan> dicountPlanCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "taskID")
+    private Collection<TaskLine> taskLineCollection;
 
     public Task() {
     }
@@ -114,6 +120,24 @@ public class Task implements Serializable {
 
     public void setVersion(long version) {
         this.version = version;
+    }
+
+    @XmlTransient
+    public Collection<DicountPlan> getDicountPlanCollection() {
+        return dicountPlanCollection;
+    }
+
+    public void setDicountPlanCollection(Collection<DicountPlan> dicountPlanCollection) {
+        this.dicountPlanCollection = dicountPlanCollection;
+    }
+
+    @XmlTransient
+    public Collection<TaskLine> getTaskLineCollection() {
+        return taskLineCollection;
+    }
+
+    public void setTaskLineCollection(Collection<TaskLine> taskLineCollection) {
+        this.taskLineCollection = taskLineCollection;
     }
 
     @Override

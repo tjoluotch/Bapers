@@ -46,30 +46,31 @@ public class JobLine implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @GeneratedValue(strategy=GenerationType.IDENTITY )
-    @Column(name = "job_lineID")
+    @Column(name = "job_lineID", nullable = false)
     private Integer joblineID;
     @Column(name = "job_deadline")
     @Temporal(TemporalType.DATE)
     private Date jobDeadline;
     @Size(max = 100)
-    @Column(name = "special_instructions")
+    @Column(name = "special_instructions", length = 100)
     private String specialInstructions;
     @Size(max = 20)
-    @Column(name = "reminder_status")
+    @Column(name = "reminder_status", length = 20)
     private String reminderStatus;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "version")
+    @Column(nullable = false)
     private long version;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "joblineID")
+    private Collection<Alert> alertCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "joblineID")
     private Collection<TaskLine> taskLineCollection;
-    @JoinColumn(name = "job_code", referencedColumnName = "code")
+    @JoinColumn(name = "job_code", referencedColumnName = "code", nullable = false)
     @ManyToOne(optional = false)
     private Job jobCode;
-    @JoinColumn(name = "orderID", referencedColumnName = "orderID")
+    @JoinColumn(name = "orderID", referencedColumnName = "orderID", nullable = false)
     @ManyToOne(optional = false)
     private OrderTable orderID;
     @JoinColumn(name = "payment_detailID", referencedColumnName = "payment_detailID")
@@ -126,6 +127,15 @@ public class JobLine implements Serializable {
 
     public void setVersion(long version) {
         this.version = version;
+    }
+
+    @XmlTransient
+    public Collection<Alert> getAlertCollection() {
+        return alertCollection;
+    }
+
+    public void setAlertCollection(Collection<Alert> alertCollection) {
+        this.alertCollection = alertCollection;
     }
 
     @XmlTransient

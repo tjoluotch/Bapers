@@ -6,6 +6,7 @@
 package gui;
 
 import Controllers.BAPREPT;
+import java.awt.print.PrinterException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -267,6 +268,8 @@ public class StaffReportsScreen extends javax.swing.JFrame {
                 rp.createQuarterlyReport(sDate, currentDate,quarter,q);
             } catch (IOException ex) {
                 Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (PrinterException ex) {
+                Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         }
@@ -282,6 +285,8 @@ public class StaffReportsScreen extends javax.swing.JFrame {
             try {
                 rp.createYearlyReport(sDate, currentDate);
             } catch (IOException ex) {
+                Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (PrinterException ex) {
                 Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
             }
             

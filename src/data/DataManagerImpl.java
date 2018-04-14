@@ -164,6 +164,17 @@ public class DataManagerImpl implements DataManager{
         em.getTransaction().commit();
         
     }
+    
+    
+     @Override
+    public void saveAlert(Alert a){
+        em.getTransaction().begin();
+        em.persist(a);
+        em.getTransaction().commit();
+        
+    }
+    
+    
     @Override
     public void saveJob(Job job){em.persist(job);}
     @Override
@@ -219,6 +230,14 @@ public class DataManagerImpl implements DataManager{
     @Override
     public List<Staff> searchAllStaff(){
         TypedQuery<Staff> query = em.createNamedQuery("Staff.findAllStaff", Staff.class);
+        
+        return query.getResultList();
+    }
+    
+     @Override
+    public List<Alert> findAlerts(){
+        TypedQuery<Alert> query = em.createNamedQuery("Alert.findByBeenSeen", Alert.class);
+        query.setParameter("beenSeen", 0);
         
         return query.getResultList();
     }

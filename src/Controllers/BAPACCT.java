@@ -6,6 +6,7 @@
 package Controllers;
 
 import data.DataManagerImpl;
+import domain.Alert;
 import domain.Customer;
 import domain.Job;
 import domain.JobLine;
@@ -60,12 +61,29 @@ public class BAPACCT {
      public void createOrder( Collection<JobLine> jColl , Customer accountNo){ 
             List<PaymentDetail> paymentDetails = new LinkedList();
         OrderTable order = new OrderTable();
-        order.setPaymentDetailCollection(paymentDetails);
+        order.setAccountNo(accountNo);
+        //order.setPaymentDetailCollection(paymentDetails);
+        Collection<Alert> al= new LinkedList();
+        order.setAlertCollection(al);
         
         for(JobLine j: jColl){
             
+            
             j.setOrderID(order);
+            
+            Alert a = new Alert();
+             a.setOrderID(order);
+             a.setAccountNo(order.getAccountNo());
+             a.setDescription("New job alert. Job code: "+ j.getJobCode().getCode() + " Account Number: " + accountNo.getAccountNo() + " Deadline : " + j.getJobDeadline().toString()  );
+             a.setTarget("Office Manager and Shift Manager");
+             a.setBeenSeen((short)0);
+             a.setJoblineID(j);
+             
+             DataManagerImpl dm = new DataManagerImpl();
+             order.getAlertCollection().add(a);
+             
         }
+        
         order.setJobLineCollection(jColl);
         Date dateSubmitted = new Date();
         dateSubmitted.setTime(System.currentTimeMillis());
@@ -79,6 +97,7 @@ public class BAPACCT {
         }
         
         order.setTotalPrice(price);
+        
         
         
         
@@ -100,6 +119,7 @@ public class BAPACCT {
          
          for(Job jc: jcodes){
              JobLine f = new JobLine();
+             
              f.setJobCode(jc);
           
             f.setJobDeadline(date);
@@ -136,6 +156,7 @@ public class BAPACCT {
                 JobLine j2 = new JobLine();
                  j2 = j;
                  j2.setTaskLineCollection(tLines);
+                 jCollection.remove(j);
                  jCollection.add(j2);
                  
                  
@@ -153,6 +174,7 @@ public class BAPACCT {
                  JobLine j2 = new JobLine();
                  j2 = j;
                  j2.setTaskLineCollection(tLines);
+                 jCollection.remove(j);
                  jCollection.add(j2);
                  
                  
@@ -169,6 +191,7 @@ public class BAPACCT {
                  JobLine j2 = new JobLine();
                  j2 = j;
                  j2.setTaskLineCollection(tLines);
+                 jCollection.remove(j);
                  jCollection.add(j2);
                  
                  
@@ -185,6 +208,7 @@ public class BAPACCT {
                  JobLine j2 = new JobLine();
                  j2 = j;
                  j2.setTaskLineCollection(tLines);
+                 jCollection.remove(j);
                  jCollection.add(j2);
                  
                  
@@ -199,6 +223,7 @@ public class BAPACCT {
                  JobLine j2 = new JobLine();
                  j2 = j;
                  j2.setTaskLineCollection(tLines);
+                 jCollection.remove(j);
                  jCollection.add(j2);
                  
                  
@@ -213,7 +238,8 @@ public class BAPACCT {
                 JobLine j2 = new JobLine();
                  j2 = j;
                  j2.setTaskLineCollection(tLines);
-                jCollection.add(j);
+                jCollection.remove(j);
+                 jCollection.add(j2);
             }
         }
             
@@ -229,6 +255,7 @@ public class BAPACCT {
          
          Task t1 = dm.findTaskById(id);
          TaskLine l1 = new TaskLine();
+                  l1.setJoblineID(j);
                   l1.setTaskID(t1);
                   l1.setJoblineID(j);
                   tLines.add(l1);

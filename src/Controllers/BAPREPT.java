@@ -14,6 +14,7 @@ import domain.TaskLine;
         
 import domain.TaskLine;
 import java.awt.Color;
+import java.awt.print.PrinterException;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
@@ -29,6 +30,7 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream.AppendMode;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import print.DocPrinter;
 
 /**
  *
@@ -242,7 +244,7 @@ public class BAPREPT {
         doc.close();
     }
 
-    public void createYearlyReport(String date1, String date2) throws IOException {
+    public void createYearlyReport(String date1, String date2) throws IOException, PrinterException {
         String day1 = date1.substring(0, 2);
         String month1 = date1.substring(3, 5);
         String year1 = date1.substring(6, 10);
@@ -415,10 +417,12 @@ public class BAPREPT {
         table.draw();
         contentStream.close();
         doc.save(year1 + "_" + "Individualreport.pdf");
+        DocPrinter dp = new DocPrinter();
+        dp.printFile(doc);
         doc.close();
     }
 
-    public void createQuarterlyReport(String date1, String date2, String quarter, String q) throws IOException {
+    public void createQuarterlyReport(String date1, String date2, String quarter, String q) throws IOException, PrinterException {
         String day1 = date1.substring(0, 2);
         String month1 = date1.substring(3, 5);
         String year1 = date1.substring(6, 10);
@@ -595,6 +599,8 @@ public class BAPREPT {
         doc.addPage(page);
         table.draw();
         doc.save(year1 + "_" + quarter + "_Individual_report.pdf");
+        DocPrinter dp = new DocPrinter();
+        dp.printFile(doc);
         doc.close();
     }
 
@@ -938,7 +944,7 @@ public class BAPREPT {
 
     }
     
-    public void createSummaryReport(String date1, String date2) throws IOException, ParseException{
+    public void createSummaryReport(String date1, String date2) throws IOException, ParseException, PrinterException{
         
         
         
@@ -1083,7 +1089,10 @@ public class BAPREPT {
         contentStream.close();
        
         doc.save( "Summaryreport.pdf");
+        DocPrinter dp = new DocPrinter();
+        dp.printFile(doc);
         doc.close();
+        
         
         
         
@@ -1519,7 +1528,7 @@ public class BAPREPT {
     
     
     
-    public void drawSummaryTable(List<String[]> list, PDPage page, PDDocument doc,PDPageContentStream contentStream) throws IOException{
+    public void drawSummaryTable(List<String[]> list, PDPage page, PDDocument doc,PDPageContentStream contentStream) throws IOException, PrinterException{
         float margin = 50;
         float yStartNewPage = page.getMediaBox().getHeight() - (2 * margin) -150;
         float tableWidth = page.getMediaBox().getWidth() - (2 * margin);
@@ -1571,7 +1580,9 @@ public class BAPREPT {
 
         doc.addPage(page);
         table.draw();
-        contentStream.close();
+        
+       
+        
     }
     
     

@@ -40,31 +40,33 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "PaymentDetail.findByExpiryDate", query = "SELECT p FROM PaymentDetail p WHERE p.expiryDate = :expiryDate")
     , @NamedQuery(name = "PaymentDetail.findByType", query = "SELECT p FROM PaymentDetail p WHERE p.type = :type")
     , @NamedQuery(name = "PaymentDetail.findByLast4digits", query = "SELECT p FROM PaymentDetail p WHERE p.last4digits = :last4digits")
-    , @NamedQuery(name = "PaymentDetail.findByVersion", query = "SELECT p FROM PaymentDetail p WHERE p.version = :version")})
+    , @NamedQuery(name = "PaymentDetail.findByVersion", query = "SELECT p FROM PaymentDetail p WHERE p.version = :version")
+    , @NamedQuery(name = "PaymentDetail.findByAmount", query = "SELECT p FROM PaymentDetail p WHERE p.amount = :amount")})
 public class PaymentDetail implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 45)
-    @GeneratedValue(strategy=GenerationType.IDENTITY )
-    @Column(name = "payment_detailID")
-    private String paymentdetailID;
+    @Column(name = "payment_detailID", nullable = false)
+    private Integer paymentdetailID;
     @Column(name = "expiry_date")
     @Temporal(TemporalType.DATE)
     private Date expiryDate;
     @Size(max = 10)
-    @Column(name = "type")
+    @Column(length = 10)
     private String type;
     @Size(max = 4)
-    @Column(name = "last4digits")
+    @Column(length = 4)
     private String last4digits;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "version")
+    @Column(nullable = false)
     private long version;
-    @JoinColumn(name = "orderID", referencedColumnName = "orderID")
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(precision = 12)
+    private Float amount;
+    @JoinColumn(name = "orderID", referencedColumnName = "orderID", nullable = false)
     @ManyToOne(optional = false)
     private OrderTable orderID;
     @OneToMany(mappedBy = "paymentdetailID")
@@ -73,20 +75,20 @@ public class PaymentDetail implements Serializable {
     public PaymentDetail() {
     }
 
-    public PaymentDetail(String paymentdetailID) {
+    public PaymentDetail(Integer paymentdetailID) {
         this.paymentdetailID = paymentdetailID;
     }
 
-    public PaymentDetail(String paymentdetailID, long version) {
+    public PaymentDetail(Integer paymentdetailID, long version) {
         this.paymentdetailID = paymentdetailID;
         this.version = version;
     }
 
-    public String getPaymentdetailID() {
+    public Integer getPaymentdetailID() {
         return paymentdetailID;
     }
 
-    public void setPaymentdetailID(String paymentdetailID) {
+    public void setPaymentdetailID(Integer paymentdetailID) {
         this.paymentdetailID = paymentdetailID;
     }
 
@@ -122,6 +124,17 @@ public class PaymentDetail implements Serializable {
         this.version = version;
     }
 
+    public Float getAmount() {
+        return amount;
+    }
+     public void addJobLine(JobLine jobLine){
+        jobLineCollection.add(jobLine);
+    }
+
+    public void setAmount(Float amount) {
+        this.amount = amount;
+    }
+
     public OrderTable getOrderID() {
         return orderID;
     }
@@ -137,10 +150,6 @@ public class PaymentDetail implements Serializable {
 
     public void setJobLineCollection(Collection<JobLine> jobLineCollection) {
         this.jobLineCollection = jobLineCollection;
-    }
-    
-    public void addJobLine(JobLine jobLine){
-        jobLineCollection.add(jobLine);
     }
 
     @Override
