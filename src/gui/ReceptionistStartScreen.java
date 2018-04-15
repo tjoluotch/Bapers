@@ -3,21 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bapersgui;
+package gui;
+
+import domain.Staff;
 
 /**
  *
  * @author Tweetie Pie
  */
 public class ReceptionistStartScreen extends javax.swing.JFrame {
-
+Staff staff;
     /**
      * Creates new form ReceptionistHomeScreen
      */
     public ReceptionistStartScreen() {
         initComponents();
     }
-
+    public ReceptionistStartScreen(Staff staff) {
+        this.staff = staff;
+        initComponents();
+    } 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

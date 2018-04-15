@@ -5,19 +5,26 @@
  */
 package gui;
 
+import domain.Staff;
+
 /**
  *
  * @author Tweetie Pie
  */
 public class ShiftManagerStartScreen extends javax.swing.JFrame {
-
+Staff staff;
     /**
      * Creates new form OfficeManagerStartScreen
      */
     public ShiftManagerStartScreen() {
         initComponents();
+      
     }
 
+    public ShiftManagerStartScreen(Staff staff) {
+        this.staff = staff;
+        initComponents();
+    } 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
