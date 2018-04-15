@@ -63,14 +63,12 @@ public class BAPACCT {
         order.setPaymentDetailCollection(paymentDetails);
         
         for(JobLine j: jColl){
-            
             j.setOrderID(order);
         }
         order.setJobLineCollection(jColl);
         Date dateSubmitted = new Date();
         dateSubmitted.setTime(System.currentTimeMillis());
         order.setDateSubmitted(dateSubmitted);
-        
         
         float price = 0;
         

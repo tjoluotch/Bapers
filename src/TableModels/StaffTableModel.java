@@ -26,7 +26,7 @@ public class StaffTableModel extends AbstractTableModel{
                return String.class;
              case 3:
                return String.class;
-             
+            
              }
              return null;
          //To change body of generated methods, choose Tools | Templates.
