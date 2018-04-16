@@ -8,6 +8,7 @@ package TableModels;
 import data.DataManagerImpl;
 import domain.JobLine;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -44,8 +45,8 @@ public class JobsTableModel extends AbstractTableModel {
         this.li = li;
     }
     
-    public void update(List<JobLine> jobs){
-        li = jobs;
+    public void update(Collection<JobLine> jobs){
+        li = new ArrayList(jobs);
     }
 
     @Override

@@ -9,6 +9,7 @@ import data.DataManagerImpl;
 import domain.JobLine;
 import domain.OrderTable;
 import domain.PaymentDetail;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
@@ -49,7 +50,7 @@ public class BAPPAYM {
     }
     
     //for jobs
-    public void createPayment(List<JobLine> jobs, String last4, Date expiryDate){ //NEED TO UPDATE EXPIRY DATE
+    public void createPayment(Collection<JobLine> jobs, String last4, Date expiryDate){ //NEED TO UPDATE EXPIRY DATE
         PaymentDetail payment = new PaymentDetail();
         payment.setType("Card");
         //payment.setExpiryDate(java.sql.Date.valueOf(expiryDate));
@@ -81,7 +82,7 @@ public class BAPPAYM {
         dm.savePayment(payment);
     }
     //for jobs
-    public void createPayment(List<JobLine> jobs){
+    public void createPayment(Collection<JobLine> jobs){
         PaymentDetail payment = new PaymentDetail();
         payment.setType("Cash");
         payment.setExpiryDate(null);
@@ -95,5 +96,7 @@ public class BAPPAYM {
         payment.setOrderID(orderID);
         dm.savePayment(payment);
     }
+    
+    
 }
 

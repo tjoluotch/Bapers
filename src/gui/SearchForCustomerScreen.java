@@ -7,6 +7,7 @@ package gui;
 
 import Controllers.*;
 import TableModels.CustomersTableModel;
+import data.DataManagerImpl;
 import domain.Customer;
 import java.util.List;
 /**
@@ -14,7 +15,8 @@ import java.util.List;
  * @author Tweetie Pie
  */
 public class SearchForCustomerScreen extends javax.swing.JFrame {
-    List<Customer> customerList;
+    DataManagerImpl dm = new DataManagerImpl();
+    List<Customer> customerList = dm.AllCustomers();
     CustomersTableModel model;
     /**
      * Creates new form SearchForCustomerScreen
@@ -69,6 +71,11 @@ public class SearchForCustomerScreen extends javax.swing.JFrame {
         });
 
         jTable1.setModel((new CustomersTableModel(customerList)));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -114,6 +121,10 @@ public class SearchForCustomerScreen extends javax.swing.JFrame {
     private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_goBackButtonActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments

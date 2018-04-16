@@ -12,7 +12,8 @@ import domain.JobLine;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -30,8 +31,7 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
     BAPPAYM paym = new BAPPAYM(dm);
     
     List<JobLine> jobList;
-    List<JobLine> selectedJobs = new ArrayList<JobLine>();
-    List<JobLine> jobsToRemove = new ArrayList<JobLine>();
+    Collection<JobLine> selectedJobs = new LinkedList();
     JobsTableModel jobsTableModel;
     JobsTableModel basketModel = new JobsTableModel();
     float currentPrice = 0;
@@ -44,6 +44,7 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
     AddPaymentForJobsScreen(List<JobLine> jobList){
         this.jobList = jobList;
         jobsTableModel = new JobsTableModel(jobList);
+        //selectedJobs;
         initComponents();
     }
     
@@ -216,11 +217,21 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jobsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jobsTableMouseClicked
+              
         int selectedRowIndex = jobsTable.getSelectedRow();
-        JobLine job = jobList.get(jobsTable.convertRowIndexToModel(selectedRowIndex));
-        
+        int selectedJobLineID = jobList.get(jobsTable.convertRowIndexToModel(selectedRowIndex)).getJoblineID();
+        JobLine myJob = null;
+        for(JobLine job : jobList){
+            if(job.getJoblineID()==selectedJobLineID){
+                myJob = job;
+            }
+        }
+        selectedJobs.add(myJob);
+        /*
+        int jobLineID = jobList.get(jobsTable.convertRowIndexToModel(selectedRowIndex)).getJoblineID();
         selectedJobs.add(job);
-        currentPrice = currentPrice + job.getJobCode().getPrice();
+        */
+        currentPrice = currentPrice + myJob.getJobCode().getPrice();
         subtotal.setText(String.valueOf(currentPrice));
         basketModel.update(selectedJobs);
         basketModel.fireTableChanged(null);
@@ -265,11 +276,10 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
             }
         }
         //FOR CASH PAYMENTS
-        else if ((jComboBox1.getSelectedItem().toString()).equals("Cash")){
+        if ((jComboBox1.getSelectedItem().toString()).equals("Cash")){
             paym.createPayment(selectedJobs);
             JOptionPane.showMessageDialog(this,"Cash Payment for job(s) added","",JOptionPane.INFORMATION_MESSAGE);
         }
-
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void basketTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_basketTableMouseClicked
