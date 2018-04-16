@@ -1674,7 +1674,7 @@ public class BAPREPT {
         
     }
     
-    public void createCustomerReport(String accNo, String date1, String date2) throws IOException{
+    public void createCustomerReport(String accNo, String date1, String date2) throws IOException, ParseException{
         
         
         String day1 = date1.substring(1, 2);
@@ -1694,27 +1694,32 @@ public class BAPREPT {
         float hWidth2 = (float) a;
         PDFont font = PDType1Font.HELVETICA_BOLD;
         PDFont font2 = PDType1Font.HELVETICA;
-        
-        
-        PDStreamUtils.write(contentStream, "Summary Performance Report", font, 20, hWidth, 790, Color.BLACK);
-        PDStreamUtils.write(contentStream, period, font2, 15, hWidth2-44, 750, Color.BLACK);
-        
         DataManagerImpl dm = new DataManagerImpl();
        Customer c = dm.findCustomerByAccountNumber(accNo);
        List<String[]> list = new ArrayList<String[]>();
+        
+        PDStreamUtils.write(contentStream, "Customer Accounts Report for Account: " + c.getAccountHolderName(), font, 12, hWidth/2, 790, Color.BLACK);
+        PDStreamUtils.write(contentStream, period, font2, 10, hWidth2-44, 750, Color.BLACK);
+        
+        
         
         
         Collection<OrderTable> oList = c.getOrderTableCollection();
         
         for (OrderTable o : oList){
             
-            Collection<JobLine> jList = o.getJobLineCollection();
+            if(o.getDateSubmitted().after(new SimpleDateFormat("dd/MM/yyyy").parse(date1)) && o.getDateSubmitted().before(new SimpleDateFormat("dd/MM/yyyy").parse(date2))){
+               
+                
+                Collection<JobLine> jList = o.getJobLineCollection();
             for(JobLine js : jList){
+                
+                
                 String[] sdot = new String[5];
                 sdot[0] = String.valueOf(js.getJoblineID());
                 sdot[1] = js.getJobCode().getCode();
                 sdot[2] = String.valueOf(js.getOrderID().getOrderID());
-                sdot[3] = js.getJobDeadline().toString();
+                sdot[3] = js.getOrderID().getDateSubmitted().toString();
                 if(js.isPaidFor()){
                     
                     sdot[4] = "Paid";
@@ -1727,12 +1732,26 @@ public class BAPREPT {
                 
                 list.add(sdot);
                 
+            }
+            
+            
+                
                 
                 
                
             }
             
-            float margin = 50;
+            
+                
+            
+            
+            
+            
+        }
+        
+       
+        
+        float margin = 50;
         float yStartNewPage = page.getMediaBox().getHeight() - (2 * margin) -150;
         float tableWidth = page.getMediaBox().getWidth() - (2 * margin);
 
@@ -1741,21 +1760,21 @@ public class BAPREPT {
         
            BaseTable table = new BaseTable(yPosition, yStartNewPage, bottomMargin, tableWidth, margin, doc, page, true, true);
          Row<PDPage> titleRow = table.createRow(15f);
-        Cell<PDPage> cell = titleRow.createCell(100, "Summary Report");
+        Cell<PDPage> cell = titleRow.createCell(100, "Account Number: " + c.getAccountNo() + " Name: " + c.getForename()+ " " + c.getSurname());
         cell.setFont(PDType1Font.HELVETICA_BOLD);
         cell.setFillColor(Color.WHITE);
         table.addHeaderRow(titleRow);
 
         Row<PDPage> headerRow = table.createRow(15f);
-        Cell<PDPage> cell2 = headerRow.createCell(100 / 5f, "Date");
+        Cell<PDPage> cell2 = headerRow.createCell(100 / 5f, "Job Id");
         cell2.setFont(PDType1Font.HELVETICA_BOLD);
-        Cell<PDPage> cell3 = headerRow.createCell(100 / 5f, "Copy Room");
+        Cell<PDPage> cell3 = headerRow.createCell(100 / 5f, "Job Code");
         cell3.setFont(PDType1Font.HELVETICA_BOLD);
-        Cell<PDPage> cell4 = headerRow.createCell(100 / 5f, "Development Area");
+        Cell<PDPage> cell4 = headerRow.createCell(100 / 5f, "Order Id");
         cell4.setFont(PDType1Font.HELVETICA_BOLD);
-        Cell<PDPage> cell5 = headerRow.createCell(100 / 5f, "Packing Department");
+        Cell<PDPage> cell5 = headerRow.createCell(100 / 5f, "Date submitted");
         cell5.setFont(PDType1Font.HELVETICA_BOLD);
-        Cell<PDPage> cell6 = headerRow.createCell(100 / 5f, "Finishing Room");
+        Cell<PDPage> cell6 = headerRow.createCell(100 / 5f, "Payment Status");
         cell6.setFont(PDType1Font.HELVETICA_BOLD);
     
         cell.setFont(PDType1Font.HELVETICA_BOLD);
@@ -1770,6 +1789,8 @@ public class BAPREPT {
                 page = table.getCurrentPage();
                 contentStream = new PDPageContentStream(doc, page, AppendMode.APPEND, false);
 
+                
+
                 contentStream.beginText();
             }
             Row<PDPage> row = table.createRow(10f);
@@ -1779,19 +1800,13 @@ public class BAPREPT {
             }
         }
        
-        
-
+        contentStream.close();
         doc.addPage(page);
         table.draw();
-        contentStream.close();
+        
+        
        
         doc.save( "customerReport.pdf");
-                
-            
-            
-            
-            
-        }
         
         
         

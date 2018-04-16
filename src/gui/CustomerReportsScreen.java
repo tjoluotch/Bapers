@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bapersgui;
+package gui;
 
 import Controllers.BAPREPT;
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,6 +41,7 @@ public class CustomerReportsScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        accountNo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         accountNo.setText("Account Number");
         accountNo.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -52,6 +54,7 @@ public class CustomerReportsScreen extends javax.swing.JFrame {
             }
         });
 
+        startDate.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         startDate.setText("Start Date");
         startDate.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -64,13 +67,20 @@ public class CustomerReportsScreen extends javax.swing.JFrame {
             }
         });
 
+        endDate.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         endDate.setText("End Date");
+        endDate.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                endDateFocusGained(evt);
+            }
+        });
         endDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 endDateActionPerformed(evt);
             }
         });
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton1.setText("Create");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,37 +88,40 @@ public class CustomerReportsScreen extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jButton2.setText("Cancel");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(accountNo)
-                            .addComponent(startDate, javax.swing.GroupLayout.DEFAULT_SIZE, 93, Short.MAX_VALUE)
-                            .addComponent(endDate)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(79, 79, 79)
                         .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                        .addGap(40, 40, 40)
+                        .addComponent(jButton2))
+                    .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(accountNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(313, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(56, 56, 56)
                 .addComponent(accountNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 174, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
@@ -124,34 +137,35 @@ public class CustomerReportsScreen extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+         BAPREPT bp = new BAPREPT();
+        try {
+            bp.createCustomerReport(accountNo.getText(), startDate.getText(), endDate.getText());
+        } catch (IOException ex) {
+            Logger.getLogger(CustomerReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(CustomerReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void accountNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountNoActionPerformed
         // TODO add your handling code here:
         
-      BAPREPT bp = new BAPREPT();
-        try {
-            bp.createCustomerReport(accountNo.getText(), startDate.getText(), endDate.getText());
-        } catch (IOException ex) {
-            Logger.getLogger(CustomerReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
-        }
-      
+     
         
     }//GEN-LAST:event_accountNoActionPerformed
 
     private void accountNoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_accountNoFocusGained
         // TODO add your handling code here:
         
-        if (accountNo.getText().compareTo("Account Holder")== 0){
+        if (accountNo.getText().compareTo("Account Number")== 0){
             accountNo.setText("");
         }
     }//GEN-LAST:event_accountNoFocusGained
 
     private void endDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endDateActionPerformed
         // TODO add your handling code here:
-        if(endDate.getText().compareTo("End Date")==0){
-            endDate.setText("");
-        }
+        
     }//GEN-LAST:event_endDateActionPerformed
 
     private void startDateFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_startDateFocusGained
@@ -160,6 +174,17 @@ public class CustomerReportsScreen extends javax.swing.JFrame {
             startDate.setText("");
         }
     }//GEN-LAST:event_startDateFocusGained
+
+    private void endDateFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_endDateFocusGained
+        // TODO add your handling code here:
+        if(endDate.getText().compareTo("End Date")==0){
+            endDate.setText("");
+        }
+    }//GEN-LAST:event_endDateFocusGained
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
