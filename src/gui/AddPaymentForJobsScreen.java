@@ -295,12 +295,12 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
         String jobId = basketTable.getValueAt(selectedRowIndex, 0).toString();
         int jobID = Integer.parseInt(jobId);
         List<JobLine> removeList = new LinkedList();
-        
+        currentPrice = 0;
         for(JobLine job : selectedJobs){
             
             if(job.getJoblineID() != jobID){
                 removeList.add(job);
-                currentPrice = currentPrice - job.getJobCode().getPrice();
+                currentPrice += job.getJobCode().getPrice();
             }
             
         }
