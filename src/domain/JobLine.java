@@ -115,6 +115,12 @@ private static final long serialVersionUID = 1L;
     public void setSpecialInstructions(String specialInstructions) {
         this.specialInstructions = specialInstructions;
     }
+    
+    public boolean isPaidFor(){
+        if(paymentdetailID != null){
+            return true;
+        } else { return false; }
+    }
 
     public String getReminderStatus() {
         return reminderStatus;

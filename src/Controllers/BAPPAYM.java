@@ -50,10 +50,11 @@ public class BAPPAYM {
         payment.setType("Card");
         payment.setExpiryDate(expiryDate);
         payment.setLast4digits(last4);
-        payment.setOrderID(order);
+        
         payment.setJobLineCollection(order.getJobLineCollection());
         order.addPaymentDetail(payment);
         for(JobLine job : order.getJobLineCollection()){
+            
             job.setPaymentdetailID(payment);
         }
         
@@ -82,9 +83,9 @@ public class BAPPAYM {
         for(JobLine job : jobs){
             payment.addJobLine(job);
             job.setPaymentdetailID(payment);
-            orderID = job.getOrderID();
+           
         }
-        payment.setOrderID(orderID);
+        
         
         
          //calculating discounted total
@@ -103,7 +104,7 @@ public class BAPPAYM {
         payment.setType("Cash");
         payment.setExpiryDate(null);
         payment.setLast4digits(null);
-        payment.setOrderID(order);
+        
         payment.setJobLineCollection(order.getJobLineCollection());
         order.addPaymentDetail(payment);
         for(JobLine job : order.getJobLineCollection()){
@@ -126,13 +127,13 @@ public class BAPPAYM {
         payment.setType("Cash");
         payment.setExpiryDate(null);
         payment.setLast4digits(null);
-        OrderTable orderID = null;
+        
         for(JobLine job : jobs){
             payment.addJobLine(job);
             job.setPaymentdetailID(payment);
-            orderID = job.getOrderID();
+            
         }
-        payment.setOrderID(orderID);
+        
         
         
         //calculating discounted total
