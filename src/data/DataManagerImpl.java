@@ -212,6 +212,13 @@ public class DataManagerImpl implements DataManager{
     }
     
     @Override
+    public List<Customer> customerCount(){
+        TypedQuery<Customer> query = em.createNamedQuery("Customer.findAll", Customer.class);
+        
+        return query.getResultList();
+    }
+    
+    @Override
     public List<JobLine> searchByJobDeadline(java.util.Date deadline){
         TypedQuery<JobLine> query = em.createNamedQuery("JobLine.findDeadlinesAfterDate", JobLine.class);
         query.setParameter("jobDeadline", deadline);

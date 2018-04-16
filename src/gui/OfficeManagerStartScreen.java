@@ -199,7 +199,7 @@ public class OfficeManagerStartScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         PaymentManagementScreen pay = new PaymentManagementScreen();
         pay.setVisible(true);
-        this.dispose();
+        
               
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -225,15 +225,7 @@ public class OfficeManagerStartScreen extends javax.swing.JFrame {
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         // TODO add your handling code here:
-        DataManagerImpl dm = new DataManagerImpl();
-        dm.getEm().getTransaction().begin();
-        staff = dm.getEm().merge(staff);
-        dm.getEm().lock(staff, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
-        staff.setLoggedOn(false);
-        dm.getEm().getTransaction().commit();
-        Login lg  = new Login();
-        lg.setVisible(true);
-        this.dispose();
+       
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -244,8 +236,6 @@ public class OfficeManagerStartScreen extends javax.swing.JFrame {
         dm.getEm().lock(staff, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
         staff.setLoggedOn(false);
         dm.getEm().getTransaction().commit();
-        Login lg  = new Login();
-        lg.setVisible(true);
         this.dispose();
         
     }//GEN-LAST:event_formWindowClosing
