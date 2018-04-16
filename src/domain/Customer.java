@@ -108,12 +108,26 @@ public class Customer implements Serializable {
     private long version;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountNo")
     private Collection<DiscountPlan> discountPlanCollection;
+    @OneToMany(mappedBy = "accountNo")
+    private Collection<OrderTable> orderTableCollection;
+
+    
+
 
     public Customer() {
     }
 
     public Customer(String accountNo) {
         this.accountNo = accountNo;
+    }
+    
+    
+    public Collection<OrderTable> getOrderTableCollection() {
+        return orderTableCollection;
+    }
+
+    public void setOrderTableCollection(Collection<OrderTable> orderTableCollection) {
+        this.orderTableCollection = orderTableCollection;
     }
 
     public Customer(String accountNo, String status, long version) {
