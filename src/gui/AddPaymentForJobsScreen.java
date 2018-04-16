@@ -298,7 +298,7 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
         
         for(JobLine job : selectedJobs){
             
-            if(job.getJoblineID() == jobID){
+            if(job.getJoblineID() != jobID){
                 removeList.add(job);
                 currentPrice = currentPrice - job.getJobCode().getPrice();
             }
