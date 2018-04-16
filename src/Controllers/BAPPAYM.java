@@ -52,7 +52,7 @@ public class BAPPAYM {
         payment.setLast4digits(last4);
         
         payment.setJobLineCollection(order.getJobLineCollection());
-        order.addPaymentDetail(payment);
+        //order.addPaymentDetail(payment);
         for(JobLine job : order.getJobLineCollection()){
             
             job.setPaymentdetailID(payment);
@@ -79,10 +79,13 @@ public class BAPPAYM {
         //payment.setExpiryDate(java.sql.Date.valueOf(expiryDate));
         payment.setExpiryDate(expiryDate);
         payment.setLast4digits(last4);
-        OrderTable orderID = null;
+        payment.setJobLineCollection(jobs);
+        
+        
         for(JobLine job : jobs){
-            payment.addJobLine(job);
+            
             job.setPaymentdetailID(payment);
+            
            
         }
         
@@ -106,7 +109,7 @@ public class BAPPAYM {
         payment.setLast4digits(null);
         
         payment.setJobLineCollection(order.getJobLineCollection());
-        order.addPaymentDetail(payment);
+        //order.addPaymentDetail(payment);
         for(JobLine job : order.getJobLineCollection()){
             job.setPaymentdetailID(payment);
         }
