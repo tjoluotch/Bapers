@@ -237,6 +237,7 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
         
         basketModel = new JobsTableModel(selectedJobs);
         basketModel.fireTableDataChanged();
+        basketTable.setModel(basketModel);
         
         
         subtotal.setText(String.valueOf(currentPrice));
@@ -310,6 +311,7 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
         subtotal.setText(String.valueOf(currentPrice));
        
         basketModel.fireTableDataChanged();
+        basketTable.setModel(basketModel);
         System.out.println(selectedJobs.size());
     }//GEN-LAST:event_basketTableMouseClicked
 

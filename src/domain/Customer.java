@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Customer.findByForename", query = "SELECT c FROM Customer c WHERE c.forename = :forename")
     , @NamedQuery(name = "Customer.findBySurname", query = "SELECT c FROM Customer c WHERE c.surname = :surname")
     , @NamedQuery(name = "Customer.findByAccountHolderName", query = "SELECT c FROM Customer c WHERE c.accountHolderName = :accountHolderName")
+    , @NamedQuery(name = "Customer.findByName", query = "SELECT c FROM Customer c WHERE c.forename = :forename AND c.surname = :surname")
     , @NamedQuery(name = "Customer.findByTitle", query = "SELECT c FROM Customer c WHERE c.title = :title")
     , @NamedQuery(name = "Customer.findByAddress1", query = "SELECT c FROM Customer c WHERE c.address1 = :address1")
     , @NamedQuery(name = "Customer.findByAddress2", query = "SELECT c FROM Customer c WHERE c.address2 = :address2")
