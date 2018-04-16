@@ -44,7 +44,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "PaymentDetail.findByAmount", query = "SELECT p FROM PaymentDetail p WHERE p.amount = :amount")})
 public class PaymentDetail implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -176,5 +176,7 @@ public class PaymentDetail implements Serializable {
     public String toString() {
         return "domain.PaymentDetail[ paymentdetailID=" + paymentdetailID + " ]";
     }
+
+   
     
 }

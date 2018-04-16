@@ -6,25 +6,23 @@
 package domain;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Tweetie Pie
  */
 @Entity
+@Table(name = "customer")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Customer.findAll", query = "SELECT c FROM Customer c")
@@ -50,58 +48,52 @@ public class Customer implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
-    @Column(name = "account_no", nullable = false, length = 45)
+    @Column(name = "account_no")
     private String accountNo;
     @Size(max = 30)
-    @Column(length = 30)
+    @Column(name = "forename")
     private String forename;
     @Size(max = 30)
-    @Column(length = 30)
+    @Column(name = "surname")
     private String surname;
     @Size(max = 45)
-    @Column(name = "account_holder_name", length = 45)
+    @Column(name = "account_holder_name")
     private String accountHolderName;
     @Size(max = 45)
-    @Column(length = 45)
+    @Column(name = "title")
     private String title;
     @Size(max = 20)
-    @Column(length = 20)
+    @Column(name = "address1")
     private String address1;
     @Size(max = 20)
-    @Column(length = 20)
+    @Column(name = "address2")
     private String address2;
     @Size(max = 20)
-    @Column(length = 20)
+    @Column(name = "city")
     private String city;
     @Size(max = 20)
-    @Column(length = 20)
+    @Column(name = "region")
     private String region;
     @Size(max = 9)
-    @Column(length = 9)
+    @Column(name = "postcode")
     private String postcode;
     // @Pattern(regexp="^\\(?(\\d{3})\\)?[- ]?(\\d{3})[- ]?(\\d{4})$", message="Invalid phone/fax format, should be as xxx-xxx-xxxx")//if the field contains phone or fax number consider using this annotation to enforce field validation
     @Size(max = 15)
-    @Column(length = 15)
+    @Column(name = "phone")
     private String phone;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
     @Size(max = 45)
-    @Column(length = 45)
+    @Column(name = "email")
     private String email;
     @Column(name = "valued_customer")
     private Boolean valuedCustomer;
     @Size(max = 45)
-    @Column(name = "discount_type", length = 45)
+    @Column(name = "discount_type")
     private String discountType;
     @Basic(optional = false)
     @NotNull
-    @Column(nullable = false)
+    @Column(name = "version")
     private long version;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountNo")
-    private Collection<DicountPlan> dicountPlanCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountNo")
-    private Collection<Alert> alertCollection;
-    @OneToMany(mappedBy = "accountNo")
-    private Collection<OrderTable> orderTableCollection;
 
     public Customer() {
     }
@@ -233,33 +225,6 @@ public class Customer implements Serializable {
 
     public void setVersion(long version) {
         this.version = version;
-    }
-
-    @XmlTransient
-    public Collection<DicountPlan> getDicountPlanCollection() {
-        return dicountPlanCollection;
-    }
-
-    public void setDicountPlanCollection(Collection<DicountPlan> dicountPlanCollection) {
-        this.dicountPlanCollection = dicountPlanCollection;
-    }
-
-    @XmlTransient
-    public Collection<Alert> getAlertCollection() {
-        return alertCollection;
-    }
-
-    public void setAlertCollection(Collection<Alert> alertCollection) {
-        this.alertCollection = alertCollection;
-    }
-
-    @XmlTransient
-    public Collection<OrderTable> getOrderTableCollection() {
-        return orderTableCollection;
-    }
-
-    public void setOrderTableCollection(Collection<OrderTable> orderTableCollection) {
-        this.orderTableCollection = orderTableCollection;
     }
 
     @Override

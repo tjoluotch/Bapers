@@ -10,6 +10,8 @@ import domain.Customer;
 import domain.Staff;
 import javax.swing.*;
 import gui.*;
+import java.awt.HeadlessException;
+import javax.persistence.LockModeType;
 
 /**
  *
@@ -34,13 +36,23 @@ public class Controller {
        //password for all staff in DB is null
         try{
             staff = dm.findStaffByUsername(user);
-            if (staff.getPassword().compareTo(pass) == 0&& staff.getRole().compareTo(role) == 0) {
-                JOptionPane.showMessageDialog(null, "Welcome");
+            if (staff.getPassword().compareTo(pass) == 0&& staff.getRole().compareTo(role) == 0 ) {
+                
+                if(staff.getLoggedOn() == false){
+                    
+                    JOptionPane.showMessageDialog(null, "Welcome");
                 //Code for changing to the next page
                 
                 if(role.compareToIgnoreCase("Office Manager")==0){
                     OfficeManagerStartScreen screen = new OfficeManagerStartScreen(staff);
                     screen.setVisible(true);
+                    AlertSystem as = new AlertSystem();
+                    as.beginAlerts();
+                    dm.getEm().getTransaction().begin();
+                    dm.getEm().lock(staff, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+                    staff.setLoggedOn(true);
+                    dm.getEm().getTransaction().commit();
+                    
                     
                 }
                 
@@ -61,12 +73,19 @@ public class Controller {
                     screen.setVisible(true);
                     
                 }
+                    
+                }
+                
+                else{
+                    JOptionPane.showMessageDialog(null,"User is a;ready logged in at another terminal. Please log off before retrying", "Access Denied", JOptionPane.OK_OPTION);
+                }
+                
                 //Welcome w=new Welcome ();
                 //w.setVisible(true);
             } else {
                 JOptionPane.showMessageDialog(null,"Invalid credentials, Please enter correct credentials!", "Access Denied", JOptionPane.ERROR_MESSAGE);
             } 
-        } catch (Exception ex) {
+        } catch (HeadlessException ex) {
         JOptionPane.showMessageDialog(null,"Invalid credentials, Please enter correct credentials!", "Access Denied", JOptionPane.ERROR_MESSAGE);
         }
     }

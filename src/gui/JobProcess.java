@@ -5,6 +5,8 @@
  */
 package gui;
 
+import Controllers.AlertSystem;
+
 /**
  *
  * @author tjay
@@ -16,6 +18,8 @@ public class JobProcess extends javax.swing.JFrame {
      */
     public JobProcess() {
         initComponents();
+        AlertSystem al = new AlertSystem();
+        al.beginAlerts();
     }
 
     /**

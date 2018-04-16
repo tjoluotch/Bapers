@@ -68,19 +68,52 @@ public class BAPACCT {
         
         for(JobLine j: jColl){
             
+       
             
-            j.setOrderID(order);
+            Collection<TaskLine> tl = j.getTaskLineCollection();
+            long tasksExpectedDuration = 0;
+            for(TaskLine t : tl){
+                
+               tasksExpectedDuration += t.getTaskID().getExpectedDuration();
+                
+            }
+            if(j.getJobDeadline().getTime() < System.currentTimeMillis() + tasksExpectedDuration ){
+                
+                j.setOrderID(order);
+            
+            Alert a = new Alert();
+             a.setOrderID(order);
+             a.setAccountNo(order.getAccountNo());
+             a.setDescription("New job alert. Job code: "+ j.getJobCode().getCode() + " Account Number: " + accountNo.getAccountNo() + " Deadline : " + j.getJobDeadline().toString() + ". Warning Job expected completion time is after the deadline"  );
+             a.setTarget("Office Manager and Shift Manager");
+             a.setBeenSeen(false);
+             a.setJoblineID(j);
+             
+             DataManagerImpl dm = new DataManagerImpl();
+             order.getAlertCollection().add(a);
+                
+            }
+            
+            else{
+                
+                j.setOrderID(order);
             
             Alert a = new Alert();
              a.setOrderID(order);
              a.setAccountNo(order.getAccountNo());
              a.setDescription("New job alert. Job code: "+ j.getJobCode().getCode() + " Account Number: " + accountNo.getAccountNo() + " Deadline : " + j.getJobDeadline().toString()  );
-             a.setTarget("Office Manager and Shift Manager");
-             a.setBeenSeen((short)0);
+             a.setTarget("Shift Manager");
+             a.setBeenSeen(false);
              a.setJoblineID(j);
              
              DataManagerImpl dm = new DataManagerImpl();
              order.getAlertCollection().add(a);
+                
+            }
+                
+                
+            
+            
              
         }
         

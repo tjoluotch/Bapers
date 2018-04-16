@@ -23,6 +23,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -39,12 +40,13 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "JobLine.findAll", query = "SELECT j FROM JobLine j")
     , @NamedQuery(name = "JobLine.findByJoblineID", query = "SELECT j FROM JobLine j WHERE j.joblineID = :joblineID")
     , @NamedQuery(name = "JobLine.findByJobDeadline", query = "SELECT j FROM JobLine j WHERE j.jobDeadline = :jobDeadline")
+    , @NamedQuery(name = "JobLine.findDeadlinesAfterDate", query = "SELECT j FROM JobLine j WHERE j.jobDeadline > :jobDeadline")
     , @NamedQuery(name = "JobLine.findBySpecialInstructions", query = "SELECT j FROM JobLine j WHERE j.specialInstructions = :specialInstructions")
     , @NamedQuery(name = "JobLine.findByReminderStatus", query = "SELECT j FROM JobLine j WHERE j.reminderStatus = :reminderStatus")
     , @NamedQuery(name = "JobLine.findByVersion", query = "SELECT j FROM JobLine j WHERE j.version = :version")})
 public class JobLine implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -62,6 +64,7 @@ public class JobLine implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(nullable = false)
+    @Version
     private long version;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "joblineID")
     private Collection<Alert> alertCollection;
@@ -76,7 +79,7 @@ public class JobLine implements Serializable {
     @JoinColumn(name = "payment_detailID", referencedColumnName = "payment_detailID")
     @ManyToOne
     private PaymentDetail paymentdetailID;
-
+    
     public JobLine() {
     }
 
@@ -195,5 +198,7 @@ public class JobLine implements Serializable {
     public String toString() {
         return "domain.JobLine[ joblineID=" + joblineID + " ]";
     }
+
+   
     
 }

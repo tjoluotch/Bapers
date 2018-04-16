@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.LockModeType;
+import javax.swing.JFrame;
 
 /**
  *
@@ -29,6 +31,7 @@ public class OfficeManagerStartScreen extends javax.swing.JFrame {
     }
     public OfficeManagerStartScreen(Staff staff) {
         this.staff = staff;
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         initComponents();
         
         this.setLocationRelativeTo(null);
@@ -54,6 +57,14 @@ public class OfficeManagerStartScreen extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Administrator Tools");
@@ -199,10 +210,45 @@ public class OfficeManagerStartScreen extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        Login lg = new Login();
+        DataManagerImpl dm = new DataManagerImpl();
+        dm.getEm().getTransaction().begin();
+        staff = dm.getEm().merge(staff);
+        dm.getEm().lock(staff, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+        staff.setLoggedOn(false);
+        dm.getEm().getTransaction().commit();
+        Login lg  = new Login();
         lg.setVisible(true);
         this.dispose();
+        
+        
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        // TODO add your handling code here:
+        DataManagerImpl dm = new DataManagerImpl();
+        dm.getEm().getTransaction().begin();
+        staff = dm.getEm().merge(staff);
+        dm.getEm().lock(staff, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+        staff.setLoggedOn(false);
+        dm.getEm().getTransaction().commit();
+        Login lg  = new Login();
+        lg.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        DataManagerImpl dm = new DataManagerImpl();
+        dm.getEm().getTransaction().begin();
+        staff = dm.getEm().merge(staff);
+        dm.getEm().lock(staff, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+        staff.setLoggedOn(false);
+        dm.getEm().getTransaction().commit();
+        Login lg  = new Login();
+        lg.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

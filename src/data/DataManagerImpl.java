@@ -177,6 +177,8 @@ public class DataManagerImpl implements DataManager{
     
     @Override
     public void saveJob(Job job){em.persist(job);}
+    
+    
     @Override
     public void saveTask(Task task){em.persist(task);}
 
@@ -226,6 +228,14 @@ public class DataManagerImpl implements DataManager{
         return query.getResultList();
     }
     
+    @Override
+    public List<JobLine> searchByJobDeadline(java.util.Date deadline){
+        TypedQuery<JobLine> query = em.createNamedQuery("JobLine.findDeadlinesAfterDate", JobLine.class);
+        query.setParameter("jobDeadline", deadline);
+        
+        return query.getResultList();
+    }
+    
     
     @Override
     public List<Staff> searchAllStaff(){
@@ -237,14 +247,22 @@ public class DataManagerImpl implements DataManager{
      @Override
     public List<Alert> findAlerts(){
         TypedQuery<Alert> query = em.createNamedQuery("Alert.findByBeenSeen", Alert.class);
-        query.setParameter("beenSeen", 0);
+        query.setParameter("beenSeen", false);
+        
+        return query.getResultList();
+    }
+    
+     @Override
+    public List<OrderTable> findOrders(Customer customer){
+        TypedQuery<OrderTable> query = em.createNamedQuery("OrderTable.findByAccountNo", OrderTable.class);
+        query.setParameter("accountNo", false);
         
         return query.getResultList();
     }
     
     
             
-    
+   
         
     }
         

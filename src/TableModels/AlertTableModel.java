@@ -63,9 +63,9 @@ public class AlertTableModel extends AbstractTableModel {
             case 1:
                 return alert.getDescription();
             case 2: 
-                return alert.getAccountNo();
+                return alert.getAccountNo().getAccountNo();
             case 3:
-                return alert.getJoblineID().getJobCode();
+                return alert.getJoblineID().getJobCode().getCode();
         }
         
        return null;

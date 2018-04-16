@@ -44,7 +44,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "OrderTable.findByVersion", query = "SELECT o FROM OrderTable o WHERE o.version = :version")})
 public class OrderTable implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -184,5 +184,6 @@ public class OrderTable implements Serializable {
     public String toString() {
         return "domain.OrderTable[ orderID=" + orderID + " ]";
     }
+
     
 }

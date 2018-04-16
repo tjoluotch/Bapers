@@ -53,5 +53,8 @@ public interface DataManager {
      public List<Staff> searchAllStaff();
      public void saveAlert(Alert a);
      public List<Alert> findAlerts();
+      public List<JobLine> searchByJobDeadline(java.util.Date deadline);
+      public List<OrderTable> findOrders(Customer customer);
+      
      
 }
