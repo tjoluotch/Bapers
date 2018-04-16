@@ -31,7 +31,7 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
     BAPPAYM paym = new BAPPAYM(dm);
     
     List<JobLine> jobList;
-    Collection<JobLine> selectedJobs = new LinkedList();
+    List<JobLine> selectedJobs = new LinkedList();
     JobsTableModel jobsTableModel;
     JobsTableModel basketModel = new JobsTableModel();
     float currentPrice = 0;
@@ -219,22 +219,29 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
     private void jobsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jobsTableMouseClicked
               
         int selectedRowIndex = jobsTable.getSelectedRow();
-        int selectedJobLineID = jobList.get(jobsTable.convertRowIndexToModel(selectedRowIndex)).getJoblineID();
-        JobLine myJob = null;
+        String jobId = jobsTable.getValueAt(selectedRowIndex, 0).toString();
+        int jobID = Integer.parseInt(jobId);
+        
+        //int selectedJobLineID = jobList.get(jobsTable.convertRowIndexToModel(selectedRowIndex)).getJoblineID();
+        
         for(JobLine job : jobList){
-            if(job.getJoblineID()==selectedJobLineID){
-                myJob = job;
+            if(job.getJoblineID() == jobID){
+                selectedJobs.add(job);
+                currentPrice += job.getJobCode().getPrice();
             }
         }
-        selectedJobs.add(myJob);
+        
         /*
         int jobLineID = jobList.get(jobsTable.convertRowIndexToModel(selectedRowIndex)).getJoblineID();
         selectedJobs.add(job);
         */
-        currentPrice = currentPrice + myJob.getJobCode().getPrice();
+        
+        basketModel = new JobsTableModel(selectedJobs);
+        basketModel.fireTableDataChanged();
+        
+        
         subtotal.setText(String.valueOf(currentPrice));
-        basketModel.update(selectedJobs);
-        basketModel.fireTableChanged(null);
+        
         System.out.println(selectedJobs.size());
     }//GEN-LAST:event_jobsTableMouseClicked
 
@@ -283,14 +290,26 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void basketTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_basketTableMouseClicked
-        int selectedRowIndex = jobsTable.getSelectedRow();
-        JobLine removedJob = jobList.get(jobsTable.convertRowIndexToModel(selectedRowIndex));
+        int selectedRowIndex = basketTable.getSelectedRow();
+        String jobId = basketTable.getValueAt(selectedRowIndex, 0).toString();
+        int jobID = Integer.parseInt(jobId);
+        List<JobLine> removeList = new LinkedList();
         
-        selectedJobs.remove(removedJob);
-        currentPrice = currentPrice - removedJob.getJobCode().getPrice();
+        for(JobLine job : selectedJobs){
+            
+            if(job.getJoblineID() == jobID){
+                removeList.add(job);
+                currentPrice = currentPrice - job.getJobCode().getPrice();
+            }
+            
+        }
+        
+        selectedJobs = removeList;
+        basketModel = new JobsTableModel(selectedJobs);
+        
         subtotal.setText(String.valueOf(currentPrice));
-        basketModel.update(selectedJobs);
-        basketModel.fireTableChanged(null);
+       
+        basketModel.fireTableDataChanged();
         System.out.println(selectedJobs.size());
     }//GEN-LAST:event_basketTableMouseClicked
 

@@ -45,9 +45,9 @@ public class JobsTableModel extends AbstractTableModel {
         this.li = li;
     }
     
-    public void update(Collection<JobLine> jobs){
-        li = new ArrayList(jobs);
-    }
+//    public void update(Collection<JobLine> jobs){
+//        li = new ArrayList(jobs);
+//    }
 
     @Override
     public String getColumnName(int column) {
