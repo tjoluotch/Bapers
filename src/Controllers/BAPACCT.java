@@ -21,6 +21,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Spliterator;
 import java.util.function.Consumer;
+import javax.swing.JTextField;
 
 /**
  * @author Daniel
@@ -36,6 +37,24 @@ public class BAPACCT {
         
     }
     
+     
+      public void deleteCustomer(Customer c){
+          DataManagerImpl dm = new DataManagerImpl();
+       c = new Customer();
+        
+        
+        dm.deleteCustomer(c);
+        System.out.println("Customer " + c.getForename() + " " + c.getSurname() + " has been deleted from the database.");
+    }
+
+    public Customer searchCustomerByName(JTextField name) {
+         DataManagerImpl dm = new DataManagerImpl();
+        String firstName = name.getText();
+        //String lastName = sName.getText();
+        
+      Customer c = dm.findCustomerByName(firstName, null);
+      return c;
+    }
     
     
     
