@@ -14,7 +14,7 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Tweetie Pie
  */
-public class JobsTableModel extends AbstractTableModel {
+public class TasksTableModel extends AbstractTableModel {
 
  @Override
     public Class<?> getColumnClass(int columnIndex) {
@@ -40,7 +40,7 @@ public class JobsTableModel extends AbstractTableModel {
     private List<TaskLine> li;
     private String[] columnNames = {"Task ID", "Description", "Department", "Expected Duration", "Job Deadline" , "Special Instructions"};
 
-    public JobsTableModel(List<TaskLine> li) {
+    public TasksTableModel(List<TaskLine> li) {
         this.li = li;
     }
 

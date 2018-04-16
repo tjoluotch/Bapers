@@ -5,7 +5,7 @@
  */
 package gui;
 
-import TableModels.JobsTableModel;
+import TableModels.TasksTableModel;
 import domain.TaskLine;
 import java.util.List;
 
@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class JobsCenterScreen extends javax.swing.JFrame {
 List <TaskLine> taskLineList;
-JobsTableModel model;
+TasksTableModel model;
     /**
      * Creates new form JobsCenterScreen
      */
@@ -56,7 +56,7 @@ JobsTableModel model;
             }
         });
 
-        jTable1.setModel((new JobsTableModel(taskLineList)));
+        jTable1.setModel((new TasksTableModel(taskLineList)));
         jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
