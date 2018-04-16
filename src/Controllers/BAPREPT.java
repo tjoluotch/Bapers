@@ -1783,6 +1783,9 @@ public class BAPREPT {
 
         doc.addPage(page);
         table.draw();
+        contentStream.close();
+       
+        doc.save( "customerReport.pdf");
                 
             
             
