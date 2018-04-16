@@ -152,16 +152,7 @@ public class DataManagerImpl implements DataManager{
         em.persist(customer);
         em.getTransaction().commit();
     }
-    
-    @Override
-    public void deleteCustomer(Customer customer){
-        Customer cust = em.find(Customer.class,1);
-        
-        em.getTransaction().begin();
-        em.remove(cust);
-        em.getTransaction().commit(); 
-    }
-    
+      
     @Override
     public void saveStaff(Staff staff){
         em.getTransaction().begin();
@@ -199,7 +190,7 @@ public class DataManagerImpl implements DataManager{
     }
     
     @Override
-    public void saveDiscountRate(DicountPlan d){
+    public void saveDiscountRate(DiscountPlan d){
        em.getTransaction().begin();
        em.persist(d);
        em.getTransaction().commit();

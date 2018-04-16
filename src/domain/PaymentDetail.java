@@ -14,8 +14,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -66,9 +64,6 @@ public class PaymentDetail implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "amount")
     private Float amount;
-    @JoinColumn(name = "orderID", referencedColumnName = "orderID")
-    @ManyToOne(optional = false)
-    private OrderTable orderID;
     @OneToMany(mappedBy = "paymentdetailID")
     private Collection<JobLine> jobLineCollection;
 
@@ -130,14 +125,6 @@ public class PaymentDetail implements Serializable {
 
     public void setAmount(Float amount) {
         this.amount = amount;
-    }
-
-    public OrderTable getOrderID() {
-        return orderID;
-    }
-
-    public void setOrderID(OrderTable orderID) {
-        this.orderID = orderID;
     }
 
     @XmlTransient

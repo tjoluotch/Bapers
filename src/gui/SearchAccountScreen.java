@@ -59,6 +59,14 @@ public class SearchAccountScreen extends javax.swing.JFrame {
         postcodeTextField = new javax.swing.JTextField();
         address1TxtField = new javax.swing.JTextField();
         updateButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -124,7 +132,7 @@ public class SearchAccountScreen extends javax.swing.JFrame {
 
             },
             new String [] {
-                "first name", "surname", "Discount Plan", "acc holder name", "postcode", "adress1", "phone", "email"
+                "first name", "surname", "Discount Plan", "acc holder name", "postcode", "adress1", "phone", "email", "Acc No"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -157,39 +165,32 @@ public class SearchAccountScreen extends javax.swing.JFrame {
         jLabel2.setText("Rate");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(200, 410, 27, 16);
-
-        fname.setText("jTextField1");
         getContentPane().add(fname);
         fname.setBounds(30, 310, 100, 26);
-
-        surnametextfield.setText("jTextField2");
         getContentPane().add(surnametextfield);
-        surnametextfield.setBounds(160, 310, 80, 26);
+        surnametextfield.setBounds(160, 310, 90, 26);
 
-        accHolderNameTextField.setText("jTextField3");
+        accHolderNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accHolderNameTextFieldActionPerformed(evt);
+            }
+        });
         getContentPane().add(accHolderNameTextField);
         accHolderNameTextField.setBounds(260, 310, 80, 26);
-
-        emailTextField.setText("jTextField4");
         getContentPane().add(emailTextField);
-        emailTextField.setBounds(360, 310, 80, 26);
+        emailTextField.setBounds(360, 310, 70, 26);
 
-        phoneTextField.setText("jTextField5");
         phoneTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 phoneTextFieldActionPerformed(evt);
             }
         });
         getContentPane().add(phoneTextField);
-        phoneTextField.setBounds(460, 310, 80, 26);
-
-        postcodeTextField.setText("jTextField6");
+        phoneTextField.setBounds(460, 310, 70, 26);
         getContentPane().add(postcodeTextField);
-        postcodeTextField.setBounds(550, 310, 80, 26);
-
-        address1TxtField.setText("jTextField8");
+        postcodeTextField.setBounds(550, 310, 70, 26);
         getContentPane().add(address1TxtField);
-        address1TxtField.setBounds(640, 310, 80, 26);
+        address1TxtField.setBounds(640, 310, 100, 26);
 
         updateButton.setText("Change Customer");
         updateButton.addActionListener(new java.awt.event.ActionListener() {
@@ -198,7 +199,44 @@ public class SearchAccountScreen extends javax.swing.JFrame {
             }
         });
         getContentPane().add(updateButton);
-        updateButton.setBounds(350, 360, 180, 29);
+        updateButton.setBounds(250, 370, 180, 29);
+
+        deleteButton.setText("Delete Customer");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(deleteButton);
+        deleteButton.setBounds(500, 370, 170, 29);
+
+        jLabel3.setText("First Name");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(50, 290, 68, 16);
+
+        jLabel4.setText("Last Name");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(170, 290, 70, 16);
+
+        jLabel5.setText("Acc H. Name");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(265, 290, 90, 16);
+
+        jLabel6.setText("email");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(370, 290, 34, 16);
+
+        jLabel7.setText("phone");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(470, 290, 39, 16);
+
+        jLabel9.setText("postcode");
+        getContentPane().add(jLabel9);
+        jLabel9.setBounds(560, 290, 80, 16);
+
+        jLabel10.setText("Address");
+        getContentPane().add(jLabel10);
+        jLabel10.setBounds(660, 290, 51, 16);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -216,7 +254,7 @@ public class SearchAccountScreen extends javax.swing.JFrame {
             
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();                       
             
-            model.addRow(new String []{c.getForename(),c.getSurname(), c.getDiscountType(), c.getAccountHolderName(),c.getPostcode(), c.getAddress1(), c.getPhone(), c.getEmail(), c.getTitle()});
+            model.addRow(new String []{c.getForename(),c.getSurname(), c.getDiscountType(), c.getAccountHolderName(),c.getPostcode(), c.getAddress1(), c.getPhone(), c.getEmail(), c.getAccountNo()});
             
             
     }//GEN-LAST:event_srcAccNameButtonActionPerformed
@@ -281,23 +319,38 @@ public class SearchAccountScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_phoneTextFieldActionPerformed
 
     private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-            int selectedRowIndex = jTable1.getSelectedRow();
-            
-            String plan = model.getValueAt(selectedRowIndex, 2).toString();
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        int selectedRowIndex = jTable1.getSelectedRow();  
+        String id =  model.getValueAt(selectedRowIndex, 8).toString();
           
-           String cfn = fname.toString();
-           String cln = surnametextfield.toString();
-           String cacn = accHolderNameTextField.toString();
-           String cpc = postcodeTextField.toString();
-           String cadr = address1TxtField.toString();
-           String cphn = phoneTextField.toString();
-           String cemail = emailTextField.toString();
-           
-           
-           bapacct.updateCustomer(cfn, cln, cemail, cphn, cadr, cpc, cacn);
-           
+           boolean cUpdate = bapacct.updateCustomer(fname, surnametextfield, emailTextField, postcodeTextField, address1TxtField, phoneTextField, accHolderNameTextField, id);
+           if (cUpdate == true){
+           JOptionPane.showMessageDialog(rootPane, "Successfully Updated Customer " + id);
+           }
+           else{
+              JOptionPane.showMessageDialog(rootPane, "Your update was unsuccessfull please try again"); 
+           }
     }//GEN-LAST:event_updateButtonActionPerformed
+
+    private void accHolderNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accHolderNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_accHolderNameTextFieldActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        int selectedRowIndex = jTable1.getSelectedRow();
+        
+        String id =  model.getValueAt(selectedRowIndex, 8).toString();
+        
+        boolean cDelete = bapacct.deleteCustomer(id);
+        if (cDelete == true) {
+            JOptionPane.showMessageDialog(rootPane, "Successfully Deleted Customer " + id);
+        }
+        else {
+            JOptionPane.showMessageDialog(rootPane, "You've been unsuccessfull in deleting Customer " + id); 
+        }
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -341,14 +394,22 @@ public class SearchAccountScreen extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JFormattedTextField dcPlnBx;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JTextField fname;
     private javax.swing.JButton goBackButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField phoneTextField;

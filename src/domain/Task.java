@@ -60,7 +60,7 @@ public class Task implements Serializable {
     @Column(name = "version")
     private long version;
     @OneToMany(mappedBy = "taskID")
-    private Collection<DicountPlan> dicountPlanCollection;
+    private Collection<DiscountPlan> discountPlanCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "taskID")
     private Collection<TaskLine> taskLineCollection;
 
@@ -125,12 +125,12 @@ public class Task implements Serializable {
     }
 
     @XmlTransient
-    public Collection<DicountPlan> getDicountPlanCollection() {
-        return dicountPlanCollection;
+    public Collection<DiscountPlan> getDiscountPlanCollection() {
+        return discountPlanCollection;
     }
 
-    public void setDicountPlanCollection(Collection<DicountPlan> dicountPlanCollection) {
-        this.dicountPlanCollection = dicountPlanCollection;
+    public void setDiscountPlanCollection(Collection<DiscountPlan> discountPlanCollection) {
+        this.discountPlanCollection = discountPlanCollection;
     }
 
     @XmlTransient

@@ -61,7 +61,7 @@ public class Customer implements Serializable {
     @Size(max = 30)
     @Column(name = "surname")
     private String surname;
-    @Size(max = 255)
+    @Size(max = 45)
     @Column(name = "account_holder_name")
     private String accountHolderName;
     @Size(max = 45)
@@ -95,7 +95,9 @@ public class Customer implements Serializable {
     @Size(max = 45)
     @Column(name = "discount_type")
     private String discountType;
-    @Size(max = 45)
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
     @Column(name = "status")
     private String status;
     @Basic(optional = false)
@@ -103,9 +105,9 @@ public class Customer implements Serializable {
     @Column(name = "version")
     private long version;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountNo")
-    private Collection<DicountPlan> dicountPlanCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountNo")
     private Collection<Alert> alertCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountNo")
+    private Collection<DiscountPlan> discountPlanCollection;
     @OneToMany(mappedBy = "accountNo")
     private Collection<OrderTable> orderTableCollection;
 
@@ -116,8 +118,9 @@ public class Customer implements Serializable {
         this.accountNo = accountNo;
     }
 
-    public Customer(String accountNo, long version) {
+    public Customer(String accountNo, String status, long version) {
         this.accountNo = accountNo;
+        this.status = status;
         this.version = version;
     }
 
@@ -250,21 +253,21 @@ public class Customer implements Serializable {
     }
 
     @XmlTransient
-    public Collection<DicountPlan> getDicountPlanCollection() {
-        return dicountPlanCollection;
-    }
-
-    public void setDicountPlanCollection(Collection<DicountPlan> dicountPlanCollection) {
-        this.dicountPlanCollection = dicountPlanCollection;
-    }
-
-    @XmlTransient
     public Collection<Alert> getAlertCollection() {
         return alertCollection;
     }
 
     public void setAlertCollection(Collection<Alert> alertCollection) {
         this.alertCollection = alertCollection;
+    }
+
+    @XmlTransient
+    public Collection<DiscountPlan> getDiscountPlanCollection() {
+        return discountPlanCollection;
+    }
+
+    public void setDiscountPlanCollection(Collection<DiscountPlan> discountPlanCollection) {
+        this.discountPlanCollection = discountPlanCollection;
     }
 
     @XmlTransient

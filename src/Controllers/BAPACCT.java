@@ -48,31 +48,48 @@ public class BAPACCT {
         System.out.println("Customer " + customer.getForename() + " " + customer.getSurname() + " has been added to the database.");
     }
 
-    public void deleteCustomer(Customer c){
-       c = new Customer();
+    public boolean deleteCustomer(String id){
+        boolean deleted;
+       Customer c = dm.getEm().find(Customer.class, id); 
         
-        
-        dm.deleteCustomer(c);
+        //dm.deleteCustomer(c);
+        dm.getEm().getTransaction().begin();
+        dm.getEm().remove(c);
+        dm.getEm().getTransaction().commit(); 
         System.out.println("Customer " + c.getForename() + " " + c.getSurname() + " has been deleted from the database.");
+        deleted = true;
+        return deleted;
     }
     
-    public void updateCustomer(String firstName, String surname, String email,
-                                String phone, String address1, String postcode, 
-                                 String Acc_holderName){
-
-         dm.getEm().getTransaction().begin();
-        cust = dm.getEm().find(Customer.class, firstName);
-        dm.getEm().lock(cust, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
-        dm.getEm().flush();
-        cust.setForename(firstName);
-        cust.setSurname(surname);
-        cust.setEmail(email);
-        cust.setPhone(phone);
-        cust.setAddress1(address1);
-        cust.setPostcode(postcode);
-        cust.setAccountHolderName(Acc_holderName);
-        dm.getEm().getTransaction().commit();
+    public boolean updateCustomer(JTextField fname,JTextField surnametextfield, JTextField emailTextField,
+                               JTextField postcodeTextField, JTextField address1TxtField, JTextField phoneTextField, 
+                                 JTextField accHolderNameTextField, String id){
         
+         boolean update = false;
+            
+         Customer c = dm.getEm().find(Customer.class, id);
+       
+        String cfn = fname.getText();
+           String cln = surnametextfield.getText();
+           String cacn = accHolderNameTextField.getText();
+           String cpc = postcodeTextField.getText();
+           String cadr = address1TxtField.getText();
+           String cphn = phoneTextField.getText();
+           String cemail = emailTextField.getText();
+       
+      dm.getEm().getTransaction().begin();
+      c.setAccountHolderName(cacn);
+      c.setAddress1(cadr);
+      c.setEmail(cemail);
+      c.setForename(cfn);
+      c.setSurname(cln);
+      c.setPostcode(cpc);
+      c.setPhone(cphn);
+      dm.getEm().getTransaction().commit();
+      
+      update = true;
+      return update;
+    
     }
 
     public Customer searchCustomerByName(JTextField name) {

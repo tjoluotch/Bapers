@@ -18,6 +18,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -32,7 +33,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Alert.findAll", query = "SELECT a FROM Alert a")
     , @NamedQuery(name = "Alert.findByAlertID", query = "SELECT a FROM Alert a WHERE a.alertID = :alertID")
     , @NamedQuery(name = "Alert.findByTarget", query = "SELECT a FROM Alert a WHERE a.target = :target")
-    , @NamedQuery(name = "Alert.findByBeenSeen", query = "SELECT a FROM Alert a WHERE a.beenSeen = :beenSeen")})
+    , @NamedQuery(name = "Alert.findByBeenSeen", query = "SELECT a FROM Alert a WHERE a.beenSeen = :beenSeen")
+    , @NamedQuery(name = "Alert.findByVersion", query = "SELECT a FROM Alert a WHERE a.version = :version")})
 public class Alert implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -49,7 +51,11 @@ public class Alert implements Serializable {
     @Column(name = "target")
     private String target;
     @Column(name = "been_seen")
-    private Short beenSeen;
+    private Boolean beenSeen;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "version")
+    private long version;
     @JoinColumn(name = "account_no", referencedColumnName = "account_no")
     @ManyToOne(optional = false)
     private Customer accountNo;
@@ -65,6 +71,11 @@ public class Alert implements Serializable {
 
     public Alert(Integer alertID) {
         this.alertID = alertID;
+    }
+
+    public Alert(Integer alertID, long version) {
+        this.alertID = alertID;
+        this.version = version;
     }
 
     public Integer getAlertID() {
@@ -91,12 +102,20 @@ public class Alert implements Serializable {
         this.target = target;
     }
 
-    public Short getBeenSeen() {
+    public Boolean getBeenSeen() {
         return beenSeen;
     }
 
-    public void setBeenSeen(Short beenSeen) {
+    public void setBeenSeen(Boolean beenSeen) {
         this.beenSeen = beenSeen;
+    }
+
+    public long getVersion() {
+        return version;
+    }
+
+    public void setVersion(long version) {
+        this.version = version;
     }
 
     public Customer getAccountNo() {

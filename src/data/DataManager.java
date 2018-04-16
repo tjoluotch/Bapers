@@ -42,7 +42,7 @@ public interface DataManager {
     
     
     void saveCustomer(Customer customer);
-    void deleteCustomer(Customer customer);
+    
     
     void saveStaff(Staff staff);
     
@@ -52,7 +52,7 @@ public interface DataManager {
     
     void savePayment(PaymentDetail payment);
     
-        void saveDiscountRate(DicountPlan d);
+        void saveDiscountRate(DiscountPlan d);
         
         
 

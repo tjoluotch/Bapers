@@ -64,8 +64,6 @@ public class OrderTable implements Serializable {
     @Column(name = "version")
     private long version;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderID")
-    private Collection<PaymentDetail> paymentDetailCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderID")
     private Collection<Alert> alertCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderID")
     private Collection<JobLine> jobLineCollection;
@@ -123,15 +121,6 @@ public class OrderTable implements Serializable {
 
     public void setVersion(long version) {
         this.version = version;
-    }
-
-    @XmlTransient
-    public Collection<PaymentDetail> getPaymentDetailCollection() {
-        return paymentDetailCollection;
-    }
-
-    public void setPaymentDetailCollection(Collection<PaymentDetail> paymentDetailCollection) {
-        this.paymentDetailCollection = paymentDetailCollection;
     }
 
     @XmlTransient
