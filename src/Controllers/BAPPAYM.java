@@ -160,13 +160,14 @@ public class BAPPAYM {
     public void firstLetterGeneration() throws IOException{
         String filename = "/Users/tjay/NetBeansProjects/" + /*c.getAccountHolderName()*/"DavidRhind" + "LatePaymLetter1.pdf";
         
-        String theLab = "The Lab";
-        String LabName = "Bloombsbury's Image Processing Laboratory";
-        String LabAdress = "2 Wynyatt Street, London, EC1V 7HU";
-        String LabNumber = "Phone: 0207 235 7534";
+        String name = "The Lab";
+        String accountHolder = "Bloombsbury's Image Processing Laboratory";
+        String address = address1 + ", " + city + ", " + postcode;
+        String phoneNumber = "Phone: " + telephone;
         
-        String wording = "According to our records, it appears that we have not yet received payment of the above invoice, which was posted"; 
-        String wording2 = "to you on 18th December 2017, for photographic work done in our laboratory.";
+        String wording = "According to our records, it appears that we have not yet received payment of the order you made on the , which was posted"; 
+        String wording2 = "to you on" + order.datsSubmitted 
+                + ", for photographic work done in our laboratory.";
         String wording3 = "We would appreciate payment at your earliest convenience.";
         String wording4 = "If you have already sent a payment to us recently, please accept our apologies.";
         String wording5 = "Yours sincerely,";
