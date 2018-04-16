@@ -84,6 +84,8 @@ public class OrderTable implements Serializable {
         this.orderID = orderID;
         this.version = version;
     }
+    
+    
 
     public Integer getOrderID() {
         return orderID;
@@ -133,7 +135,9 @@ public class OrderTable implements Serializable {
     public void setPaymentDetailCollection(Collection<PaymentDetail> paymentDetailCollection) {
         this.paymentDetailCollection = paymentDetailCollection;
     }
-
+    public void addPaymentDetail(PaymentDetail paymentDetail){
+        paymentDetailCollection.add(paymentDetail);
+    }
     @XmlTransient
     public Collection<Alert> getAlertCollection() {
         return alertCollection;
