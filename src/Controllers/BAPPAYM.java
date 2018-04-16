@@ -170,6 +170,8 @@ public class BAPPAYM {
             PDFont LabNamefont = PDType1Font.HELVETICA_BOLD;
             PDFont StandardFont = PDType1Font.HELVETICA;
             PDPageContentStream contents = new PDPageContentStream(doc, page);
+            
+            
             contents.beginText();
             contents.setFont(LabNamefont, 30);
             contents.newLineAtOffset(300, 700);

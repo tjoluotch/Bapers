@@ -5,6 +5,8 @@
  */
 package gui;
 
+import Controllers.BAPACCT;
+
 
 /**
  *
@@ -16,7 +18,7 @@ public class CreateAccountScreen extends javax.swing.JFrame {
      * Creates new form CreateAccountScreen
      */
     
-    
+    BAPACCT b = new BAPACCT();
     
     public CreateAccountScreen() {
         initComponents();
@@ -38,16 +40,14 @@ public class CreateAccountScreen extends javax.swing.JFrame {
         forename = new javax.swing.JTextField();
         surname = new javax.swing.JTextField();
         accountHolderName = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        phoneNo = new javax.swing.JTextField();
+        postcode = new javax.swing.JTextField();
         adress1 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        city = new javax.swing.JTextField();
+        createAccountButton = new javax.swing.JButton();
         Title = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        address2 = new javax.swing.JTextField();
-        address3 = new javax.swing.JTextField();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -84,17 +84,17 @@ public class CreateAccountScreen extends javax.swing.JFrame {
             }
         });
 
-        jTextField4.setText("Contact Number");
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        phoneNo.setText("Contact Number");
+        phoneNo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                phoneNoActionPerformed(evt);
             }
         });
 
-        jTextField5.setText("Postcode");
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        postcode.setText("Postcode");
+        postcode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                postcodeActionPerformed(evt);
             }
         });
 
@@ -105,14 +105,19 @@ public class CreateAccountScreen extends javax.swing.JFrame {
             }
         });
 
-        jTextField7.setText("City");
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        city.setText("City");
+        city.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                cityActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Create Account");
+        createAccountButton.setText("Create Account");
+        createAccountButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createAccountButtonActionPerformed(evt);
+            }
+        });
 
         Title.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Titile", "Mr", "Mrs", "Ms", "Miss", "Master", " " }));
         Title.addActionListener(new java.awt.event.ActionListener() {
@@ -124,20 +129,6 @@ public class CreateAccountScreen extends javax.swing.JFrame {
         jLabel1.setText("Logo");
 
         jButton3.setText("Cancel");
-
-        address2.setText("Address");
-        address2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                address2ActionPerformed(evt);
-            }
-        });
-
-        address3.setText("Address");
-        address3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                address3ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -157,13 +148,11 @@ public class CreateAccountScreen extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(adress1)
-                                    .addComponent(address2)
-                                    .addComponent(address3)
-                                    .addComponent(jTextField7)
-                                    .addComponent(jTextField4)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(city)
+                                    .addComponent(phoneNo)
+                                    .addComponent(postcode, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(55, 55, 55)
-                                .addComponent(jButton2)
+                                .addComponent(createAccountButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton3)))
                         .addContainerGap())
@@ -182,9 +171,8 @@ public class CreateAccountScreen extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3))
-                        .addContainerGap())
+                            .addComponent(createAccountButton)
+                            .addComponent(jButton3)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -196,16 +184,13 @@ public class CreateAccountScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(adress1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(address2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(postcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(address3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33))))
+                        .addComponent(phoneNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 94, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
@@ -223,33 +208,31 @@ public class CreateAccountScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_accountHolderNameActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void phoneNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneNoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_phoneNoActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void postcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postcodeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_postcodeActionPerformed
 
     private void adress1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adress1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_adress1ActionPerformed
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+    private void cityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cityActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
-
-    private void address2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_address2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_address2ActionPerformed
-
-    private void address3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_address3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_address3ActionPerformed
+    }//GEN-LAST:event_cityActionPerformed
 
     private void TitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TitleActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TitleActionPerformed
+
+    private void createAccountButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createAccountButtonActionPerformed
+        // TODO add your handling code here:
+        b.createNewCustomer(forename.toString(), surname.toString(), accountHolderName.toString(), adress1.toString(),
+                            city.toString(), postcode.toString(), phoneNo.toString());
+    }//GEN-LAST:event_createAccountButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -289,20 +272,18 @@ public class CreateAccountScreen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> Title;
     private javax.swing.JTextField accountHolderName;
-    private javax.swing.JTextField address2;
-    private javax.swing.JTextField address3;
     private javax.swing.JTextField adress1;
+    private javax.swing.JTextField city;
+    private javax.swing.JButton createAccountButton;
     private javax.swing.JTextField forename;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField phoneNo;
+    private javax.swing.JTextField postcode;
     private javax.swing.JTextField surname;
     // End of variables declaration//GEN-END:variables
 }

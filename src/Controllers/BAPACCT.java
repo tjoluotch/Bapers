@@ -7,6 +7,8 @@ package Controllers;
 
 import data.DataManagerImpl;
 import domain.Customer;
+import domain.Staff;
+import javax.persistence.LockModeType;
 
 import javax.swing.*;
 
@@ -18,20 +20,25 @@ import javax.swing.*;
 public class BAPACCT {
     
     DataManagerImpl dm = new DataManagerImpl();
+    Customer cust;
     public BAPACCT(){
        
     }
     
-    public void createNewCustomer(String accountNo, String forename, String surname, String accountHolderName, 
-        String address1, String address2, String address3, String city, String postcode, String phone){
+    public String calAcc() {
+         String prefix = "ACC0200";   
+    return prefix;
+    }
+    
+    public void createNewCustomer(String forename, String surname, String accountHolderName, 
+        String address1, String city, String postcode, String phone){
         Customer customer = new Customer();
         
-        customer.setAccountNo(accountNo);
+        customer.setAccountNo(calAcc());
         customer.setForename(forename);
         customer.setSurname(surname);
         customer.setAccountHolderName(accountHolderName);
         customer.setAddress1(address1);
-        customer.setAddress2(address2);
         customer.setCity(city);
         customer.setPostcode(postcode);
         customer.setPhone(phone);
@@ -47,6 +54,25 @@ public class BAPACCT {
         
         dm.deleteCustomer(c);
         System.out.println("Customer " + c.getForename() + " " + c.getSurname() + " has been deleted from the database.");
+    }
+    
+    public void updateCustomer(String firstName, String surname, String email,
+                                String phone, String address1, String postcode, 
+                                 String Acc_holderName){
+
+         dm.getEm().getTransaction().begin();
+        cust = dm.getEm().find(Customer.class, firstName);
+        dm.getEm().lock(cust, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+        dm.getEm().flush();
+        cust.setForename(firstName);
+        cust.setSurname(surname);
+        cust.setEmail(email);
+        cust.setPhone(phone);
+        cust.setAddress1(address1);
+        cust.setPostcode(postcode);
+        cust.setAccountHolderName(Acc_holderName);
+        dm.getEm().getTransaction().commit();
+        
     }
 
     public Customer searchCustomerByName(JTextField name) {

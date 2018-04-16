@@ -159,10 +159,6 @@ public class OrderTable implements Serializable {
     public void setAccountNo(Customer accountNo) {
         this.accountNo = accountNo;
     }
-    
-       public void addPaymentDetail(PaymentDetail paymentDetail){
-        paymentDetailCollection.add(paymentDetail);
-    }
 
     @Override
     public int hashCode() {

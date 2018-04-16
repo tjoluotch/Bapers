@@ -147,7 +147,11 @@ public class DataManagerImpl implements DataManager{
     }
     
     @Override
-    public void saveCustomer(Customer customer){em.persist(customer);}
+    public void saveCustomer(Customer customer){
+        em.getTransaction().begin();
+        em.persist(customer);
+        em.getTransaction().commit();
+    }
     
     @Override
     public void deleteCustomer(Customer customer){
@@ -201,17 +205,8 @@ public class DataManagerImpl implements DataManager{
        em.getTransaction().commit();
     }
 
-    @Override
-    public boolean updateStaffRecord(String username, String firstName, String surname, String password, String role) {
-        TypedQuery<Staff> query = em.createNamedQuery("Staff.updateStaff", Staff.class);
-        query.setParameter("forename", firstName);
-        query.setParameter("surname", surname);
-        query.setParameter("password", password);
-        query.setParameter("role", role);
-        query.setParameter("username", username);
-        query.executeUpdate();
-        return true;//To change body of generated methods, choose Tools | Templates.
-    }
+    
+
     
     @Override
     public List <TaskLine> individualReport(Date date) {

@@ -33,7 +33,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Customer.findByAccountNo", query = "SELECT c FROM Customer c WHERE c.accountNo = :accountNo")
     , @NamedQuery(name = "Customer.findByForename", query = "SELECT c FROM Customer c WHERE c.forename = :forename")
     , @NamedQuery(name = "Customer.findBySurname", query = "SELECT c FROM Customer c WHERE c.surname = :surname")
-    , @NamedQuery(name = "Customer.findByName", query = "SELECT c FROM Customer c WHERE c.forename = :forename AND c.surname = :surname")     
     , @NamedQuery(name = "Customer.findByAccountHolderName", query = "SELECT c FROM Customer c WHERE c.accountHolderName = :accountHolderName")
     , @NamedQuery(name = "Customer.findByTitle", query = "SELECT c FROM Customer c WHERE c.title = :title")
     , @NamedQuery(name = "Customer.findByAddress1", query = "SELECT c FROM Customer c WHERE c.address1 = :address1")
@@ -62,7 +61,7 @@ public class Customer implements Serializable {
     @Size(max = 30)
     @Column(name = "surname")
     private String surname;
-    @Size(max = 45)
+    @Size(max = 255)
     @Column(name = "account_holder_name")
     private String accountHolderName;
     @Size(max = 45)
