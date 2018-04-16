@@ -10,6 +10,9 @@ import be.quodlibet.boxable.Cell;
 import be.quodlibet.boxable.Row;
 import be.quodlibet.boxable.utils.PDStreamUtils;
 import data.DataManagerImpl;
+import domain.Customer;
+import domain.JobLine;
+import domain.OrderTable;
 import domain.TaskLine;
         
 import domain.TaskLine;
@@ -21,6 +24,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import org.apache.pdfbox.pdmodel.PDDocument;
@@ -116,8 +120,7 @@ public class BAPREPT {
         long total = 0;
 
         for (int i = 0; i < line.size(); i++) {
-            TaskLine
-                    g = line.get(i);
+            TaskLine g = line.get(i);
 
             String[] sdot = new String[8];
             sdot[0] = g.getCompletedBy().getForename() + " " + g.getCompletedBy().getSurname();
@@ -1671,13 +1674,126 @@ public class BAPREPT {
         
     }
     
-    public void createCustomerReport(String accNo, String date1, String date2){
+    public void createCustomerReport(String accNo, String date1, String date2) throws IOException{
+        
+        
+        String day1 = date1.substring(1, 2);
+        String month1 = date1.substring(3, 5);
+        String year1 = date1.substring(6, 10);
+        String newDate1 = year1 + "-" + month1 + "-" + day1;
+        String day2 = date2.substring(0, 2);
+        String month2 = date2.substring(3, 5);
+        String year2 = date2.substring(6, 10);
+        String newDate2 = year2 + "-" + month2 + "-" + day2;
+        String period = "Period: " + date1 + " - " + date2;
+        PDPage page = new PDPage(PDRectangle.A4);
+        PDDocument doc = new PDDocument();
+        PDPageContentStream contentStream = new PDPageContentStream(doc, page);
+        float hWidth = page.getMediaBox().getWidth() / 4;
+        double a = page.getMediaBox().getWidth() / 2.65;
+        float hWidth2 = (float) a;
+        PDFont font = PDType1Font.HELVETICA_BOLD;
+        PDFont font2 = PDType1Font.HELVETICA;
+        
+        
+        PDStreamUtils.write(contentStream, "Summary Performance Report", font, 20, hWidth, 790, Color.BLACK);
+        PDStreamUtils.write(contentStream, period, font2, 15, hWidth2-44, 750, Color.BLACK);
         
         DataManagerImpl dm = new DataManagerImpl();
-        dm.findCustomerByAccountNumber(accNo);
+       Customer c = dm.findCustomerByAccountNumber(accNo);
+       List<String[]> list = new ArrayList<String[]>();
+        
+        
+        Collection<OrderTable> oList = c.getOrderTableCollection();
+        
+        for (OrderTable o : oList){
+            
+            Collection<JobLine> jList = o.getJobLineCollection();
+            for(JobLine js : jList){
+                String[] sdot = new String[5];
+                sdot[0] = String.valueOf(js.getJoblineID());
+                sdot[1] = js.getJobCode().getCode();
+                sdot[2] = String.valueOf(js.getOrderID().getOrderID());
+                sdot[3] = js.getJobDeadline().toString();
+                if(js.isPaidFor()){
+                    
+                    sdot[4] = "Paid";
+                    
+                }
+                
+                else{
+                    sdot[4] = "Unpaid";
+                }
+                
+                list.add(sdot);
+                
+                
+                
+               
+            }
+            
+            float margin = 50;
+        float yStartNewPage = page.getMediaBox().getHeight() - (2 * margin) -150;
+        float tableWidth = page.getMediaBox().getWidth() - (2 * margin);
+
+        float bottomMargin = 70;
+        float yPosition = 700;
+        
+           BaseTable table = new BaseTable(yPosition, yStartNewPage, bottomMargin, tableWidth, margin, doc, page, true, true);
+         Row<PDPage> titleRow = table.createRow(15f);
+        Cell<PDPage> cell = titleRow.createCell(100, "Summary Report");
+        cell.setFont(PDType1Font.HELVETICA_BOLD);
+        cell.setFillColor(Color.WHITE);
+        table.addHeaderRow(titleRow);
+
+        Row<PDPage> headerRow = table.createRow(15f);
+        Cell<PDPage> cell2 = headerRow.createCell(100 / 5f, "Date");
+        cell2.setFont(PDType1Font.HELVETICA_BOLD);
+        Cell<PDPage> cell3 = headerRow.createCell(100 / 5f, "Copy Room");
+        cell3.setFont(PDType1Font.HELVETICA_BOLD);
+        Cell<PDPage> cell4 = headerRow.createCell(100 / 5f, "Development Area");
+        cell4.setFont(PDType1Font.HELVETICA_BOLD);
+        Cell<PDPage> cell5 = headerRow.createCell(100 / 5f, "Packing Department");
+        cell5.setFont(PDType1Font.HELVETICA_BOLD);
+        Cell<PDPage> cell6 = headerRow.createCell(100 / 5f, "Finishing Room");
+        cell6.setFont(PDType1Font.HELVETICA_BOLD);
+    
+        cell.setFont(PDType1Font.HELVETICA_BOLD);
+        cell.setFillColor(Color.WHITE);
+        table.addHeaderRow(headerRow);
+
+        for (String[] fact : list) {
+            
+             if (table.getCurrentPage() != page) {
+                doc.addPage(page);
+                contentStream.close();
+                page = table.getCurrentPage();
+                contentStream = new PDPageContentStream(doc, page, AppendMode.APPEND, false);
+
+                contentStream.beginText();
+            }
+            Row<PDPage> row = table.createRow(10f);
+            cell = row.createCell((100 / 5f), fact[0]);
+            for (int i = 1; i < fact.length; i++) {
+                cell = row.createCell((100 / 5f), fact[i]);
+            }
+        }
+       
+        
+
+        doc.addPage(page);
+        table.draw();
+                
+            
+            
+            
+            
+        }
         
         
         
     }
+    
+    
 
 }
