@@ -8,13 +8,13 @@ package domain;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Tweetie Pie
  */
 @Entity
+@Table(name = "task")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Task.findAll", query = "SELECT t FROM Task t")
@@ -36,31 +37,31 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Task.findByVersion", query = "SELECT t FROM Task t WHERE t.version = :version")})
 public class Task implements Serializable {
 
+   
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Column(nullable = false)
+    @Column(name = "taskID")
     private Integer taskID;
     @Size(max = 45)
-    @Column(length = 45)
+    @Column(name = "description")
     private String description;
     @Size(max = 45)
-    @Column(length = 45)
+    @Column(name = "department")
     private String department;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(precision = 12)
+    @Column(name = "price")
     private Float price;
     @Column(name = "expected_duration")
     private Integer expectedDuration;
     @Basic(optional = false)
     @NotNull
-    @Column(nullable = false)
+    @Column(name = "version")
     private long version;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "taskID")
-    private Collection<DicountPlan> dicountPlanCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "taskID")
-    private Collection<TaskLine> taskLineCollection;
+    @OneToMany(mappedBy = "taskID")
+    private Collection<DiscountPlan> discountPlanCollection;
 
     public Task() {
     }
@@ -123,21 +124,12 @@ public class Task implements Serializable {
     }
 
     @XmlTransient
-    public Collection<DicountPlan> getDicountPlanCollection() {
-        return dicountPlanCollection;
+    public Collection<DiscountPlan> getDicountPlanCollection() {
+        return discountPlanCollection;
     }
 
-    public void setDicountPlanCollection(Collection<DicountPlan> dicountPlanCollection) {
-        this.dicountPlanCollection = dicountPlanCollection;
-    }
-
-    @XmlTransient
-    public Collection<TaskLine> getTaskLineCollection() {
-        return taskLineCollection;
-    }
-
-    public void setTaskLineCollection(Collection<TaskLine> taskLineCollection) {
-        this.taskLineCollection = taskLineCollection;
+    public void setDicountPlanCollection(Collection<DiscountPlan> dicountPlanCollection) {
+        this.discountPlanCollection = dicountPlanCollection;
     }
 
     @Override
@@ -163,6 +155,15 @@ public class Task implements Serializable {
     @Override
     public String toString() {
         return "domain.Task[ taskID=" + taskID + " ]";
+    }
+
+    @XmlTransient
+    public Collection<DiscountPlan> getDiscountPlanCollection() {
+        return discountPlanCollection;
+    }
+
+    public void setDiscountPlanCollection(Collection<DiscountPlan> discountPlanCollection) {
+        this.discountPlanCollection = discountPlanCollection;
     }
     
 }

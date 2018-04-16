@@ -6,16 +6,20 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -40,9 +44,11 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Customer.findByEmail", query = "SELECT c FROM Customer c WHERE c.email = :email")
     , @NamedQuery(name = "Customer.findByValuedCustomer", query = "SELECT c FROM Customer c WHERE c.valuedCustomer = :valuedCustomer")
     , @NamedQuery(name = "Customer.findByDiscountType", query = "SELECT c FROM Customer c WHERE c.discountType = :discountType")
-    , @NamedQuery(name = "Customer.findByDefaulted", query = "SELECT c FROM Customer c WHERE c.defaulted = :defaulted")
+    , @NamedQuery(name = "Customer.findByStatus", query = "SELECT c FROM Customer c WHERE c.status = :status")
     , @NamedQuery(name = "Customer.findByVersion", query = "SELECT c FROM Customer c WHERE c.version = :version")})
 public class Customer implements Serializable {
+
+    
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -91,12 +97,17 @@ public class Customer implements Serializable {
     @Size(max = 45)
     @Column(name = "discount_type")
     private String discountType;
-    @Column(name = "defaulted")
-    private Boolean defaulted;
+    @Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "status")
+    private String status;
     @Basic(optional = false)
     @NotNull
     @Column(name = "version")
     private long version;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountNo")
+    private Collection<DiscountPlan> discountPlanCollection;
 
     public Customer() {
     }
@@ -105,8 +116,9 @@ public class Customer implements Serializable {
         this.accountNo = accountNo;
     }
 
-    public Customer(String accountNo, long version) {
+    public Customer(String accountNo, String status, long version) {
         this.accountNo = accountNo;
+        this.status = status;
         this.version = version;
     }
 
@@ -222,12 +234,12 @@ public class Customer implements Serializable {
         this.discountType = discountType;
     }
 
-    public Boolean getDefaulted() {
-        return defaulted;
+    public String getStatus() {
+        return status;
     }
 
-    public void setDefaulted(Boolean defaulted) {
-        this.defaulted = defaulted;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public long getVersion() {
@@ -236,6 +248,15 @@ public class Customer implements Serializable {
 
     public void setVersion(long version) {
         this.version = version;
+    }
+
+    @XmlTransient
+    public Collection<DiscountPlan> getDicountPlanCollection() {
+        return discountPlanCollection;
+    }
+
+    public void setDiscountPlanCollection(Collection<DiscountPlan> discountPlanCollection) {
+        this.discountPlanCollection = discountPlanCollection;
     }
 
     @Override
@@ -262,5 +283,12 @@ public class Customer implements Serializable {
     public String toString() {
         return "domain.Customer[ accountNo=" + accountNo + " ]";
     }
+
+    @XmlTransient
+    public Collection<DiscountPlan> getDiscountPlanCollection() {
+        return discountPlanCollection;
+    }
+
+    
     
 }

@@ -180,6 +180,24 @@ public class DataManagerImpl implements DataManager{
         return true;//To change body of generated methods, choose Tools | Templates.
     }
     
+    
+    @Override
+    public void saveDiscountRate(DiscountPlan d){
+       em.getTransaction().begin();
+       em.persist(d);
+       em.getTransaction().commit();
+    }
+	
+	
+	 @Override
+    public void deleteCustomer(Customer customer){
+        Customer cust = em.find(Customer.class,1);
+        
+        em.getTransaction().begin();
+        em.remove(cust);
+        em.getTransaction().commit(); 
+    }
+    
     @Override
     public List <TaskLine> individualReport(Date date) {
         TypedQuery<TaskLine> query = em.createNamedQuery("TaskLine.findPerformanceReport", TaskLine.class);

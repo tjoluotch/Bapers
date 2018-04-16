@@ -57,7 +57,8 @@ public interface DataManager {
      public List<OrderTable> findOrders(Customer customer);
      public void saveJob(Job job); 
      public List<Customer> customerCount();
-      
+     public void deleteCustomer(Customer customer);
+     public void saveDiscountRate(DiscountPlan d);
      public void savePayment(PaymentDetail payment);
       
      

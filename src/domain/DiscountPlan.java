@@ -25,50 +25,50 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Tweetie Pie
  */
 @Entity
-@Table(name = "dicount_plan")
+@Table(name = "discount_plan")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "DicountPlan.findAll", query = "SELECT d FROM DicountPlan d")
-    , @NamedQuery(name = "DicountPlan.findByDicountplanID", query = "SELECT d FROM DicountPlan d WHERE d.dicountplanID = :dicountplanID")
-    , @NamedQuery(name = "DicountPlan.findByRate", query = "SELECT d FROM DicountPlan d WHERE d.rate = :rate")
-    , @NamedQuery(name = "DicountPlan.findByIsFlexible", query = "SELECT d FROM DicountPlan d WHERE d.isFlexible = :isFlexible")
-    , @NamedQuery(name = "DicountPlan.findByVariableRate", query = "SELECT d FROM DicountPlan d WHERE d.variableRate = :variableRate")})
-public class DicountPlan implements Serializable {
+    @NamedQuery(name = "DiscountPlan.findAll", query = "SELECT d FROM DiscountPlan d")
+    , @NamedQuery(name = "DiscountPlan.findByDiscountplanID", query = "SELECT d FROM DiscountPlan d WHERE d.discountplanID = :discountplanID")
+    , @NamedQuery(name = "DiscountPlan.findByRate", query = "SELECT d FROM DiscountPlan d WHERE d.rate = :rate")
+    , @NamedQuery(name = "DiscountPlan.findByIsFlexible", query = "SELECT d FROM DiscountPlan d WHERE d.isFlexible = :isFlexible")
+    , @NamedQuery(name = "DiscountPlan.findByVariableRate", query = "SELECT d FROM DiscountPlan d WHERE d.variableRate = :variableRate")})
+public class DiscountPlan implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "dicount_planID", nullable = false)
-    private Integer dicountplanID;
+    @Column(name = "discount_planID")
+    private Integer discountplanID;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(precision = 12)
+    @Column(name = "rate")
     private Float rate;
     @Column(name = "is_flexible")
     private Short isFlexible;
     @Size(max = 45)
-    @Column(name = "variable_rate", length = 45)
+    @Column(name = "variable_rate")
     private String variableRate;
-    @JoinColumn(name = "account_no", referencedColumnName = "account_no", nullable = false)
+    @JoinColumn(name = "account_no", referencedColumnName = "account_no")
     @ManyToOne(optional = false)
     private Customer accountNo;
-    @JoinColumn(name = "taskID", referencedColumnName = "taskID", nullable = false)
-    @ManyToOne(optional = false)
+    @JoinColumn(name = "taskID", referencedColumnName = "taskID")
+    @ManyToOne
     private Task taskID;
 
-    public DicountPlan() {
+    public DiscountPlan() {
     }
 
-    public DicountPlan(Integer dicountplanID) {
-        this.dicountplanID = dicountplanID;
+    public DiscountPlan(Integer discountplanID) {
+        this.discountplanID = discountplanID;
     }
 
-    public Integer getDicountplanID() {
-        return dicountplanID;
+    public Integer getDiscountplanID() {
+        return discountplanID;
     }
 
-    public void setDicountplanID(Integer dicountplanID) {
-        this.dicountplanID = dicountplanID;
+    public void setDiscountplanID(Integer discountplanID) {
+        this.discountplanID = discountplanID;
     }
 
     public Float getRate() {
@@ -114,18 +114,18 @@ public class DicountPlan implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (dicountplanID != null ? dicountplanID.hashCode() : 0);
+        hash += (discountplanID != null ? discountplanID.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof DicountPlan)) {
+        if (!(object instanceof DiscountPlan)) {
             return false;
         }
-        DicountPlan other = (DicountPlan) object;
-        if ((this.dicountplanID == null && other.dicountplanID != null) || (this.dicountplanID != null && !this.dicountplanID.equals(other.dicountplanID))) {
+        DiscountPlan other = (DiscountPlan) object;
+        if ((this.discountplanID == null && other.discountplanID != null) || (this.discountplanID != null && !this.discountplanID.equals(other.discountplanID))) {
             return false;
         }
         return true;
@@ -133,7 +133,7 @@ public class DicountPlan implements Serializable {
 
     @Override
     public String toString() {
-        return "domain.DicountPlan[ dicountplanID=" + dicountplanID + " ]";
+        return "domain.DiscountPlan[ discountplanID=" + discountplanID + " ]";
     }
     
 }

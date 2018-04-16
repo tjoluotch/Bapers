@@ -14,6 +14,8 @@
     <class>domain.DicountPlan</class>
     <class>domain.Customer_1</class>
     <class>domain.Job_1</class>
+    <class>domain.Task_1</class>
+    <class>domain.DiscountPlan</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/solsoft_DB"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
