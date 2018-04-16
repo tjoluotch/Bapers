@@ -81,22 +81,7 @@ public class DataManagerImpl implements DataManager{
         return query.getSingleResult();
     }
 
-    @Override
-    public Staff findStaffByName(String forename, String surname) {
-        if(surname == null){
-            TypedQuery<Staff> query = em.createNamedQuery("Staff.findByForename", Staff.class);
-            query.setParameter("forename", forename);
-            return query.getSingleResult();
-        } else if(forename == null){
-            TypedQuery<Staff> query = em.createNamedQuery("Staff.findBySurname", Staff.class);
-            query.setParameter("surname", surname);
-            return query.getSingleResult();
-        } else {
-            TypedQuery<Staff> query = em.createNamedQuery("Staff.findByName", Staff.class);
-            query.setParameter("forename", forename).setParameter("surname", surname);
-            return query.getSingleResult();
-        }
-    }
+    
 
     @Override
     public Staff findStaffByUsername(String username) {
@@ -175,12 +160,10 @@ public class DataManagerImpl implements DataManager{
     }
     
     
-    @Override
-    public void saveJob(Job job){em.persist(job);}
     
     
-    @Override
-    public void saveTask(Task task){em.persist(task);}
+    
+ 
 
     @Override
     public boolean updateStaffRecord(String username, String firstName, String surname, String password, String role) {
@@ -234,6 +217,44 @@ public class DataManagerImpl implements DataManager{
         query.setParameter("jobDeadline", deadline);
         
         return query.getResultList();
+    }
+    
+     @Override
+    public Staff findStaffByName(String forename, String surname) {
+        if(surname.contentEquals("")){
+            TypedQuery<Staff> query = em.createNamedQuery("Staff.findByForename", Staff.class);
+            query.setParameter("forename", forename);
+            return query.getSingleResult();
+        } else if(forename == null){
+            TypedQuery<Staff> query = em.createNamedQuery("Staff.findBySurname", Staff.class);
+            query.setParameter("surname", surname);
+            return query.getSingleResult();
+        } else {
+            TypedQuery<Staff> query = em.createNamedQuery("Staff.findByName", Staff.class);
+            query.setParameter("forename", forename).setParameter("surname", surname);
+            return query.getSingleResult();
+        }
+    }
+	
+	 @Override
+    public void saveJob(Job job){
+        em.getTransaction().begin();
+        em.persist(job);
+        em.getTransaction().commit();
+    }
+	
+	@Override
+    public void savePayment(PaymentDetail payment){
+        em.getTransaction().begin();
+        em.persist(payment);
+        em.getTransaction().commit();
+    }
+	
+	@Override
+    public void saveTask(Task task){
+        em.getTransaction().begin();
+        em.persist(task);
+        em.getTransaction().commit();
     }
     
     

@@ -41,7 +41,7 @@ public interface DataManager {
     
     void saveCustomer(Customer customer);
     void saveStaff(Staff staff);
-    void saveJob(Job job);
+    
     void saveTask(Task task);
     
     public void saveOrder(OrderTable order);
@@ -55,6 +55,9 @@ public interface DataManager {
      public List<Alert> findAlerts();
       public List<JobLine> searchByJobDeadline(java.util.Date deadline);
       public List<OrderTable> findOrders(Customer customer);
+      public void saveJob(Job job); 
+      
+    public void savePayment(PaymentDetail payment);
       
      
 }

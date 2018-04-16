@@ -9,9 +9,8 @@ import data.DataManagerImpl;
 import domain.JobLine;
 import domain.OrderTable;
 import domain.PaymentDetail;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JFrame;
 
 /**
@@ -31,8 +30,6 @@ public class BAPPAYM {
         this.dm = dm;
         this.frame = frame;
     }
-  
-    
     
     //CREATE PAYMENTDETAIL METHODS
     //card payments
@@ -44,36 +41,59 @@ public class BAPPAYM {
         payment.setLast4digits(last4);
         payment.setOrderID(order);
         payment.setJobLineCollection(order.getJobLineCollection());
+        order.addPaymentDetail(payment);
+        for(JobLine job : order.getJobLineCollection()){
+            job.setPaymentdetailID(payment);
+        }
+        dm.savePayment(payment);
     }
     
-    //for one job
-    public void createPayment(JobLine job, String last4, Date expiryDate){
+    //for jobs
+    public void createPayment(List<JobLine> jobs, String last4, Date expiryDate){ //NEED TO UPDATE EXPIRY DATE
         PaymentDetail payment = new PaymentDetail();
         payment.setType("Card");
+        //payment.setExpiryDate(java.sql.Date.valueOf(expiryDate));
         payment.setExpiryDate(expiryDate);
         payment.setLast4digits(last4);
-        payment.addJobLine(job);
-        payment.setOrderID(job.getOrderID());
+        OrderTable orderID = null;
+        for(JobLine job : jobs){
+            payment.addJobLine(job);
+            job.setPaymentdetailID(payment);
+            orderID = job.getOrderID();
+        }
+        payment.setOrderID(orderID);
+        dm.savePayment(payment);
     } 
     
     //cash payments
     //for whole order
     public void createPayment(OrderTable order){
         PaymentDetail payment = new PaymentDetail();
-        payment.setType("cash");
+        payment.setType("Cash");
         payment.setExpiryDate(null);
         payment.setLast4digits(null);
         payment.setOrderID(order);
         payment.setJobLineCollection(order.getJobLineCollection());
+        order.addPaymentDetail(payment);
+        for(JobLine job : order.getJobLineCollection()){
+            job.setPaymentdetailID(payment);
+        }
+        dm.savePayment(payment);
     }
-    //for one job
-    public void createPayment(JobLine job){
+    //for jobs
+    public void createPayment(List<JobLine> jobs){
         PaymentDetail payment = new PaymentDetail();
-        payment.setType("cash");
+        payment.setType("Cash");
         payment.setExpiryDate(null);
         payment.setLast4digits(null);
-        payment.setOrderID(job.getOrderID());
-        payment.addJobLine(job);
+        OrderTable orderID = null;
+        for(JobLine job : jobs){
+            payment.addJobLine(job);
+            job.setPaymentdetailID(payment);
+            orderID = job.getOrderID();
+        }
+        payment.setOrderID(orderID);
+        dm.savePayment(payment);
     }
 }
 
