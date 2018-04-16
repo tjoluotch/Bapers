@@ -6,8 +6,10 @@
 package Controllers;
 
 import data.DataManagerImpl;
+import domain.*;
 import java.util.ArrayList;
 import java.util.regex.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,6 +18,7 @@ import java.util.regex.*;
 public class BAPCUST {
     
     DataManagerImpl dm = new DataManagerImpl();
+   
     public BAPCUST(){
         
     }
@@ -33,5 +36,19 @@ public class BAPCUST {
         }
         System.out.println(plans);
         return plans;
+    }
+    
+    public void discountPlanSetFixed(float rate, Customer c){
+        DicountPlan d = new DicountPlan();
+        //set isFlexible to 0 showing that its false
+        short isFlexible = 0;
+        //set Task ID to 0 indicating this is fixed and therefore not attached to a particular task
+        
+        
+        d.setIsFlexible(isFlexible);
+        d.setRate(rate);
+        d.setAccountNo(c);
+        dm.saveDiscountRate(d);
+        System.out.println("Discount Rate " + rate + " successfully Set for " + c.getForename());
     }
 }

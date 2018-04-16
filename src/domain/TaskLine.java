@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Tweetie Pie
+ * @author tjay
  */
 @Entity
 @Table(name = "task_line")
@@ -35,23 +35,16 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "TaskLine.findAll", query = "SELECT t FROM TaskLine t")
     , @NamedQuery(name = "TaskLine.findByTasklineID", query = "SELECT t FROM TaskLine t WHERE t.tasklineID = :tasklineID")
     , @NamedQuery(name = "TaskLine.findByStartTime", query = "SELECT t FROM TaskLine t WHERE t.startTime = :startTime")
-    , @NamedQuery(name = "TaskLine.findByNullStartTime", query = "SELECT t FROM TaskLine t WHERE t.startTime IS NULL")
     , @NamedQuery(name = "TaskLine.findByEndTime", query = "SELECT t FROM TaskLine t WHERE t.endTime = :endTime")
     , @NamedQuery(name = "TaskLine.findByShelf", query = "SELECT t FROM TaskLine t WHERE t.shelf = :shelf")
-    , @NamedQuery(name = "TaskLine.findPerformanceReport", query = "SELECT j FROM TaskLine j  WHERE j.startTime = :startTime ORDER BY j.completedBy ASC, j.startTime ASC ")
-    , @NamedQuery(name = "TaskLine.findBetweenDates", query = "SELECT t FROM TaskLine t WHERE t.startTime BETWEEN :startDate AND :endDate ORDER BY t.completedBy ASC,  t.startTime ASC")
-    , @NamedQuery(name = "TaskLine.findBetweenDates2", query = "SELECT t FROM TaskLine t WHERE t.startTime BETWEEN :startDate AND :endDate ORDER BY   t.startTime ASC")
-    , @NamedQuery(name = "TaskLine.findSummaryReport", query = "SELECT t FROM TaskLine t WHERE t.startTime BETWEEN :startDATE AND :endDATE ORDER BY CASE WHEN t.taskID.department = 'Copy Room' THEN 'Copy Room' WHEN t.taskID.department = 'Development Area' THEN 'Development Area' WHEN t.taskID.department = 'Packing Departments' THEN 'Packing Departments' WHEN t.taskID.department = 'Finishing Room' THEN 'Finishing Room'\n" +
-
-"                   ELSE '' END" )  
-    , @NamedQuery(name = "TaskLine.findByVersion", query = "SELECT t FROM TaskLine t WHERE t.version = :version")})
+    , @NamedQuery(name = "TaskLine.findByVersion", query = "SELECT t FROM TaskLine t WHERE t.version = :version")
+    , @NamedQuery(name = "TaskLine.findByPrice", query = "SELECT t FROM TaskLine t WHERE t.price = :price")})
 public class TaskLine implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @GeneratedValue(strategy=GenerationType.IDENTITY )
     @Column(name = "task_lineID")
     private Integer tasklineID;
     @Column(name = "start_time")
@@ -67,6 +60,9 @@ public class TaskLine implements Serializable {
     @NotNull
     @Column(name = "version")
     private long version;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "price")
+    private Float price;
     @JoinColumn(name = "completed_by", referencedColumnName = "username")
     @ManyToOne
     private Staff completedBy;
@@ -127,6 +123,14 @@ public class TaskLine implements Serializable {
 
     public void setVersion(long version) {
         this.version = version;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
     }
 
     public Staff getCompletedBy() {

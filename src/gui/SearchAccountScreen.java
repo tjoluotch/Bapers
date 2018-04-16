@@ -7,10 +7,12 @@ package gui;
 
 import Controllers.*;
 import domain.Customer;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
  *
- * @author Tweetie Pie
+ * make Sure the 1st customer oyu search is the rate that you change
+ * 
  */
 public class SearchAccountScreen extends javax.swing.JFrame {
     
@@ -18,9 +20,11 @@ public class SearchAccountScreen extends javax.swing.JFrame {
      * Creates new form SearchAccountScreen
      */
     BAPACCT bapacct = new BAPACCT();
+    BAPCUST bapcust = new BAPCUST();
     public SearchAccountScreen() {
         initComponents();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,6 +35,9 @@ public class SearchAccountScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        jComboBox1 = new javax.swing.JComboBox<>();
         srcAccNoTxtField = new javax.swing.JTextField();
         srcAccNameTxtField = new javax.swing.JTextField();
         srcAccNameButton = new javax.swing.JButton();
@@ -42,8 +49,20 @@ public class SearchAccountScreen extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        dcPlnBx = new javax.swing.JFormattedTextField();
+        rateTextField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         srcAccNoTxtField.setText("Search by Account Number");
         srcAccNoTxtField.addActionListener(new java.awt.event.ActionListener() {
@@ -51,6 +70,8 @@ public class SearchAccountScreen extends javax.swing.JFrame {
                 srcAccNoTxtFieldActionPerformed(evt);
             }
         });
+        getContentPane().add(srcAccNoTxtField);
+        srcAccNoTxtField.setBounds(0, 101, 192, 29);
 
         srcAccNameTxtField.setText("Search by Account Holder's Name");
         srcAccNameTxtField.addActionListener(new java.awt.event.ActionListener() {
@@ -58,6 +79,8 @@ public class SearchAccountScreen extends javax.swing.JFrame {
                 srcAccNameTxtFieldActionPerformed(evt);
             }
         });
+        getContentPane().add(srcAccNameTxtField);
+        srcAccNameTxtField.setBounds(0, 41, 192, 29);
 
         srcAccNameButton.setText("Search");
         srcAccNameButton.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +88,8 @@ public class SearchAccountScreen extends javax.swing.JFrame {
                 srcAccNameButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(srcAccNameButton);
+        srcAccNameButton.setBounds(40, 70, 85, 29);
 
         srcAccNoButton.setText("Search");
         srcAccNoButton.addActionListener(new java.awt.event.ActionListener() {
@@ -72,6 +97,8 @@ public class SearchAccountScreen extends javax.swing.JFrame {
                 srcAccNoButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(srcAccNoButton);
+        srcAccNoButton.setBounds(40, 130, 85, 29);
 
         goBackButton.setText("Go Back");
         goBackButton.addActionListener(new java.awt.event.ActionListener() {
@@ -79,8 +106,12 @@ public class SearchAccountScreen extends javax.swing.JFrame {
                 goBackButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(goBackButton);
+        goBackButton.setBounds(90, 260, 94, 29);
 
         jLabel1.setText("Logo");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 13, 31, 16);
 
         srcPostcodeTxtField.setText("Search by Postcode");
         srcPostcodeTxtField.addActionListener(new java.awt.event.ActionListener() {
@@ -88,6 +119,8 @@ public class SearchAccountScreen extends javax.swing.JFrame {
                 srcPostcodeTxtFieldActionPerformed(evt);
             }
         });
+        getContentPane().add(srcPostcodeTxtField);
+        srcPostcodeTxtField.setBounds(0, 160, 192, 29);
 
         srcPostcodeButton.setText("Search");
         srcPostcodeButton.addActionListener(new java.awt.event.ActionListener() {
@@ -95,83 +128,47 @@ public class SearchAccountScreen extends javax.swing.JFrame {
                 srcPostcodeButtonActionPerformed(evt);
             }
         });
+        getContentPane().add(srcPostcodeButton);
+        srcPostcodeButton.setBounds(40, 200, 85, 29);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "first name", "last Name", "acc Type", "discount Type"
+                "first name", "last Name", "Discount Plan"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Change");
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(203, 1, 280, 280);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(srcAccNameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(srcAccNoTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(srcAccNoButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(srcAccNameButton, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(goBackButton)
-                                .addGap(20, 20, 20)
-                                .addComponent(jButton1))
-                            .addComponent(srcPostcodeTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(srcPostcodeButton, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(29, 29, 29)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 1, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(srcAccNameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(srcAccNameButton))
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(srcAccNoButton)
-                            .addComponent(srcAccNoTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(48, 48, 48)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(srcPostcodeTxtField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(srcPostcodeButton, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(goBackButton)
-                            .addComponent(jLabel1)
-                            .addComponent(jButton1))))
-                .addContainerGap())
-        );
+        jButton1.setText("Set/Change");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(340, 350, 120, 29);
+
+        jLabel8.setText("Discount Plan");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(70, 320, 87, 16);
+        getContentPane().add(dcPlnBx);
+        dcPlnBx.setBounds(50, 350, 131, 26);
+        getContentPane().add(rateTextField);
+        rateTextField.setBounds(220, 350, 100, 26);
+
+        jLabel2.setText("Rate");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(230, 320, 27, 16);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -187,9 +184,9 @@ public class SearchAccountScreen extends javax.swing.JFrame {
     private void srcAccNameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srcAccNameButtonActionPerformed
            Customer c = bapacct.searchCustomerByName(srcAccNameTxtField);
             
-            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();                       
             
-            model.addRow(new String []{c.getForename(),c.getSurname(), c.getDiscountType(), c.getAccountNo()});
+            model.addRow(new String []{c.getForename(),c.getSurname(), c.getDiscountType()});
             
             
     }//GEN-LAST:event_srcAccNameButtonActionPerformed
@@ -209,6 +206,42 @@ public class SearchAccountScreen extends javax.swing.JFrame {
     private void srcPostcodeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srcPostcodeButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_srcPostcodeButtonActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            int selectedRowIndex = jTable1.getSelectedRow();
+            
+            String plan = model.getValueAt(selectedRowIndex, 2).toString();
+          
+            dcPlnBx.setText(model.getValueAt(selectedRowIndex, 2).toString());
+            
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Customer c = bapacct.searchCustomerByName(srcAccNameTxtField);
+        
+         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+         
+            int selectedRowIndex = jTable1.getSelectedRow();
+            
+            String selectedCustomer = model.getValueAt(selectedRowIndex, 0).toString();
+            
+            float rateSet = Float.valueOf(rateTextField.getText());
+            
+        //check to see that customer being collected for the discount plan is the same as the 
+        // customer that has been selected in the table
+        if (c.getForename().equals(selectedCustomer)) {
+            bapcust.discountPlanSetFixed(rateSet, c);
+        }
+        else
+            JOptionPane.showMessageDialog(rootPane, "wrong customer selected!");
+       
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -243,14 +276,22 @@ public class SearchAccountScreen extends javax.swing.JFrame {
                 new SearchAccountScreen().setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JFormattedTextField dcPlnBx;
     private javax.swing.JButton goBackButton;
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField rateTextField;
     private javax.swing.JButton srcAccNameButton;
     private javax.swing.JTextField srcAccNameTxtField;
     private javax.swing.JButton srcAccNoButton;

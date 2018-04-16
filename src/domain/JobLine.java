@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Tweetie Pie
+ * @author tjay
  */
 @Entity
 @Table(name = "job_line")
@@ -46,9 +46,8 @@ public class JobLine implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
-    @GeneratedValue(strategy=GenerationType.IDENTITY )
     @Column(name = "job_lineID")
     private Integer joblineID;
     @Column(name = "job_deadline")
@@ -64,6 +63,8 @@ public class JobLine implements Serializable {
     @NotNull
     @Column(name = "version")
     private long version;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "joblineID")
+    private Collection<Alert> alertCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "joblineID")
     private Collection<TaskLine> taskLineCollection;
     @JoinColumn(name = "job_code", referencedColumnName = "code")
@@ -129,6 +130,15 @@ public class JobLine implements Serializable {
     }
 
     @XmlTransient
+    public Collection<Alert> getAlertCollection() {
+        return alertCollection;
+    }
+
+    public void setAlertCollection(Collection<Alert> alertCollection) {
+        this.alertCollection = alertCollection;
+    }
+
+    @XmlTransient
     public Collection<TaskLine> getTaskLineCollection() {
         return taskLineCollection;
     }
@@ -185,5 +195,11 @@ public class JobLine implements Serializable {
     public String toString() {
         return "domain.JobLine[ joblineID=" + joblineID + " ]";
     }
+    
+        public boolean isPaidFor(){
+        if(paymentdetailID != null){
+            return true;
+        } else { return false; }
+    } 
     
 }

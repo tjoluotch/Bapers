@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Tweetie Pie
+ * @author tjay
  */
 @Entity
 @Table(name = "task")
@@ -37,9 +37,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Task.findByExpectedDuration", query = "SELECT t FROM Task t WHERE t.expectedDuration = :expectedDuration")
     , @NamedQuery(name = "Task.findByVersion", query = "SELECT t FROM Task t WHERE t.version = :version")})
 public class Task implements Serializable {
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "taskID")
-    private Collection<TaskLine> taskLineCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -62,6 +59,10 @@ public class Task implements Serializable {
     @NotNull
     @Column(name = "version")
     private long version;
+    @OneToMany(mappedBy = "taskID")
+    private Collection<DicountPlan> dicountPlanCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "taskID")
+    private Collection<TaskLine> taskLineCollection;
 
     public Task() {
     }
@@ -123,6 +124,24 @@ public class Task implements Serializable {
         this.version = version;
     }
 
+    @XmlTransient
+    public Collection<DicountPlan> getDicountPlanCollection() {
+        return dicountPlanCollection;
+    }
+
+    public void setDicountPlanCollection(Collection<DicountPlan> dicountPlanCollection) {
+        this.dicountPlanCollection = dicountPlanCollection;
+    }
+
+    @XmlTransient
+    public Collection<TaskLine> getTaskLineCollection() {
+        return taskLineCollection;
+    }
+
+    public void setTaskLineCollection(Collection<TaskLine> taskLineCollection) {
+        this.taskLineCollection = taskLineCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -146,15 +165,6 @@ public class Task implements Serializable {
     @Override
     public String toString() {
         return "domain.Task[ taskID=" + taskID + " ]";
-    }
-
-    @XmlTransient
-    public Collection<TaskLine> getTaskLineCollection() {
-        return taskLineCollection;
-    }
-
-    public void setTaskLineCollection(Collection<TaskLine> taskLineCollection) {
-        this.taskLineCollection = taskLineCollection;
     }
     
 }

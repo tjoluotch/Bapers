@@ -8,6 +8,7 @@ package domain;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -22,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Tweetie Pie
+ * @author tjay
  */
 @Entity
 @Table(name = "customer")
@@ -32,7 +33,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Customer.findByAccountNo", query = "SELECT c FROM Customer c WHERE c.accountNo = :accountNo")
     , @NamedQuery(name = "Customer.findByForename", query = "SELECT c FROM Customer c WHERE c.forename = :forename")
     , @NamedQuery(name = "Customer.findBySurname", query = "SELECT c FROM Customer c WHERE c.surname = :surname")
+    , @NamedQuery(name = "Customer.findByName", query = "SELECT c FROM Customer c WHERE c.forename = :forename AND c.surname = :surname")     
     , @NamedQuery(name = "Customer.findByAccountHolderName", query = "SELECT c FROM Customer c WHERE c.accountHolderName = :accountHolderName")
+    , @NamedQuery(name = "Customer.findByTitle", query = "SELECT c FROM Customer c WHERE c.title = :title")
     , @NamedQuery(name = "Customer.findByAddress1", query = "SELECT c FROM Customer c WHERE c.address1 = :address1")
     , @NamedQuery(name = "Customer.findByAddress2", query = "SELECT c FROM Customer c WHERE c.address2 = :address2")
     , @NamedQuery(name = "Customer.findByCity", query = "SELECT c FROM Customer c WHERE c.city = :city")
@@ -42,6 +45,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Customer.findByEmail", query = "SELECT c FROM Customer c WHERE c.email = :email")
     , @NamedQuery(name = "Customer.findByValuedCustomer", query = "SELECT c FROM Customer c WHERE c.valuedCustomer = :valuedCustomer")
     , @NamedQuery(name = "Customer.findByDiscountType", query = "SELECT c FROM Customer c WHERE c.discountType = :discountType")
+    , @NamedQuery(name = "Customer.findByStatus", query = "SELECT c FROM Customer c WHERE c.status = :status")
     , @NamedQuery(name = "Customer.findByVersion", query = "SELECT c FROM Customer c WHERE c.version = :version")})
 public class Customer implements Serializable {
 
@@ -61,6 +65,9 @@ public class Customer implements Serializable {
     @Size(max = 45)
     @Column(name = "account_holder_name")
     private String accountHolderName;
+    @Size(max = 45)
+    @Column(name = "title")
+    private String title;
     @Size(max = 20)
     @Column(name = "address1")
     private String address1;
@@ -89,10 +96,17 @@ public class Customer implements Serializable {
     @Size(max = 45)
     @Column(name = "discount_type")
     private String discountType;
+    @Size(max = 45)
+    @Column(name = "status")
+    private String status;
     @Basic(optional = false)
     @NotNull
     @Column(name = "version")
     private long version;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountNo")
+    private Collection<DicountPlan> dicountPlanCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountNo")
+    private Collection<Alert> alertCollection;
     @OneToMany(mappedBy = "accountNo")
     private Collection<OrderTable> orderTableCollection;
 
@@ -138,6 +152,14 @@ public class Customer implements Serializable {
 
     public void setAccountHolderName(String accountHolderName) {
         this.accountHolderName = accountHolderName;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getAddress1() {
@@ -212,12 +234,38 @@ public class Customer implements Serializable {
         this.discountType = discountType;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public long getVersion() {
         return version;
     }
 
     public void setVersion(long version) {
         this.version = version;
+    }
+
+    @XmlTransient
+    public Collection<DicountPlan> getDicountPlanCollection() {
+        return dicountPlanCollection;
+    }
+
+    public void setDicountPlanCollection(Collection<DicountPlan> dicountPlanCollection) {
+        this.dicountPlanCollection = dicountPlanCollection;
+    }
+
+    @XmlTransient
+    public Collection<Alert> getAlertCollection() {
+        return alertCollection;
+    }
+
+    public void setAlertCollection(Collection<Alert> alertCollection) {
+        this.alertCollection = alertCollection;
     }
 
     @XmlTransient

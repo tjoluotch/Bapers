@@ -9,6 +9,13 @@ import Controllers.*;
 import data.*;
 import domain.Customer;
 
+import java.io.IOException; 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.pdfbox.pdmodel.PDDocument;
+
+
+
 
 public class SolSoftBapers2 {
 
@@ -20,14 +27,16 @@ public class SolSoftBapers2 {
     
     
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         //Controller controller = new Controller();
         String test = "(trevor12345)";
         BAPCUST b = new BAPCUST();
         b.discountRegexp(test);
         
-        
-        
+        DataManagerImpl dm = new DataManagerImpl();
+        BAPPAYM p = new BAPPAYM(dm);
+        p.LetterGeneration();
+         
     }
     
 /*    

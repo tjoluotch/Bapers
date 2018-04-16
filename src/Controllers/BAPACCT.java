@@ -41,12 +41,12 @@ public class BAPACCT {
         System.out.println("Customer " + customer.getForename() + " " + customer.getSurname() + " has been added to the database.");
     }
 
-    public void deleteCustomer(){
-        Customer customer = new Customer();
+    public void deleteCustomer(Customer c){
+       c = new Customer();
         
         
-        dm.deleteCustomer(customer);
-        System.out.println("Customer " + customer.getForename() + " " + customer.getSurname() + " has been deleted from the database.");
+        dm.deleteCustomer(c);
+        System.out.println("Customer " + c.getForename() + " " + c.getSurname() + " has been deleted from the database.");
     }
 
     public Customer searchCustomerByName(JTextField name) {

@@ -30,7 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Tweetie Pie
+ * @author tjay
  */
 @Entity
 @Table(name = "order_table")
@@ -46,9 +46,8 @@ public class OrderTable implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "orderID")
     private Integer orderID;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -66,6 +65,8 @@ public class OrderTable implements Serializable {
     private long version;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderID")
     private Collection<PaymentDetail> paymentDetailCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderID")
+    private Collection<Alert> alertCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderID")
     private Collection<JobLine> jobLineCollection;
     @JoinColumn(name = "account_no", referencedColumnName = "account_no")
@@ -134,6 +135,15 @@ public class OrderTable implements Serializable {
     }
 
     @XmlTransient
+    public Collection<Alert> getAlertCollection() {
+        return alertCollection;
+    }
+
+    public void setAlertCollection(Collection<Alert> alertCollection) {
+        this.alertCollection = alertCollection;
+    }
+
+    @XmlTransient
     public Collection<JobLine> getJobLineCollection() {
         return jobLineCollection;
     }
@@ -148,6 +158,10 @@ public class OrderTable implements Serializable {
 
     public void setAccountNo(Customer accountNo) {
         this.accountNo = accountNo;
+    }
+    
+       public void addPaymentDetail(PaymentDetail paymentDetail){
+        paymentDetailCollection.add(paymentDetail);
     }
 
     @Override

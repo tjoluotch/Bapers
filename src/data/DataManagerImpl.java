@@ -77,13 +77,13 @@ public class DataManagerImpl implements DataManager{
     @Override
     public Customer findCustomerByAccountNumber(String AccountNumber) {
         TypedQuery<Customer> query = em.createNamedQuery("Customer.findByAccountNo", Customer.class);
-        query.setParameter("account_no", AccountNumber);
+        query.setParameter("accountNo", AccountNumber);
         return query.getSingleResult();
     }
 
     @Override
     public Staff findStaffByName(String forename, String surname) {
-        if(surname == null){
+        if(surname.contentEquals("")){
             TypedQuery<Staff> query = em.createNamedQuery("Staff.findByForename", Staff.class);
             query.setParameter("forename", forename);
             return query.getSingleResult();
@@ -140,9 +140,9 @@ public class DataManagerImpl implements DataManager{
     }
     
     @Override
-    public Task findTaskById(String Id) {
+    public Task findTaskById(int Id) {
         TypedQuery<Task> query = em.createNamedQuery("Task.findByTaskID", Task.class);
-        query.setParameter("TaskID", Id);
+        query.setParameter("taskID", Id);
         return query.getSingleResult();
     }
     
@@ -163,17 +163,46 @@ public class DataManagerImpl implements DataManager{
         em.getTransaction().begin();
         em.persist(staff);
         em.getTransaction().commit();
-        
     }
+    
+    
     @Override
-    public void saveJob(Job job){em.persist(job);}
+    public void saveOrder(OrderTable order){
+        em.getTransaction().begin();
+        em.persist(order);
+        em.getTransaction().commit();
+    }
+    
     @Override
-    public void saveTask(Task task){em.persist(task);}
+    public void saveJob(Job job){
+        em.getTransaction().begin();
+        em.persist(job);
+        em.getTransaction().commit();
+    }
+    
+    @Override
+    public void saveTask(Task task){
+        em.getTransaction().begin();
+        em.persist(task);
+        em.getTransaction().commit();
+    }
+    
+    @Override
+    public void savePayment(PaymentDetail payment){
+        em.getTransaction().begin();
+        em.persist(payment);
+        em.getTransaction().commit();
+    }
+    
+    @Override
+    public void saveDiscountRate(DicountPlan d){
+       em.getTransaction().begin();
+       em.persist(d);
+       em.getTransaction().commit();
+    }
 
     @Override
     public boolean updateStaffRecord(String username, String firstName, String surname, String password, String role) {
-        
-    
         TypedQuery<Staff> query = em.createNamedQuery("Staff.updateStaff", Staff.class);
         query.setParameter("forename", firstName);
         query.setParameter("surname", surname);
@@ -181,7 +210,6 @@ public class DataManagerImpl implements DataManager{
         query.setParameter("role", role);
         query.setParameter("username", username);
         query.executeUpdate();
-        
         return true;//To change body of generated methods, choose Tools | Templates.
     }
     
@@ -208,6 +236,16 @@ public class DataManagerImpl implements DataManager{
         return query.getResultList();
     }
     
+    
+    @Override
+    public List<TaskLine> searchbyStartTime(){
+        TypedQuery<TaskLine> query = em.createNamedQuery("TaskLine.findByNullStartTime", TaskLine.class);
+        
+        return query.getResultList();
+    }
+    
+    
+            
     
         
     }
