@@ -26,7 +26,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
+<<<<<<< HEAD
  * @author tjay
+=======
+ * @author Tweetie Pie
+>>>>>>> Sylvester'
  */
 @Entity
 @Table(name = "task_line")
@@ -35,6 +39,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "TaskLine.findAll", query = "SELECT t FROM TaskLine t")
     , @NamedQuery(name = "TaskLine.findByTasklineID", query = "SELECT t FROM TaskLine t WHERE t.tasklineID = :tasklineID")
     , @NamedQuery(name = "TaskLine.findByStartTime", query = "SELECT t FROM TaskLine t WHERE t.startTime = :startTime")
+    , @NamedQuery(name = "TaskLine.findByNullStartTime", query = "SELECT t FROM TaskLine t WHERE t.startTime IS NULL")
     , @NamedQuery(name = "TaskLine.findByEndTime", query = "SELECT t FROM TaskLine t WHERE t.endTime = :endTime")
     , @NamedQuery(name = "TaskLine.findByShelf", query = "SELECT t FROM TaskLine t WHERE t.shelf = :shelf")
     , @NamedQuery(name = "TaskLine.findByVersion", query = "SELECT t FROM TaskLine t WHERE t.version = :version")
@@ -45,7 +50,11 @@ public class TaskLine implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+<<<<<<< HEAD
     @Column(name = "task_lineID")
+=======
+    @Column(name = "task_lineID", nullable = false)
+>>>>>>> Sylvester'
     private Integer tasklineID;
     @Column(name = "start_time")
     @Temporal(TemporalType.TIMESTAMP)
@@ -54,22 +63,29 @@ public class TaskLine implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date endTime;
     @Size(max = 10)
-    @Column(name = "shelf")
+    @Column(length = 10)
     private String shelf;
     @Basic(optional = false)
     @NotNull
+<<<<<<< HEAD
     @Column(name = "version")
     private long version;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "price")
+=======
+    @Column(nullable = false)
+    private long version;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(precision = 12)
+>>>>>>> Sylvester'
     private Float price;
     @JoinColumn(name = "completed_by", referencedColumnName = "username")
     @ManyToOne
     private Staff completedBy;
-    @JoinColumn(name = "taskID", referencedColumnName = "taskID")
+    @JoinColumn(name = "taskID", referencedColumnName = "taskID", nullable = false)
     @ManyToOne(optional = false)
     private Task taskID;
-    @JoinColumn(name = "job_lineID", referencedColumnName = "job_lineID")
+    @JoinColumn(name = "job_lineID", referencedColumnName = "job_lineID", nullable = false)
     @ManyToOne(optional = false)
     private JobLine joblineID;
 

@@ -65,8 +65,14 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="adress1" max="32767" attributes="0"/>
+<<<<<<< HEAD
                                   <Component id="city" max="32767" attributes="0"/>
                                   <Component id="phoneNo" max="32767" attributes="0"/>
+=======
+                                  <Component id="address2" max="32767" attributes="0"/>
+                                  <Component id="city" max="32767" attributes="0"/>
+                                  <Component id="telephone" max="32767" attributes="0"/>
+>>>>>>> Sylvester'
                                   <Component id="postcode" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
@@ -78,7 +84,7 @@
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="Title" min="-2" max="-2" attributes="0"/>
+                      <Component id="title" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
@@ -101,7 +107,7 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="Title" min="-2" max="-2" attributes="0"/>
+                      <Component id="title" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="forename" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -111,12 +117,23 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="adress1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+<<<<<<< HEAD
                       <Component id="postcode" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="city" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="phoneNo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="94" max="32767" attributes="0"/>
+=======
+                      <Component id="address2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="postcode" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="city" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="telephone" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="36" max="32767" attributes="0"/>
+>>>>>>> Sylvester'
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -130,6 +147,8 @@
         <Property name="text" type="java.lang.String" value="Forename"/>
       </Properties>
       <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="forenameFocusGained"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="forenameFocusLost"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="forenameActionPerformed"/>
       </Events>
     </Component>
@@ -138,6 +157,7 @@
         <Property name="text" type="java.lang.String" value="Surname"/>
       </Properties>
       <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="surnameFocusGained"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="surnameActionPerformed"/>
       </Events>
     </Component>
@@ -146,15 +166,25 @@
         <Property name="text" type="java.lang.String" value="Account Holder Name"/>
       </Properties>
       <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="accountHolderNameFocusGained"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="accountHolderNameActionPerformed"/>
       </Events>
     </Component>
+<<<<<<< HEAD
     <Component class="javax.swing.JTextField" name="phoneNo">
+=======
+    <Component class="javax.swing.JTextField" name="telephone">
+>>>>>>> Sylvester'
       <Properties>
         <Property name="text" type="java.lang.String" value="Contact Number"/>
       </Properties>
       <Events>
+<<<<<<< HEAD
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="phoneNoActionPerformed"/>
+=======
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="telephoneFocusGained"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="telephoneActionPerformed"/>
+>>>>>>> Sylvester'
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="postcode">
@@ -162,6 +192,10 @@
         <Property name="text" type="java.lang.String" value="Postcode"/>
       </Properties>
       <Events>
+<<<<<<< HEAD
+=======
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="postcodeFocusGained"/>
+>>>>>>> Sylvester'
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="postcodeActionPerformed"/>
       </Events>
     </Component>
@@ -170,6 +204,7 @@
         <Property name="text" type="java.lang.String" value="Address"/>
       </Properties>
       <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="adress1FocusGained"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="adress1ActionPerformed"/>
       </Events>
     </Component>
@@ -178,6 +213,10 @@
         <Property name="text" type="java.lang.String" value="City"/>
       </Properties>
       <Events>
+<<<<<<< HEAD
+=======
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="cityFocusGained"/>
+>>>>>>> Sylvester'
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cityActionPerformed"/>
       </Events>
     </Component>
@@ -186,25 +225,28 @@
         <Property name="text" type="java.lang.String" value="Create Account"/>
       </Properties>
       <Events>
+<<<<<<< HEAD
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createAccountButtonActionPerformed"/>
+=======
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton2ActionPerformed"/>
+>>>>>>> Sylvester'
       </Events>
     </Component>
-    <Component class="javax.swing.JComboBox" name="Title">
+    <Component class="javax.swing.JComboBox" name="title">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="7">
+          <StringArray count="6">
             <StringItem index="0" value="Titile"/>
             <StringItem index="1" value="Mr"/>
             <StringItem index="2" value="Mrs"/>
             <StringItem index="3" value="Ms"/>
             <StringItem index="4" value="Miss"/>
             <StringItem index="5" value="Master"/>
-            <StringItem index="6" value=" "/>
           </StringArray>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TitleActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="titleActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -220,5 +262,17 @@
         <Property name="text" type="java.lang.String" value="Cancel"/>
       </Properties>
     </Component>
+<<<<<<< HEAD
+=======
+    <Component class="javax.swing.JTextField" name="address2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Address"/>
+      </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="address2FocusGained"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="address2ActionPerformed"/>
+      </Events>
+    </Component>
+>>>>>>> Sylvester'
   </SubComponents>
 </Form>

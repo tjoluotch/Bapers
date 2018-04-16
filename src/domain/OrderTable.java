@@ -44,24 +44,28 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "OrderTable.findByVersion", query = "SELECT o FROM OrderTable o WHERE o.version = :version")})
 public class OrderTable implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+<<<<<<< HEAD
     @Column(name = "orderID")
+=======
+    @Column(nullable = false)
+>>>>>>> Sylvester'
     private Integer orderID;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "total_price")
+    @Column(name = "total_price", precision = 12)
     private Float totalPrice;
     @Size(max = 20)
-    @Column(name = "payment_status")
+    @Column(name = "payment_status", length = 20)
     private String paymentStatus;
     @Column(name = "date_submitted")
     @Temporal(TemporalType.DATE)
     private Date dateSubmitted;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "version")
+    @Column(nullable = false)
     private long version;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "orderID")
     private Collection<Alert> alertCollection;
@@ -82,6 +86,8 @@ public class OrderTable implements Serializable {
         this.orderID = orderID;
         this.version = version;
     }
+    
+    
 
     public Integer getOrderID() {
         return orderID;
@@ -123,6 +129,7 @@ public class OrderTable implements Serializable {
         this.version = version;
     }
 
+   
     @XmlTransient
     public Collection<Alert> getAlertCollection() {
         return alertCollection;
@@ -173,5 +180,6 @@ public class OrderTable implements Serializable {
     public String toString() {
         return "domain.OrderTable[ orderID=" + orderID + " ]";
     }
+
     
 }

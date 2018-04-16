@@ -15,7 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -26,7 +25,6 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author tjay
  */
 @Entity
-@Table(name = "job")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Job.findAll", query = "SELECT j FROM Job j")
@@ -41,17 +39,17 @@ public class Job implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(name = "code")
+    @Column(nullable = false, length = 10)
     private String code;
     @Size(max = 45)
-    @Column(name = "job_description")
+    @Column(name = "job_description", length = 45)
     private String jobDescription;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "price")
+    @Column(precision = 12)
     private Float price;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "version")
+    @Column(nullable = false)
     private long version;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "jobCode")
     private Collection<JobLine> jobLineCollection;

@@ -12,6 +12,12 @@
     <class>domain.TaskLine</class>
     <class>domain.Alert</class>
     <class>domain.DicountPlan</class>
+<<<<<<< HEAD
+=======
+    <class>domain.Customer_1</class>
+    <class>domain.Job_1</class>
+    <class>domain.Task_1</class>
+>>>>>>> Sylvester'
     <class>domain.DiscountPlan</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/solsoft_DB"/>

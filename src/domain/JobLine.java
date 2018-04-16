@@ -23,6 +23,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -39,44 +40,54 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "JobLine.findAll", query = "SELECT j FROM JobLine j")
     , @NamedQuery(name = "JobLine.findByJoblineID", query = "SELECT j FROM JobLine j WHERE j.joblineID = :joblineID")
     , @NamedQuery(name = "JobLine.findByJobDeadline", query = "SELECT j FROM JobLine j WHERE j.jobDeadline = :jobDeadline")
+    , @NamedQuery(name = "JobLine.findDeadlinesAfterDate", query = "SELECT j FROM JobLine j WHERE j.jobDeadline > :jobDeadline")
     , @NamedQuery(name = "JobLine.findBySpecialInstructions", query = "SELECT j FROM JobLine j WHERE j.specialInstructions = :specialInstructions")
     , @NamedQuery(name = "JobLine.findByReminderStatus", query = "SELECT j FROM JobLine j WHERE j.reminderStatus = :reminderStatus")
     , @NamedQuery(name = "JobLine.findByVersion", query = "SELECT j FROM JobLine j WHERE j.version = :version")})
 public class JobLine implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+<<<<<<< HEAD
     @Column(name = "job_lineID")
+=======
+    @Column(name = "job_lineID", nullable = false)
+>>>>>>> Sylvester'
     private Integer joblineID;
     @Column(name = "job_deadline")
     @Temporal(TemporalType.DATE)
     private Date jobDeadline;
     @Size(max = 100)
-    @Column(name = "special_instructions")
+    @Column(name = "special_instructions", length = 100)
     private String specialInstructions;
     @Size(max = 20)
-    @Column(name = "reminder_status")
+    @Column(name = "reminder_status", length = 20)
     private String reminderStatus;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "version")
+    @Column(nullable = false)
+    @Version
     private long version;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "joblineID")
     private Collection<Alert> alertCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "joblineID")
     private Collection<TaskLine> taskLineCollection;
+<<<<<<< HEAD
     @JoinColumn(name = "job_code", referencedColumnName = "code")
+=======
+    @JoinColumn(name = "job_code", referencedColumnName = "code", nullable = false)
+>>>>>>> Sylvester'
     @ManyToOne(optional = false)
     private Job jobCode;
-    @JoinColumn(name = "orderID", referencedColumnName = "orderID")
+    @JoinColumn(name = "orderID", referencedColumnName = "orderID", nullable = false)
     @ManyToOne(optional = false)
     private OrderTable orderID;
     @JoinColumn(name = "payment_detailID", referencedColumnName = "payment_detailID")
     @ManyToOne
     private PaymentDetail paymentdetailID;
-
+    
     public JobLine() {
     }
 
@@ -111,6 +122,12 @@ public class JobLine implements Serializable {
 
     public void setSpecialInstructions(String specialInstructions) {
         this.specialInstructions = specialInstructions;
+    }
+    
+    public boolean isPaidFor(){
+        if(paymentdetailID != null){
+            return true;
+        } else { return false; }
     }
 
     public String getReminderStatus() {
@@ -195,5 +212,7 @@ public class JobLine implements Serializable {
     public String toString() {
         return "domain.JobLine[ joblineID=" + joblineID + " ]";
     }
+
+   
     
 }

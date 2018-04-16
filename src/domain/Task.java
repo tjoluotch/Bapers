@@ -38,6 +38,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Task.findByVersion", query = "SELECT t FROM Task t WHERE t.version = :version")})
 public class Task implements Serializable {
 
+   
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -61,8 +63,11 @@ public class Task implements Serializable {
     private long version;
     @OneToMany(mappedBy = "taskID")
     private Collection<DiscountPlan> discountPlanCollection;
+<<<<<<< HEAD
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "taskID")
     private Collection<TaskLine> taskLineCollection;
+=======
+>>>>>>> Sylvester'
 
     public Task() {
     }
@@ -125,6 +130,7 @@ public class Task implements Serializable {
     }
 
     @XmlTransient
+<<<<<<< HEAD
     public Collection<DiscountPlan> getDiscountPlanCollection() {
         return discountPlanCollection;
     }
@@ -140,6 +146,14 @@ public class Task implements Serializable {
 
     public void setTaskLineCollection(Collection<TaskLine> taskLineCollection) {
         this.taskLineCollection = taskLineCollection;
+=======
+    public Collection<DiscountPlan> getDicountPlanCollection() {
+        return discountPlanCollection;
+    }
+
+    public void setDicountPlanCollection(Collection<DiscountPlan> dicountPlanCollection) {
+        this.discountPlanCollection = dicountPlanCollection;
+>>>>>>> Sylvester'
     }
 
     @Override
@@ -165,6 +179,15 @@ public class Task implements Serializable {
     @Override
     public String toString() {
         return "domain.Task[ taskID=" + taskID + " ]";
+    }
+
+    @XmlTransient
+    public Collection<DiscountPlan> getDiscountPlanCollection() {
+        return discountPlanCollection;
+    }
+
+    public void setDiscountPlanCollection(Collection<DiscountPlan> discountPlanCollection) {
+        this.discountPlanCollection = discountPlanCollection;
     }
     
 }

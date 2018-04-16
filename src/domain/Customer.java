@@ -34,6 +34,10 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Customer.findByForename", query = "SELECT c FROM Customer c WHERE c.forename = :forename")
     , @NamedQuery(name = "Customer.findBySurname", query = "SELECT c FROM Customer c WHERE c.surname = :surname")
     , @NamedQuery(name = "Customer.findByAccountHolderName", query = "SELECT c FROM Customer c WHERE c.accountHolderName = :accountHolderName")
+<<<<<<< HEAD
+=======
+    , @NamedQuery(name = "Customer.findByName", query = "SELECT c FROM Customer c WHERE c.forename = :forename AND c.surname = :surname")
+>>>>>>> Sylvester'
     , @NamedQuery(name = "Customer.findByTitle", query = "SELECT c FROM Customer c WHERE c.title = :title")
     , @NamedQuery(name = "Customer.findByAddress1", query = "SELECT c FROM Customer c WHERE c.address1 = :address1")
     , @NamedQuery(name = "Customer.findByAddress2", query = "SELECT c FROM Customer c WHERE c.address2 = :address2")
@@ -47,6 +51,8 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Customer.findByStatus", query = "SELECT c FROM Customer c WHERE c.status = :status")
     , @NamedQuery(name = "Customer.findByVersion", query = "SELECT c FROM Customer c WHERE c.version = :version")})
 public class Customer implements Serializable {
+
+    
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -105,17 +111,32 @@ public class Customer implements Serializable {
     @Column(name = "version")
     private long version;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountNo")
+<<<<<<< HEAD
     private Collection<Alert> alertCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "accountNo")
+=======
+>>>>>>> Sylvester'
     private Collection<DiscountPlan> discountPlanCollection;
     @OneToMany(mappedBy = "accountNo")
     private Collection<OrderTable> orderTableCollection;
+
+    
+
 
     public Customer() {
     }
 
     public Customer(String accountNo) {
         this.accountNo = accountNo;
+    }
+    
+    
+    public Collection<OrderTable> getOrderTableCollection() {
+        return orderTableCollection;
+    }
+
+    public void setOrderTableCollection(Collection<OrderTable> orderTableCollection) {
+        this.orderTableCollection = orderTableCollection;
     }
 
     public Customer(String accountNo, String status, long version) {
@@ -253,6 +274,7 @@ public class Customer implements Serializable {
     }
 
     @XmlTransient
+<<<<<<< HEAD
     public Collection<Alert> getAlertCollection() {
         return alertCollection;
     }
@@ -273,10 +295,14 @@ public class Customer implements Serializable {
     @XmlTransient
     public Collection<OrderTable> getOrderTableCollection() {
         return orderTableCollection;
+=======
+    public Collection<DiscountPlan> getDicountPlanCollection() {
+        return discountPlanCollection;
+>>>>>>> Sylvester'
     }
 
-    public void setOrderTableCollection(Collection<OrderTable> orderTableCollection) {
-        this.orderTableCollection = orderTableCollection;
+    public void setDiscountPlanCollection(Collection<DiscountPlan> discountPlanCollection) {
+        this.discountPlanCollection = discountPlanCollection;
     }
 
     @Override
@@ -303,5 +329,12 @@ public class Customer implements Serializable {
     public String toString() {
         return "domain.Customer[ accountNo=" + accountNo + " ]";
     }
+
+    @XmlTransient
+    public Collection<DiscountPlan> getDiscountPlanCollection() {
+        return discountPlanCollection;
+    }
+
+    
     
 }

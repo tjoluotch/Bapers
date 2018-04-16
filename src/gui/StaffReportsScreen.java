@@ -6,6 +6,7 @@
 package gui;
 
 import Controllers.BAPREPT;
+import java.awt.print.PrinterException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -61,6 +62,11 @@ public class StaffReportsScreen extends javax.swing.JFrame {
         });
 
         jButton2.setText("Cancel");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         monthly.setText(" Month");
         monthly.addActionListener(new java.awt.event.ActionListener() {
@@ -262,6 +268,8 @@ public class StaffReportsScreen extends javax.swing.JFrame {
                 rp.createQuarterlyReport(sDate, currentDate,quarter,q);
             } catch (IOException ex) {
                 Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (PrinterException ex) {
+                Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         }
@@ -277,6 +285,8 @@ public class StaffReportsScreen extends javax.swing.JFrame {
             try {
                 rp.createYearlyReport(sDate, currentDate);
             } catch (IOException ex) {
+                Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (PrinterException ex) {
                 Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
             }
             
@@ -317,6 +327,8 @@ public class StaffReportsScreen extends javax.swing.JFrame {
                    BAPREPT rp = new BAPREPT();
                   try {
                       rp.createIndividualReport(startDate.getText(), endDate.getText());
+                      JOptionPane.showMessageDialog(null, "Report Created in Reports Directory ","Backup successful.",JOptionPane.OK_OPTION);
+                      this.dispose();
                   } catch (IOException ex) {
                       Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
                   }
@@ -383,6 +395,11 @@ public class StaffReportsScreen extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_endDateFocusGained
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

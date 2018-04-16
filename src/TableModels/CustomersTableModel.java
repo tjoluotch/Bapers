@@ -26,13 +26,22 @@ public class CustomersTableModel extends AbstractTableModel {
                return String.class;
              case 3:
                return String.class;
+<<<<<<< HEAD
+=======
+             case 4:
+               return String.class;
+>>>>>>> Sylvester'
              }
              return null;
          //To change body of generated methods, choose Tools | Templates.
     }
     
     private List<Customer> li;
+<<<<<<< HEAD
     private String[] columnNames = {"Forename", "Surname", "Account Number", "Valued"};
+=======
+    private String[] columnNames = {"Account Holder", "Forename", "Surname", "Account Number", "Valued"};
+>>>>>>> Sylvester'
 
     public CustomersTableModel(List<Customer> li) {
         this.li = li;
@@ -58,12 +67,23 @@ public class CustomersTableModel extends AbstractTableModel {
         Customer cl = li.get(rowIndex);
         switch(columnIndex){
             case 0:
+<<<<<<< HEAD
                 return cl.getForename();
             case 1:
                 return cl.getSurname();
             case 2: 
                 return cl.getAccountNo();
             case 3:
+=======
+                return cl.getAccountHolderName();
+            case 1:
+                return cl.getForename();
+            case 2: 
+                return cl.getSurname();
+            case 3:
+               return cl.getAccountNo();
+            case 4:
+>>>>>>> Sylvester'
                 if(cl.getValuedCustomer() == true){
                 return cl.getDiscountType();
                 } else {

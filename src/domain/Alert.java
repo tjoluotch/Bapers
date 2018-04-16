@@ -18,13 +18,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+<<<<<<< HEAD
+=======
+import javax.persistence.Version;
+>>>>>>> Sylvester'
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
+<<<<<<< HEAD
  * @author tjay
+=======
+ * @author Tweetie Pie
+>>>>>>> Sylvester'
  */
 @Entity
 @Table(name = "alert")
@@ -54,6 +62,10 @@ public class Alert implements Serializable {
     private Boolean beenSeen;
     @Basic(optional = false)
     @NotNull
+<<<<<<< HEAD
+=======
+    @Version
+>>>>>>> Sylvester'
     @Column(name = "version")
     private long version;
     @JoinColumn(name = "account_no", referencedColumnName = "account_no")
@@ -90,6 +102,17 @@ public class Alert implements Serializable {
         return description;
     }
 
+<<<<<<< HEAD
+=======
+    public Customer getAccountNo() {
+        return accountNo;
+    }
+
+    public void setAccountNo(Customer accountNo) {
+        this.accountNo = accountNo;
+    }
+
+>>>>>>> Sylvester'
     public void setDescription(String description) {
         this.description = description;
     }
@@ -118,6 +141,7 @@ public class Alert implements Serializable {
         this.version = version;
     }
 
+<<<<<<< HEAD
     public Customer getAccountNo() {
         return accountNo;
     }
@@ -125,6 +149,9 @@ public class Alert implements Serializable {
     public void setAccountNo(Customer accountNo) {
         this.accountNo = accountNo;
     }
+=======
+   
+>>>>>>> Sylvester'
 
     public JobLine getJoblineID() {
         return joblineID;

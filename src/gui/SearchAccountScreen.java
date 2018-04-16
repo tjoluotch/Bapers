@@ -44,6 +44,11 @@ public class SearchAccountScreen extends javax.swing.JFrame {
         srcAccNoButton = new javax.swing.JButton();
         goBackButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+<<<<<<< HEAD
+=======
+        srcPostcodeTxtField = new javax.swing.JTextField();
+        srcPostcodeButton = new javax.swing.JButton();
+>>>>>>> Sylvester'
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
@@ -51,6 +56,7 @@ public class SearchAccountScreen extends javax.swing.JFrame {
         dcPlnBx = new javax.swing.JFormattedTextField();
         rateTextField = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+<<<<<<< HEAD
         fname = new javax.swing.JTextField();
         surnametextfield = new javax.swing.JTextField();
         accHolderNameTextField = new javax.swing.JTextField();
@@ -67,6 +73,8 @@ public class SearchAccountScreen extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+=======
+>>>>>>> Sylvester'
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -121,11 +129,16 @@ public class SearchAccountScreen extends javax.swing.JFrame {
             }
         });
         getContentPane().add(goBackButton);
+<<<<<<< HEAD
         goBackButton.setBounds(730, 430, 94, 29);
+=======
+        goBackButton.setBounds(90, 260, 94, 29);
+>>>>>>> Sylvester'
 
         jLabel1.setText("Logo");
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 13, 31, 16);
+<<<<<<< HEAD
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -237,6 +250,65 @@ public class SearchAccountScreen extends javax.swing.JFrame {
         jLabel10.setText("Address");
         getContentPane().add(jLabel10);
         jLabel10.setBounds(660, 290, 51, 16);
+=======
+
+        srcPostcodeTxtField.setText("Search by Postcode");
+        srcPostcodeTxtField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                srcPostcodeTxtFieldActionPerformed(evt);
+            }
+        });
+        getContentPane().add(srcPostcodeTxtField);
+        srcPostcodeTxtField.setBounds(0, 160, 192, 29);
+
+        srcPostcodeButton.setText("Search");
+        srcPostcodeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                srcPostcodeButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(srcPostcodeButton);
+        srcPostcodeButton.setBounds(40, 200, 85, 29);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "first name", "last Name", "Discount Plan"
+            }
+        ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(203, 1, 280, 280);
+
+        jButton1.setText("Set/Change");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(340, 350, 120, 29);
+
+        jLabel8.setText("Discount Plan");
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(70, 320, 87, 16);
+        getContentPane().add(dcPlnBx);
+        dcPlnBx.setBounds(50, 350, 131, 26);
+        getContentPane().add(rateTextField);
+        rateTextField.setBounds(220, 350, 100, 26);
+
+        jLabel2.setText("Rate");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(230, 320, 27, 16);
+>>>>>>> Sylvester'
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -254,7 +326,11 @@ public class SearchAccountScreen extends javax.swing.JFrame {
             
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();                       
             
+<<<<<<< HEAD
             model.addRow(new String []{c.getForename(),c.getSurname(), c.getDiscountType(), c.getAccountHolderName(),c.getPostcode(), c.getAddress1(), c.getPhone(), c.getEmail(), c.getAccountNo()});
+=======
+            model.addRow(new String []{c.getForename(),c.getSurname(), c.getDiscountType()});
+>>>>>>> Sylvester'
             
             
     }//GEN-LAST:event_srcAccNameButtonActionPerformed
@@ -262,6 +338,7 @@ public class SearchAccountScreen extends javax.swing.JFrame {
     private void srcAccNoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srcAccNoButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_srcAccNoButtonActionPerformed
+<<<<<<< HEAD
 
     private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
         // TODO add your handling code here:
@@ -351,6 +428,56 @@ public class SearchAccountScreen extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "You've been unsuccessfull in deleting Customer " + id); 
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
+=======
+
+    private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_goBackButtonActionPerformed
+
+    private void srcPostcodeTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srcPostcodeTxtFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_srcPostcodeTxtFieldActionPerformed
+
+    private void srcPostcodeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srcPostcodeButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_srcPostcodeButtonActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+            DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+            int selectedRowIndex = jTable1.getSelectedRow();
+            
+            String plan = model.getValueAt(selectedRowIndex, 2).toString();
+          
+            dcPlnBx.setText(model.getValueAt(selectedRowIndex, 2).toString());
+            
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Customer c = bapacct.searchCustomerByName(srcAccNameTxtField);
+        
+         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+         
+            int selectedRowIndex = jTable1.getSelectedRow();
+            
+            String selectedCustomer = model.getValueAt(selectedRowIndex, 0).toString();
+            
+            float rateSet = Float.valueOf(rateTextField.getText());
+            
+        //check to see that customer being collected for the discount plan is the same as the 
+        // customer that has been selected in the table
+        if (c.getForename().equals(selectedCustomer)) {
+            bapcust.discountPlanSetFixed(rateSet, c);
+        }
+        else
+            JOptionPane.showMessageDialog(rootPane, "wrong customer selected!");
+       
+    }//GEN-LAST:event_jButton1ActionPerformed
+>>>>>>> Sylvester'
 
     /**
      * @param args the command line arguments
@@ -389,6 +516,7 @@ public class SearchAccountScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+<<<<<<< HEAD
     private javax.swing.JTextField accHolderNameTextField;
     private javax.swing.JTextField address1TxtField;
     private javax.swing.ButtonGroup buttonGroup1;
@@ -397,10 +525,16 @@ public class SearchAccountScreen extends javax.swing.JFrame {
     private javax.swing.JButton deleteButton;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JTextField fname;
+=======
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.JFormattedTextField dcPlnBx;
+>>>>>>> Sylvester'
     private javax.swing.JButton goBackButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+<<<<<<< HEAD
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -414,12 +548,23 @@ public class SearchAccountScreen extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField phoneTextField;
     private javax.swing.JTextField postcodeTextField;
+=======
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
+>>>>>>> Sylvester'
     private javax.swing.JTextField rateTextField;
     private javax.swing.JButton srcAccNameButton;
     private javax.swing.JTextField srcAccNameTxtField;
     private javax.swing.JButton srcAccNoButton;
     private javax.swing.JTextField srcAccNoTxtField;
+<<<<<<< HEAD
     private javax.swing.JTextField surnametextfield;
     private javax.swing.JButton updateButton;
+=======
+    private javax.swing.JButton srcPostcodeButton;
+    private javax.swing.JTextField srcPostcodeTxtField;
+>>>>>>> Sylvester'
     // End of variables declaration//GEN-END:variables
 }

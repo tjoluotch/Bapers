@@ -22,7 +22,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
+<<<<<<< HEAD
  * @author tjay
+=======
+ * @author Tweetie Pie
+>>>>>>> Sylvester'
  */
 @Entity
 @Table(name = "discount_plan")

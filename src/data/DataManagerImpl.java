@@ -81,6 +81,7 @@ public class DataManagerImpl implements DataManager{
         return query.getSingleResult();
     }
 
+<<<<<<< HEAD
     @Override
     public Staff findStaffByName(String forename, String surname) {
         if(surname.contentEquals("")){
@@ -97,6 +98,9 @@ public class DataManagerImpl implements DataManager{
             return query.getSingleResult();
         }
     }
+=======
+    
+>>>>>>> Sylvester'
 
     @Override
     public Staff findStaffByUsername(String username) {
@@ -115,6 +119,13 @@ public class DataManagerImpl implements DataManager{
     @Override
     public OrderTable findOrderByID(int ID) {
         TypedQuery<OrderTable> query = em.createNamedQuery("OrderTable.findByOrderID", OrderTable.class);
+        query.setParameter("orderID", ID);
+        return query.getSingleResult();
+    }
+    
+    @Override
+    public DiscountPlan findDiscountByID(int ID) {
+        TypedQuery<DiscountPlan> query = em.createNamedQuery("DiscountPlan.findByDiscountplanID", DiscountPlan.class);
         query.setParameter("orderID", ID);
         return query.getSingleResult();
     }
@@ -166,6 +177,7 @@ public class DataManagerImpl implements DataManager{
         em.getTransaction().begin();
         em.persist(order);
         em.getTransaction().commit();
+<<<<<<< HEAD
     }
     
     @Override
@@ -175,6 +187,26 @@ public class DataManagerImpl implements DataManager{
         em.getTransaction().commit();
     }
     
+=======
+        
+    }
+    
+    
+     @Override
+    public void saveAlert(Alert a){
+        em.getTransaction().begin();
+        em.persist(a);
+        em.getTransaction().commit();
+        
+    }
+    
+    
+    
+    
+    
+ 
+
+>>>>>>> Sylvester'
     @Override
     public void saveTask(Task task){
         em.getTransaction().begin();
@@ -187,6 +219,24 @@ public class DataManagerImpl implements DataManager{
         em.getTransaction().begin();
         em.persist(payment);
         em.getTransaction().commit();
+    }
+    
+    
+    @Override
+    public void saveDiscountRate(DiscountPlan d){
+       em.getTransaction().begin();
+       em.persist(d);
+       em.getTransaction().commit();
+    }
+	
+	
+	 @Override
+    public void deleteCustomer(Customer customer){
+        Customer cust = em.find(Customer.class,1);
+        
+        em.getTransaction().begin();
+        em.remove(cust);
+        em.getTransaction().commit(); 
     }
     
     @Override
@@ -230,9 +280,92 @@ public class DataManagerImpl implements DataManager{
         return query.getResultList();
     }
     
+<<<<<<< HEAD
     
             
     
+=======
+    @Override
+    public List<Customer> customerCount(){
+        TypedQuery<Customer> query = em.createNamedQuery("Customer.findAll", Customer.class);
+        
+        return query.getResultList();
+    }
+    
+    @Override
+    public List<JobLine> searchByJobDeadline(java.util.Date deadline){
+        TypedQuery<JobLine> query = em.createNamedQuery("JobLine.findDeadlinesAfterDate", JobLine.class);
+        query.setParameter("jobDeadline", deadline);
+        
+        return query.getResultList();
+    }
+    
+     @Override
+    public Staff findStaffByName(String forename, String surname) {
+        if(surname.contentEquals("")){
+            TypedQuery<Staff> query = em.createNamedQuery("Staff.findByForename", Staff.class);
+            query.setParameter("forename", forename);
+            return query.getSingleResult();
+        } else if(forename == null){
+            TypedQuery<Staff> query = em.createNamedQuery("Staff.findBySurname", Staff.class);
+            query.setParameter("surname", surname);
+            return query.getSingleResult();
+        } else {
+            TypedQuery<Staff> query = em.createNamedQuery("Staff.findByName", Staff.class);
+            query.setParameter("forename", forename).setParameter("surname", surname);
+            return query.getSingleResult();
+        }
+    }
+	
+	 @Override
+    public void saveJob(Job job){
+        em.getTransaction().begin();
+        em.persist(job);
+        em.getTransaction().commit();
+    }
+	
+	@Override
+    public void savePayment(PaymentDetail payment){
+        em.getTransaction().begin();
+        em.persist(payment);
+        em.getTransaction().commit();
+    }
+	
+	@Override
+    public void saveTask(Task task){
+        em.getTransaction().begin();
+        em.persist(task);
+        em.getTransaction().commit();
+    }
+    
+    
+    @Override
+    public List<Staff> searchAllStaff(){
+        TypedQuery<Staff> query = em.createNamedQuery("Staff.findAllStaff", Staff.class);
+        
+        return query.getResultList();
+    }
+    
+     @Override
+    public List<Alert> findAlerts(){
+        TypedQuery<Alert> query = em.createNamedQuery("Alert.findByBeenSeen", Alert.class);
+        query.setParameter("beenSeen", false);
+        
+        return query.getResultList();
+    }
+    
+     @Override
+    public List<OrderTable> findOrders(Customer customer){
+        TypedQuery<OrderTable> query = em.createNamedQuery("OrderTable.findByAccountNo", OrderTable.class);
+        query.setParameter("accountNo", false);
+        
+        return query.getResultList();
+    }
+    
+    
+            
+   
+>>>>>>> Sylvester'
         
     }
         
