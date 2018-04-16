@@ -5,6 +5,12 @@
  */
 package gui;
 
+import Controllers.BAPACCT;
+import com.google.i18n.phonenumbers.NumberParseException;
+import com.google.i18n.phonenumbers.PhoneNumberUtil;
+import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
+import domain.Customer;
+
 
 /**
  *
@@ -38,16 +44,15 @@ public class CreateAccountScreen extends javax.swing.JFrame {
         forename = new javax.swing.JTextField();
         surname = new javax.swing.JTextField();
         accountHolderName = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
+        telephone = new javax.swing.JTextField();
+        postcode = new javax.swing.JTextField();
         adress1 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        city = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        Title = new javax.swing.JComboBox<>();
+        title = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         address2 = new javax.swing.JTextField();
-        address3 = new javax.swing.JTextField();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -64,6 +69,14 @@ public class CreateAccountScreen extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         forename.setText("Forename");
+        forename.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                forenameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                forenameFocusLost(evt);
+            }
+        });
         forename.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 forenameActionPerformed(evt);
@@ -71,6 +84,11 @@ public class CreateAccountScreen extends javax.swing.JFrame {
         });
 
         surname.setText("Surname");
+        surname.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                surnameFocusGained(evt);
+            }
+        });
         surname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 surnameActionPerformed(evt);
@@ -78,46 +96,76 @@ public class CreateAccountScreen extends javax.swing.JFrame {
         });
 
         accountHolderName.setText("Account Holder Name");
+        accountHolderName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                accountHolderNameFocusGained(evt);
+            }
+        });
         accountHolderName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 accountHolderNameActionPerformed(evt);
             }
         });
 
-        jTextField4.setText("Contact Number");
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        telephone.setText("Contact Number");
+        telephone.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                telephoneFocusGained(evt);
+            }
+        });
+        telephone.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                telephoneActionPerformed(evt);
             }
         });
 
-        jTextField5.setText("Postcode");
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        postcode.setText("Postcode");
+        postcode.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                postcodeFocusGained(evt);
+            }
+        });
+        postcode.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                postcodeActionPerformed(evt);
             }
         });
 
         adress1.setText("Address");
+        adress1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                adress1FocusGained(evt);
+            }
+        });
         adress1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 adress1ActionPerformed(evt);
             }
         });
 
-        jTextField7.setText("City");
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
+        city.setText("City");
+        city.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                cityFocusGained(evt);
+            }
+        });
+        city.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                cityActionPerformed(evt);
             }
         });
 
         jButton2.setText("Create Account");
-
-        Title.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Titile", "Mr", "Mrs", "Ms", "Miss", "Master", " " }));
-        Title.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TitleActionPerformed(evt);
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        title.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Titile", "Mr", "Mrs", "Ms", "Miss", "Master" }));
+        title.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                titleActionPerformed(evt);
             }
         });
 
@@ -126,16 +174,14 @@ public class CreateAccountScreen extends javax.swing.JFrame {
         jButton3.setText("Cancel");
 
         address2.setText("Address");
+        address2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                address2FocusGained(evt);
+            }
+        });
         address2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 address2ActionPerformed(evt);
-            }
-        });
-
-        address3.setText("Address");
-        address3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                address3ActionPerformed(evt);
             }
         });
 
@@ -158,17 +204,16 @@ public class CreateAccountScreen extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(adress1)
                                     .addComponent(address2)
-                                    .addComponent(address3)
-                                    .addComponent(jTextField7)
-                                    .addComponent(jTextField4)
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(city)
+                                    .addComponent(telephone)
+                                    .addComponent(postcode, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(55, 55, 55)
                                 .addComponent(jButton2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton3)))
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addGap(27, 27, 27))))
@@ -183,10 +228,9 @@ public class CreateAccountScreen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton2)
-                            .addComponent(jButton3))
-                        .addContainerGap())
+                            .addComponent(jButton3)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(forename, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -197,15 +241,14 @@ public class CreateAccountScreen extends javax.swing.JFrame {
                         .addComponent(adress1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(address2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(address3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(postcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(telephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 36, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
@@ -223,33 +266,119 @@ public class CreateAccountScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_accountHolderNameActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void telephoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telephoneActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_telephoneActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void postcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postcodeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_postcodeActionPerformed
 
     private void adress1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adress1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_adress1ActionPerformed
 
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
+    private void cityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cityActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
+    }//GEN-LAST:event_cityActionPerformed
 
     private void address2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_address2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_address2ActionPerformed
 
-    private void address3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_address3ActionPerformed
+    private void titleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_address3ActionPerformed
+    }//GEN-LAST:event_titleActionPerformed
 
-    private void TitleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TitleActionPerformed
+    private void forenameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_forenameFocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_TitleActionPerformed
+        
+        if(forename.getText().compareTo("Forename")==0){
+            forename.setText("");
+        }
+    }//GEN-LAST:event_forenameFocusGained
+
+    private void forenameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_forenameFocusLost
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_forenameFocusLost
+
+    private void surnameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_surnameFocusGained
+        // TODO add your handling code here:
+        if(surname.getText().compareTo("Surname")==0){
+            surname.setText("");
+        }
+    }//GEN-LAST:event_surnameFocusGained
+
+    private void accountHolderNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_accountHolderNameFocusGained
+        // TODO add your handling code here:
+        if(accountHolderName.getText().compareTo("Account Holder Name")== 0 );
+    }//GEN-LAST:event_accountHolderNameFocusGained
+
+    private void adress1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_adress1FocusGained
+        // TODO add your handling code here:
+        if(adress1.getText().compareTo("Address") ==0 ){
+            adress1.setText("");
+        }
+    }//GEN-LAST:event_adress1FocusGained
+
+    private void address2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_address2FocusGained
+        // TODO add your handling code here:
+        if(address2.getText().compareTo("Address") == 0){
+        address2.setText("");
+    }
+    }//GEN-LAST:event_address2FocusGained
+
+    private void postcodeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_postcodeFocusGained
+        // TODO add your handling code here:
+        if(postcode.getText().compareTo("Postcode")==0){
+            postcode.setText("");
+        }
+    }//GEN-LAST:event_postcodeFocusGained
+
+    private void cityFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cityFocusGained
+        // TODO add your handling code here:
+        if(city.getText().compareTo("")==0){
+            city.setText("");
+        }
+    }//GEN-LAST:event_cityFocusGained
+
+    private void telephoneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_telephoneFocusGained
+        // TODO add your handling code here:
+        if(telephone.getText().compareTo("Contact Number")==0){
+            telephone.setText("");
+        }
+    }//GEN-LAST:event_telephoneFocusGained
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        
+        String ukNumberStr = telephone.getText();
+        String parsedNumb = new String();
+PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
+try {
+  PhoneNumber ukNumberProto = phoneUtil.parse(ukNumberStr, "GB");
+  parsedNumb = ukNumberProto.toString();
+} catch (NumberParseException e) {
+  System.err.println("NumberParseException was thrown: " + e.toString());
+}
+
+
+if (parsedNumb !=null && forename.getText().compareTo("Forename")!=0 && surname.getText().compareTo("Surname") !=0 && title.getSelectedItem().toString().compareTo("Title") !=0 && accountHolderName.getText().compareTo("Account Holder Name")!= 0 && adress1.getText().compareTo("Address")!= 0 && address2.getText().compareTo("Address")!= 0 && postcode.getText().compareTo("Postcode") !=0 && city.getText().compareTo("City") !=0 ){
+    
+    Customer c = new Customer();
+    BAPACCT ba = new BAPACCT();
+    String accountNo = ba.createAccountNo();
+    ba.createNewCustomer(accountNo, forename.getText(), surname.getText(), accountHolderName.getText(), adress1.getText(), address2.getText(), city.getText(), postcode.getText(), parsedNumb, title.getSelectedItem().toString());
+    
+    
+  
+    
+    
+    
+    
+}
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -287,11 +416,10 @@ public class CreateAccountScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> Title;
     private javax.swing.JTextField accountHolderName;
     private javax.swing.JTextField address2;
-    private javax.swing.JTextField address3;
     private javax.swing.JTextField adress1;
+    private javax.swing.JTextField city;
     private javax.swing.JTextField forename;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -300,9 +428,9 @@ public class CreateAccountScreen extends javax.swing.JFrame {
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField postcode;
     private javax.swing.JTextField surname;
+    private javax.swing.JTextField telephone;
+    private javax.swing.JComboBox<String> title;
     // End of variables declaration//GEN-END:variables
 }

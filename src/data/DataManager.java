@@ -53,11 +53,12 @@ public interface DataManager {
      public List<Staff> searchAllStaff();
      public void saveAlert(Alert a);
      public List<Alert> findAlerts();
-      public List<JobLine> searchByJobDeadline(java.util.Date deadline);
-      public List<OrderTable> findOrders(Customer customer);
-      public void saveJob(Job job); 
+     public List<JobLine> searchByJobDeadline(java.util.Date deadline);
+     public List<OrderTable> findOrders(Customer customer);
+     public void saveJob(Job job); 
+     public List<Customer> customerCount();
       
-    public void savePayment(PaymentDetail payment);
+     public void savePayment(PaymentDetail payment);
       
      
 }

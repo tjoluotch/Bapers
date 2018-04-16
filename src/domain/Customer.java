@@ -29,7 +29,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Customer.findByAccountNo", query = "SELECT c FROM Customer c WHERE c.accountNo = :accountNo")
     , @NamedQuery(name = "Customer.findByForename", query = "SELECT c FROM Customer c WHERE c.forename = :forename")
     , @NamedQuery(name = "Customer.findBySurname", query = "SELECT c FROM Customer c WHERE c.surname = :surname")
-    , @NamedQuery(name = "Customer.findByName", query = "SELECT c FROM Customer c WHERE c.forename = :forename AND c.surname = :surname")
     , @NamedQuery(name = "Customer.findByAccountHolderName", query = "SELECT c FROM Customer c WHERE c.accountHolderName = :accountHolderName")
     , @NamedQuery(name = "Customer.findByTitle", query = "SELECT c FROM Customer c WHERE c.title = :title")
     , @NamedQuery(name = "Customer.findByAddress1", query = "SELECT c FROM Customer c WHERE c.address1 = :address1")
@@ -41,6 +40,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Customer.findByEmail", query = "SELECT c FROM Customer c WHERE c.email = :email")
     , @NamedQuery(name = "Customer.findByValuedCustomer", query = "SELECT c FROM Customer c WHERE c.valuedCustomer = :valuedCustomer")
     , @NamedQuery(name = "Customer.findByDiscountType", query = "SELECT c FROM Customer c WHERE c.discountType = :discountType")
+    , @NamedQuery(name = "Customer.findByDefaulted", query = "SELECT c FROM Customer c WHERE c.defaulted = :defaulted")
     , @NamedQuery(name = "Customer.findByVersion", query = "SELECT c FROM Customer c WHERE c.version = :version")})
 public class Customer implements Serializable {
 
@@ -91,6 +91,8 @@ public class Customer implements Serializable {
     @Size(max = 45)
     @Column(name = "discount_type")
     private String discountType;
+    @Column(name = "defaulted")
+    private Boolean defaulted;
     @Basic(optional = false)
     @NotNull
     @Column(name = "version")
@@ -218,6 +220,14 @@ public class Customer implements Serializable {
 
     public void setDiscountType(String discountType) {
         this.discountType = discountType;
+    }
+
+    public Boolean getDefaulted() {
+        return defaulted;
+    }
+
+    public void setDefaulted(Boolean defaulted) {
+        this.defaulted = defaulted;
     }
 
     public long getVersion() {

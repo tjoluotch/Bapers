@@ -40,7 +40,7 @@ public class BAPACCT {
     
     
     public void createNewCustomer(String accountNo, String forename, String surname, String accountHolderName, 
-            String address1, String address2, String city, String postcode, String phone){
+            String address1, String address2, String city, String postcode, String phone, String title){
         Customer customer = new Customer();
         
         customer.setAccountNo(accountNo);
@@ -53,10 +53,33 @@ public class BAPACCT {
         customer.setPostcode(postcode);
         customer.setPhone(phone);
         customer.setValuedCustomer(Boolean.FALSE);
+        customer.setTitle(title);
         DataManagerImpl dm = new DataManagerImpl();
         dm.saveCustomer(customer);
         System.out.println("Customer " + customer.getForename() + " " + customer.getSurname() + " has been added to the database.");
     }  
+    
+    
+    public void createNewCustomerPriv(String accountNo, String forename, String surname, String accountHolderName, 
+            String address1, String address2, String city, String postcode, String phone, String title){
+        Customer customer = new Customer();
+        
+        customer.setAccountNo(accountNo);
+        customer.setForename(forename);
+        customer.setSurname(surname);
+        customer.setAccountHolderName(accountHolderName);
+        customer.setAddress1(address1);
+        customer.setAddress2(address2);
+        customer.setCity(city);
+        customer.setPostcode(postcode);
+        customer.setPhone(phone);
+        customer.setValuedCustomer(Boolean.FALSE);
+        customer.setTitle(title);
+        DataManagerImpl dm = new DataManagerImpl();
+        dm.saveCustomer(customer);
+        System.out.println("Customer " + customer.getForename() + " " + customer.getSurname() + " has been added to the database.");
+    }  
+    
     
     public String createAccountNo(){
        
