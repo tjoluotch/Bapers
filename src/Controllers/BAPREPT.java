@@ -1760,7 +1760,7 @@ public class BAPREPT {
         
            BaseTable table = new BaseTable(yPosition, yStartNewPage, bottomMargin, tableWidth, margin, doc, page, true, true);
          Row<PDPage> titleRow = table.createRow(15f);
-        Cell<PDPage> cell = titleRow.createCell(100, "Account Number: " + c.getAccountNo() + " Name: " + c.getForename()+ " " + c.getSurname());
+        Cell<PDPage> cell = titleRow.createCell(100, "Account Number: " + c.getAccountNo() + "      Name: " + c.getForename()+ " " + c.getSurname());
         cell.setFont(PDType1Font.HELVETICA_BOLD);
         cell.setFillColor(Color.WHITE);
         table.addHeaderRow(titleRow);
