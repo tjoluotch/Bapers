@@ -166,8 +166,7 @@ public class BAPPAYM {
         String phoneNumber = "Phone: " + telephone;
         
         String wording = "According to our records, it appears that we have not yet received payment of the order you made on the , which was posted"; 
-        String wording2 = "to you on" + order.datsSubmitted 
-                + ", for photographic work done in our laboratory.";
+        String wording2 = "to you on" + order.datsSubmitted + ", for photographic work done in our laboratory.";
         String wording3 = "We would appreciate payment at your earliest convenience.";
         String wording4 = "If you have already sent a payment to us recently, please accept our apologies.";
         String wording5 = "Yours sincerely,";
@@ -184,19 +183,19 @@ public class BAPPAYM {
             contents.beginText();
             contents.setFont(LabNamefont, 30);
             contents.newLineAtOffset(300, 700);
-            contents.showText(theLab);
+            contents.showText(name);
             
             
             
             contents.setFont(StandardFont, 15);
             contents.newLineAtOffset(300, 680);
-            contents.showText(LabName);
+            contents.showText(name);
             
             contents.newLine();
-            contents.showText(LabAdress);
+            contents.showText(address);
             
             contents.newLine();
-            contents.showText(LabNumber);
+            contents.showText(phoneNumber);
             
             
             
