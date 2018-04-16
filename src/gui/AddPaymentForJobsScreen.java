@@ -13,6 +13,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -216,14 +217,30 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jobsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jobsTableMouseClicked
-        int selectedRowIndex = jobsTable.getSelectedRow();
-        JobLine job = jobList.get(jobsTable.convertRowIndexToModel(selectedRowIndex));
+         int selectedRowIndex = jobsTable.getSelectedRow();
+        String jobId = jobsTable.getValueAt(selectedRowIndex, 0).toString();
+        int jobID = Integer.parseInt(jobId);
         
+        //int selectedJobLineID = jobList.get(jobsTable.convertRowIndexToModel(selectedRowIndex)).getJoblineID();
+        
+        for(JobLine job : jobList){
+            if(job.getJoblineID() == jobID){
+                selectedJobs.add(job);
+                currentPrice += job.getJobCode().getPrice();
+            }
+        }
+        
+        /*
+        int jobLineID = jobList.get(jobsTable.convertRowIndexToModel(selectedRowIndex)).getJoblineID();
         selectedJobs.add(job);
-        currentPrice = currentPrice + job.getJobCode().getPrice();
+        */
+        
+        basketModel = new JobsTableModel(selectedJobs);
+        basketModel.fireTableDataChanged();
+        
+        
         subtotal.setText(String.valueOf(currentPrice));
-        basketModel.update(selectedJobs);
-        basketModel.fireTableChanged(null);
+        
         System.out.println(selectedJobs.size());
     }//GEN-LAST:event_jobsTableMouseClicked
 
@@ -273,14 +290,26 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void basketTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_basketTableMouseClicked
-        int selectedRowIndex = jobsTable.getSelectedRow();
-        JobLine removedJob = jobList.get(jobsTable.convertRowIndexToModel(selectedRowIndex));
+         int selectedRowIndex = basketTable.getSelectedRow();
+        String jobId = basketTable.getValueAt(selectedRowIndex, 0).toString();
+        int jobID = Integer.parseInt(jobId);
+        List<JobLine> removeList = new LinkedList();
         
-        selectedJobs.remove(removedJob);
-        currentPrice = currentPrice - removedJob.getJobCode().getPrice();
+        for(JobLine job : selectedJobs){
+            
+            if(job.getJoblineID() == jobID){
+                removeList.add(job);
+                currentPrice = currentPrice - job.getJobCode().getPrice();
+            }
+            
+        }
+        
+        selectedJobs = removeList;
+        basketModel = new JobsTableModel(selectedJobs);
+        
         subtotal.setText(String.valueOf(currentPrice));
-        basketModel.update(selectedJobs);
-        basketModel.fireTableChanged(null);
+       
+        basketModel.fireTableDataChanged();
         System.out.println(selectedJobs.size());
     }//GEN-LAST:event_basketTableMouseClicked
 
