@@ -147,12 +147,20 @@ public class BAPPAYM {
         return lastAmount;
     }
     
-    public void LetterGeneration() throws IOException{
-        String filename = "/Users/tjay/NetBeansProjects/" + /*c.getAccountHolderName()*/"DavidRhind" + "LatePaym.pdf";
+    public void firstLetterGeneration() throws IOException{
+        String filename = "/Users/tjay/NetBeansProjects/" + /*c.getAccountHolderName()*/"DavidRhind" + "LatePaymLetter1.pdf";
+        
         String theLab = "The Lab";
         String LabName = "Bloombsbury's Image Processing Laboratory";
         String LabAdress = "2 Wynyatt Street, London, EC1V 7HU";
         String LabNumber = "Phone: 0207 235 7534";
+        
+        String wording = "According to our records, it appears that we have not yet received payment of the above invoice, which was posted"; 
+        String wording2 = "to you on 18th December 2017, for photographic work done in our laboratory.";
+        String wording3 = "We would appreciate payment at your earliest convenience.";
+        String wording4 = "If you have already sent a payment to us recently, please accept our apologies.";
+        String wording5 = "Yours sincerely,";
+        String wording6 = "G. Lancaster";
         
         PDDocument doc = new PDDocument();
         try {
@@ -166,22 +174,25 @@ public class BAPPAYM {
             contents.setFont(LabNamefont, 30);
             contents.newLineAtOffset(300, 700);
             contents.showText(theLab);
-            contents.endText();
             
-            contents.beginText();
+            
+            
             contents.setFont(StandardFont, 15);
             contents.newLineAtOffset(300, 680);
             contents.showText(LabName);
-            contents.endText();
             
-            contents.beginText();
-            contents.newLineAtOffset(300, 660);
+            contents.newLine();
             contents.showText(LabAdress);
-            contents.endText();
             
-            contents.beginText();
-            contents.newLineAtOffset(300, 640);
+            contents.newLine();
             contents.showText(LabNumber);
+            
+            
+            
+            
+            
+            contents.newLineAtOffset(100, 610);
+            contents.showText(wording);
             
            
                     
