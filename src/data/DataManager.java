@@ -60,6 +60,7 @@ public interface DataManager {
      public void deleteCustomer(Customer customer);
      public void saveDiscountRate(DiscountPlan d);
      public void savePayment(PaymentDetail payment);
+     public DiscountPlan findDiscountByID(int ID) ;
       
      
 }

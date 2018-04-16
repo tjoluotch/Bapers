@@ -108,7 +108,7 @@ public class BAPACCT {
        customerCount = dm.AllCustomers().size();
        
            
-           String number =  String.format("%04d", customerCount);
+           String number =  String.format("%04d", customerCount + 1);
            
             
             account = "ACC"+number;
