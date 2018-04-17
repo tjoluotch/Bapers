@@ -203,7 +203,14 @@ public class AddPaymentForOrderScreen extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         int selectedRowIndex = jTable1.getSelectedRow();
-        selectedOrder = orderList.get(jTable1.convertRowIndexToModel(selectedRowIndex));
+        String orderId = jTable1.getValueAt(selectedRowIndex, 0).toString();
+        int orderID = Integer.parseInt(orderId);
+        
+        for (OrderTable order : orderList){
+            if(order.getOrderID() == orderID){
+                selectedOrder = order;
+            }
+        }
     }//GEN-LAST:event_jTable1MouseClicked
 
     /**

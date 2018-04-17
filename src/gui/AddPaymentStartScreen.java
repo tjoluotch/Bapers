@@ -7,6 +7,7 @@ package gui;
 
 import data.DataManagerImpl;
 import domain.Customer;
+import domain.DiscountPlan;
 import domain.JobLine;
 import domain.OrderTable;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class AddPaymentStartScreen extends javax.swing.JFrame {
     DataManagerImpl dm = new DataManagerImpl();
     Customer customer = dm.findCustomerByName("David", "Rhind");
     List<OrderTable> orderList = new ArrayList(customer.getOrderTableCollection());
+    List<DiscountPlan> discounts = new ArrayList(dm.findDiscountsByAccountNo(customer.getAccountNo()));
     
     
     public AddPaymentStartScreen() {

@@ -79,22 +79,13 @@ public class BAPPAYM {
         //payment.setExpiryDate(java.sql.Date.valueOf(expiryDate));
         payment.setExpiryDate(expiryDate);
         payment.setLast4digits(last4);
-        payment.setJobLineCollection(jobs);
-        
-        
+        payment.setJobLineCollection(jobs);        
         for(JobLine job : jobs){
-            
             job.setPaymentdetailID(payment);
-            
-           
         }
-        
-        
-        
          //calculating discounted total
         DiscountPlan d = new DiscountPlan();
-     
-         //after discount calculated
+        //after discount calculated
         float pd = calculateDiscount(payment,d);
         payment.setAmount(pd);
         dm.savePayment(payment);
@@ -133,15 +124,10 @@ public class BAPPAYM {
         
         for(JobLine job : jobs){
             payment.addJobLine(job);
-            job.setPaymentdetailID(payment);
-            
-        }
-        
-        
-        
+            job.setPaymentdetailID(payment);   
+        }        
         //calculating discounted total
         DiscountPlan d = new DiscountPlan();
-     
          //after discount calculated
         float pd = calculateDiscount(payment,d);
         payment.setAmount(pd);

@@ -32,7 +32,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "DiscountPlan.findByDiscountplanID", query = "SELECT d FROM DiscountPlan d WHERE d.discountplanID = :discountplanID")
     , @NamedQuery(name = "DiscountPlan.findByRate", query = "SELECT d FROM DiscountPlan d WHERE d.rate = :rate")
     , @NamedQuery(name = "DiscountPlan.findByIsFlexible", query = "SELECT d FROM DiscountPlan d WHERE d.isFlexible = :isFlexible")
-    , @NamedQuery(name = "DiscountPlan.findByVariableRate", query = "SELECT d FROM DiscountPlan d WHERE d.variableRate = :variableRate")})
+    , @NamedQuery(name = "DiscountPlan.findByVariableRate", query = "SELECT d FROM DiscountPlan d WHERE d.variableRate = :variableRate")
+    , @NamedQuery(name = "DiscountPlan.findByAccountNo", query = "SELECT d FROM DiscountPlan d WHERE d.accountNo = :accountNo")})
 public class DiscountPlan implements Serializable {
 
     private static final long serialVersionUID = 1L;

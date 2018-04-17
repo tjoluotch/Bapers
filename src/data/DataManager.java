@@ -61,6 +61,7 @@ public interface DataManager {
      public void saveDiscountRate(DiscountPlan d);
      public void savePayment(PaymentDetail payment);
      public DiscountPlan findDiscountByID(int ID) ;
+     public List<DiscountPlan> findDiscountsByAccountNo(String AccountNo);
       
      
 }
