@@ -236,92 +236,17 @@ public class CreateNewOrderScreen extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
-        job = new Job();
+        
         String code = (String) jComboBox1.getSelectedItem();
-        job.setCode(code);
+        job = dm.findJobByCode(code);
         
-        if(jComboBox1.getSelectedItem().toString().compareTo("ABN54")==0){
+        
+        
            quantity.setValue(0);
-            job.setPrice(19f);
-            job.setJobDescription("5 x 4 B& W copy negatives");
             descField.setText(job.getJobDescription());
             jLabel4.setText("£"+String.valueOf(job.getPrice()));
             
-           
-        }
-        
-        if(jComboBox1.getSelectedItem().toString().compareTo("ACN54")==0){
-            
-            quantity.setValue(0);
-            job.setPrice(19f);
-            job.setJobDescription("5 x 4 Colour copy negatives");
-            descField.setText(job.getJobDescription());
-            jLabel4.setText("£"+String.valueOf(job.getPrice()));
-            
-        }
-        
-        
-        if(jComboBox1.getSelectedItem().toString().compareTo("ACN54")==0){
-            
-            quantity.setValue(0);
-            job.setPrice(19f);
-            job.setJobDescription("5 x 4 Colour copy negatives");
-            descField.setText(job.getJobDescription());
-            jLabel4.setText("£"+String.valueOf(job.getPrice()));
-           
-        }
-        
-        if(jComboBox1.getSelectedItem().toString().compareTo("ACT108")==0){
-            
-            quantity.setValue(0);
-            job.setPrice(96f);
-            job.setJobDescription("10 x 8 Colour copy transparency");
-            descField.setText(job.getJobDescription());
-            jLabel4.setText("£"+String.valueOf(job.getPrice()));
-            
-        }
-        
-         if(jComboBox1.getSelectedItem().toString().compareTo("ACT108")==0){
-           
-            quantity.setValue(0);
-            job.setPrice(96f);
-            job.setJobDescription("10 x 8 Colour copy transparency");
-            descField.setText(job.getJobDescription());
-            jLabel4.setText("£"+String.valueOf(job.getPrice()));
-            
-        }
-         
-          if(jComboBox1.getSelectedItem().toString().compareTo("ACT35")==0){
-           
-              quantity.setValue(0);
-            job.setPrice(20f);
-            job.setJobDescription("35 mm Colour copy transparency");
-            descField.setText(job.getJobDescription());
-            jLabel4.setText("£"+String.valueOf(job.getPrice()));
-            
-        }
-          
-           if(jComboBox1.getSelectedItem().toString().compareTo("B108")==0){
-            
-               quantity.setValue(0);
-            job.setPrice(8.3f);
-            job.setJobDescription("10 x 8 processing");
-            descField.setText(job.getJobDescription());
-            jLabel4.setText("£"+String.valueOf(job.getPrice()));
-            
-        }
-           
-           if(jComboBox1.getSelectedItem().toString().compareTo("C108")==0){
-            
-            quantity.setValue(0);
-            job.setPrice(8.3f);
-            job.setJobDescription("10 x 8 C41 processing");
-            descField.setText(job.getJobDescription());
-            jLabel4.setText("£"+String.valueOf(job.getPrice()));
-            
-            
-            
-        }
+       
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

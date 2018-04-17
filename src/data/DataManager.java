@@ -8,6 +8,7 @@ package data;
 import java.util.List;
 import domain.*;
 import java.sql.Date;
+import java.util.Collection;
 
 /**
  *
@@ -61,6 +62,8 @@ public interface DataManager {
      public void saveDiscountRate(DiscountPlan d);
      public void savePayment(PaymentDetail payment);
      public DiscountPlan findDiscountByID(int ID) ;
+      public List <JobTaskBridge> searchByJobCode(Job code);
+      public TaskLine findTaskLineByCode(String tid);
       
      
 }

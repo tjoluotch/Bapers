@@ -5,7 +5,12 @@
  */
 package gui;
 
+import TableModels.TasksTableModel;
+import data.DataManagerImpl;
 import domain.Staff;
+import domain.TaskLine;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -13,6 +18,9 @@ import domain.Staff;
  */
 public class TechnicianStartScreen extends javax.swing.JFrame {
 Staff staff;
+DataManagerImpl dm = new DataManagerImpl();
+List<TaskLine> tl = dm.searchbyStartTime();
+TaskLine selectedTask;
     /**
      * Creates new form TechnicianSHomeScreen
      */
@@ -168,8 +176,8 @@ Staff staff;
         sp.setLayout(spLayout);
         spLayout.setHorizontalGroup(
             spLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(SelectTaskButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(TaskHistoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(SelectTaskButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(TaskHistoryButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(LogoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(spLayout.createSequentialGroup()
                 .addGap(57, 57, 57)
@@ -189,17 +197,12 @@ Staff staff;
                 .addComponent(LogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        JobTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Job Line ID", "Job Code", "Job Deadline", "Special Instructions", "Order ID"
+        JobTable.setModel(new TasksTableModel(tl));
+        JobTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JobTableMouseClicked(evt);
             }
-        ));
+        });
         jScrollPane2.setViewportView(JobTable);
 
         jLabel8.setFont(new java.awt.Font("Lucida Grande", 1, 48)); // NOI18N
@@ -261,10 +264,24 @@ Staff staff;
 
     private void SelectTaskButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SelectTaskButtonMouseClicked
         // TODO add your handling code here:
+        
+        
+        
         SelectTaskScreen st = new SelectTaskScreen();
         st.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_SelectTaskButtonMouseClicked
+
+    private void JobTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JobTableMouseClicked
+        // TODO add your handling code here:
+        int row = JobTable.getSelectedRow();
+        String tID = JobTable.getValueAt(row, 0).toString();
+        int tlID = Integer.parseInt(tID);
+        DataManagerImpl dm = new DataManagerImpl();
+        TaskLine selecetedTask = dm.findTaskLineByCode(tlID);
+        
+        
+    }//GEN-LAST:event_JobTableMouseClicked
 
     /**
      * @param args the command line arguments

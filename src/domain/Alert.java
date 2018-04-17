@@ -91,15 +91,15 @@ public class Alert implements Serializable {
     public String getDescription() {
         return description;
     }
-
-    public Customer getAccountNo() {
+    
+     public Customer getAccountNo() {
         return accountNo;
     }
 
     public void setAccountNo(Customer accountNo) {
         this.accountNo = accountNo;
     }
-
+    
     public void setDescription(String description) {
         this.description = description;
     }
@@ -128,7 +128,7 @@ public class Alert implements Serializable {
         this.version = version;
     }
 
-   
+  
 
     public JobLine getJoblineID() {
         return joblineID;

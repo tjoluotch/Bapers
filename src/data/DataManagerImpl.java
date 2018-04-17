@@ -7,6 +7,7 @@ package data;
 
 import domain.*;
 import java.sql.Date;
+import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -96,6 +97,13 @@ public class DataManagerImpl implements DataManager{
         query.setParameter("username", username);
         return query.getResultList();
     }
+    
+    @Override
+    public List <JobTaskBridge> searchByJobCode(Job code) {
+        TypedQuery<JobTaskBridge> query = em.createNamedQuery("JobTaskBridge.findByJobCode", JobTaskBridge.class);
+        query.setParameter("jobCode", code);
+        return query.getResultList();
+    }
 
     @Override
     public OrderTable findOrderByID(int ID) {
@@ -132,6 +140,13 @@ public class DataManagerImpl implements DataManager{
     }
     
     @Override
+    public TaskLine findTaskLineByCode(int tid) {
+        TypedQuery<TaskLine> query = em.createNamedQuery("TaskLine.findByTasklineID", TaskLine.class);
+        query.setParameter("tasklineID", tid);
+        return query.getSingleResult();
+    }
+    
+    @Override
     public Task findTaskById(int Id) {
         TypedQuery<Task> query = em.createNamedQuery("Task.findByTaskID", Task.class);
         query.setParameter("taskID", Id);
@@ -139,7 +154,12 @@ public class DataManagerImpl implements DataManager{
     }
     
     @Override
-    public void saveCustomer(Customer customer){em.persist(customer);}
+    public void saveCustomer(Customer customer){
+        em.getTransaction().begin();
+        em.persist(customer);
+        em.getTransaction().commit();
+    
+    }
     @Override
     public void saveStaff(Staff staff){
         em.getTransaction().begin();

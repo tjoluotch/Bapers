@@ -5,16 +5,25 @@
  */
 package gui;
 
+import domain.JobLine;
+import domain.TaskLine;
+
 /**
  *
  * @author Tweetie Pie
  */
 public class SelectTaskScreen extends javax.swing.JFrame {
-
+    TaskLine t = new TaskLine();
     /**
      * Creates new form SelectTaskScreen
      */
     public SelectTaskScreen() {
+        
+        initComponents();
+    }
+    
+    public SelectTaskScreen(TaskLine t) {
+        this.t = t;
         initComponents();
     }
 
@@ -27,24 +36,29 @@ public class SelectTaskScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        department = new javax.swing.JComboBox<>();
         jComboBox5 = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jComboBox6 = new javax.swing.JComboBox<>();
+        room = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+
+        department.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        department.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Department", "Copy", "Development", "Packing", "Finishing" }));
+        department.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                departmentActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Room", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Department", "Item 2", "Item 3", "Item 4" }));
-
+        jComboBox5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Task ID", "Item 2", "Item 3", "Item 4" }));
 
         jTextArea1.setColumns(20);
@@ -52,73 +66,88 @@ public class SelectTaskScreen extends javax.swing.JFrame {
         jTextArea1.setText("Additional Comments");
         jScrollPane1.setViewportView(jTextArea1);
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jTextArea2.setText("Job information");
-        jScrollPane2.setViewportView(jTextArea2);
-
+        jButton1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton1.setText("Submit");
 
+        jButton2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton2.setText("Save");
 
+        jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jButton3.setText("Cancel");
 
+        jComboBox6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Status", "Item 2", "Item 3", "Item 4" }));
+
+        room.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        room.setText("Room");
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel1.setText("Job Code: " + t.getJoblineID().getJobCode());
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel2.setText("Order ID : " + t.getJoblineID().getOrderID().toString());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton3))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(room)
                     .addComponent(jComboBox6, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox4, 0, 92, Short.MAX_VALUE)
-                    .addComponent(jComboBox5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(98, 98, 98)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44))
+                    .addComponent(jComboBox5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(198, 198, 198)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addGap(76, 76, 76))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(11, 11, 11)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(38, 38, 38)))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(66, 66, 66)
+                .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(room, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2)
-                    .addComponent(jButton3)))
+                    .addComponent(jButton3))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void departmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_departmentActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_departmentActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,16 +188,16 @@ public class SelectTaskScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> department;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JComboBox<String> jComboBox5;
     private javax.swing.JComboBox<String> jComboBox6;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextField room;
     // End of variables declaration//GEN-END:variables
 }

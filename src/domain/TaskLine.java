@@ -38,13 +38,14 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "TaskLine.findByNullStartTime", query = "SELECT t FROM TaskLine t WHERE t.startTime IS NULL")
     , @NamedQuery(name = "TaskLine.findByEndTime", query = "SELECT t FROM TaskLine t WHERE t.endTime = :endTime")
     , @NamedQuery(name = "TaskLine.findByShelf", query = "SELECT t FROM TaskLine t WHERE t.shelf = :shelf")
+    , @NamedQuery(name = "TaskLine.findByVersion", query = "SELECT t FROM TaskLine t WHERE t.version = :version")
     , @NamedQuery(name = "TaskLine.findPerformanceReport", query = "SELECT j FROM TaskLine j  WHERE j.startTime = :startTime ORDER BY j.completedBy ASC, j.startTime ASC ")
     , @NamedQuery(name = "TaskLine.findBetweenDates", query = "SELECT t FROM TaskLine t WHERE t.startTime BETWEEN :startDate AND :endDate ORDER BY t.completedBy ASC,  t.startTime ASC")
     , @NamedQuery(name = "TaskLine.findBetweenDates2", query = "SELECT t FROM TaskLine t WHERE t.startTime BETWEEN :startDate AND :endDate ORDER BY   t.startTime ASC")
     , @NamedQuery(name = "TaskLine.findSummaryReport", query = "SELECT t FROM TaskLine t WHERE t.startTime BETWEEN :startDATE AND :endDATE ORDER BY CASE WHEN t.taskID.department = 'Copy Room' THEN 'Copy Room' WHEN t.taskID.department = 'Development Area' THEN 'Development Area' WHEN t.taskID.department = 'Packing Departments' THEN 'Packing Departments' WHEN t.taskID.department = 'Finishing Room' THEN 'Finishing Room'\n" +
 
 "                   ELSE '' END" )  
-    , @NamedQuery(name = "TaskLine.findByVersion", query = "SELECT t FROM TaskLine t WHERE t.version = :version")})
+    , @NamedQuery(name = "TaskLine.findByPrice", query = "SELECT t FROM TaskLine t WHERE t.price = :price")})
 public class TaskLine implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -60,14 +61,14 @@ public class TaskLine implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date endTime;
     @Size(max = 10)
-    @Column(length = 10)
+    @Column(name = "shelf")
     private String shelf;
     @Basic(optional = false)
     @NotNull
-    @Column(nullable = false)
+    @Column(name = "version")
     private long version;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(precision = 12)
+    @Column(name = "price")
     private Float price;
     @JoinColumn(name = "completed_by", referencedColumnName = "username")
     @ManyToOne

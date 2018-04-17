@@ -10,6 +10,7 @@ import domain.Alert;
 import domain.Customer;
 import domain.Job;
 import domain.JobLine;
+import domain.JobTaskBridge;
 import domain.OrderTable;
 import domain.PaymentDetail;
 import domain.Task;
@@ -73,6 +74,7 @@ public class BAPACCT {
         customer.setPhone(phone);
         customer.setValuedCustomer(Boolean.FALSE);
         customer.setTitle(title);
+        customer.setStatus("Active");
         DataManagerImpl dm = new DataManagerImpl();
         dm.saveCustomer(customer);
         System.out.println("Customer " + customer.getForename() + " " + customer.getSurname() + " has been added to the database.");
@@ -237,106 +239,61 @@ public class BAPACCT {
          
          for (JobLine j : new LinkedList<JobLine>(jCollection)){
              
-             String jcode = j.getJobCode().getCode();
+             String jcod = j.getJobCode().getCode();
+             Job jcode = j.getJobCode();
              
              
-             if(jcode.compareTo("ABN54")==0){
-                 tLines = new LinkedList();
-                 int t1 = 1;
-                 int t2 = 2;
-                 int t3 = 3;
-                 
-                 createTaskColl(t1,j);
-                 createTaskColl(t2,j);
-                 createTaskColl(t3,j);
-                 
-                JobLine j2 = new JobLine();
-                 j2 = j;
-                 j2.setTaskLineCollection(tLines);
-                 jCollection.remove(j);
-                 jCollection.add(j2);
+             if(jcod.compareTo("ABN54")==0){
+                 DataManagerImpl dm = new DataManagerImpl();
+                Collection<JobTaskBridge> jtc = dm.searchByJobCode(jcode);
+                Collection<TaskLine> tb = createTaskColl(jtc,j);
+                j.setTaskLineCollection(tb);
                  
                  
                  
                  
              }
-             else if(jcode.compareTo("ACN54")==0){
-                 tLines = new LinkedList();
-                 int t1 = 1;
-                 int t2 = 4;
-                 int t3 = 3;
-                 createTaskColl(t1,j);
-                 createTaskColl(t2,j);
-                 createTaskColl(t3,j);
-                 JobLine j2 = new JobLine();
-                 j2 = j;
-                 j2.setTaskLineCollection(tLines);
-                 jCollection.remove(j);
-                 jCollection.add(j2);
+             else if(jcod.compareTo("ACN54")==0){
+                 DataManagerImpl dm = new DataManagerImpl();
+                Collection<JobTaskBridge> jtc = dm.searchByJobCode(jcode);
+                Collection<TaskLine> tb = createTaskColl(jtc,j);
+                j.setTaskLineCollection(tb);
                  
                  
                  
              }
-             else if(jcode.compareTo("ACT108")==0){
-                 tLines = new LinkedList();
-                 int t1 = 1;
-                 int t2 = 5;
-                 int t3 = 3;
-                 createTaskColl(t1,j);
-                 createTaskColl(t2,j);
-                 createTaskColl(t3,j);
-                 JobLine j2 = new JobLine();
-                 j2 = j;
-                 j2.setTaskLineCollection(tLines);
-                 jCollection.remove(j);
-                 jCollection.add(j2);
+             else if(jcod.compareTo("ACT108")==0){
+                 DataManagerImpl dm = new DataManagerImpl();
+                Collection<JobTaskBridge> jtc = dm.searchByJobCode(jcode);
+                Collection<TaskLine> tb = createTaskColl(jtc,j);
+                j.setTaskLineCollection(tb);
                  
                  
                  
              }
-             else if(jcode.compareTo("ACT35")==0){
-                 tLines = new LinkedList();
-                 int t1 = 6;
-                 int t2 = 5;
-                 int t3 = 7;
-                 createTaskColl(t1,j);
-                 createTaskColl(t2,j);
-                 createTaskColl(t3,j);
-                 JobLine j2 = new JobLine();
-                 j2 = j;
-                 j2.setTaskLineCollection(tLines);
-                 jCollection.remove(j);
-                 jCollection.add(j2);
+             else if(jcod.compareTo("ACT35")==0){
+                 DataManagerImpl dm = new DataManagerImpl();
+                Collection<JobTaskBridge> jtc = dm.searchByJobCode(jcode);
+                Collection<TaskLine> tb = createTaskColl(jtc,j);
+                j.setTaskLineCollection(tb);
                  
                  
                  
              }
-            else if(jcode.compareTo("B108")==0){
-                 tLines = new LinkedList();
-                 int t1 = 2;
-                 int t2 = 3;
-                 createTaskColl(t1,j);
-                 createTaskColl(t2,j);
-                 JobLine j2 = new JobLine();
-                 j2 = j;
-                 j2.setTaskLineCollection(tLines);
-                 jCollection.remove(j);
-                 jCollection.add(j2);
+            else if(jcod.compareTo("B108")==0){
+                 DataManagerImpl dm = new DataManagerImpl();
+                Collection<JobTaskBridge> jtc = dm.searchByJobCode(jcode);
+                Collection<TaskLine> tb = createTaskColl(jtc,j);
+                j.setTaskLineCollection(tb);
                  
                  
                  
              }
-           else if (jcode.compareTo("C108 ")==0) {
-                tLines = new LinkedList();
-                int t1 = 4;
-                int t2 = 3;
-                createTaskColl(t1,j);
-                createTaskColl(t2,j);
-                JobLine j2 = new JobLine();
-                 j2 = j;
-                 j2.setTaskLineCollection(tLines);
-                jCollection.remove(j);
-                 jCollection.add(j2);
+           else if (jcod.compareTo("C108 ")==0) {
+                DataManagerImpl dm = new DataManagerImpl();
+                Collection<JobTaskBridge> jtc = dm.searchByJobCode(jcode);
+                Collection<TaskLine> tb = createTaskColl(jtc,j);
+                j.setTaskLineCollection(tb);
             }
         }
             
@@ -347,16 +304,21 @@ public class BAPACCT {
          
      }
      
-     public void createTaskColl(int id,  JobLine j ){
+     public Collection<TaskLine>  createTaskColl(Collection<JobTaskBridge> jtb,  JobLine j ){
          DataManagerImpl dm = new DataManagerImpl();
-         
-         Task t1 = dm.findTaskById(id);
+         Collection<TaskLine> tl = new LinkedList();
+        
+         for (JobTaskBridge t: jtb){
+             Task t1 = t.getTaskID();
          TaskLine l1 = new TaskLine();
                   l1.setJoblineID(j);
                   l1.setTaskID(t1);
-                  l1.setJoblineID(j);
-                  tLines.add(l1);
+                   tl.add(l1);
          
+         }
+         
+         
+         return tl;
          
          
          
