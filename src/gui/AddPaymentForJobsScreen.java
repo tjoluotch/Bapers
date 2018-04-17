@@ -10,6 +10,7 @@ import TableModels.JobsTableModel;
 import data.DataManagerImpl;
 import domain.DiscountPlan;
 import domain.JobLine;
+import domain.TaskLine;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -226,9 +227,9 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
         for(JobLine job : jobList){
             if(job.getJoblineID() == jobID){
                 selectedJobs.add(job);
-                currentPrice += job.getJobCode().getPrice();
             }
         }
+        currentPrice += paym.getPrice(selectedJobs, discounts);
         basketModel = new JobsTableModel(selectedJobs);
         basketModel.fireTableDataChanged();
         basketTable.setModel(basketModel);

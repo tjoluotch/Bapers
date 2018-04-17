@@ -8,12 +8,12 @@ package Controllers;
 import data.DataManagerImpl;
 import domain.DiscountPlan;
 import domain.JobLine;
-import domain.OrderTable;
 import domain.PaymentDetail;
+import domain.TaskLine;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.swing.JFrame;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -67,12 +67,55 @@ public class BAPPAYM {
     }
     
      //calculate discount for saving payment
+    /*
     public float calculateDiscount(PaymentDetail p, DiscountPlan d){
         float subTotal = p.getAmount();
         float percentage = d.getRate() * subTotal;
         float lastAmount = subTotal - percentage;
         
         return lastAmount;
+    }*/
+    
+    //for VARIABLE (task specific) & fixed discounts
+    public float getPrice(Collection<JobLine> jobs, Collection<DiscountPlan> discounts){
+        float price = 0;
+        Collection<DiscountPlan> variableDiscounts = new ArrayList();
+        if(discounts.isEmpty()){ price = calculateNormalPrice(jobs); } 
+        else {
+            for(JobLine job : jobs){
+                for(DiscountPlan discount : discounts){
+                    //Variable
+                    if(discount.getTaskID() != null){
+                        for(TaskLine task : job.getTaskLineCollection()){
+                            if(discount.getTaskID() == task.getTaskID()){
+                                price += task.getPrice()*discount.getRate();
+                            }
+                        }
+                    //Fixed
+                    } else if (discount.getFlexibleRate() == null && discount.getTaskID() == null) {
+                        price = (job.getJobCode().getPrice()) * discount.getRate();
+                    } else 
+                    //Flexible
+                    if (discount.getFlexibleRate() != null){
+                        variableDiscounts.add(discount);
+                    }
+                }
+            }
+            if(!variableDiscounts.isEmpty()){
+                //regular expression stuff here
+            }
+        }
+        return price;
+    }
+    
+    public float calculateNormalPrice(Collection<JobLine> jobs){
+        float price = 0;
+        for(JobLine job : jobs){
+            for(TaskLine task : job.getTaskLineCollection()){
+                price += task.getPrice();
+            }
+        }
+        return price;
     }
     
     public void calculateSurcharge(JobLine job){

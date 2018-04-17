@@ -25,7 +25,7 @@ public class AddPaymentStartScreen extends javax.swing.JFrame {
     DataManagerImpl dm = new DataManagerImpl();
     Customer customer = dm.findCustomerByName("David", "Rhind");
     List<OrderTable> orderList = new ArrayList(customer.getOrderTableCollection());
-    List<DiscountPlan> discounts = new ArrayList(dm.findDiscountsByAccountNo(customer.getAccountNo()));
+    List<DiscountPlan> discounts = new ArrayList(customer.getDiscountPlanCollection());
     
     
     public AddPaymentStartScreen() {
@@ -35,7 +35,7 @@ public class AddPaymentStartScreen extends javax.swing.JFrame {
     public AddPaymentStartScreen(Customer customer){
         this.customer = customer;
         orderList = new ArrayList(customer.getOrderTableCollection());
-        discounts = new ArrayList(dm.findDiscountsByAccountNo(customer.getAccountNo()));
+        discounts = new ArrayList(customer.getDiscountPlanCollection());
         //orderList = new ArrayList(customer.getOrderTableCollection());
         initComponents();
     }

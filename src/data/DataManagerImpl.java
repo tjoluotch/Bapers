@@ -113,7 +113,7 @@ public class DataManagerImpl implements DataManager{
     
     @Override
     public List<DiscountPlan> findDiscountsByAccountNo(String AccountNo){
-        TypedQuery<DiscountPlan> query = em.createNamedQuery("OrderTable.findByAccountNo", DiscountPlan.class);
+        TypedQuery<DiscountPlan> query = em.createNamedQuery("DiscountPlan.findByAccountNo", DiscountPlan.class);
         query.setParameter("accountNo", AccountNo);
         return query.getResultList();
     }
