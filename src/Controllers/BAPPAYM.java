@@ -42,6 +42,10 @@ public class BAPPAYM {
         this.frame = frame;
     }
     
+    public BAPPAYM(){
+        
+    }
+    
     //CREATE PAYMENTDETAIL METHODS
     //card payments
     //for whole order

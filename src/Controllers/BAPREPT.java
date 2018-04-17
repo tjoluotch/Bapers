@@ -608,6 +608,8 @@ public class BAPREPT {
     }
 
     public void createMonthlyReport(String date1, String date2) throws IOException {
+        
+        //Reconstruct Inputed dates to Date format
         String day1 = date1.substring(0, 2);
         String month1 = date1.substring(3, 5);
         String year1 = date1.substring(6, 10);
@@ -616,8 +618,13 @@ public class BAPREPT {
         String month2 = date2.substring(3, 5);
         String year2 = date2.substring(6, 10);
         String newDate2 = year2 + "-" + month2 + "-" + day2;
+        
+        
         SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM");
         String monthName = monthFormat.format(Date.valueOf(newDate1));
+        
+        
+        //Create PDF document and set header
         PDPage page = new PDPage(PDRectangle.A4);
         PDDocument doc = new PDDocument();
         PDPageContentStream contentStream = new PDPageContentStream(doc, page);
@@ -628,8 +635,8 @@ public class BAPREPT {
         PDFont font2 = PDType1Font.HELVETICA;
         String period = "Period: " + monthName;
         PDStreamUtils.write(contentStream, "Individual Performance Report", font, 20, hWidth, 790, Color.BLACK);
-        PDStreamUtils.write(contentStream, period, font2, 15, hWidth2, 750, Color.BLACK);
-
+        PDStreamUtils.write(contentStream, period, font2, 15, hWidth2, 750 , Color.BLACK);
+        // Define table properties
         float margin = 50;
         float yStartNewPage = page.getMediaBox().getHeight() - (2 * margin);
         float tableWidth = page.getMediaBox().getWidth() - (2 * margin);
@@ -637,17 +644,22 @@ public class BAPREPT {
         float bottomMargin = 70;
         float yPosition = 700;
         BaseTable table = new BaseTable(yPosition, yStartNewPage, bottomMargin, tableWidth, margin, doc, page, true, true);
-//Create Header row
+        
+// Search for TaskLines between a given period and place in a list
         DataManagerImpl dm = new DataManagerImpl();
-        List<TaskLine
-                > line = dm.individualReportBetween(Date.valueOf(newDate1), Date.valueOf(newDate2));
+        List<TaskLine> line = dm.individualReportBetween(Date.valueOf(newDate1), Date.valueOf(newDate2));
+        // create array list of Strings to feed into the table
         List<String[]> list = new ArrayList<String[]>();
+        
+        //Set up date formats and hours and minutes formats
         SimpleDateFormat localDateFormat = new SimpleDateFormat("HH:mm");
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         SimpleDateFormat form = new SimpleDateFormat("HH:mm");
-
+        // create variable to total up hours
         long j = 0;
         long total = 0;
+        
+        //Go through TaskLine list and copy properties into arraylist
 
         for (int i = 0; i < line.size(); i++) {
             TaskLine g = line.get(i);
@@ -725,6 +737,9 @@ public class BAPREPT {
 
             System.out.println(g.getCompletedBy().getForename() + " " + g.getCompletedBy().getSurname() + " " + g.getTaskID().getTaskID() + " " + g.getJoblineID().getJobCode().getCode() + " " + localDateFormat.format(g.getStartTime()) + " " + formatter.format(g.getEndTime()));
         }
+        
+        // Draw Table
+        // Draw first 2 rows
 
         Row<PDPage> titleRow = table.createRow(15f);
         Cell<PDPage> cell = titleRow.createCell(100, "Individual Report");
@@ -752,6 +767,8 @@ public class BAPREPT {
         cell.setFont(PDType1Font.HELVETICA_BOLD);
         cell.setFillColor(Color.WHITE);
         table.addHeaderRow(headerRow);
+        
+        // pupulate the rest of the table with ArrayList of string
 
         for (String[] fact : list) {
             
@@ -769,6 +786,8 @@ public class BAPREPT {
                 cell = row.createCell((100 / 8f), fact[i]);
             }
         }
+        
+        // convert total time in milliseconds to minutes and hours
 
         int minutes = (int) ((total / (1000 * 60)) % 60);
         int hours = (int) ((total / (1000 * 60 * 60)) % 24);
@@ -778,10 +797,12 @@ public class BAPREPT {
         String totalString = hours + "h " + minutes + "min ";
         Cell<PDPage> cell11 = footerRow.createCell((100 / 8f), totalString);
         cell11.setFont(PDType1Font.HELVETICA_BOLD);
-        int p = 5 * 8;
+        
+        //close content stream
         contentStream.close();
         doc.addPage(page);
         table.draw();
+        //save document
         doc.save(monthName + "_" + "Individualreport.pdf");
         doc.close();
     }

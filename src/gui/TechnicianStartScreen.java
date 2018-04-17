@@ -9,8 +9,11 @@ import TableModels.TasksTableModel;
 import data.DataManagerImpl;
 import domain.Staff;
 import domain.TaskLine;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.LinkedList;
 import java.util.List;
+import javax.swing.Timer;
 
 /**
  *
@@ -29,6 +32,21 @@ TaskLine selectedTask;
     }
     public TechnicianStartScreen(Staff staff) {
         this.staff = staff;
+        
+        Timer timer = new Timer(60000, new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+               
+                tl = dm.searchbyStartTime();
+                JobTable.setModel(new TasksTableModel(tl));
+               
+               
+           }
+       });
+        
+        timer.start(); 
+        
+        
         initComponents();
     } 
     /**

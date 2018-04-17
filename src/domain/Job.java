@@ -36,6 +36,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Job.findByVersion", query = "SELECT j FROM Job j WHERE j.version = :version")})
 public class Job implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "jobCode")
+    private Collection<JobLine> jobLineCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -132,6 +135,15 @@ public class Job implements Serializable {
     @Override
     public String toString() {
         return "domain.Job[ code=" + code + " ]";
+    }
+
+    @XmlTransient
+    public Collection<JobLine> getJobLineCollection() {
+        return jobLineCollection;
+    }
+
+    public void setJobLineCollection(Collection<JobLine> jobLineCollection) {
+        this.jobLineCollection = jobLineCollection;
     }
     
 }

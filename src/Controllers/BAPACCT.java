@@ -22,6 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Spliterator;
 import java.util.function.Consumer;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 /**
@@ -323,4 +324,17 @@ public class BAPACCT {
          
          
 }
+     
+     public Collection<JobLine> getOrderJobLines(OrderTable o, JTable j ){
+         
+         Collection<JobLine> jobList = o.getJobLineCollection();
+         
+         return jobList;
+         
+         
+        
+         
+         
+     }
 }
+

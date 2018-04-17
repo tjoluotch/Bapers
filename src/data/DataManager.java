@@ -63,7 +63,7 @@ public interface DataManager {
      public void savePayment(PaymentDetail payment);
      public DiscountPlan findDiscountByID(int ID) ;
       public List <JobTaskBridge> searchByJobCode(Job code);
-      public TaskLine findTaskLineByCode(String tid);
+      public TaskLine findTaskLineByCode(int tid);
       
      
 }

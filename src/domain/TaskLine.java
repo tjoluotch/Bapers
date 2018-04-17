@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -52,7 +53,7 @@ public class TaskLine implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "task_lineID", nullable = false)
+    @Column(name = "task_lineID")
     private Integer tasklineID;
     @Column(name = "start_time")
     @Temporal(TemporalType.TIMESTAMP)
@@ -70,13 +71,17 @@ public class TaskLine implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "price")
     private Float price;
+    @Lob
+    @Size(max = 2147483647)
+    @Column(name = "comments")
+    private String comments;
     @JoinColumn(name = "completed_by", referencedColumnName = "username")
     @ManyToOne
     private Staff completedBy;
-    @JoinColumn(name = "taskID", referencedColumnName = "taskID", nullable = false)
+    @JoinColumn(name = "taskID", referencedColumnName = "taskID")
     @ManyToOne(optional = false)
     private Task taskID;
-    @JoinColumn(name = "job_lineID", referencedColumnName = "job_lineID", nullable = false)
+    @JoinColumn(name = "job_lineID", referencedColumnName = "job_lineID")
     @ManyToOne(optional = false)
     private JobLine joblineID;
 
@@ -138,6 +143,14 @@ public class TaskLine implements Serializable {
 
     public void setPrice(Float price) {
         this.price = price;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 
     public Staff getCompletedBy() {
