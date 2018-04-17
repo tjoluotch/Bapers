@@ -1,25 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Controllers;
 
 import data.DataManagerImpl;
-import domain.Customer;
+import domain.DiscountPlan;
 import domain.JobLine;
 import domain.OrderTable;
 import domain.PaymentDetail;
-import domain.DicountPlan;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
-
-
+import javax.swing.JOptionPane;
+import org.apache.pdfbox.io.MemoryUsageSetting;
+import org.apache.pdfbox.jbig2.util.log.LoggerFactory;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
+import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
@@ -49,41 +46,49 @@ public class BAPPAYM {
         payment.setType("Card");
         payment.setExpiryDate(expiryDate);
         payment.setLast4digits(last4);
-        payment.setOrderID(order);
+        
         payment.setJobLineCollection(order.getJobLineCollection());
-        order.addPaymentDetail(payment);
+        //order.addPaymentDetail(payment);
         for(JobLine job : order.getJobLineCollection()){
+            
             job.setPaymentdetailID(payment);
         }
-        dm.savePayment(payment);
+        
         
          //calculating discounted total
-        DicountPlan d = new DicountPlan();
+        
      
          //after discount calculated
+         DiscountPlan d = new DiscountPlan();
         float pd = calculateDiscount(payment,d);
         payment.setAmount(pd);
         dm.savePayment(payment);
     }
     
+    
+    
+    
     //for jobs
-    public void createPayment(List<JobLine> jobs, String last4, Date expiryDate){ //NEED TO UPDATE EXPIRY DATE
+     public void createPayment(List<JobLine> jobs, String last4, Date expiryDate){ //NEED TO UPDATE EXPIRY DATE
         PaymentDetail payment = new PaymentDetail();
         payment.setType("Card");
         //payment.setExpiryDate(java.sql.Date.valueOf(expiryDate));
         payment.setExpiryDate(expiryDate);
         payment.setLast4digits(last4);
-        OrderTable orderID = null;
+        payment.setJobLineCollection(jobs);
+        
+        
         for(JobLine job : jobs){
-            payment.addJobLine(job);
+            
             job.setPaymentdetailID(payment);
-            orderID = job.getOrderID();
+            
+           
         }
-        payment.setOrderID(orderID);
-        dm.savePayment(payment);
+        
+        
         
          //calculating discounted total
-        DicountPlan d = new DicountPlan();
+        DiscountPlan d = new DiscountPlan();
      
          //after discount calculated
         float pd = calculateDiscount(payment,d);
@@ -98,17 +103,17 @@ public class BAPPAYM {
         payment.setType("Cash");
         payment.setExpiryDate(null);
         payment.setLast4digits(null);
-        payment.setOrderID(order);
+        
         payment.setJobLineCollection(order.getJobLineCollection());
-        order.addPaymentDetail(payment);
+        //order.addPaymentDetail(payment);
         for(JobLine job : order.getJobLineCollection()){
             job.setPaymentdetailID(payment);
         }
-        dm.savePayment(payment);
+        
         
         
          //calculating discounted total
-        DicountPlan d = new DicountPlan();
+        DiscountPlan d = new DiscountPlan();
      
          //after discount calculated
         float pd = calculateDiscount(payment,d);
@@ -121,25 +126,26 @@ public class BAPPAYM {
         payment.setType("Cash");
         payment.setExpiryDate(null);
         payment.setLast4digits(null);
-        OrderTable orderID = null;
+        
         for(JobLine job : jobs){
             payment.addJobLine(job);
             job.setPaymentdetailID(payment);
-            orderID = job.getOrderID();
+            
         }
-        payment.setOrderID(orderID);
-        dm.savePayment(payment);
+        
+        
         
         //calculating discounted total
-        DicountPlan d = new DicountPlan();
+        DiscountPlan d = new DiscountPlan();
      
          //after discount calculated
         float pd = calculateDiscount(payment,d);
         payment.setAmount(pd);
         dm.savePayment(payment);
     }
-    //calculate discount for saving payment
-    public float calculateDiscount(PaymentDetail p, DicountPlan d){
+    
+     //calculate discount for saving payment
+    public float calculateDiscount(PaymentDetail p, DiscountPlan d){
         float subTotal = p.getAmount();
         float percentage = d.getRate() * subTotal;
         float lastAmount = subTotal - percentage;
@@ -147,16 +153,16 @@ public class BAPPAYM {
         return lastAmount;
     }
     
-    public void firstLetterGeneration() throws IOException{
+    public void firstLetterGeneration(String forename, String surname, String accountHolderName, String address1, String city, String postcode, String telephone, String dateSubmitted) throws IOException{
         String filename = "/Users/tjay/NetBeansProjects/" + /*c.getAccountHolderName()*/"DavidRhind" + "LatePaymLetter1.pdf";
         
-        String theLab = "The Lab";
-        String LabName = "Bloombsbury's Image Processing Laboratory";
-        String LabAdress = "2 Wynyatt Street, London, EC1V 7HU";
-        String LabNumber = "Phone: 0207 235 7534";
+        String name = forename + " " + surname;
+        String accountHolder = accountHolderName;
+        String address = address1 + ", " + city + ", " + postcode;
+        String phoneNumber = "Phone: " + telephone;
         
-        String wording = "According to our records, it appears that we have not yet received payment of the above invoice, which was posted"; 
-        String wording2 = "to you on 18th December 2017, for photographic work done in our laboratory.";
+        String wording = "According to our records, it appears that we have not yet received payment of the order you made on the , which was posted"; 
+        String wording2 = "to you on" + dateSubmitted + ", for photographic work done in our laboratory.";
         String wording3 = "We would appreciate payment at your earliest convenience.";
         String wording4 = "If you have already sent a payment to us recently, please accept our apologies.";
         String wording5 = "Yours sincerely,";
@@ -170,24 +176,22 @@ public class BAPPAYM {
             PDFont LabNamefont = PDType1Font.HELVETICA_BOLD;
             PDFont StandardFont = PDType1Font.HELVETICA;
             PDPageContentStream contents = new PDPageContentStream(doc, page);
-            
-            
             contents.beginText();
             contents.setFont(LabNamefont, 30);
             contents.newLineAtOffset(300, 700);
-            contents.showText(theLab);
+            contents.showText(name);
             
             
             
             contents.setFont(StandardFont, 15);
             contents.newLineAtOffset(300, 680);
-            contents.showText(LabName);
+            contents.showText(name);
             
             contents.newLine();
-            contents.showText(LabAdress);
+            contents.showText(address);
             
             contents.newLine();
-            contents.showText(LabNumber);
+            contents.showText(phoneNumber);
             
             
             
@@ -195,6 +199,16 @@ public class BAPPAYM {
             
             contents.newLineAtOffset(100, 610);
             contents.showText(wording);
+            contents.newLine();
+            contents.showText(wording2);
+            contents.newLine();
+            contents.showText(wording3);
+            contents.newLine();
+            contents.showText(wording4);
+            contents.newLine();
+            contents.showText(wording5);
+            contents.newLine();
+            contents.showText(wording6);
             
            
                     
@@ -206,4 +220,7 @@ public class BAPPAYM {
             doc.close();
         }
     }
+	
 }
+
+

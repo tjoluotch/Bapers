@@ -6,7 +6,7 @@
 package gui;
 
 import Controllers.BAPPAYM;
-import TableModels.OrdersTableModel;
+import TableModels.OrderTableModel;
 import data.DataManagerImpl;
 import domain.OrderTable;
 import java.sql.Date;
@@ -29,7 +29,7 @@ public class AddPaymentForOrderScreen extends javax.swing.JFrame {
     BAPPAYM paym = new BAPPAYM(dm);
     List<OrderTable> orderList;
     OrderTable selectedOrder;
-    OrdersTableModel ordersTableModel; 
+    OrderTableModel ordersTableModel; 
     
     public AddPaymentForOrderScreen() {
         initComponents();
@@ -37,7 +37,7 @@ public class AddPaymentForOrderScreen extends javax.swing.JFrame {
     
     public AddPaymentForOrderScreen(List<OrderTable> orderList){
         this.orderList = orderList;
-        ordersTableModel = new OrdersTableModel(orderList);
+        ordersTableModel = new OrderTableModel(orderList);
         initComponents();
     }
 

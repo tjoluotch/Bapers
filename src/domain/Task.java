@@ -63,6 +63,8 @@ public class Task implements Serializable {
     private Collection<DiscountPlan> discountPlanCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "taskID")
     private Collection<TaskLine> taskLineCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "taskID")
+    private Collection<JobTaskBridge> jobTaskBridgeCollection;
 
     public Task() {
     }
@@ -140,6 +142,15 @@ public class Task implements Serializable {
 
     public void setTaskLineCollection(Collection<TaskLine> taskLineCollection) {
         this.taskLineCollection = taskLineCollection;
+    }
+
+    @XmlTransient
+    public Collection<JobTaskBridge> getJobTaskBridgeCollection() {
+        return jobTaskBridgeCollection;
+    }
+
+    public void setJobTaskBridgeCollection(Collection<JobTaskBridge> jobTaskBridgeCollection) {
+        this.jobTaskBridgeCollection = jobTaskBridgeCollection;
     }
 
     @Override

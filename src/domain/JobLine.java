@@ -190,6 +190,12 @@ public class JobLine implements Serializable {
         }
         return true;
     }
+    
+        public boolean isPaidFor(){
+        if(paymentdetailID != null){
+            return true;
+        } else { return false; }
+    }
 
     @Override
     public String toString() {

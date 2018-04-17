@@ -53,6 +53,8 @@ public class Job implements Serializable {
     @NotNull
     @Column(name = "version")
     private long version;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "code")
+    private Collection<JobTaskBridge> jobTaskBridgeCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "jobCode")
     private Collection<JobLine> jobLineCollection;
 
@@ -98,6 +100,15 @@ public class Job implements Serializable {
 
     public void setVersion(long version) {
         this.version = version;
+    }
+
+    @XmlTransient
+    public Collection<JobTaskBridge> getJobTaskBridgeCollection() {
+        return jobTaskBridgeCollection;
+    }
+
+    public void setJobTaskBridgeCollection(Collection<JobTaskBridge> jobTaskBridgeCollection) {
+        this.jobTaskBridgeCollection = jobTaskBridgeCollection;
     }
 
     @XmlTransient

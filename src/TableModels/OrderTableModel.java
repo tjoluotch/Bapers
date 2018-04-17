@@ -5,17 +5,17 @@
  */
 package TableModels;
 
-import domain.Customer;
+import domain.OrderTable;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
 /**
  *
- * @author DanTe
+ * @author Tweetie Pie
  */
-public class CustomersTableModel extends AbstractTableModel {
-
- @Override
+public class OrderTableModel extends AbstractTableModel{
+    
+    @Override
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex){
              case 0:
@@ -24,19 +24,15 @@ public class CustomersTableModel extends AbstractTableModel {
                return String.class;
              case 2:
                return String.class;
-             case 3:
-               return String.class;
-             case 4:
-               return String.class;
              }
              return null;
          //To change body of generated methods, choose Tools | Templates.
     }
     
-    private List<Customer> li;
-    private String[] columnNames = {"Account Holder", "Forename", "Surname", "Account Number", "Valued"};
+    private List<OrderTable> li;
+    private String[] columnNames = {"Order ID", "Total Price", "Payment Status"};
 
-    public CustomersTableModel(List<Customer> li) {
+    public OrderTableModel(List<OrderTable> li) {
         this.li = li;
     }
 
@@ -52,31 +48,22 @@ public class CustomersTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 4; //To change body of generated methods, choose Tools | Templates.
+        return 3; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Customer cl = li.get(rowIndex);
+        OrderTable o = li.get(rowIndex);
         switch(columnIndex){
             case 0:
-                return cl.getAccountHolderName();
+                return o.getOrderID();
             case 1:
-                return cl.getForename();
-            case 2: 
-                return cl.getSurname();
-            case 3:
-               return cl.getAccountNo();
-            case 4:
-                if(cl.getValuedCustomer() == true){
-                return cl.getDiscountType();
-                } else {
-                    return "No";
-                }
+                return o.getTotalPrice();
+            case 2:
+                return o.getPaymentStatus();
         }
         
        return null;
     }
-    
     
 }

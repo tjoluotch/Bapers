@@ -5,17 +5,17 @@
  */
 package TableModels;
 
+import domain.Alert;
+import domain.Staff;
 import java.util.List;
-import domain.OrderTable;
 import javax.swing.table.AbstractTableModel;
 
 /**
  *
- * @author DanTe
+ * @author Tweetie Pie
  */
-public class OrdersTableModel extends AbstractTableModel{
-    
- @Override
+public class AlertTableModel extends AbstractTableModel {
+      @Override
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex){
              case 0:
@@ -24,16 +24,19 @@ public class OrdersTableModel extends AbstractTableModel{
                return String.class;
              case 2:
                return String.class;
+             case 3:
+               return String.class;
+             
              }
              return null;
          //To change body of generated methods, choose Tools | Templates.
     }
     
-    private List<OrderTable> li;
-    private String[] columnNames = {"Order ID", "Total Price", "Payment Status"};
+    private List<Alert> al;
+    private String[] columnNames = {"Order ID", "Description", "Account Number", "Job Code"};
 
-    public OrdersTableModel(List<OrderTable> li) {
-        this.li = li;
+    public AlertTableModel(List<Alert> al) {
+        this.al = al;
     }
 
     @Override
@@ -43,28 +46,29 @@ public class OrdersTableModel extends AbstractTableModel{
 
     @Override
     public int getRowCount() {
-       return li.size(); //To change body of generated methods, choose Tools | Templates.
+       return al.size(); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public int getColumnCount() {
-        return 3; //To change body of generated methods, choose Tools | Templates.
+        return 4; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        OrderTable o = li.get(rowIndex);
+        Alert alert = al.get(rowIndex);
         switch(columnIndex){
             case 0:
-                return o.getOrderID();
+                return alert.getOrderID().getOrderID();
             case 1:
-                return o.getTotalPrice();
-            case 2:
-                return o.getPaymentStatus();
+                return alert.getDescription();
+            case 2: 
+                return alert.getAccountNo().getAccountNo();
+            case 3:
+                return alert.getJoblineID().getJobCode().getCode();
         }
         
        return null;
     }
-    
     
 }
