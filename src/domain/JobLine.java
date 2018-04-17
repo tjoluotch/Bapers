@@ -23,7 +23,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -46,25 +45,24 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "JobLine.findByVersion", query = "SELECT j FROM JobLine j WHERE j.version = :version")})
 public class JobLine implements Serializable {
 
-private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "job_lineID", nullable = false)
+    @Column(name = "job_lineID")
     private Integer joblineID;
     @Column(name = "job_deadline")
     @Temporal(TemporalType.DATE)
     private Date jobDeadline;
     @Size(max = 100)
-    @Column(name = "special_instructions", length = 100)
+    @Column(name = "special_instructions")
     private String specialInstructions;
     @Size(max = 20)
-    @Column(name = "reminder_status", length = 20)
+    @Column(name = "reminder_status")
     private String reminderStatus;
     @Basic(optional = false)
     @NotNull
-    @Column(nullable = false)
-    @Version
+    @Column(name = "version")
     private long version;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "joblineID")
     private Collection<Alert> alertCollection;
@@ -79,7 +77,7 @@ private static final long serialVersionUID = 1L;
     @JoinColumn(name = "payment_detailID", referencedColumnName = "payment_detailID")
     @ManyToOne
     private PaymentDetail paymentdetailID;
-    
+
     public JobLine() {
     }
 
@@ -204,7 +202,5 @@ private static final long serialVersionUID = 1L;
     public String toString() {
         return "domain.JobLine[ joblineID=" + joblineID + " ]";
     }
-
-   
     
 }

@@ -6,30 +6,30 @@
 package domain;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author Tweetie Pie
  */
 @Entity
+@Table(name = "staff")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Staff.findAll", query = "SELECT s FROM Staff s")
-    , @NamedQuery(name = "Staff.searchByUsername", query = "SELECT s FROM Staff s WHERE s.username LIKE CONCAT('%',:username,'%')")    
     , @NamedQuery(name = "Staff.findByUsername", query = "SELECT s FROM Staff s WHERE s.username = :username")
+     , @NamedQuery(name = "Staff.searchByUsername", query = "SELECT s FROM Staff s WHERE s.username LIKE CONCAT('%',:username,'%')") 
     , @NamedQuery(name = "Staff.findByPassword", query = "SELECT s FROM Staff s WHERE s.password = :password")
     , @NamedQuery(name = "Staff.findByForename", query = "SELECT s FROM Staff s WHERE s.forename = :forename")
     , @NamedQuery(name = "Staff.findBySurname", query = "SELECT s FROM Staff s WHERE s.surname = :surname")
@@ -43,31 +43,32 @@ public class Staff implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
-    @Column(nullable = false, length = 20)
+    @Column(name = "username")
     private String username;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
-    @Column(nullable = false, length = 20)
+    @Column(name = "password")
     private String password;
     @Size(max = 30)
-    @Column(length = 30)
+    @Column(name = "forename")
     private String forename;
     @Size(max = 30)
-    @Column(length = 30)
+    @Column(name = "surname")
     private String surname;
-    @Size(max = 20)
-    @Column(length = 20)
+    @Basic(optional = false)
+    @NotNull
+    @Lob
+    @Size(min = 1, max = 2147483647)
+    @Column(name = "role")
     private String role;
     @Basic(optional = false)
     @NotNull
     @Version
-    @Column(nullable = false)
+    @Column(name = "version")
     private long version;
     @Column(name = "logged_on")
     private Boolean loggedOn;
-    @OneToMany(mappedBy = "completedBy")
-    private Collection<TaskLine> taskLineCollection;
 
     public Staff() {
     }
@@ -76,9 +77,10 @@ public class Staff implements Serializable {
         this.username = username;
     }
 
-    public Staff(String username, String password, long version) {
+    public Staff(String username, String password, String role, long version) {
         this.username = username;
         this.password = password;
+        this.role = role;
         this.version = version;
     }
 
@@ -136,15 +138,6 @@ public class Staff implements Serializable {
 
     public void setLoggedOn(Boolean loggedOn) {
         this.loggedOn = loggedOn;
-    }
-
-    @XmlTransient
-    public Collection<TaskLine> getTaskLineCollection() {
-        return taskLineCollection;
-    }
-
-    public void setTaskLineCollection(Collection<TaskLine> taskLineCollection) {
-        this.taskLineCollection = taskLineCollection;
     }
 
     @Override
