@@ -11,6 +11,8 @@
     <class>domain.Staff</class>
     <class>domain.TaskLine</class>
     <class>domain.JobTaskBridge</class>
+    <class>domain.Alert</class>
+    <class>domain.DiscountPlan</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/solsoft_DB"/>
       <property name="javax.persistence.jdbc.user" value="root"/>
