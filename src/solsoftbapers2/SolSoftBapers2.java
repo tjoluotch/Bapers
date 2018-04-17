@@ -35,7 +35,7 @@ public class SolSoftBapers2 {
         
         DataManagerImpl dm = new DataManagerImpl();
         BAPPAYM p = new BAPPAYM(dm);
-        //p.firstLetterGeneration();
+        p.firstLetterGeneration();
          
     }
     
