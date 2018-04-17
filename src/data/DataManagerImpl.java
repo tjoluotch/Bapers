@@ -139,7 +139,12 @@ public class DataManagerImpl implements DataManager{
     }
     
     @Override
-    public void saveCustomer(Customer customer){em.persist(customer);}
+    public void saveCustomer(Customer customer){
+        em.getTransaction().begin();
+        em.persist(customer);
+        em.getTransaction().commit();
+    }
+    
     @Override
     public void saveStaff(Staff staff){
         em.getTransaction().begin();

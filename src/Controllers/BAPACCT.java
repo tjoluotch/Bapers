@@ -73,6 +73,7 @@ public class BAPACCT {
         customer.setPhone(phone);
         customer.setValuedCustomer(Boolean.FALSE);
         customer.setTitle(title);
+        customer.setStatus("Active");
         DataManagerImpl dm = new DataManagerImpl();
         dm.saveCustomer(customer);
         System.out.println("Customer " + customer.getForename() + " " + customer.getSurname() + " has been added to the database.");

@@ -370,13 +370,7 @@ if (parsedNumb !=null && forename.getText().compareTo("Forename")!=0 && surname.
     BAPACCT ba = new BAPACCT();
     String accountNo = ba.createAccountNo();
     ba.createNewCustomer(accountNo, forename.getText(), surname.getText(), accountHolderName.getText(), adress1.getText(), address2.getText(), city.getText(), postcode.getText(), parsedNumb, title.getSelectedItem().toString());
-    
-    
-  
-    
-    
-    
-    
+     
 }
     }//GEN-LAST:event_jButton2ActionPerformed
 
