@@ -10,6 +10,10 @@ import com.google.i18n.phonenumbers.NumberParseException;
 import com.google.i18n.phonenumbers.PhoneNumberUtil;
 import com.google.i18n.phonenumbers.Phonenumber.PhoneNumber;
 import domain.Customer;
+import java.awt.Color;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -27,6 +31,8 @@ public class CreateAccountScreen extends javax.swing.JFrame {
     public CreateAccountScreen() {
         initComponents();
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -66,6 +72,7 @@ public class CreateAccountScreen extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         email = new javax.swing.JTextField();
+        jLabelEmail = new javax.swing.JLabel();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -267,41 +274,46 @@ public class CreateAccountScreen extends javax.swing.JFrame {
                 emailActionPerformed(evt);
             }
         });
+        email.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                emailKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(bgLayout.createSequentialGroup()
-                .addGap(371, 371, 371)
-                .addComponent(jButton2)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(backButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(email, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel7)
-                    .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4)
-                    .addComponent(accountHolderName)
-                    .addComponent(forename)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel1)
-                    .addComponent(surname)
-                    .addComponent(jLabel6)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(email, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                        .addComponent(jLabel11)
+                        .addComponent(jLabel10)
+                        .addComponent(jLabel9)
+                        .addComponent(jLabel7)
+                        .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel4)
+                        .addComponent(accountHolderName)
+                        .addComponent(forename)
+                        .addComponent(jLabel3)
+                        .addComponent(jLabel1)
+                        .addComponent(surname)
+                        .addComponent(jLabel6)
                         .addComponent(address1)
                         .addComponent(address2)
                         .addComponent(city)
                         .addComponent(telephone)
-                        .addComponent(postcode, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)))
+                        .addComponent(postcode))
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(jButton2)))
                 .addGap(263, 263, 263))
         );
         bgLayout.setVerticalGroup(
@@ -349,8 +361,14 @@ public class CreateAccountScreen extends javax.swing.JFrame {
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2))
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)))
                 .addGap(17, 17, 17))
         );
 
@@ -386,7 +404,8 @@ public class CreateAccountScreen extends javax.swing.JFrame {
             Customer c = new Customer();
             BAPACCT ba = new BAPACCT();
             String accountNo = ba.createAccountNo();
-            ba.createNewCustomer(accountNo, forename.getText(), surname.getText(), accountHolderName.getText(), address1.getText(), address2.getText(), city.getText(), postcode.getText(), parsedNumb, title.getSelectedItem().toString(),email.getText());
+            ba.createNewCustomer(accountNo, forename.getText(), surname.getText(), accountHolderName.getText(), address1.getText(), address2.getText(), city.getText(), postcode.getText(), parsedNumb, title.getSelectedItem().toString(),email.getText(), this);
+          
             accountHolderName.setText("");
             address1.setText("");
             address2.setText("");
@@ -510,6 +529,23 @@ public class CreateAccountScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_emailActionPerformed
 
+    private void emailKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_emailKeyTyped
+
+        //Email Regex: mail@mail.com          => ^([\w]+)@([\w]+)\.([\w]+)$
+       Pattern pMail = Pattern.compile("^([\\w]+)@([\\w]+)\\.([\\w]+)$");
+       Matcher mMail = pMail.matcher(email.getText());
+       
+       boolean isEmailValid = mMail.matches();
+       
+       if(isEmailValid){
+            jLabelEmail.setText("Valid Email");
+            jLabelEmail.setForeground(Color.BLUE);
+       }else{
+           jLabelEmail.setText("InValid Email");
+            jLabelEmail.setForeground(Color.RED);
+       }  
+    }//GEN-LAST:event_emailKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -570,6 +606,7 @@ public class CreateAccountScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelEmail;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField postcode;
     private javax.swing.JTextField surname;

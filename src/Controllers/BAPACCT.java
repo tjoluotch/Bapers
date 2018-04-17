@@ -21,6 +21,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Spliterator;
 import java.util.function.Consumer;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
@@ -67,7 +71,12 @@ public class BAPACCT {
     
     
     public void createNewCustomer(String accountNo, String forename, String surname, String accountHolderName, 
-            String address1, String address2, String city, String postcode, String phone, String title, String email){
+            String address1, String address2, String city, String postcode, String phone, String title, String email, JFrame current){
+       //regexp
+        Pattern pMail = Pattern.compile("^([\\w]+)@([\\w]+)\\.([\\w]+)$");
+       Matcher mMail = pMail.matcher(email);
+       boolean isEmailValid = mMail.matches();   
+        
         Customer customer = new Customer();
         
         customer.setAccountNo(accountNo);
@@ -84,8 +93,15 @@ public class BAPACCT {
         customer.setStatus("Active");
         customer.setEmail(email);
         DataManagerImpl dm = new DataManagerImpl();
-        dm.saveCustomer(customer);
-        System.out.println("Customer " + customer.getForename() + " " + customer.getSurname() + " has been added to the database.");
+        if(isEmailValid == true){
+            dm.saveCustomer(customer);
+            JOptionPane.showMessageDialog(current, "New Customer Account Has Been Created!", "Customer Insertion", 1);
+            System.out.println("Customer " + customer.getForename() + " " + customer.getSurname() + " has been added to the database.");
+        } else {
+            JOptionPane.showMessageDialog(current, "Insertion Failed!", "Error", 1);
+            System.out.println("Customer has not been added to the database.");
+        }
+        
     }  
     
     
