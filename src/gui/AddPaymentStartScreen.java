@@ -34,6 +34,8 @@ public class AddPaymentStartScreen extends javax.swing.JFrame {
     
     public AddPaymentStartScreen(Customer customer){
         this.customer = customer;
+        orderList = new ArrayList(customer.getOrderTableCollection());
+        discounts = new ArrayList(dm.findDiscountsByAccountNo(customer.getAccountNo()));
         //orderList = new ArrayList(customer.getOrderTableCollection());
         initComponents();
     }
@@ -118,7 +120,7 @@ public class AddPaymentStartScreen extends javax.swing.JFrame {
             }
             }
         }
-        AddPaymentForJobsScreen nextScreen = new AddPaymentForJobsScreen(jobList);
+        AddPaymentForJobsScreen nextScreen = new AddPaymentForJobsScreen(jobList, discounts);
         nextScreen.setVisible(true);
         this.dispose();        
     }//GEN-LAST:event_jButton5ActionPerformed

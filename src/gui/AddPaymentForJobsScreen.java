@@ -8,6 +8,7 @@ package gui;
 import Controllers.BAPPAYM;
 import TableModels.JobsTableModel;
 import data.DataManagerImpl;
+import domain.DiscountPlan;
 import domain.JobLine;
 import java.sql.Date;
 import java.text.ParseException;
@@ -33,6 +34,7 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
     List<JobLine> jobList;
     List<JobLine> selectedJobs = new ArrayList<JobLine>();
     List<JobLine> jobsToRemove = new ArrayList<JobLine>();
+    List<DiscountPlan> discounts;
     JobsTableModel jobsTableModel;
     JobsTableModel basketModel = new JobsTableModel();
     float currentPrice = 0;
@@ -42,8 +44,9 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
         initComponents();
     }
     
-    AddPaymentForJobsScreen(List<JobLine> jobList){
+    AddPaymentForJobsScreen(List<JobLine> jobList, List<DiscountPlan> discounts){
         this.jobList = jobList;
+        this.discounts = discounts;
         jobsTableModel = new JobsTableModel(jobList);
         initComponents();
     }
@@ -220,28 +223,16 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
          int selectedRowIndex = jobsTable.getSelectedRow();
         String jobId = jobsTable.getValueAt(selectedRowIndex, 0).toString();
         int jobID = Integer.parseInt(jobId);
-        
-        //int selectedJobLineID = jobList.get(jobsTable.convertRowIndexToModel(selectedRowIndex)).getJoblineID();
-        
         for(JobLine job : jobList){
             if(job.getJoblineID() == jobID){
                 selectedJobs.add(job);
                 currentPrice += job.getJobCode().getPrice();
             }
         }
-        
-        /*
-        int jobLineID = jobList.get(jobsTable.convertRowIndexToModel(selectedRowIndex)).getJoblineID();
-        selectedJobs.add(job);
-        */
-        
         basketModel = new JobsTableModel(selectedJobs);
         basketModel.fireTableDataChanged();
         basketTable.setModel(basketModel);
-        
-        
         subtotal.setText(String.valueOf(currentPrice));
-        
         System.out.println(selectedJobs.size());
     }//GEN-LAST:event_jobsTableMouseClicked
 

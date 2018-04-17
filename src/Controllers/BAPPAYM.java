@@ -40,94 +40,29 @@ public class BAPPAYM {
     }
     
     //CREATE PAYMENTDETAIL METHODS
-    //card payments
-    //for whole order
-    public void createPayment(OrderTable order, String last4, Date expiryDate){
-        PaymentDetail payment = new PaymentDetail();
-        payment.setType("Card");
-        payment.setExpiryDate(expiryDate);
-        payment.setLast4digits(last4);
-        
-        payment.setJobLineCollection(order.getJobLineCollection());
-        //order.addPaymentDetail(payment);
-        for(JobLine job : order.getJobLineCollection()){
-            
-            job.setPaymentdetailID(payment);
-        }
-        
-        
-         //calculating discounted total
-        
-     
-         //after discount calculated
-         DiscountPlan d = new DiscountPlan();
-        float pd = calculateDiscount(payment,d);
-        payment.setAmount(pd);
-        dm.savePayment(payment);
-    }
-    
-    
-    
-    
+    //card payments    
     //for jobs
      public void createPayment(Collection<JobLine> jobs, String last4, Date expiryDate){ //NEED TO UPDATE EXPIRY DATE
         PaymentDetail payment = new PaymentDetail();
         payment.setType("Card");
-        //payment.setExpiryDate(java.sql.Date.valueOf(expiryDate));
         payment.setExpiryDate(expiryDate);
         payment.setLast4digits(last4);
         payment.setJobLineCollection(jobs);        
         for(JobLine job : jobs){
             job.setPaymentdetailID(payment);
         }
-         //calculating discounted total
-        DiscountPlan d = new DiscountPlan();
-        //after discount calculated
-        float pd = calculateDiscount(payment,d);
-        payment.setAmount(pd);
         dm.savePayment(payment);
     } 
-    
-    //cash payments
-    //for whole order
-    public void createPayment(OrderTable order){
-        PaymentDetail payment = new PaymentDetail();
-        payment.setType("Cash");
-        payment.setExpiryDate(null);
-        payment.setLast4digits(null);
-        
-        payment.setJobLineCollection(order.getJobLineCollection());
-        //order.addPaymentDetail(payment);
-        for(JobLine job : order.getJobLineCollection()){
-            job.setPaymentdetailID(payment);
-        }
-        
-        
-        
-         //calculating discounted total
-        DiscountPlan d = new DiscountPlan();
-     
-         //after discount calculated
-        float pd = calculateDiscount(payment,d);
-        payment.setAmount(pd);
-        dm.savePayment(payment);
-    }
     //for jobs
     public void createPayment(Collection<JobLine> jobs){
         PaymentDetail payment = new PaymentDetail();
         payment.setType("Cash");
         payment.setExpiryDate(null);
         payment.setLast4digits(null);
-        
         for(JobLine job : jobs){
             payment.addJobLine(job);
             job.setPaymentdetailID(payment);   
         }        
-        //calculating discounted total
-        DiscountPlan d = new DiscountPlan();
-         //after discount calculated
-        float pd = calculateDiscount(payment,d);
-        payment.setAmount(pd);
         dm.savePayment(payment);
     }
     
@@ -140,6 +75,9 @@ public class BAPPAYM {
         return lastAmount;
     }
     
+    public void calculateSurcharge(JobLine job){
+        
+    }
     
     
     
