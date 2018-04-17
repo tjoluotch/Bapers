@@ -6,7 +6,9 @@ import domain.DiscountPlan;
 import domain.JobLine;
 import domain.OrderTable;
 import domain.PaymentDetail;
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
@@ -153,72 +155,156 @@ public class BAPPAYM {
         return lastAmount;
     }
     
-    public void firstLetterGeneration(String forename, String surname, String accountHolderName, String address1, String city, String postcode, String telephone, String dateSubmitted) throws IOException{
-        String filename = "/Users/tjay/NetBeansProjects/" + /*c.getAccountHolderName()*/"DavidRhind" + "LatePaymLetter1.pdf";
+    public void firstLetterGeneration() throws IOException{
+        //HardCoded
+        String name = "David Rhind";
+        String address = "Northampton Square";
+        String city1 = "London";
+        String postcode1 = "EC1V 0HB";
         
-        String name = forename + " " + surname;
-        String accountHolder = accountHolderName;
-        String address = address1 + ", " + city + ", " + postcode;
-        String phoneNumber = "Phone: " + telephone;
+        String filename = "/Users/tjay/NetBeansProjects/" + name + "LatePaymLetter1.pdf";
         
-        String wording = "According to our records, it appears that we have not yet received payment of the order you made on the , which was posted"; 
-        String wording2 = "to you on" + dateSubmitted + ", for photographic work done in our laboratory.";
-        String wording3 = "We would appreciate payment at your earliest convenience.";
-        String wording4 = "If you have already sent a payment to us recently, please accept our apologies.";
-        String wording5 = "Yours sincerely,";
-        String wording6 = "G. Lancaster";
+        //String name = forename + " " + surname;
+        //String accountHolder = accountHolderName;
+        //String address = address1 + ", " + city + ", " + postcode;
+        //String phoneNumber = "Phone: " + telephone;
         
-        PDDocument doc = new PDDocument();
-        try {
-            PDPage page = new PDPage();
-            doc.addPage(page);
-            
-            PDFont LabNamefont = PDType1Font.HELVETICA_BOLD;
-            PDFont StandardFont = PDType1Font.HELVETICA;
-            PDPageContentStream contents = new PDPageContentStream(doc, page);
-            contents.beginText();
-            contents.setFont(LabNamefont, 30);
-            contents.newLineAtOffset(300, 700);
-            contents.showText(name);
-            
-            
-            
-            contents.setFont(StandardFont, 15);
-            contents.newLineAtOffset(300, 680);
-            contents.showText(name);
-            
-            contents.newLine();
-            contents.showText(address);
-            
-            contents.newLine();
-            contents.showText(phoneNumber);
-            
-            
-            
-            
-            
-            contents.newLineAtOffset(100, 610);
-            contents.showText(wording);
-            contents.newLine();
-            contents.showText(wording2);
-            contents.newLine();
-            contents.showText(wording3);
-            contents.newLine();
-            contents.showText(wording4);
-            contents.newLine();
-            contents.showText(wording5);
-            contents.newLine();
-            contents.showText(wording6);
-            
-           
-                    
-            contents.endText();
-            contents.close();
-           
-            doc.save(filename);
-        } finally {
-            doc.close();
-        }
+        
+        
+        String date= "18th February 2018";
+        
+        String greet = "Dear " + name;
+        
+        String orderID = "1111";
+        
+        String jobID = "4555";
+        
+        String amountDue = "456.78";
+        
+        String reminder = "REMINDER-INVOICE NO: " + orderID;
+        
+        String jobIDWithAmount = "Job No: " + jobID + "      " + "Total Amount: " + amountDue;
+        
+        //Lab Details
+        String labLogo = "The Lab";
+        String labName = "Bloomsbury’s Image Processing Laboratory";
+        String labAddress = "2, Wynyatt Street, London, EC1V 7HU";
+        String labPhone = "Phone: 0207 235 7534";
+        
+        List<String> customerLines = new ArrayList<>();
+        customerLines.add(name);
+        customerLines.add(address);
+        customerLines.add(city1);
+        customerLines.add(postcode1);
+        
+        
+        List<String> labLines = new ArrayList<>();
+        labLines.add(labLogo);
+        labLines.add(labName);
+        labLines.add(labAddress);
+        labLines.add(labPhone);
+        
+        PDDocument doc = null;
+try
+{
+    doc = new PDDocument();
+    PDPage page = new PDPage();
+    doc.addPage(page);
+    PDPageContentStream contentStream = new PDPageContentStream(doc, page);
+    
+    
+    PDFont pdfFont = PDType1Font.HELVETICA;
+    float fontSize = 14;
+    float leading = 1.5f * fontSize;
+
+    PDRectangle mediabox = page.getMediaBox();
+    
+    float actualWidth = mediabox.getWidth();
+    float actualHeight = mediabox.getHeight();
+    
+    float margin = 72;
+    float width = mediabox.getWidth() - 2*margin;
+    float startX = mediabox.getLowerLeftX() + margin;
+    float startY = mediabox.getUpperRightY() - margin;
+
+    contentStream.beginText();
+    contentStream.setFont(pdfFont, fontSize);
+    contentStream.newLineAtOffset(startX, startY);
+    for (String line: customerLines)
+    {
+        contentStream.showText(line);
+        contentStream.newLineAtOffset(0, -leading);
+    }
+      
+    contentStream.setFont(PDType1Font.HELVETICA_BOLD, fontSize);
+    contentStream.newLineAtOffset(220, 85);
+    
+    for(String line: labLines){
+      
+        contentStream.showText(line);
+        contentStream.newLineAtOffset(0, -leading);
+        contentStream.setFont(pdfFont, fontSize);
+    }
+    
+    contentStream.newLineAtOffset(-230, -50);
+    contentStream.showText(date);
+    
+    contentStream.newLineAtOffset(0, -30);
+    contentStream.showText(greet);
+    
+    //reminder order no...
+    contentStream.setFont(PDType1Font.HELVETICA_BOLD, fontSize);
+    contentStream.newLineAtOffset(150, -30);
+    contentStream.showText(reminder);
+    
+    contentStream.newLineAtOffset(-18, -leading);
+    contentStream.showText(jobIDWithAmount);
+    
+    String paragraphL1 = "According to our records, it appears that we have not yet received payment of the above";
+    
+    
+    contentStream.setFont(PDType1Font.HELVETICA, fontSize);
+    contentStream.newLineAtOffset(-170, -2*leading);
+    contentStream.showText(paragraphL1);
+    
+    String dayOrderWasRecorded = "18th December 2017";
+    String paragraphL2 = "invoice, which was posted to you on " + dayOrderWasRecorded + ", for photographic work done in";
+    
+    contentStream.newLineAtOffset(0, -leading);
+    contentStream.showText(paragraphL2);
+    
+    String paragraphL3 = " our laboratory.";
+    contentStream.newLineAtOffset(0, -leading);
+    contentStream.showText(paragraphL3);
+    
+    String paragraphL4 = "We would appreciate payment at your earliest convenience.";
+    contentStream.newLineAtOffset(0, -2*leading);
+    contentStream.showText(paragraphL4);
+    
+    String paragraphL5 = "If you have already sent a payment to us recently, please accept our apologies.";
+    contentStream.newLineAtOffset(0, -2*leading);
+    contentStream.showText(paragraphL5);
+    
+    String paragraphL6 = "Yours sincerely,";
+    contentStream.newLineAtOffset(170, -2*leading);
+    contentStream.showText(paragraphL6);
+    
+    String paragraphL7 = "G. Lancaster";
+    contentStream.newLineAtOffset(0, -2*leading);
+    contentStream.showText(paragraphL7);
+    
+    contentStream.endText(); 
+    contentStream.close();
+
+    doc.save(filename);
+}
+finally
+{
+    if (doc != null)
+    {
+        doc.close();
+    }
+}
     }
 	
 }
