@@ -80,7 +80,7 @@ public class BAPPAYM {
     public float getPrice(Collection<JobLine> jobs, Collection<DiscountPlan> discounts){
         float price = 0;
         Collection<DiscountPlan> variableDiscounts = new ArrayList();
-        if(discounts.isEmpty()){ price = calculateNormalPrice(jobs); } 
+        if(discounts.isEmpty()){ price = getNormalPrice(jobs); } 
         else {
             for(JobLine job : jobs){
                 for(DiscountPlan discount : discounts){
@@ -93,10 +93,11 @@ public class BAPPAYM {
                         }
                     //Fixed
                     } else if (discount.getFlexibleRate() == null && discount.getTaskID() == null) {
-                        price = (job.getJobCode().getPrice()) * discount.getRate();
+                        price += (job.getJobCode().getPrice()) * discount.getRate();
                     } else 
                     //Flexible
                     if (discount.getFlexibleRate() != null){
+                        //adds the DiscountsTable with flexible discounts
                         variableDiscounts.add(discount);
                     }
                 }
@@ -108,12 +109,10 @@ public class BAPPAYM {
         return price;
     }
     
-    public float calculateNormalPrice(Collection<JobLine> jobs){
+    public float getNormalPrice(Collection<JobLine> jobs){
         float price = 0;
         for(JobLine job : jobs){
-            for(TaskLine task : job.getTaskLineCollection()){
-                price += task.getPrice();
-            }
+            price += job.getJobCode().getPrice();
         }
         return price;
     }
