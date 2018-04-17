@@ -8,6 +8,7 @@ package domain;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -37,8 +38,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Task.findByVersion", query = "SELECT t FROM Task t WHERE t.version = :version")})
 public class Task implements Serializable {
 
-   
-
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -60,8 +59,8 @@ public class Task implements Serializable {
     @NotNull
     @Column(name = "version")
     private long version;
-    @OneToMany(mappedBy = "taskID")
-    private Collection<DiscountPlan> discountPlanCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "taskID")
+    private Collection<JobTaskBridge> jobTaskBridgeCollection;
 
     public Task() {
     }
@@ -124,12 +123,12 @@ public class Task implements Serializable {
     }
 
     @XmlTransient
-    public Collection<DiscountPlan> getDicountPlanCollection() {
-        return discountPlanCollection;
+    public Collection<JobTaskBridge> getJobTaskBridgeCollection() {
+        return jobTaskBridgeCollection;
     }
 
-    public void setDicountPlanCollection(Collection<DiscountPlan> dicountPlanCollection) {
-        this.discountPlanCollection = dicountPlanCollection;
+    public void setJobTaskBridgeCollection(Collection<JobTaskBridge> jobTaskBridgeCollection) {
+        this.jobTaskBridgeCollection = jobTaskBridgeCollection;
     }
 
     @Override
@@ -155,15 +154,6 @@ public class Task implements Serializable {
     @Override
     public String toString() {
         return "domain.Task[ taskID=" + taskID + " ]";
-    }
-
-    @XmlTransient
-    public Collection<DiscountPlan> getDiscountPlanCollection() {
-        return discountPlanCollection;
-    }
-
-    public void setDiscountPlanCollection(Collection<DiscountPlan> discountPlanCollection) {
-        this.discountPlanCollection = discountPlanCollection;
     }
     
 }
