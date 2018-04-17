@@ -162,7 +162,7 @@ Staff staff;
         spLayout.setHorizontalGroup(
             spLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(spLayout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addGap(52, 52, 52)
                 .addComponent(jLabel8)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(CreateAccountButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -178,7 +178,7 @@ Staff staff;
                 .addComponent(CreateAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(SearchAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 293, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 300, Short.MAX_VALUE)
                 .addComponent(LogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -235,8 +235,8 @@ Staff staff;
 
     private void SearchAccountButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchAccountButtonMouseClicked
         // TODO add your handling code here:
-        CustomerAccountScreen sa = new CustomerAccountScreen();
-        sa.setVisible(true);
+        SearchCustomerResultsScreen scrs = new SearchCustomerResultsScreen();
+        scrs.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_SearchAccountButtonMouseClicked
 

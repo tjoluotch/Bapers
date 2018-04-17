@@ -3,20 +3,40 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bapersgui;
+package gui;
+
+import Controllers.*;
+import TableModels.SearchCustomerTableModel;
+import data.DataManagerImpl;
+import domain.Customer;
+import java.util.LinkedList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Tweetie Pie
  */
 public class SearchCustomerResultsScreen extends javax.swing.JFrame {
-
+    List<Customer> cl = new LinkedList();
+    DataManagerImpl dm = new DataManagerImpl();
     /**
      * Creates new form SearchResultsScreen
      */
+    BAPACCT bapacct = new BAPACCT();
+    BAPCUST bapcust = new BAPCUST();
+   
     public SearchCustomerResultsScreen() {
         initComponents();
     }
+    
+    public SearchCustomerResultsScreen(List<Customer> cl) {
+        this.cl = cl;
+        initComponents();
+    }
+    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,51 +47,392 @@ public class SearchCustomerResultsScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bg = new javax.swing.JPanel();
+        backButton = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        srcAccNoTxtField = new javax.swing.JTextField();
+        srcAccNameTxtField = new javax.swing.JTextField();
+        srcAccNameButton = new javax.swing.JButton();
+        srcAccNoButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTable1 = new javax.swing.JTable();
+        fname = new javax.swing.JTextField();
+        surnametextfield = new javax.swing.JTextField();
+        accHolderNameTextField = new javax.swing.JTextField();
+        emailTextField = new javax.swing.JTextField();
+        phoneTextField = new javax.swing.JTextField();
+        postcodeTextField = new javax.swing.JTextField();
+        address1TxtField = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        accNoTxtField = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        address2TxtField = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        cityTextField = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Search Results Table");
-        jScrollPane1.setViewportView(jTextArea1);
+        bg.setBackground(new java.awt.Color(255, 204, 102));
+
+        backButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/backicon.png"))); // NOI18N
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+
+        jPanel1.setBackground(new java.awt.Color(250, 174, 62));
+
+        jLabel8.setFont(new java.awt.Font("Lucida Grande", 1, 48)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Search Account");
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/SolSoft.png"))); // NOI18N
+        jLabel2.setToolTipText("");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(156, 156, 156)
+                .addComponent(jLabel8)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addGap(30, 30, 30))
+        );
+
+        srcAccNoTxtField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                srcAccNoTxtFieldActionPerformed(evt);
+            }
+        });
+
+        srcAccNameTxtField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                srcAccNameTxtFieldActionPerformed(evt);
+            }
+        });
+
+        srcAccNameButton.setText("Search");
+        srcAccNameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                srcAccNameButtonActionPerformed(evt);
+            }
+        });
+
+        srcAccNoButton.setText("Search");
+        srcAccNoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                srcAccNoButtonActionPerformed(evt);
+            }
+        });
+
+        jTable1.setModel(new SearchCustomerTableModel(cl));
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(40);
+        jTable1.getColumnModel().getColumn(1).setPreferredWidth(40);
+        jTable1.getColumnModel().getColumn(2).setPreferredWidth(40);
+        jTable1.getColumnModel().getColumn(3).setPreferredWidth(80);
+        jTable1.getColumnModel().getColumn(4).setPreferredWidth(40);
+        jTable1.getColumnModel().getColumn(5).setPreferredWidth(40);
+        jTable1.getColumnModel().getColumn(6).setPreferredWidth(40);
+        jTable1.getColumnModel().getColumn(7).setPreferredWidth(40);
+        jTable1.getColumnModel().getColumn(8).setPreferredWidth(40);
+        jTable1.getColumnModel().getColumn(9).setPreferredWidth(40);
+        jTable1.getTableHeader().setReorderingAllowed(false);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        accHolderNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accHolderNameTextFieldActionPerformed(evt);
+            }
+        });
+
+        phoneTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                phoneTextFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel3.setText("First Name:");
+
+        jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel4.setText("Surname:");
+
+        jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel5.setText("Acc Holder Name:");
+
+        jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel6.setText("Email:");
+
+        jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel7.setText("Phone:");
+
+        jLabel9.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel9.setText("Postcode:");
+
+        jLabel10.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel10.setText("Address Line 1:");
+
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel1.setText("Search by Account Holder's Name:");
+
+        jLabel11.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel11.setText("Search by Account Number:");
+
+        jLabel12.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel12.setText("Account Number:");
+
+        jLabel13.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel13.setText("Address Line 2:");
+
+        jLabel14.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel14.setText("City:");
 
         jButton1.setText("Select");
 
-        jButton2.setText("Cancel");
+        javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
+        bg.setLayout(bgLayout);
+        bgLayout.setHorizontalGroup(
+            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(bgLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addComponent(backButton)
+                        .addGap(18, 18, 18)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel11))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(bgLayout.createSequentialGroup()
+                                .addComponent(srcAccNoTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(srcAccNoButton))
+                            .addGroup(bgLayout.createSequentialGroup()
+                                .addComponent(srcAccNameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(srcAccNameButton)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(bgLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(accNoTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fname, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(surnametextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(accHolderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(address1TxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(address2TxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(bgLayout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addGap(192, 192, 192))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
+                                .addComponent(cityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel9)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(postcodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(93, 93, 93))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, bgLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(83, 83, 83))))
+        );
+        bgLayout.setVerticalGroup(
+            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bgLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(srcAccNameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(srcAccNameButton)
+                        .addComponent(jLabel1))
+                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(srcAccNoTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(srcAccNoButton))
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel3)
+                                .addComponent(fname, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel12)
+                                .addComponent(accNoTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(surnametextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5)
+                                .addComponent(accHolderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(address1TxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13)
+                            .addComponent(address2TxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14)
+                            .addComponent(cityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(postcodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)
+                            .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addGap(34, 34, 34))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(20, 20, 20))))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
-                .addContainerGap())
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        ReceptionistStartScreen rsc = new ReceptionistStartScreen();
+        rsc.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_backButtonActionPerformed
+
+    private void srcAccNoTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srcAccNoTxtFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_srcAccNoTxtFieldActionPerformed
+
+    private void srcAccNameTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srcAccNameTxtFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_srcAccNameTxtFieldActionPerformed
+
+    private void srcAccNameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srcAccNameButtonActionPerformed
+        if (srcAccNameTxtField.getText().compareTo("") == 0){
+        JOptionPane.showMessageDialog(rootPane, "Some Fields Are Empty", "Error", 1);
+        System.out.println("Account Name Text Field is empty!");
+        } 
+        else {
+            cl.clear();
+            Customer c = bapacct.searchCustomerByName(srcAccNameTxtField);
+            cl.add(c);
+            srcAccNameTxtField.setText("");
+            jTable1.setModel(new SearchCustomerTableModel(cl));
+        }
+    }//GEN-LAST:event_srcAccNameButtonActionPerformed
+
+    private void srcAccNoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srcAccNoButtonActionPerformed
+        if (srcAccNoTxtField.getText().compareTo("") == 0){
+        JOptionPane.showMessageDialog(rootPane, "Some Fields Are Empty", "Error", 1);
+            System.out.println("Account Number Text Field is empty!");
+        } else {
+        String accNo = srcAccNoTxtField.getText();
+        Customer c = bapacct.searchCustomerByAccNo(accNo);
+        cl.add(c);
+        jTable1.setModel(new SearchCustomerTableModel(cl));
+        }
+    }//GEN-LAST:event_srcAccNoButtonActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+
+        int selectedRowIndex = jTable1.getSelectedRow();
+        accNoTxtField.setText(jTable1.getValueAt(selectedRowIndex, 0).toString());
+        fname.setText(jTable1.getValueAt(selectedRowIndex, 1).toString());
+        surnametextfield.setText(jTable1.getValueAt(selectedRowIndex, 2).toString());
+        accHolderNameTextField.setText(jTable1.getValueAt(selectedRowIndex, 3).toString());
+        address1TxtField.setText(jTable1.getValueAt(selectedRowIndex, 4).toString());
+        address2TxtField.setText(jTable1.getValueAt(selectedRowIndex, 5).toString());
+        cityTextField.setText(jTable1.getValueAt(selectedRowIndex, 6).toString());
+        postcodeTextField.setText(jTable1.getValueAt(selectedRowIndex, 7).toString());
+        phoneTextField.setText(jTable1.getValueAt(selectedRowIndex, 8).toString());
+        emailTextField.setText(jTable1.getValueAt(selectedRowIndex, 9).toString());
+
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void accHolderNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accHolderNameTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_accHolderNameTextFieldActionPerformed
+
+    private void phoneTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_phoneTextFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -110,9 +471,39 @@ public class SearchCustomerResultsScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField accHolderNameTextField;
+    private javax.swing.JTextField accNoTxtField;
+    private javax.swing.JTextField address1TxtField;
+    private javax.swing.JTextField address2TxtField;
+    private javax.swing.JButton backButton;
+    private javax.swing.JPanel bg;
+    private javax.swing.JTextField cityTextField;
+    private javax.swing.JTextField emailTextField;
+    private javax.swing.JTextField fname;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTextField phoneTextField;
+    private javax.swing.JTextField postcodeTextField;
+    private javax.swing.JButton srcAccNameButton;
+    private javax.swing.JTextField srcAccNameTxtField;
+    private javax.swing.JButton srcAccNoButton;
+    private javax.swing.JTextField srcAccNoTxtField;
+    private javax.swing.JTextField surnametextfield;
     // End of variables declaration//GEN-END:variables
 }

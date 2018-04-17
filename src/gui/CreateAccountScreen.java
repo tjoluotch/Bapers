@@ -41,18 +41,31 @@ public class CreateAccountScreen extends javax.swing.JFrame {
         jCheckBoxMenuItem2 = new javax.swing.JCheckBoxMenuItem();
         jCheckBoxMenuItem3 = new javax.swing.JCheckBoxMenuItem();
         jCheckBoxMenuItem4 = new javax.swing.JCheckBoxMenuItem();
+        bg = new javax.swing.JPanel();
+        title = new javax.swing.JComboBox<>();
         forename = new javax.swing.JTextField();
+        city = new javax.swing.JTextField();
+        address2 = new javax.swing.JTextField();
         surname = new javax.swing.JTextField();
         accountHolderName = new javax.swing.JTextField();
         telephone = new javax.swing.JTextField();
         postcode = new javax.swing.JTextField();
-        adress1 = new javax.swing.JTextField();
-        city = new javax.swing.JTextField();
+        address1 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        title = new javax.swing.JComboBox<>();
+        backButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        address2 = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        email = new javax.swing.JTextField();
 
         jCheckBoxMenuItem1.setSelected(true);
         jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
@@ -68,7 +81,15 @@ public class CreateAccountScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        forename.setText("Forename");
+        bg.setBackground(new java.awt.Color(255, 204, 102));
+
+        title.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Title", "Mr", "Mrs", "Ms", "Miss", "Master" }));
+        title.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                titleActionPerformed(evt);
+            }
+        });
+
         forename.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 forenameFocusGained(evt);
@@ -83,67 +104,6 @@ public class CreateAccountScreen extends javax.swing.JFrame {
             }
         });
 
-        surname.setText("Surname");
-        surname.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                surnameFocusGained(evt);
-            }
-        });
-        surname.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                surnameActionPerformed(evt);
-            }
-        });
-
-        accountHolderName.setText("Account Holder Name");
-        accountHolderName.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                accountHolderNameFocusGained(evt);
-            }
-        });
-        accountHolderName.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                accountHolderNameActionPerformed(evt);
-            }
-        });
-
-        telephone.setText("Contact Number");
-        telephone.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                telephoneFocusGained(evt);
-            }
-        });
-        telephone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                telephoneActionPerformed(evt);
-            }
-        });
-
-        postcode.setText("Postcode");
-        postcode.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                postcodeFocusGained(evt);
-            }
-        });
-        postcode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                postcodeActionPerformed(evt);
-            }
-        });
-
-        adress1.setText("Address");
-        adress1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                adress1FocusGained(evt);
-            }
-        });
-        adress1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adress1ActionPerformed(evt);
-            }
-        });
-
-        city.setText("City");
         city.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 cityFocusGained(evt);
@@ -155,25 +115,6 @@ public class CreateAccountScreen extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Create Account");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        title.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Titile", "Mr", "Mrs", "Ms", "Miss", "Master" }));
-        title.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                titleActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Logo");
-
-        jButton3.setText("Cancel");
-
-        address2.setText("Address");
         address2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 address2FocusGained(evt);
@@ -185,149 +126,295 @@ public class CreateAccountScreen extends javax.swing.JFrame {
             }
         });
 
+        surname.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                surnameFocusGained(evt);
+            }
+        });
+        surname.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                surnameActionPerformed(evt);
+            }
+        });
+
+        accountHolderName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                accountHolderNameFocusGained(evt);
+            }
+        });
+        accountHolderName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accountHolderNameActionPerformed(evt);
+            }
+        });
+
+        telephone.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                telephoneFocusGained(evt);
+            }
+        });
+        telephone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                telephoneActionPerformed(evt);
+            }
+        });
+
+        postcode.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                postcodeFocusGained(evt);
+            }
+        });
+        postcode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                postcodeActionPerformed(evt);
+            }
+        });
+
+        address1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                address1FocusGained(evt);
+            }
+        });
+        address1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                address1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/addpersonicon.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        backButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/backicon.png"))); // NOI18N
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel1.setText("Surname:");
+
+        jPanel1.setBackground(new java.awt.Color(250, 174, 62));
+
+        jLabel8.setFont(new java.awt.Font("Lucida Grande", 1, 48)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Create Account");
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/SolSoft.png"))); // NOI18N
+        jLabel2.setToolTipText("");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addGap(189, 189, 189))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jLabel8))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2)))
+                .addContainerGap(11, Short.MAX_VALUE))
+        );
+
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel3.setText("First Name:");
+
+        jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel4.setText("Account Holder Name:");
+
+        jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel5.setText("Address Line 1:");
+
+        jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel6.setText("Address Line 2:");
+
+        jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel7.setText("City:");
+
+        jLabel9.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel9.setText("Postcode:");
+
+        jLabel10.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel10.setText("Contact Number:");
+
+        jLabel11.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel11.setText("Email:");
+
+        email.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                emailFocusGained(evt);
+            }
+        });
+        email.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
+        bg.setLayout(bgLayout);
+        bgLayout.setHorizontalGroup(
+            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(bgLayout.createSequentialGroup()
+                .addGap(371, 371, 371)
+                .addComponent(jButton2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(backButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(email, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel7)
+                    .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel4)
+                    .addComponent(accountHolderName)
+                    .addComponent(forename)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1)
+                    .addComponent(surname)
+                    .addComponent(jLabel6)
+                    .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(address1)
+                        .addComponent(address2)
+                        .addComponent(city)
+                        .addComponent(telephone)
+                        .addComponent(postcode, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)))
+                .addGap(263, 263, 263))
+        );
+        bgLayout.setVerticalGroup(
+            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bgLayout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3))
+                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(forename, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(surname, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(accountHolderName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(address1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(address2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(city, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(postcode, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(telephone, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(email, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(17, 17, 17))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(surname, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(accountHolderName, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(forename, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(adress1)
-                                    .addComponent(address2)
-                                    .addComponent(city)
-                                    .addComponent(telephone)
-                                    .addComponent(postcode, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(55, 55, 55)
-                                .addComponent(jButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton3)))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)
-                        .addGap(27, 27, 27))))
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(forename, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(surname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(accountHolderName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(adress1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(address2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(postcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(city, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(telephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 36, Short.MAX_VALUE)))
-                .addContainerGap())
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void forenameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forenameActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_forenameActionPerformed
 
-    private void surnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surnameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_surnameActionPerformed
+        String ukNumberStr = telephone.getText();
+        String parsedNumb = new String();
+        PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
+        try {
+            PhoneNumber ukNumberProto = phoneUtil.parse(ukNumberStr, "GB");
+            parsedNumb = ukNumberProto.toString();
+        } catch (NumberParseException e) {
+            System.err.println("NumberParseException was thrown: " + e.toString());
+        }
 
-    private void accountHolderNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountHolderNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_accountHolderNameActionPerformed
+        if (parsedNumb !=null && forename.getText().compareTo("Forename")!=0 && surname.getText().compareTo("Surname") !=0 && title.getSelectedItem().toString().compareTo("Title") !=0 && accountHolderName.getText().compareTo("Account Holder Name")!= 0 && address1.getText().compareTo("Address")!= 0 && address2.getText().compareTo("Address")!= 0 && postcode.getText().compareTo("Postcode") !=0 && city.getText().compareTo("City") !=0 ){
 
-    private void telephoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telephoneActionPerformed
+            Customer c = new Customer();
+            BAPACCT ba = new BAPACCT();
+            String accountNo = ba.createAccountNo();
+            ba.createNewCustomer(accountNo, forename.getText(), surname.getText(), accountHolderName.getText(), address1.getText(), address2.getText(), city.getText(), postcode.getText(), parsedNumb, title.getSelectedItem().toString(),email.getText());
+            accountHolderName.setText("");
+            address1.setText("");
+            address2.setText("");
+            city.setText("");
+            forename.setText("");
+            surname.setText("");
+            postcode.setText("");
+            telephone.setText("");
+            title.setSelectedItem("Title");
+            email.setText("");
+            
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void address1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_address1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_telephoneActionPerformed
+    }//GEN-LAST:event_address1ActionPerformed
+
+    private void address1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_address1FocusGained
+        // TODO add your handling code here:
+        if(address1.getText().compareTo("Address") ==0 ){
+            address1.setText("");
+        }
+    }//GEN-LAST:event_address1FocusGained
 
     private void postcodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_postcodeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_postcodeActionPerformed
-
-    private void adress1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adress1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_adress1ActionPerformed
-
-    private void cityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cityActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cityActionPerformed
-
-    private void address2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_address2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_address2ActionPerformed
-
-    private void titleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_titleActionPerformed
-
-    private void forenameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_forenameFocusGained
-        // TODO add your handling code here:
-        
-        if(forename.getText().compareTo("Forename")==0){
-            forename.setText("");
-        }
-    }//GEN-LAST:event_forenameFocusGained
-
-    private void forenameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_forenameFocusLost
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_forenameFocusLost
-
-    private void surnameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_surnameFocusGained
-        // TODO add your handling code here:
-        if(surname.getText().compareTo("Surname")==0){
-            surname.setText("");
-        }
-    }//GEN-LAST:event_surnameFocusGained
-
-    private void accountHolderNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_accountHolderNameFocusGained
-        // TODO add your handling code here:
-        if(accountHolderName.getText().compareTo("Account Holder Name")== 0 );
-    }//GEN-LAST:event_accountHolderNameFocusGained
-
-    private void adress1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_adress1FocusGained
-        // TODO add your handling code here:
-        if(adress1.getText().compareTo("Address") ==0 ){
-            adress1.setText("");
-        }
-    }//GEN-LAST:event_adress1FocusGained
-
-    private void address2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_address2FocusGained
-        // TODO add your handling code here:
-        if(address2.getText().compareTo("Address") == 0){
-        address2.setText("");
-    }
-    }//GEN-LAST:event_address2FocusGained
 
     private void postcodeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_postcodeFocusGained
         // TODO add your handling code here:
@@ -336,12 +423,9 @@ public class CreateAccountScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_postcodeFocusGained
 
-    private void cityFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cityFocusGained
+    private void telephoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telephoneActionPerformed
         // TODO add your handling code here:
-        if(city.getText().compareTo("")==0){
-            city.setText("");
-        }
-    }//GEN-LAST:event_cityFocusGained
+    }//GEN-LAST:event_telephoneActionPerformed
 
     private void telephoneFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_telephoneFocusGained
         // TODO add your handling code here:
@@ -350,29 +434,81 @@ public class CreateAccountScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_telephoneFocusGained
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void accountHolderNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accountHolderNameActionPerformed
         // TODO add your handling code here:
-        
-        String ukNumberStr = telephone.getText();
-        String parsedNumb = new String();
-PhoneNumberUtil phoneUtil = PhoneNumberUtil.getInstance();
-try {
-  PhoneNumber ukNumberProto = phoneUtil.parse(ukNumberStr, "GB");
-  parsedNumb = ukNumberProto.toString();
-} catch (NumberParseException e) {
-  System.err.println("NumberParseException was thrown: " + e.toString());
-}
+    }//GEN-LAST:event_accountHolderNameActionPerformed
 
+    private void accountHolderNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_accountHolderNameFocusGained
+        // TODO add your handling code here:
+        if(accountHolderName.getText().compareTo("Account Holder Name")== 0 );
+    }//GEN-LAST:event_accountHolderNameFocusGained
 
-if (parsedNumb !=null && forename.getText().compareTo("Forename")!=0 && surname.getText().compareTo("Surname") !=0 && title.getSelectedItem().toString().compareTo("Title") !=0 && accountHolderName.getText().compareTo("Account Holder Name")!= 0 && adress1.getText().compareTo("Address")!= 0 && address2.getText().compareTo("Address")!= 0 && postcode.getText().compareTo("Postcode") !=0 && city.getText().compareTo("City") !=0 ){
-    
-    Customer c = new Customer();
-    BAPACCT ba = new BAPACCT();
-    String accountNo = ba.createAccountNo();
-    ba.createNewCustomer(accountNo, forename.getText(), surname.getText(), accountHolderName.getText(), adress1.getText(), address2.getText(), city.getText(), postcode.getText(), parsedNumb, title.getSelectedItem().toString());
-     
-}
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void surnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surnameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_surnameActionPerformed
+
+    private void surnameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_surnameFocusGained
+        // TODO add your handling code here:
+        if(surname.getText().compareTo("Surname")==0){
+            surname.setText("");
+        }
+    }//GEN-LAST:event_surnameFocusGained
+
+    private void address2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_address2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_address2ActionPerformed
+
+    private void address2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_address2FocusGained
+        // TODO add your handling code here:
+        if(address2.getText().compareTo("Address") == 0){
+            address2.setText("");
+        }
+    }//GEN-LAST:event_address2FocusGained
+
+    private void cityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cityActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cityActionPerformed
+
+    private void cityFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cityFocusGained
+        // TODO add your handling code here:
+        if(city.getText().compareTo("")==0){
+            city.setText("");
+        }
+    }//GEN-LAST:event_cityFocusGained
+
+    private void forenameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_forenameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_forenameActionPerformed
+
+    private void forenameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_forenameFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_forenameFocusLost
+
+    private void forenameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_forenameFocusGained
+        // TODO add your handling code here:
+
+        if(forename.getText().compareTo("Forename")==0){
+            forename.setText("");
+        }
+    }//GEN-LAST:event_forenameFocusGained
+
+    private void titleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_titleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_titleActionPerformed
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        ReceptionistStartScreen rsc = new ReceptionistStartScreen();
+        rsc.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_backButtonActionPerformed
+
+    private void emailFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailFocusGained
+
+    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -411,17 +547,30 @@ if (parsedNumb !=null && forename.getText().compareTo("Forename")!=0 && surname.
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField accountHolderName;
+    private javax.swing.JTextField address1;
     private javax.swing.JTextField address2;
-    private javax.swing.JTextField adress1;
+    private javax.swing.JButton backButton;
+    private javax.swing.JPanel bg;
     private javax.swing.JTextField city;
+    private javax.swing.JTextField email;
     private javax.swing.JTextField forename;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem2;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem3;
     private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField postcode;
     private javax.swing.JTextField surname;
     private javax.swing.JTextField telephone;
