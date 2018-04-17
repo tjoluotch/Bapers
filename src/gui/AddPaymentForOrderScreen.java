@@ -183,14 +183,14 @@ public class AddPaymentForOrderScreen extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this,"Please enter a valid date","Invalid Date Error",JOptionPane.ERROR_MESSAGE);
             } else {
                 //ERROR HERE:
-                paym.createPayment(selectedOrder, last4Field.getText(), Date.valueOf(expiryDate));
+                paym.createPayment(selectedOrder.getJobLineCollection(), last4Field.getText(), Date.valueOf(expiryDate));
                 // IT DOESN'T LIKE THE DATE
                 JOptionPane.showMessageDialog(this,"Card Payment for order added","",JOptionPane.INFORMATION_MESSAGE);
             }
         } 
         //FOR CASH PAYMENTS
         else if ((jComboBox1.getSelectedItem().toString()).equals("Cash")){
-            paym.createPayment(selectedOrder);
+            paym.createPayment(selectedOrder.getJobLineCollection());
             JOptionPane.showMessageDialog(this,"Cash Payment for order added","",JOptionPane.INFORMATION_MESSAGE);
         }
         

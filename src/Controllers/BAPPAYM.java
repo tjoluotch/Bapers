@@ -11,16 +11,13 @@ import domain.JobLine;
 import domain.OrderTable;
 import domain.PaymentDetail;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import org.apache.pdfbox.io.MemoryUsageSetting;
-import org.apache.pdfbox.jbig2.util.log.LoggerFactory;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
@@ -73,7 +70,7 @@ public class BAPPAYM {
     
     
     //for jobs
-     public void createPayment(List<JobLine> jobs, String last4, Date expiryDate){ //NEED TO UPDATE EXPIRY DATE
+     public void createPayment(Collection<JobLine> jobs, String last4, Date expiryDate){ //NEED TO UPDATE EXPIRY DATE
         PaymentDetail payment = new PaymentDetail();
         payment.setType("Card");
         //payment.setExpiryDate(java.sql.Date.valueOf(expiryDate));
@@ -116,7 +113,7 @@ public class BAPPAYM {
         dm.savePayment(payment);
     }
     //for jobs
-    public void createPayment(List<JobLine> jobs){
+    public void createPayment(Collection<JobLine> jobs){
         PaymentDetail payment = new PaymentDetail();
         payment.setType("Cash");
         payment.setExpiryDate(null);
@@ -142,6 +139,9 @@ public class BAPPAYM {
         
         return lastAmount;
     }
+    
+    
+    
     
     public void firstLetterGeneration(String forename, String surname, String accountHolderName, String address1, String city, String postcode, String telephone, String dateSubmitted) throws IOException{
         String filename = "/Users/tjay/NetBeansProjects/" + /*c.getAccountHolderName()*/"DavidRhind" + "LatePaymLetter1.pdf";
