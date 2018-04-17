@@ -4,13 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/DanTe/Documents/GitHub/Bapers/src/gui/AddPaymentForJobsScreen.java</file>
+            <file>file:/C:/Users/DanTe/Documents/GitHub/Bapers/src/domain/Customer.java</file>
             <file>file:/C:/Users/DanTe/Documents/GitHub/Bapers/src/gui/AddPaymentStartScreen.java</file>
-            <file>file:/C:/Users/DanTe/Documents/GitHub/Bapers/src/META-INF/persistence.xml</file>
+            <file>file:/C:/Users/DanTe/Documents/GitHub/Bapers/src/gui/AddPaymentForOrderScreen.java</file>
+            <file>file:/C:/Users/DanTe/Documents/GitHub/Bapers/src/domain/JobLine.java</file>
             <file>file:/C:/Users/DanTe/Documents/GitHub/Bapers/src/Controllers/BAPPAYM.java</file>
-            <file>file:/C:/Users/DanTe/Documents/GitHub/Bapers/src/data/DataManager.java</file>
-            <file>file:/C:/Users/DanTe/Documents/GitHub/Bapers/src/data/DataManagerImpl.java</file>
-            <file>file:/C:/Users/DanTe/Documents/GitHub/Bapers/src/Controllers/BAPADMN.java</file>
-            <file>file:/C:/Users/DanTe/Documents/GitHub/Bapers/src/gui/CreateAccountScreen.java</file>
+            <file>file:/C:/Users/DanTe/Documents/GitHub/Bapers/src/domain/DiscountPlan.java</file>
+            <file>file:/C:/Users/DanTe/Documents/GitHub/Bapers/src/domain/Alert.java</file>
         </group>
     </open-files>
 </project-private>
