@@ -33,8 +33,8 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
     BAPPAYM paym = new BAPPAYM(dm);
     
     List<JobLine> jobList;
-    List<JobLine> selectedJobs = new ArrayList<JobLine>();
-    List<JobLine> jobsToRemove = new ArrayList<JobLine>();
+    List<JobLine> selectedJobs = new ArrayList<>();
+    List<JobLine> jobsToRemove = new ArrayList<>();
     List<DiscountPlan> discounts;
     JobsTableModel jobsTableModel;
     JobsTableModel basketModel = new JobsTableModel();
@@ -108,7 +108,7 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
 
         jLabel1.setText("Payment Type:");
 
-        jLabel2.setText("Expiry Date:");
+        jLabel2.setText("Expiry Date (MM/YY):");
 
         jLabel3.setText("Last 4 Digits:");
 
@@ -275,11 +275,11 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
         if((paymentTypeComboBox.getSelectedItem().toString()).equals("Card")){
             String day = "01";
             String month = expiryDateField.getText().substring(0,2);
-            String year = expiryDateField.getText().substring(3,7);
+            String year = "20" + expiryDateField.getText().substring(3,5);
             String expiryDate = year + "-" + month + "-" + day;    
             System.out.println(expiryDate);
             boolean dates = false;
-            SimpleDateFormat sdf = new SimpleDateFormat("MM/yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/yy");
             sdf.setLenient(false);
             try{
                 sdf.parse(expiryDateField.getText().trim());

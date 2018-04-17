@@ -51,7 +51,7 @@ public class AddPaymentForOrderScreen extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        orderTable = new javax.swing.JTable();
         jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         expiryDateField = new javax.swing.JTextField();
@@ -63,16 +63,16 @@ public class AddPaymentForOrderScreen extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(ordersTableModel);
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        orderTable.setModel(ordersTableModel);
+        orderTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                orderTableMouseClicked(evt);
             }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                jTable1MouseReleased(evt);
+                orderTableMouseReleased(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(orderTable);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Card", "Cash" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -89,7 +89,7 @@ public class AddPaymentForOrderScreen extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("Expiry Date:");
+        jLabel2.setText("Expiry Date (MM/YY):");
 
         jLabel3.setText("Last 4 Digits:");
 
@@ -168,11 +168,11 @@ public class AddPaymentForOrderScreen extends javax.swing.JFrame {
         if((jComboBox1.getSelectedItem().toString()).equals("Card")){
             String day = "01";
             String month = expiryDateField.getText().substring(0,2);
-            String year = expiryDateField.getText().substring(3,7);
+            String year = "20" + expiryDateField.getText().substring(3,5);
             String expiryDate = year + "-" + month + "-" + day;    
             System.out.println(expiryDate);
             boolean dates = false;
-            SimpleDateFormat sdf = new SimpleDateFormat("MM/yyyy");
+            SimpleDateFormat sdf = new SimpleDateFormat("MM/yy");
             sdf.setLenient(false);
             try{
                 sdf.parse(expiryDateField.getText().trim());
@@ -197,13 +197,13 @@ public class AddPaymentForOrderScreen extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTable1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseReleased
+    private void orderTableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderTableMouseReleased
         
-    }//GEN-LAST:event_jTable1MouseReleased
+    }//GEN-LAST:event_orderTableMouseReleased
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        int selectedRowIndex = jTable1.getSelectedRow();
-        String orderId = jTable1.getValueAt(selectedRowIndex, 0).toString();
+    private void orderTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderTableMouseClicked
+        int selectedRowIndex = orderTable.getSelectedRow();
+        String orderId = orderTable.getValueAt(selectedRowIndex, 0).toString();
         int orderID = Integer.parseInt(orderId);
         
         for (OrderTable order : orderList){
@@ -211,7 +211,7 @@ public class AddPaymentForOrderScreen extends javax.swing.JFrame {
                 selectedOrder = order;
             }
         }
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_orderTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -257,7 +257,7 @@ public class AddPaymentForOrderScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField last4Field;
+    private javax.swing.JTable orderTable;
     // End of variables declaration//GEN-END:variables
 }
