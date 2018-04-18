@@ -23,6 +23,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -43,6 +44,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "JobLine.findBySpecialInstructions", query = "SELECT j FROM JobLine j WHERE j.specialInstructions = :specialInstructions")
     , @NamedQuery(name = "JobLine.findByReminderStatus", query = "SELECT j FROM JobLine j WHERE j.reminderStatus = :reminderStatus")
     , @NamedQuery(name = "JobLine.findByVersion", query = "SELECT j FROM JobLine j WHERE j.version = :version")})
+
 public class JobLine implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,7 +54,7 @@ public class JobLine implements Serializable {
     @Column(name = "job_lineID")
     private Integer joblineID;
     @Column(name = "job_deadline")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date jobDeadline;
     @Size(max = 100)
     @Column(name = "special_instructions")
@@ -62,6 +64,7 @@ public class JobLine implements Serializable {
     private String reminderStatus;
     @Basic(optional = false)
     @NotNull
+    @Version
     @Column(name = "version")
     private long version;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "joblineID")
@@ -71,7 +74,7 @@ public class JobLine implements Serializable {
     @JoinColumn(name = "job_code", referencedColumnName = "code", nullable = false)
     @ManyToOne(optional = false)
     private Job jobCode;
-    @JoinColumn(name = "orderID", referencedColumnName = "orderID", nullable = false)
+    @JoinColumn(name = "orderID", referencedColumnName = "orderID")
     @ManyToOne(optional = false)
     private OrderTable orderID;
     @JoinColumn(name = "payment_detailID", referencedColumnName = "payment_detailID")
@@ -113,13 +116,13 @@ public class JobLine implements Serializable {
     public void setSpecialInstructions(String specialInstructions) {
         this.specialInstructions = specialInstructions;
     }
-    
+
     public boolean isPaidFor(){
         if(paymentdetailID != null){
             return true;
         } else { return false; }
     }
-
+    
     public String getReminderStatus() {
         return reminderStatus;
     }

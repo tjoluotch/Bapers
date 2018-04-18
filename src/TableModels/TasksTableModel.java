@@ -58,7 +58,7 @@ public class TasksTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 6; //To change body of generated methods, choose Tools | Templates.
+        return 7; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

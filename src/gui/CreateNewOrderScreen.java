@@ -147,7 +147,6 @@ public class CreateNewOrderScreen extends javax.swing.JFrame {
         jLabel6.setText("Urgency");
 
         date1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        date1.setText("          ");
         date1.setVisible(false);
 
         jobsTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -340,7 +339,7 @@ public class CreateNewOrderScreen extends javax.swing.JFrame {
                 // Invalid date format
                  JOptionPane.showMessageDialog(this,"Please enter a valid date","Invalid Date Error",JOptionPane.ERROR_MESSAGE);
             } else {
-                   BAPREPT rp = new BAPREPT();
+                   
                    BAPACCT act = new BAPACCT();
                    Collection<JobLine> jCollection = act.createJobLines(Date.valueOf(newDate1), jList, instructions.getText());
                    act.createOrder(jCollection, c);

@@ -14,6 +14,11 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -248,11 +253,36 @@ public class DataManagerImpl implements DataManager{
         return query.getResultList();
     }
     
+    @Override
+    public JobTaskBridge findtb( Job code, Task id) {
+        TypedQuery<JobTaskBridge> query = em.createNamedQuery("JobTaskBridge.findOrder", JobTaskBridge.class);
+        query.setParameter("jobCode", code);
+        query.setParameter("taskID", id);
+        return query.getSingleResult();
+    }
+    
+
+    
+    
     
     @Override
     public List<TaskLine> searchbyStartTime(){
         TypedQuery<TaskLine> query = em.createNamedQuery("TaskLine.findByNullStartTime", TaskLine.class);
         
+        return query.getResultList();
+    }
+    
+     @Override
+    public List<JobLine> allJobs(){
+        TypedQuery<JobLine> query = em.createNamedQuery("JobLine.findAll", JobLine.class);
+        
+        return query.getResultList();
+    }
+    
+    @Override
+    public List<TaskLine> searchCommencedJobs(Staff staff){
+        TypedQuery<TaskLine> query = em.createNamedQuery("TaskLine.findByStarted", TaskLine.class);
+        query.setParameter("completedBy", staff);
         return query.getResultList();
     }
     
@@ -309,6 +339,12 @@ public class DataManagerImpl implements DataManager{
         em.getTransaction().commit();
     }
     
+    public void saveTaskLine(TaskLine task){
+        em.getTransaction().begin();
+        em.persist(task);
+        em.getTransaction().commit();
+    }
+    
     
     @Override
     public List<Staff> searchAllStaff(){
@@ -332,6 +368,8 @@ public class DataManagerImpl implements DataManager{
         
         return query.getResultList();
     }
+
+   
     
     
             

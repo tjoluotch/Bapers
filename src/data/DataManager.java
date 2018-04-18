@@ -64,6 +64,11 @@ public interface DataManager {
      public DiscountPlan findDiscountByID(int ID) ;
       public List <JobTaskBridge> searchByJobCode(Job code);
       public TaskLine findTaskLineByCode(int tid);
+      public void saveTaskLine(TaskLine task);
+      public List<TaskLine> searchCommencedJobs(Staff staff);
+      
+      public List<JobLine> allJobs();
+      public JobTaskBridge findtb( Job code, Task id);
       
      
 }

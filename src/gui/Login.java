@@ -19,6 +19,8 @@ Controller c = new Controller();
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
+        BAPPROC bp = new BAPPROC();
+        bp.getactiveTasks();
     }
 
     /**

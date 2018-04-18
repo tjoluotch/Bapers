@@ -312,6 +312,7 @@ public class BAPACCT {
          for (JobTaskBridge t: jtb){
              Task t1 = t.getTaskID();
          TaskLine l1 = new TaskLine();
+                  l1.setPrice(t1.getPrice());
                   l1.setJoblineID(j);
                   l1.setTaskID(t1);
                    tl.add(l1);

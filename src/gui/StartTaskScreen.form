@@ -70,7 +70,6 @@
                               <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -84,7 +83,6 @@
                                   <Component id="txtTaskLineID" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txtTaskID" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txtDur" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtStartTime" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txtDescr" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txtDept" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                               </Group>
@@ -146,12 +144,7 @@
                               <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txtDur" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtStartTime" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                           <Component id="startTaskButton" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
                       </Group>
@@ -163,6 +156,7 @@
       <SubComponents>
         <Component class="javax.swing.JTextField" name="txtDept">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="tl.getTaskID().getDepartment()" type="code"/>
             </Property>
@@ -178,8 +172,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtTaskLineID">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="Integer.parseInt(tl.getTasklineID())" type="code"/>
+              <Connection code="tl.getTasklineID().toString()" type="code"/>
             </Property>
           </Properties>
           <Events>
@@ -196,25 +191,13 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtJobLineID">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="Integer.parseInt(tl.getJoblineID().getJoblineID())" type="code"/>
+              <Connection code="tl.getJoblineID().getJoblineID().toString()" type="code"/>
             </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtJobLineIDActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel9">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Lucida Grande" size="13" style="1"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Start Time:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txtStartTime">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtStartTimeActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="addCommentsButton">
@@ -226,6 +209,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Start Task"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="startTaskButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
@@ -253,8 +239,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtTaskID">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="Integer.parseInt(tl.getTaskID().getTaskID())" type="code"/>
+              <Connection code="tl.getTaskID().getTaskID().toString()" type="code"/>
             </Property>
           </Properties>
           <Events>
@@ -263,8 +250,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtDur">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="tl.getTaskID().getExpectedDuration() + &quot;minutes&quot;" type="code"/>
+              <Connection code="tl.getTaskID().getExpectedDuration() + &quot; minutes&quot;" type="code"/>
             </Property>
           </Properties>
           <Events>
@@ -286,6 +274,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtDescr">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="tl.getTaskID().getDescription()" type="code"/>
             </Property>

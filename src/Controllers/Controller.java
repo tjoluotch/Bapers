@@ -36,7 +36,7 @@ public class Controller {
        //password for all staff in DB is null
         try{
             staff = dm.findStaffByUsername(user);
-            if (staff.getPassword().compareTo(pass) == 0&& staff.getRole().compareTo(role) == 0 ) {
+            if (staff.getPassword().compareTo(pass) == 0&& staff.getRole().contains(role) ) {
                 
                 if(staff.getLoggedOn() == false){
                     
@@ -63,13 +63,18 @@ public class Controller {
                 }
                 
                 if(role.compareToIgnoreCase("Receptionist")==0){
-                    ShiftManagerStartScreen screen = new ShiftManagerStartScreen(staff);
+                    ReceptionistStartScreen screen = new ReceptionistStartScreen(staff);
                     screen.setVisible(true);
                     
                 }
                 
-                if(role.compareToIgnoreCase("Technician")==0){
-                    ShiftManagerStartScreen screen = new ShiftManagerStartScreen(staff);
+                if(role.contains("Technician")){
+                    
+                    dm.getEm().getTransaction().begin();
+                    dm.getEm().lock(staff, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
+                    staff.setLoggedOn(true);
+                    dm.getEm().getTransaction().commit();
+                    TechnicianStartScreen screen = new TechnicianStartScreen(staff);
                     screen.setVisible(true);
                     
                 }
