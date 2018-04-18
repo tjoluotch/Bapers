@@ -8,6 +8,7 @@ package Controllers;
 import data.DataManagerImpl;
 import domain.DiscountPlan;
 import domain.JobLine;
+import domain.OrderTable;
 import domain.PaymentDetail;
 import domain.TaskLine;
 import java.io.IOException;
@@ -41,45 +42,38 @@ public class BAPPAYM {
     
     //CREATE PAYMENTDETAIL METHODS
     //card payments    
-     public void createPayment(Collection<JobLine> jobs, String last4, Date expiryDate){ //NEED TO UPDATE EXPIRY DATE
+     public void createPayment(Collection<JobLine> jobs, String last4, Date expiryDate, float amount){ //NEED TO UPDATE EXPIRY DATE
         PaymentDetail payment = new PaymentDetail();
         payment.setType("Card");
         payment.setExpiryDate(expiryDate);
         payment.setLast4digits(last4);
-        payment.setJobLineCollection(jobs);        
+        payment.setJobLineCollection(jobs);    
+        payment.setAmount(amount);
         for(JobLine job : jobs){
             job.setPaymentdetailID(payment);
         }
         dm.savePayment(payment);
     } 
     //cash payments
-    public void createPayment(Collection<JobLine> jobs){
+    public void createPayment(Collection<JobLine> jobs, float amount){
         PaymentDetail payment = new PaymentDetail();
         payment.setType("Cash");
         payment.setExpiryDate(null);
         payment.setLast4digits(null);
         payment.setJobLineCollection(jobs);
+        payment.setAmount(amount);
         for(JobLine job : jobs){
             job.setPaymentdetailID(payment);   
         }        
         dm.savePayment(payment);
     }
     
-     //calculate discount for saving payment
-    /*
-    public float calculateDiscount(PaymentDetail p, DiscountPlan d){
-        float subTotal = p.getAmount();
-        float percentage = d.getRate() * subTotal;
-        float lastAmount = subTotal - percentage;
-        
-        return lastAmount;
-    }*/
-    
-    //for VARIABLE (task specific) & fixed discounts
-    public float getPrice(Collection<JobLine> jobs, Collection<DiscountPlan> discounts){
+    //calculates actual price of
+    //method to calcuate price for VARIABLE (task specific) & fixed discounts FOR LIST OF JOBS
+    public float getDiscountedPrice(Collection<JobLine> jobs, Collection<DiscountPlan> discounts){
         float price = 0;
-        Collection<DiscountPlan> variableDiscounts = new ArrayList();
-        if(discounts.isEmpty()){ price = getNormalPrice(jobs); } 
+        Collection<DiscountPlan> flexibleDiscounts = new ArrayList();
+        if(discounts.isEmpty()){ price = getJobsNormalPrice(jobs); } 
         else {
             for(JobLine job : jobs){
                 for(DiscountPlan discount : discounts){
@@ -97,17 +91,19 @@ public class BAPPAYM {
                     //Flexible
                     if (discount.getFlexibleRate() != null){
                         //adds the DiscountsTable with flexible discounts
-                        variableDiscounts.add(discount);
+                        flexibleDiscounts.add(discount);
                     }
                 }
             }
-            if(!variableDiscounts.isEmpty()){
+            if(!flexibleDiscounts.isEmpty() && flexibleDiscounts.size() == 1){
                 //regular expression stuff here
-            }
+            } else if (flexibleDiscounts.size() > 1) { 
+                System.out.println("Customer has " + flexibleDiscounts.size() + " variable discounts!"); }
         }
         return price;
     }
     
+    //calculates normal price of a list of jobs
     public float getNormalPrice(Collection<JobLine> jobs){
         float price = 0;
         for(JobLine job : jobs){
@@ -116,6 +112,7 @@ public class BAPPAYM {
         return price;
     }
     
+    //method to calculate the surcharge of a job based on urgency
     public void calculateSurcharge(JobLine job){
         
     }

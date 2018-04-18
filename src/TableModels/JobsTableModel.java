@@ -37,7 +37,7 @@ public class JobsTableModel extends AbstractTableModel {
     private String[] columnNames = {"Job ID", "Price", "Description"};
 
     public JobsTableModel(){
-        li = new ArrayList<JobLine>();
+        li = new ArrayList();
     }
     
     public JobsTableModel(List<JobLine> li) {

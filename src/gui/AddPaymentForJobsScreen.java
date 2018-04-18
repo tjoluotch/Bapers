@@ -10,7 +10,6 @@ import TableModels.JobsTableModel;
 import data.DataManagerImpl;
 import domain.DiscountPlan;
 import domain.JobLine;
-import domain.TaskLine;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,13 +32,13 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
     BAPPAYM paym = new BAPPAYM(dm);
     
     List<JobLine> jobList;
-    List<JobLine> selectedJobs = new ArrayList<>();
-    List<JobLine> jobsToRemove = new ArrayList<>();
+    List<JobLine> selectedJobs;
+    List<JobLine> jobsToRemove;
     List<DiscountPlan> discounts;
     JobsTableModel jobsTableModel;
-    JobsTableModel basketModel = new JobsTableModel();
-    float normalPrice = 0;
-    float actualPrice = 0;
+    JobsTableModel basketModel;
+    float defaultPrice;
+    float actualPrice;
     
     
     public AddPaymentForJobsScreen() {
@@ -47,9 +46,14 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
     }
     
     AddPaymentForJobsScreen(List<JobLine> jobList, List<DiscountPlan> discounts){
+        this.actualPrice = 0;
+        this.defaultPrice = 0;
         this.jobList = jobList;
         this.discounts = discounts;
-        jobsTableModel = new JobsTableModel(jobList);
+        this.basketModel = new JobsTableModel();
+        this.jobsTableModel = new JobsTableModel(jobList);
+        this.selectedJobs = new ArrayList<>();
+        this.jobsToRemove = new ArrayList<>();
         initComponents();
     }
     
@@ -74,14 +78,14 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         last4Field = new javax.swing.JTextField();
         submitButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         basketTable = new javax.swing.JTable();
         basketLabel = new javax.swing.JLabel();
-        NormalPriceLabel = new javax.swing.JLabel();
-        NormalPrice = new javax.swing.JLabel();
-        ActualPriceLabel = new javax.swing.JLabel();
-        ActualPrice = new javax.swing.JLabel();
+        defaultPriceAnnotation = new javax.swing.JLabel();
+        defaultPriceLabel = new javax.swing.JLabel();
+        actualPriceAnnotation = new javax.swing.JLabel();
+        actualPriceLabel = new javax.swing.JLabel();
 
         jScrollPane2.setViewportView(jTextPane1);
 
@@ -125,7 +129,7 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
             }
         });
 
-        cancelButton.setText("Cancel");
+        backButton.setText("Back");
 
         basketTable.setModel(basketModel
         );
@@ -138,13 +142,13 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
 
         basketLabel.setText("Basket:");
 
-        NormalPriceLabel.setText("Normal Price:");
+        defaultPriceAnnotation.setText("Default Price:");
 
-        NormalPrice.setText("0");
+        defaultPriceLabel.setText("0");
 
-        ActualPriceLabel.setText("Actual Price:");
+        actualPriceAnnotation.setText("Actual Price:");
 
-        ActualPrice.setText("0");
+        actualPriceLabel.setText("0");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -153,71 +157,61 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(expiryDateField, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(last4Field, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(expiryDateField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                            .addComponent(last4Field, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(NormalPriceLabel)
-                                        .addGap(37, 37, 37))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addComponent(ActualPriceLabel)
-                                        .addGap(30, 30, 30)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(NormalPrice)
-                                    .addComponent(ActualPrice))
-                                .addGap(6, 6, 6))))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(6, 6, 6)
-                            .addComponent(paymentTypeComboBox, 0, 238, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(4, 4, 4)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(62, 62, 62)
-                                        .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addGap(166, 166, 166)))
-                                .addComponent(jLabel2)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(basketLabel)
-                                .addComponent(jLabel1)))))
-                .addContainerGap(11, Short.MAX_VALUE))
+                                .addComponent(defaultPriceAnnotation)
+                                .addGap(37, 37, 37))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(actualPriceAnnotation)
+                                .addGap(30, 30, 30)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(defaultPriceLabel)
+                            .addComponent(actualPriceLabel))
+                        .addGap(6, 6, 6))
+                    .addComponent(paymentTypeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(62, 62, 62)
+                                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addGap(166, 166, 166)))
+                            .addComponent(jLabel2)))
+                    .addComponent(basketLabel)
+                    .addComponent(jLabel1))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(basketLabel)
                         .addGap(4, 4, 4)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(NormalPriceLabel)
+                                .addComponent(defaultPriceAnnotation)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(ActualPriceLabel)
-                                    .addComponent(ActualPrice)))
-                            .addComponent(NormalPrice))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                                    .addComponent(actualPriceAnnotation)
+                                    .addComponent(actualPriceLabel)))
+                            .addComponent(defaultPriceLabel))
+                        .addGap(31, 31, 31)
                         .addComponent(jLabel1)
                         .addGap(2, 2, 2)
                         .addComponent(paymentTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -229,33 +223,39 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(1, 1, 1)
                         .addComponent(last4Field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(submitButton)
-                            .addComponent(cancelButton))))
-                .addContainerGap(16, Short.MAX_VALUE))
+                            .addComponent(backButton))))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jobsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jobsTableMouseClicked
-         int selectedRowIndex = jobsTable.getSelectedRow();
+        //find the jobID for the job selected in the table
+        int selectedRowIndex = jobsTable.getSelectedRow();
         String jobId = jobsTable.getValueAt(selectedRowIndex, 0).toString();
         int jobID = Integer.parseInt(jobId);
         for(JobLine job : jobList){
             if(job.getJoblineID() == jobID){
+                //prevent the user from adding a job that is already in the basket
+                if(selectedJobs.contains(job)){} else {
+                //add the job with the same jobID that the user selected
                 selectedJobs.add(job);
+                }
             }
         }
-        normalPrice = paym.getNormalPrice(selectedJobs);
-        actualPrice = paym.getPrice(selectedJobs, discounts);
+        //calculate default price and actual price (with discounts)
+        defaultPrice = paym.getNormalPrice(selectedJobs);
+        actualPrice = paym.getDiscountedPrice(selectedJobs, discounts);
+        
         basketModel = new JobsTableModel(selectedJobs);
         basketModel.fireTableDataChanged();
         basketTable.setModel(basketModel);
-        NormalPrice.setText(String.valueOf(normalPrice));
-        ActualPrice.setText(String.valueOf(actualPrice));
-        System.out.println(selectedJobs.size());
+        defaultPriceLabel.setText(String.valueOf(defaultPrice));
+        actualPriceLabel.setText(String.valueOf(actualPrice));
     }//GEN-LAST:event_jobsTableMouseClicked
 
     private void jobsTableMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jobsTableMouseReleased
@@ -271,13 +271,16 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_last4FieldActionPerformed
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-        //FOR CARD PAYMENTS
+        
+//FOR CARD PAYMENTS
         if((paymentTypeComboBox.getSelectedItem().toString()).equals("Card")){
+            if(last4Field.getText().equals("") || expiryDateField.getText().equals("")){
+                JOptionPane.showMessageDialog(this,"Please enter all required information.","Invalid Data Error",JOptionPane.ERROR_MESSAGE);
+            } else {
             String day = "01";
             String month = expiryDateField.getText().substring(0,2);
             String year = "20" + expiryDateField.getText().substring(3,5);
             String expiryDate = year + "-" + month + "-" + day;    
-            System.out.println(expiryDate);
             boolean dates = false;
             SimpleDateFormat sdf = new SimpleDateFormat("MM/yy");
             sdf.setLenient(false);
@@ -289,43 +292,43 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
             if(dates == false){
                 JOptionPane.showMessageDialog(this,"Please enter a valid date","Invalid Date Error",JOptionPane.ERROR_MESSAGE);
             } else if ((paymentTypeComboBox.getSelectedItem().toString()).equals("Card")){
-                //ERROR HERE:
-                paym.createPayment(selectedJobs, last4Field.getText(), Date.valueOf(expiryDate));
-                // IT DOESN'T LIKE THE DATE
+                paym.createPayment(selectedJobs, last4Field.getText(), Date.valueOf(expiryDate), actualPrice);
                 JOptionPane.showMessageDialog(this,"Card Payment for job(s) added","",JOptionPane.INFORMATION_MESSAGE);
+            }
             }
         }
         //FOR CASH PAYMENTS
         else if ((paymentTypeComboBox.getSelectedItem().toString()).equals("Cash")){
-            paym.createPayment(selectedJobs);
+            paym.createPayment(selectedJobs, actualPrice);
             JOptionPane.showMessageDialog(this,"Cash Payment for job(s) added","",JOptionPane.INFORMATION_MESSAGE);
         }
-
+        
+            
     }//GEN-LAST:event_submitButtonActionPerformed
 
     private void basketTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_basketTableMouseClicked
-         int selectedRowIndex = basketTable.getSelectedRow();
+        int selectedRowIndex = basketTable.getSelectedRow();
         String jobId = basketTable.getValueAt(selectedRowIndex, 0).toString();
         int jobID = Integer.parseInt(jobId);
         List<JobLine> removeList = new LinkedList();
-        actualPrice = 0;
+        
         for(JobLine job : selectedJobs){
-            
             if(job.getJoblineID() != jobID){
                 removeList.add(job);
-                actualPrice += job.getJobCode().getPrice();
             }
-            
         }
         
         selectedJobs = removeList;
         basketModel = new JobsTableModel(selectedJobs);
         
-        NormalPrice.setText(String.valueOf(actualPrice));
+        actualPrice = paym.getDiscountedPrice(selectedJobs, discounts);
+        defaultPrice = paym.getNormalPrice(selectedJobs);
+        
+        defaultPriceLabel.setText(String.valueOf(defaultPrice));
+        actualPriceLabel.setText(String.valueOf(actualPrice));
        
         basketModel.fireTableDataChanged();
         basketTable.setModel(basketModel);
-        System.out.println(selectedJobs.size());
     }//GEN-LAST:event_basketTableMouseClicked
 
     /**
@@ -367,13 +370,13 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel ActualPrice;
-    private javax.swing.JLabel ActualPriceLabel;
-    private javax.swing.JLabel NormalPrice;
-    private javax.swing.JLabel NormalPriceLabel;
+    private javax.swing.JLabel actualPriceAnnotation;
+    private javax.swing.JLabel actualPriceLabel;
+    private javax.swing.JButton backButton;
     private javax.swing.JLabel basketLabel;
     private javax.swing.JTable basketTable;
-    private javax.swing.JButton cancelButton;
+    private javax.swing.JLabel defaultPriceAnnotation;
+    private javax.swing.JLabel defaultPriceLabel;
     private javax.swing.JTextField expiryDateField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
