@@ -390,6 +390,19 @@ public class SearchCustomerResultsScreen extends javax.swing.JFrame {
         System.out.println("Account Name Text Field is empty!");
         } 
         else {
+            //Clear text fields after every search
+            int selectedRowIndex = jTable1.getSelectedRow();
+            accNoTxtField.setText("");
+            fname.setText("");
+            surnametextfield.setText("");
+            accHolderNameTextField.setText("");
+            address1TxtField.setText("");
+            address2TxtField.setText("");
+            cityTextField.setText("");
+            postcodeTextField.setText("");
+            phoneTextField.setText("");
+            emailTextField.setText("");
+            //clear table after every search
             cl.clear();
             Customer c = bapacct.searchCustomerByName(srcAccNameTxtField);
             cl.add(c);
@@ -403,10 +416,25 @@ public class SearchCustomerResultsScreen extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(rootPane, "Some Fields Are Empty", "Error", 1);
             System.out.println("Account Number Text Field is empty!");
         } else {
-        String accNo = srcAccNoTxtField.getText();
-        Customer c = bapacct.searchCustomerByAccNo(accNo);
-        cl.add(c);
-        jTable1.setModel(new SearchCustomerTableModel(cl));
+            //Clear text fields after every search
+            int selectedRowIndex = jTable1.getSelectedRow();
+            accNoTxtField.setText("");
+            fname.setText("");
+            surnametextfield.setText("");
+            accHolderNameTextField.setText("");
+            address1TxtField.setText("");
+            address2TxtField.setText("");
+            cityTextField.setText("");
+            postcodeTextField.setText("");
+            phoneTextField.setText("");
+            emailTextField.setText("");
+            //clear table after every search
+            cl.clear();
+            String accNo = srcAccNoTxtField.getText();
+            Customer c = bapacct.searchCustomerByAccNo(accNo);
+            cl.add(c);
+            srcAccNoTxtField.setText("");
+            jTable1.setModel(new SearchCustomerTableModel(cl));
         }
     }//GEN-LAST:event_srcAccNoButtonActionPerformed
 

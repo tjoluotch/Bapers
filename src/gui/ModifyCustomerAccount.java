@@ -9,13 +9,18 @@ import Controllers.*;
 import domain.Customer;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import TableModels.ModifyCustomerTableModel;
+import data.DataManagerImpl;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
  * @author Tweetie Pie
  */
 public class ModifyCustomerAccount extends javax.swing.JFrame {
-
+    List<Customer> cl = new LinkedList();
+    DataManagerImpl dm = new DataManagerImpl();
     /**
      * Creates new form CreateAccountScreen
      */
@@ -25,6 +30,10 @@ public class ModifyCustomerAccount extends javax.swing.JFrame {
         initComponents();
     }
 
+    public ModifyCustomerAccount(List<Customer> cl) {
+        this.cl = cl;
+        initComponents();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,34 +47,43 @@ public class ModifyCustomerAccount extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        srcAccNoButton = new javax.swing.JButton();
+        srcAccNameButton = new javax.swing.JButton();
+        srcAccNameTxtField = new javax.swing.JTextField();
+        srcAccNoTxtField = new javax.swing.JTextField();
+        backButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        updateButton = new javax.swing.JButton();
         address1TxtField = new javax.swing.JTextField();
+        postcodeTextField = new javax.swing.JTextField();
+        jLabel14 = new javax.swing.JLabel();
+        accNoTxtField = new javax.swing.JTextField();
         phoneTextField = new javax.swing.JTextField();
         emailTextField = new javax.swing.JTextField();
         accHolderNameTextField = new javax.swing.JTextField();
         surnametextfield = new javax.swing.JTextField();
         fname = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        rateTextField = new javax.swing.JTextField();
-        dcPlnBx = new javax.swing.JFormattedTextField();
-        jLabel11 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        postcodeTextField = new javax.swing.JTextField();
-        goBackButton = new javax.swing.JButton();
-        deleteButton = new javax.swing.JButton();
-        srcAccNoButton = new javax.swing.JButton();
-        srcAccNameButton = new javax.swing.JButton();
-        srcAccNameTxtField = new javax.swing.JTextField();
-        srcAccNoTxtField = new javax.swing.JTextField();
+        cityTextField = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        address2TxtField = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        updateButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        dcPlnBx = new javax.swing.JFormattedTextField();
+        rateTextField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        valuedBox = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,81 +102,29 @@ public class ModifyCustomerAccount extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(44, 44, 44)
                 .addComponent(jLabel1)
-                .addGap(45, 45, 45)
+                .addGap(98, 98, 98)
                 .addComponent(jLabel8)
-                .addGap(159, 159, 159))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel8)
-                .addGap(28, 28, 28))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel8)
+                .addGap(27, 27, 27))
         );
 
-        jLabel10.setText("Address");
+        jLabel12.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel12.setText("Search by Account Number:");
 
-        jLabel9.setText("postcode");
-
-        jLabel7.setText("phone");
-
-        jLabel6.setText("email");
-
-        jLabel5.setText("Acc H. Name");
-
-        jLabel4.setText("Last Name");
-
-        jLabel3.setText("First Name");
-
-        updateButton.setText("Change Customer");
-        updateButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateButtonActionPerformed(evt);
-            }
-        });
-
-        phoneTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                phoneTextFieldActionPerformed(evt);
-            }
-        });
-
-        accHolderNameTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                accHolderNameTextFieldActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Rate");
-
-        jLabel11.setText("Discount Plan");
-
-        jButton1.setText("Set/Change");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        goBackButton.setText("Go Back");
-        goBackButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                goBackButtonActionPerformed(evt);
-            }
-        });
-
-        deleteButton.setText("Delete Customer");
-        deleteButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteButtonActionPerformed(evt);
-            }
-        });
+        jLabel13.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel13.setText("Search by Account Holder's Name:");
 
         srcAccNoButton.setText("Search");
         srcAccNoButton.addActionListener(new java.awt.event.ActionListener() {
@@ -174,28 +140,93 @@ public class ModifyCustomerAccount extends javax.swing.JFrame {
             }
         });
 
-        srcAccNameTxtField.setText("Search by Account Holder's Name");
         srcAccNameTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 srcAccNameTxtFieldActionPerformed(evt);
             }
         });
 
-        srcAccNoTxtField.setText("Search by Account Number");
         srcAccNoTxtField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 srcAccNoTxtFieldActionPerformed(evt);
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "first name", "surname", "Discount Plan", "acc holder name", "postcode", "adress1", "phone", "email", "Acc No"
+        backButton.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        backButton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/backicon.png"))); // NOI18N
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
             }
-        ));
+        });
+
+        jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel3.setText("First Name:");
+
+        jLabel10.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel10.setText("Address Line 1:");
+
+        jLabel9.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel9.setText("Postcode:");
+
+        jLabel7.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel7.setText("Phone:");
+
+        jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel6.setText("Email:");
+
+        jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel5.setText("Acc Holder Name:");
+
+        jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel4.setText("Surname:");
+
+        jLabel14.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel14.setText("Address Line 2:");
+
+        phoneTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                phoneTextFieldActionPerformed(evt);
+            }
+        });
+
+        accHolderNameTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accHolderNameTextFieldActionPerformed(evt);
+            }
+        });
+
+        surnametextfield.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                surnametextfieldActionPerformed(evt);
+            }
+        });
+
+        jLabel15.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel15.setText("City:");
+
+        address2TxtField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                address2TxtFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel16.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel16.setText("Account Number:");
+
+        jTable1.setModel(new ModifyCustomerTableModel(cl));
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(30);
+        jTable1.getColumnModel().getColumn(1).setPreferredWidth(50);
+        jTable1.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jTable1.getColumnModel().getColumn(3).setPreferredWidth(90);
+        jTable1.getColumnModel().getColumn(4).setPreferredWidth(50);
+        jTable1.getColumnModel().getColumn(5).setPreferredWidth(50);
+        jTable1.getColumnModel().getColumn(6).setPreferredWidth(50);
+        jTable1.getColumnModel().getColumn(7).setPreferredWidth(50);
+        jTable1.getColumnModel().getColumn(8).setPreferredWidth(50);
+        jTable1.getColumnModel().getColumn(9).setPreferredWidth(60);
+        jTable1.getColumnModel().getColumn(10).setPreferredWidth(60);
+        jTable1.getColumnModel().getColumn(11).setPreferredWidth(60);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
@@ -203,148 +234,200 @@ public class ModifyCustomerAccount extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
+        updateButton.setText("Update");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateButtonActionPerformed(evt);
+            }
+        });
+
+        deleteButton.setText("Delete");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteButtonActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Confirm Discount");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel11.setText("Discount Plan:");
+
+        jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel2.setText("Rate:");
+
+        valuedBox.setText("Valued Customer");
+
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
         bgLayout.setHorizontalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
-                .addContainerGap(25, Short.MAX_VALUE)
+            .addGroup(bgLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(bgLayout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel9)
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel7)
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel6)
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel5)
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel4)
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel3)
-                        .addGap(5, 5, 5)
-                        .addComponent(updateButton)
-                        .addGap(5, 5, 5)
-                        .addComponent(address1TxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(accHolderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(surnametextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(fname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel2)
-                        .addGap(5, 5, 5)
-                        .addComponent(rateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(dcPlnBx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(jLabel11)
-                        .addGap(5, 5, 5)
-                        .addComponent(jButton1)
-                        .addGap(5, 5, 5)
-                        .addComponent(postcodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(goBackButton)
-                        .addGap(5, 5, 5)
-                        .addComponent(deleteButton)
-                        .addGap(5, 5, 5)
-                        .addComponent(srcAccNoButton)
-                        .addGap(5, 5, 5)
-                        .addComponent(srcAccNameButton)
-                        .addGap(5, 5, 5)
-                        .addComponent(srcAccNameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(5, 5, 5)
-                        .addComponent(srcAccNoTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(258, 258, 258)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(23, 23, 23))
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(bgLayout.createSequentialGroup()
+                                .addGap(354, 354, 354)
+                                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(bgLayout.createSequentialGroup()
+                                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(bgLayout.createSequentialGroup()
+                                                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(jLabel9)
+                                                    .addComponent(jLabel6))
+                                                .addGap(18, 18, 18)
+                                                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(postcodeTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                                    .addComponent(emailTextField)
+                                                    .addComponent(rateTextField)))
+                                            .addComponent(jLabel2))
+                                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(bgLayout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addComponent(valuedBox)
+                                                .addGap(63, 63, 63)
+                                                .addComponent(jButton1))
+                                            .addGroup(bgLayout.createSequentialGroup()
+                                                .addGap(58, 58, 58)
+                                                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addGroup(bgLayout.createSequentialGroup()
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(surnametextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(36, 36, 36)
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(accHolderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(bgLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel16)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(accNoTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(bgLayout.createSequentialGroup()
+                                .addComponent(backButton)
+                                .addGap(64, 64, 64)
+                                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel12))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(bgLayout.createSequentialGroup()
+                                        .addComponent(srcAccNoTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(srcAccNoButton))
+                                    .addGroup(bgLayout.createSequentialGroup()
+                                        .addComponent(srcAccNameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(srcAccNameButton))))
+                            .addGroup(bgLayout.createSequentialGroup()
+                                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(bgLayout.createSequentialGroup()
+                                        .addGap(16, 16, 16)
+                                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel11)
+                                            .addComponent(jLabel15)))
+                                    .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel3)
+                                        .addComponent(jLabel10)))
+                                .addGap(18, 18, 18)
+                                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(dcPlnBx, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(address2TxtField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(address1TxtField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(fname, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 49, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bgLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(srcAccNameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(srcAccNameButton)
+                            .addComponent(jLabel13))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel12)
+                            .addComponent(srcAccNoTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(srcAccNoButton)))
+                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel10))
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(accNoTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(fname, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(address1TxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel14)
+                            .addComponent(address2TxtField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel15))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel11)
+                            .addComponent(dcPlnBx, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel9))
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(postcodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(rateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(valuedBox)))
                     .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel7))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel6))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel5))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel4))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel3))
-                    .addComponent(updateButton)
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(address1TxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(phoneTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(accHolderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(surnametextfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(fname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel2))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(rateTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(dcPlnBx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel11))
-                    .addComponent(jButton1)
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(postcodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(5, 5, 5)
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(goBackButton)
-                    .addComponent(deleteButton)
-                    .addComponent(srcAccNoButton)
-                    .addComponent(srcAccNameButton)
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(srcAccNameTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(srcAccNoTxtField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(5, 5, 5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 7, Short.MAX_VALUE))
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(accHolderNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(surnametextfield, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(94, 94, 94)
+                        .addComponent(updateButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(deleteButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -361,19 +444,85 @@ public class ModifyCustomerAccount extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        int selectedRowIndex = jTable1.getSelectedRow();
-        String id =  model.getValueAt(selectedRowIndex, 8).toString();
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+//        ReceptionistStartScreen rsc = new ReceptionistStartScreen();
+//        rsc.setVisible(true);
+//        setVisible(false);
+    }//GEN-LAST:event_backButtonActionPerformed
 
-        boolean cUpdate = bapacct.updateCustomer(fname, surnametextfield, emailTextField, postcodeTextField, address1TxtField, phoneTextField, accHolderNameTextField, id);
-        if (cUpdate == true){
-            JOptionPane.showMessageDialog(rootPane, "Successfully Updated Customer " + id);
+    private void srcAccNoTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srcAccNoTxtFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_srcAccNoTxtFieldActionPerformed
+
+    private void srcAccNameTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srcAccNameTxtFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_srcAccNameTxtFieldActionPerformed
+
+    private void srcAccNameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srcAccNameButtonActionPerformed
+        if (srcAccNameTxtField.getText().compareTo("") == 0){
+            JOptionPane.showMessageDialog(rootPane, "Some Fields Are Empty", "Error", 1);
+            System.out.println("Account Name Text Field is empty!");
         }
-        else{
-            JOptionPane.showMessageDialog(rootPane, "Your update was unsuccessfull please try again");
+        else {
+            //Clear text fields after every search
+            int selectedRowIndex = jTable1.getSelectedRow();
+            accNoTxtField.setText("");
+            fname.setText("");
+            surnametextfield.setText("");
+            accHolderNameTextField.setText("");
+            address1TxtField.setText("");
+            address2TxtField.setText("");
+            cityTextField.setText("");
+            postcodeTextField.setText("");
+            phoneTextField.setText("");
+            emailTextField.setText("");
+            valuedBox.setSelected(false);
+            dcPlnBx.setText("");
+            //clear table after every search
+            cl.clear();
+            //Execute Query
+            Customer c = bapacct.searchCustomerByName(srcAccNameTxtField);
+            //Populate List thus populate table
+            cl.add(c);
+            //clear the search field so its ready for the next search
+            srcAccNameTxtField.setText("");
+            //populate table
+            jTable1.setModel(new ModifyCustomerTableModel(cl));
         }
-    }//GEN-LAST:event_updateButtonActionPerformed
+    }//GEN-LAST:event_srcAccNameButtonActionPerformed
+
+    private void srcAccNoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srcAccNoButtonActionPerformed
+        if (srcAccNoTxtField.getText().compareTo("") == 0){
+            JOptionPane.showMessageDialog(rootPane, "Some Fields Are Empty", "Error", 1);
+            System.out.println("Account Number Text Field is empty!");
+        } else {
+            //Clear text fields after every search
+            int selectedRowIndex = jTable1.getSelectedRow();
+            accNoTxtField.setText("");
+            fname.setText("");
+            surnametextfield.setText("");
+            accHolderNameTextField.setText("");
+            address1TxtField.setText("");
+            address2TxtField.setText("");
+            cityTextField.setText("");
+            postcodeTextField.setText("");
+            phoneTextField.setText("");
+            emailTextField.setText("");
+            valuedBox.setSelected(false);
+            dcPlnBx.setText("");
+            //clear table after every search
+            cl.clear();
+            //Execute Query
+            String accNo = srcAccNoTxtField.getText();
+            Customer c = bapacct.searchCustomerByAccNo(accNo);
+            //Populate List thus populate table
+            cl.add(c);
+            //clear the search field so its ready for the next search
+            srcAccNoTxtField.setText("");
+            //populate table
+            jTable1.setModel(new ModifyCustomerTableModel(cl));
+        }
+    }//GEN-LAST:event_srcAccNoButtonActionPerformed
 
     private void phoneTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneTextFieldActionPerformed
         // TODO add your handling code here:
@@ -383,15 +532,79 @@ public class ModifyCustomerAccount extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_accHolderNameTextFieldActionPerformed
 
+    private void surnametextfieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_surnametextfieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_surnametextfieldActionPerformed
+
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+//        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        int selectedRowIndex = jTable1.getSelectedRow();
+        String id =  jTable1.getValueAt(selectedRowIndex, 0).toString();
+        boolean val = false;
+        if (valuedBox.isSelected()){
+            val = true;
+        }
+        boolean cUpdate = bapacct.updateCustomer(fname, surnametextfield, emailTextField, postcodeTextField, address1TxtField, address2TxtField, phoneTextField, accHolderNameTextField, cityTextField, dcPlnBx, val, id);
+        if (cUpdate == true){
+            //clear fields
+            accNoTxtField.setText("");
+            fname.setText("");
+            surnametextfield.setText("");
+            accHolderNameTextField.setText("");
+            address1TxtField.setText("");
+            address2TxtField.setText("");
+            cityTextField.setText("");
+            postcodeTextField.setText("");
+            phoneTextField.setText("");
+            emailTextField.setText("");
+            valuedBox.setSelected(false);
+            dcPlnBx.setText("");
+            //clear table after update is made
+            cl.clear();
+            jTable1.setModel(new ModifyCustomerTableModel(cl));
+            JOptionPane.showMessageDialog(rootPane, "Successfully Updated Customer " + id);
+        }
+        else{
+            JOptionPane.showMessageDialog(rootPane, "Your update was unsuccessfull please try again");
+        }
+    }//GEN-LAST:event_updateButtonActionPerformed
+
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+
+        int selectedRowIndex = jTable1.getSelectedRow();
+        String id =  jTable1.getValueAt(selectedRowIndex, 0).toString();
+        boolean cDelete = bapacct.deleteCustomer(id);
+        if (cDelete == true) {
+            //clear fields
+            accNoTxtField.setText("");
+            fname.setText("");
+            surnametextfield.setText("");
+            accHolderNameTextField.setText("");
+            address1TxtField.setText("");
+            address2TxtField.setText("");
+            cityTextField.setText("");
+            postcodeTextField.setText("");
+            phoneTextField.setText("");
+            emailTextField.setText("");
+            valuedBox.setSelected(false);
+            dcPlnBx.setText("");
+            //clear table after deletion is made
+            cl.clear();
+            jTable1.setModel(new ModifyCustomerTableModel(cl));
+            JOptionPane.showMessageDialog(rootPane, "Successfully Deleted Customer " + id);
+        }
+        else {
+            JOptionPane.showMessageDialog(rootPane, "You've been unsuccessfull in deleting Customer " + id);
+        }
+    }//GEN-LAST:event_deleteButtonActionPerformed
+
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         Customer c = bapacct.searchCustomerByName(srcAccNameTxtField);
-
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-
+       
         int selectedRowIndex = jTable1.getSelectedRow();
 
-        String selectedCustomer = model.getValueAt(selectedRowIndex, 0).toString();
+        String selectedCustomer = jTable1.getValueAt(selectedRowIndex, 1).toString();
 
         float rateSet = Float.valueOf(rateTextField.getText());
 
@@ -402,65 +615,33 @@ public class ModifyCustomerAccount extends javax.swing.JFrame {
         }
         else
         JOptionPane.showMessageDialog(rootPane, "wrong customer selected!");
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void goBackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_goBackButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_goBackButtonActionPerformed
-
-    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        int selectedRowIndex = jTable1.getSelectedRow();
-
-        String id =  model.getValueAt(selectedRowIndex, 8).toString();
-
-        boolean cDelete = bapacct.deleteCustomer(id);
-        if (cDelete == true) {
-            JOptionPane.showMessageDialog(rootPane, "Successfully Deleted Customer " + id);
-        }
-        else {
-            JOptionPane.showMessageDialog(rootPane, "You've been unsuccessfull in deleting Customer " + id);
-        }
-    }//GEN-LAST:event_deleteButtonActionPerformed
-
-    private void srcAccNoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srcAccNoButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_srcAccNoButtonActionPerformed
-
-    private void srcAccNameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srcAccNameButtonActionPerformed
-        Customer c = bapacct.searchCustomerByName(srcAccNameTxtField);
-
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-
-        model.addRow(new String []{c.getForename(),c.getSurname(), c.getDiscountType(), c.getAccountHolderName(),c.getPostcode(), c.getAddress1(), c.getPhone(), c.getEmail(), c.getAccountNo()});
-    }//GEN-LAST:event_srcAccNameButtonActionPerformed
-
-    private void srcAccNameTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srcAccNameTxtFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_srcAccNameTxtFieldActionPerformed
-
-    private void srcAccNoTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srcAccNoTxtFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_srcAccNoTxtFieldActionPerformed
-
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+
+        //BINDING THE TEXT FIELDS
         int selectedRowIndex = jTable1.getSelectedRow();
-
-        String plan = model.getValueAt(selectedRowIndex, 2).toString();
-
-        dcPlnBx.setText(model.getValueAt(selectedRowIndex, 2).toString());
-
-        fname.setText(model.getValueAt(selectedRowIndex, 0).toString());
-
-        surnametextfield.setText(model.getValueAt(selectedRowIndex, 1).toString());
-        accHolderNameTextField.setText(model.getValueAt(selectedRowIndex, 3).toString());
-        postcodeTextField.setText(model.getValueAt(selectedRowIndex, 4).toString());
-        address1TxtField.setText(model.getValueAt(selectedRowIndex, 5).toString());
-        phoneTextField.setText(model.getValueAt(selectedRowIndex, 6).toString());
-        emailTextField.setText(model.getValueAt(selectedRowIndex, 7).toString());
+        accNoTxtField.setText(jTable1.getValueAt(selectedRowIndex, 0).toString());
+        fname.setText(jTable1.getValueAt(selectedRowIndex, 1).toString());
+        surnametextfield.setText(jTable1.getValueAt(selectedRowIndex, 2).toString());
+        accHolderNameTextField.setText(jTable1.getValueAt(selectedRowIndex, 3).toString());
+        address1TxtField.setText(jTable1.getValueAt(selectedRowIndex, 4).toString());
+        address2TxtField.setText(jTable1.getValueAt(selectedRowIndex, 5).toString());
+        cityTextField.setText(jTable1.getValueAt(selectedRowIndex, 6).toString());
+        postcodeTextField.setText(jTable1.getValueAt(selectedRowIndex, 7).toString());
+        phoneTextField.setText(jTable1.getValueAt(selectedRowIndex, 8).toString());
+        emailTextField.setText(jTable1.getValueAt(selectedRowIndex, 9).toString());
+        //if true tick valued customer or else not
+        if((jTable1.getValueAt(selectedRowIndex, 10).toString().equalsIgnoreCase("true"))){
+            valuedBox.setSelected(true);
+        }
+        dcPlnBx.setText(jTable1.getValueAt(selectedRowIndex, 11).toString());
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void address2TxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_address2TxtFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_address2TxtFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -502,17 +683,25 @@ public class ModifyCustomerAccount extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField accHolderNameTextField;
+    private javax.swing.JTextField accNoTxtField;
     private javax.swing.JTextField address1TxtField;
+    private javax.swing.JTextField address2TxtField;
+    private javax.swing.JButton backButton;
     private javax.swing.JPanel bg;
+    private javax.swing.JTextField cityTextField;
     private javax.swing.JFormattedTextField dcPlnBx;
     private javax.swing.JButton deleteButton;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JTextField fname;
-    private javax.swing.JButton goBackButton;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -533,5 +722,6 @@ public class ModifyCustomerAccount extends javax.swing.JFrame {
     private javax.swing.JTextField srcAccNoTxtField;
     private javax.swing.JTextField surnametextfield;
     private javax.swing.JButton updateButton;
+    private javax.swing.JCheckBox valuedBox;
     // End of variables declaration//GEN-END:variables
 }

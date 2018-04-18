@@ -25,7 +25,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 /**
  * @author Daniel
@@ -63,29 +63,37 @@ public class BAPACCT {
     }
     
     public boolean updateCustomer(JTextField fname,JTextField surnametextfield, JTextField emailTextField,
-                               JTextField postcodeTextField, JTextField address1TxtField, JTextField phoneTextField, 
-                                 JTextField accHolderNameTextField, String id){
+                               JTextField postcodeTextField, JTextField address1TxtField, JTextField address2TxtField, JTextField phoneTextField, 
+                                 JTextField accHolderNameTextField, JTextField cityTextField, JTextField discountTextField, boolean valuedBox, String id){
         
          boolean update = false;
             
          Customer c = dm.getEm().find(Customer.class, id);
        
-        String cfn = fname.getText();
+           String cfn = fname.getText();
            String cln = surnametextfield.getText();
            String cacn = accHolderNameTextField.getText();
            String cpc = postcodeTextField.getText();
            String cadr = address1TxtField.getText();
+           String cadr2 = address2TxtField.getText();
+           String ccity = cityTextField.getText();
            String cphn = phoneTextField.getText();
            String cemail = emailTextField.getText();
+           String cdisc = discountTextField.getText();
+           
        
       dm.getEm().getTransaction().begin();
       c.setAccountHolderName(cacn);
       c.setAddress1(cadr);
+      c.setAddress2(cadr2);
       c.setEmail(cemail);
       c.setForename(cfn);
       c.setSurname(cln);
       c.setPostcode(cpc);
       c.setPhone(cphn);
+      c.setCity(ccity);
+      c.setDiscountType(cdisc);
+      c.setValuedCustomer(valuedBox);
       dm.getEm().getTransaction().commit();
       
       update = true;
