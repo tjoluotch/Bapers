@@ -46,10 +46,10 @@ Staff staff;
         SearchAccountButton = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        SearchAccountButton1 = new javax.swing.JPanel();
+        reportsButton = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        SearchAccountButton5 = new javax.swing.JPanel();
+        jobCentreButton = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -115,9 +115,9 @@ Staff staff;
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CreateAccountButtonLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addGap(14, 14, 14))
         );
         CreateAccountButtonLayout.setVerticalGroup(
             CreateAccountButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,9 +151,9 @@ Staff staff;
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SearchAccountButtonLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel10)
-                .addGap(30, 30, 30))
+                .addGap(24, 24, 24))
         );
         SearchAccountButtonLayout.setVerticalGroup(
             SearchAccountButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,10 +165,10 @@ Staff staff;
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        SearchAccountButton1.setBackground(new java.awt.Color(250, 190, 100));
-        SearchAccountButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+        reportsButton.setBackground(new java.awt.Color(250, 190, 100));
+        reportsButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                SearchAccountButton1MouseClicked(evt);
+                reportsButtonMouseClicked(evt);
             }
         });
 
@@ -178,31 +178,31 @@ Staff staff;
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/reporticon.png"))); // NOI18N
 
-        javax.swing.GroupLayout SearchAccountButton1Layout = new javax.swing.GroupLayout(SearchAccountButton1);
-        SearchAccountButton1.setLayout(SearchAccountButton1Layout);
-        SearchAccountButton1Layout.setHorizontalGroup(
-            SearchAccountButton1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SearchAccountButton1Layout.createSequentialGroup()
+        javax.swing.GroupLayout reportsButtonLayout = new javax.swing.GroupLayout(reportsButton);
+        reportsButton.setLayout(reportsButtonLayout);
+        reportsButtonLayout.setHorizontalGroup(
+            reportsButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, reportsButtonLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel3)
-                .addGap(23, 23, 23)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel16)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        SearchAccountButton1Layout.setVerticalGroup(
-            SearchAccountButton1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SearchAccountButton1Layout.createSequentialGroup()
+        reportsButtonLayout.setVerticalGroup(
+            reportsButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(reportsButtonLayout.createSequentialGroup()
                 .addGap(14, 14, 14)
-                .addGroup(SearchAccountButton1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(reportsButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel16))
                 .addContainerGap(7, Short.MAX_VALUE))
         );
 
-        SearchAccountButton5.setBackground(new java.awt.Color(250, 190, 100));
-        SearchAccountButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+        jobCentreButton.setBackground(new java.awt.Color(250, 190, 100));
+        jobCentreButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                SearchAccountButton5MouseClicked(evt);
+                jobCentreButtonMouseClicked(evt);
             }
         });
 
@@ -212,22 +212,22 @@ Staff staff;
 
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/jobicon.png"))); // NOI18N
 
-        javax.swing.GroupLayout SearchAccountButton5Layout = new javax.swing.GroupLayout(SearchAccountButton5);
-        SearchAccountButton5.setLayout(SearchAccountButton5Layout);
-        SearchAccountButton5Layout.setHorizontalGroup(
-            SearchAccountButton5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(SearchAccountButton5Layout.createSequentialGroup()
+        javax.swing.GroupLayout jobCentreButtonLayout = new javax.swing.GroupLayout(jobCentreButton);
+        jobCentreButton.setLayout(jobCentreButtonLayout);
+        jobCentreButtonLayout.setHorizontalGroup(
+            jobCentreButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jobCentreButtonLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel17)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        SearchAccountButton5Layout.setVerticalGroup(
-            SearchAccountButton5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SearchAccountButton5Layout.createSequentialGroup()
+        jobCentreButtonLayout.setVerticalGroup(
+            jobCentreButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jobCentreButtonLayout.createSequentialGroup()
                 .addContainerGap(14, Short.MAX_VALUE)
-                .addGroup(SearchAccountButton5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jobCentreButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17))
                 .addContainerGap())
@@ -244,8 +244,8 @@ Staff staff;
             .addComponent(CreateAccountButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(SearchAccountButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(LogoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(SearchAccountButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(SearchAccountButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(reportsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jobCentreButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         spLayout.setVerticalGroup(
             spLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,9 +257,9 @@ Staff staff;
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(SearchAccountButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(SearchAccountButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(reportsButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(SearchAccountButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jobCentreButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(LogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -322,13 +322,19 @@ Staff staff;
         setVisible(false);
     }//GEN-LAST:event_SearchAccountButtonMouseClicked
 
-    private void SearchAccountButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchAccountButton1MouseClicked
+    private void reportsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportsButtonMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_SearchAccountButton1MouseClicked
+        ReportScreen rep = new ReportScreen();
+        rep.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_reportsButtonMouseClicked
 
-    private void SearchAccountButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SearchAccountButton5MouseClicked
+    private void jobCentreButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jobCentreButtonMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_SearchAccountButton5MouseClicked
+        JobsCenterScreen jcs = new JobsCenterScreen();
+        jcs.setVisible(true);
+        setVisible(false);
+    }//GEN-LAST:event_jobCentreButtonMouseClicked
 
     /**
      * @param args the command line arguments
@@ -372,11 +378,9 @@ Staff staff;
     private javax.swing.JPanel CreateAccountButton;
     private javax.swing.JPanel LogoutButton;
     private javax.swing.JPanel SearchAccountButton;
-    private javax.swing.JPanel SearchAccountButton1;
     private javax.swing.JPanel SearchAccountButton2;
     private javax.swing.JPanel SearchAccountButton3;
     private javax.swing.JPanel SearchAccountButton4;
-    private javax.swing.JPanel SearchAccountButton5;
     private javax.swing.JPanel bg;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -396,6 +400,8 @@ Staff staff;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jobCentreButton;
+    private javax.swing.JPanel reportsButton;
     private javax.swing.JPanel sp;
     // End of variables declaration//GEN-END:variables
 }

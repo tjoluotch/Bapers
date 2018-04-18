@@ -3,8 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/Users/redwan/Documents/GitHub/Bapers/src/gui/StaffReportsScreen.java</file>
+            <file>file:/Users/redwan/Documents/GitHub/Bapers/src/gui/SummaryReportScreen.java</file>
+            <file>file:/Users/redwan/Documents/GitHub/Bapers/src/gui/ShiftManagerStartScreen.java</file>
             <file>file:/Users/redwan/Documents/GitHub/Bapers/src/gui/CreateAccountScreen.java</file>
-            <file>file:/Users/redwan/Documents/GitHub/Bapers/src/gui/ReceptionistStartScreen.java</file>
+            <file>file:/Users/redwan/Documents/GitHub/Bapers/src/gui/CustomerReportsScreen.java</file>
+            <file>file:/Users/redwan/Documents/GitHub/Bapers/src/gui/ReportScreen.java</file>
         </group>
     </open-files>
 </project-private>
