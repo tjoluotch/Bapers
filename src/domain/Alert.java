@@ -18,14 +18,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Tweetie Pie
+ * @author redwan
  */
 @Entity
 @Table(name = "alert")
@@ -55,7 +54,6 @@ public class Alert implements Serializable {
     private Boolean beenSeen;
     @Basic(optional = false)
     @NotNull
-    @Version
     @Column(name = "version")
     private long version;
     @JoinColumn(name = "account_no", referencedColumnName = "account_no")
@@ -92,14 +90,6 @@ public class Alert implements Serializable {
         return description;
     }
 
-    public Customer getAccountNo() {
-        return accountNo;
-    }
-
-    public void setAccountNo(Customer accountNo) {
-        this.accountNo = accountNo;
-    }
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -128,7 +118,13 @@ public class Alert implements Serializable {
         this.version = version;
     }
 
-   
+    public Customer getAccountNo() {
+        return accountNo;
+    }
+
+    public void setAccountNo(Customer accountNo) {
+        this.accountNo = accountNo;
+    }
 
     public JobLine getJoblineID() {
         return joblineID;

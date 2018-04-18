@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -22,9 +23,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Tweetie Pie
+ * @author redwan
  */
 @Entity
+@Table(name = "job")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Job.findAll", query = "SELECT j FROM Job j")
@@ -39,18 +41,20 @@ public class Job implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 10)
-    @Column(nullable = false, length = 10)
+    @Column(name = "code")
     private String code;
     @Size(max = 45)
-    @Column(name = "job_description", length = 45)
+    @Column(name = "job_description")
     private String jobDescription;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(precision = 12)
+    @Column(name = "price")
     private Float price;
     @Basic(optional = false)
     @NotNull
-    @Column(nullable = false)
+    @Column(name = "version")
     private long version;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "jobCode")
+    private Collection<JobTaskBridge> jobTaskBridgeCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "jobCode")
     private Collection<JobLine> jobLineCollection;
 
@@ -96,6 +100,15 @@ public class Job implements Serializable {
 
     public void setVersion(long version) {
         this.version = version;
+    }
+
+    @XmlTransient
+    public Collection<JobTaskBridge> getJobTaskBridgeCollection() {
+        return jobTaskBridgeCollection;
+    }
+
+    public void setJobTaskBridgeCollection(Collection<JobTaskBridge> jobTaskBridgeCollection) {
+        this.jobTaskBridgeCollection = jobTaskBridgeCollection;
     }
 
     @XmlTransient

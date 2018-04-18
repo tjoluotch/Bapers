@@ -23,10 +23,11 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Tweetie Pie
+ * @author redwan
  */
 @Entity
 @Table(name = "payment_detail")
@@ -63,16 +64,8 @@ public class PaymentDetail implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "amount")
     private Float amount;
-     @OneToMany(mappedBy = "paymentdetailID")
+    @OneToMany(mappedBy = "paymentdetailID")
     private Collection<JobLine> jobLineCollection;
-
-    public Collection<JobLine> getJobLineCollection() {
-        return jobLineCollection;
-    }
-
-    public void setJobLineCollection(Collection<JobLine> jobLineCollection) {
-        this.jobLineCollection = jobLineCollection;
-    }
 
     public PaymentDetail() {
     }
@@ -88,10 +81,6 @@ public class PaymentDetail implements Serializable {
 
     public Integer getPaymentdetailID() {
         return paymentdetailID;
-    }
-    
-    public void addJobLine(JobLine jobLine){
-        jobLineCollection.add(jobLine);
     }
 
     public void setPaymentdetailID(Integer paymentdetailID) {
@@ -136,6 +125,15 @@ public class PaymentDetail implements Serializable {
 
     public void setAmount(Float amount) {
         this.amount = amount;
+    }
+
+    @XmlTransient
+    public Collection<JobLine> getJobLineCollection() {
+        return jobLineCollection;
+    }
+
+    public void setJobLineCollection(Collection<JobLine> jobLineCollection) {
+        this.jobLineCollection = jobLineCollection;
     }
 
     @Override

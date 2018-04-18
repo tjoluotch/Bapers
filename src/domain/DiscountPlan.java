@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Tweetie Pie
+ * @author redwan
  */
 @Entity
 @Table(name = "discount_plan")
@@ -31,8 +31,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "DiscountPlan.findAll", query = "SELECT d FROM DiscountPlan d")
     , @NamedQuery(name = "DiscountPlan.findByDiscountplanID", query = "SELECT d FROM DiscountPlan d WHERE d.discountplanID = :discountplanID")
     , @NamedQuery(name = "DiscountPlan.findByRate", query = "SELECT d FROM DiscountPlan d WHERE d.rate = :rate")
-    , @NamedQuery(name = "DiscountPlan.findByIsFlexible", query = "SELECT d FROM DiscountPlan d WHERE d.isFlexible = :isFlexible")
-    , @NamedQuery(name = "DiscountPlan.findByVariableRate", query = "SELECT d FROM DiscountPlan d WHERE d.variableRate = :variableRate")})
+    , @NamedQuery(name = "DiscountPlan.findByFlexibleRate", query = "SELECT d FROM DiscountPlan d WHERE d.flexibleRate = :flexibleRate")})
 public class DiscountPlan implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -44,11 +43,9 @@ public class DiscountPlan implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "rate")
     private Float rate;
-    @Column(name = "is_flexible")
-    private Short isFlexible;
     @Size(max = 45)
-    @Column(name = "variable_rate")
-    private String variableRate;
+    @Column(name = "flexible_rate")
+    private String flexibleRate;
     @JoinColumn(name = "account_no", referencedColumnName = "account_no")
     @ManyToOne(optional = false)
     private Customer accountNo;
@@ -79,20 +76,12 @@ public class DiscountPlan implements Serializable {
         this.rate = rate;
     }
 
-    public Short getIsFlexible() {
-        return isFlexible;
+    public String getFlexibleRate() {
+        return flexibleRate;
     }
 
-    public void setIsFlexible(Short isFlexible) {
-        this.isFlexible = isFlexible;
-    }
-
-    public String getVariableRate() {
-        return variableRate;
-    }
-
-    public void setVariableRate(String variableRate) {
-        this.variableRate = variableRate;
+    public void setFlexibleRate(String flexibleRate) {
+        this.flexibleRate = flexibleRate;
     }
 
     public Customer getAccountNo() {

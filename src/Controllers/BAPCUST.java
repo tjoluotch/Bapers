@@ -23,12 +23,8 @@ public class BAPCUST {
     
       public void discountPlanSetFixed(float rate, Customer c){
         DiscountPlan d = new DiscountPlan();
-        //set isFlexible to 0 showing that its false
-        short isFlexible = 0;
         //set Task ID to 0 indicating this is fixed and therefore not attached to a particular task
         
-        
-        d.setIsFlexible(isFlexible);
         d.setRate(rate);
         d.setAccountNo(c);
         dm.saveDiscountRate(d);

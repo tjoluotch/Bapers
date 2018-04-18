@@ -8,6 +8,7 @@ package domain;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -22,7 +23,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Tweetie Pie
+ * @author redwan
  */
 @Entity
 @Table(name = "task")
@@ -36,8 +37,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Task.findByExpectedDuration", query = "SELECT t FROM Task t WHERE t.expectedDuration = :expectedDuration")
     , @NamedQuery(name = "Task.findByVersion", query = "SELECT t FROM Task t WHERE t.version = :version")})
 public class Task implements Serializable {
-
-   
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -62,6 +61,10 @@ public class Task implements Serializable {
     private long version;
     @OneToMany(mappedBy = "taskID")
     private Collection<DiscountPlan> discountPlanCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "taskID")
+    private Collection<TaskLine> taskLineCollection;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "taskID")
+    private Collection<JobTaskBridge> jobTaskBridgeCollection;
 
     public Task() {
     }
@@ -124,12 +127,30 @@ public class Task implements Serializable {
     }
 
     @XmlTransient
-    public Collection<DiscountPlan> getDicountPlanCollection() {
+    public Collection<DiscountPlan> getDiscountPlanCollection() {
         return discountPlanCollection;
     }
 
-    public void setDicountPlanCollection(Collection<DiscountPlan> dicountPlanCollection) {
-        this.discountPlanCollection = dicountPlanCollection;
+    public void setDiscountPlanCollection(Collection<DiscountPlan> discountPlanCollection) {
+        this.discountPlanCollection = discountPlanCollection;
+    }
+
+    @XmlTransient
+    public Collection<TaskLine> getTaskLineCollection() {
+        return taskLineCollection;
+    }
+
+    public void setTaskLineCollection(Collection<TaskLine> taskLineCollection) {
+        this.taskLineCollection = taskLineCollection;
+    }
+
+    @XmlTransient
+    public Collection<JobTaskBridge> getJobTaskBridgeCollection() {
+        return jobTaskBridgeCollection;
+    }
+
+    public void setJobTaskBridgeCollection(Collection<JobTaskBridge> jobTaskBridgeCollection) {
+        this.jobTaskBridgeCollection = jobTaskBridgeCollection;
     }
 
     @Override
@@ -155,15 +176,6 @@ public class Task implements Serializable {
     @Override
     public String toString() {
         return "domain.Task[ taskID=" + taskID + " ]";
-    }
-
-    @XmlTransient
-    public Collection<DiscountPlan> getDiscountPlanCollection() {
-        return discountPlanCollection;
-    }
-
-    public void setDiscountPlanCollection(Collection<DiscountPlan> discountPlanCollection) {
-        this.discountPlanCollection = discountPlanCollection;
     }
     
 }
