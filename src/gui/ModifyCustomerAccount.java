@@ -78,7 +78,7 @@ public class ModifyCustomerAccount extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         updateButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        confirmDiscButton = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         dcPlnBx = new javax.swing.JFormattedTextField();
         rateTextField = new javax.swing.JTextField();
@@ -248,10 +248,10 @@ public class ModifyCustomerAccount extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Confirm Discount");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        confirmDiscButton.setText("Confirm Discount");
+        confirmDiscButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                confirmDiscButtonActionPerformed(evt);
             }
         });
 
@@ -294,7 +294,7 @@ public class ModifyCustomerAccount extends javax.swing.JFrame {
                                                 .addGap(18, 18, 18)
                                                 .addComponent(valuedBox)
                                                 .addGap(63, 63, 63)
-                                                .addComponent(jButton1))
+                                                .addComponent(confirmDiscButton))
                                             .addGroup(bgLayout.createSequentialGroup()
                                                 .addGap(58, 58, 58)
                                                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -407,9 +407,9 @@ public class ModifyCustomerAccount extends javax.swing.JFrame {
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(postcodeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -426,7 +426,7 @@ public class ModifyCustomerAccount extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(deleteButton)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)))
+                        .addComponent(confirmDiscButton)))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
@@ -598,7 +598,7 @@ public class ModifyCustomerAccount extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_deleteButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void confirmDiscButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmDiscButtonActionPerformed
         // TODO add your handling code here:
         Customer c = bapacct.searchCustomerByName(srcAccNameTxtField);
        
@@ -616,7 +616,7 @@ public class ModifyCustomerAccount extends javax.swing.JFrame {
         else
         JOptionPane.showMessageDialog(rootPane, "wrong customer selected!");
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_confirmDiscButtonActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
@@ -689,11 +689,11 @@ public class ModifyCustomerAccount extends javax.swing.JFrame {
     private javax.swing.JButton backButton;
     private javax.swing.JPanel bg;
     private javax.swing.JTextField cityTextField;
+    private javax.swing.JButton confirmDiscButton;
     private javax.swing.JFormattedTextField dcPlnBx;
     private javax.swing.JButton deleteButton;
     private javax.swing.JTextField emailTextField;
     private javax.swing.JTextField fname;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
