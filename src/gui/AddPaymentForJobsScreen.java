@@ -288,7 +288,7 @@ public class AddPaymentForJobsScreen extends javax.swing.JFrame {
 
             if(dates == false){
                 JOptionPane.showMessageDialog(this,"Please enter a valid date","Invalid Date Error",JOptionPane.ERROR_MESSAGE);
-            } else {
+            } else if ((paymentTypeComboBox.getSelectedItem().toString()).equals("Card")){
                 //ERROR HERE:
                 paym.createPayment(selectedJobs, last4Field.getText(), Date.valueOf(expiryDate));
                 // IT DOESN'T LIKE THE DATE

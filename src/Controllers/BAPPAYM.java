@@ -41,7 +41,6 @@ public class BAPPAYM {
     
     //CREATE PAYMENTDETAIL METHODS
     //card payments    
-    //for jobs
      public void createPayment(Collection<JobLine> jobs, String last4, Date expiryDate){ //NEED TO UPDATE EXPIRY DATE
         PaymentDetail payment = new PaymentDetail();
         payment.setType("Card");
@@ -53,14 +52,14 @@ public class BAPPAYM {
         }
         dm.savePayment(payment);
     } 
-    //for jobs
+    //cash payments
     public void createPayment(Collection<JobLine> jobs){
         PaymentDetail payment = new PaymentDetail();
         payment.setType("Cash");
         payment.setExpiryDate(null);
         payment.setLast4digits(null);
+        payment.setJobLineCollection(jobs);
         for(JobLine job : jobs){
-            payment.addJobLine(job);
             job.setPaymentdetailID(payment);   
         }        
         dm.savePayment(payment);
