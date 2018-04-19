@@ -9,8 +9,6 @@ import data.DataManagerImpl;
 
 import domain.TaskLine;
 import gui.JobsCenterScreen;
-import gui.ManageUsersSearchScreen;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 

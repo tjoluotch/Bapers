@@ -6,7 +6,6 @@
 package TableModels;
 
 import domain.Alert;
-import domain.Staff;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 

@@ -13,7 +13,6 @@ import data.DataManagerImpl;
 import domain.Customer;
 import domain.JobLine;
 import domain.OrderTable;
-import domain.TaskLine;
         
 import domain.TaskLine;
 import java.awt.Color;
