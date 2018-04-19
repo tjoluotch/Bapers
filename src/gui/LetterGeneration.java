@@ -51,7 +51,7 @@ public class LetterGeneration extends javax.swing.JFrame {
             }
         });
         getContentPane().add(reminderButton);
-        reminderButton.setBounds(90, 110, 210, 29);
+        reminderButton.setBounds(40, 150, 200, 29);
 
         jButton2.setText("Print All Second Reminders");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -60,7 +60,7 @@ public class LetterGeneration extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton2);
-        jButton2.setBounds(90, 150, 210, 29);
+        jButton2.setBounds(40, 210, 210, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

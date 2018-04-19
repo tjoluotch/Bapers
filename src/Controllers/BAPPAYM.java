@@ -486,8 +486,8 @@ finally
             if(logCode == 1){
                  // display the showOptionDialog
             int choice = JOptionPane.showOptionDialog(null, 
-             "Click Yes to view more options on", 
-               "Some Reminder Letters have been generated", 
+             "Click Yes to advance", 
+               "View Late pay reminder letters", 
               JOptionPane.YES_NO_OPTION, 
               JOptionPane.QUESTION_MESSAGE, 
                null, null, null);
@@ -593,6 +593,10 @@ finally
                                         
                                       String pk =  current.getAccountNo().getAccountNo();
                                        cust = dm.getEm().find(Customer.class, pk);
+                                       
+                                        dm.getEm().getTransaction().begin();
+                                        cust.setStatus("suspended");
+                                        dm.getEm().getTransaction().commit();
                                        
                                         System.out.println(cust);
                                        String fullname = cust.getForename() + " " + cust.getSurname();

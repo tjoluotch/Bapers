@@ -42,7 +42,7 @@ public class SolSoftBapers2 {
         //Login loginPage = new Login();
         //loginPage.setVisible(true);
         BAPPAYM p = new BAPPAYM();
-        p.secondLetterGeneration();
+        //p.secondLetterGeneration();
         //p.checkCompletionDate();
        
          
