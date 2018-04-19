@@ -57,6 +57,7 @@ public class StaffReportsScreen extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -175,7 +176,10 @@ public class StaffReportsScreen extends javax.swing.JFrame {
         });
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel7.setText("Please enter your selected period:");
+        jLabel7.setText("If selected custom range then enter your selected period:");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel8.setText("Please enter your selected period:");
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
@@ -187,9 +191,9 @@ public class StaffReportsScreen extends javax.swing.JFrame {
                     .addGroup(bgLayout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(backButton)
-                        .addGap(154, 154, 154)
-                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(bgLayout.createSequentialGroup()
+                                .addGap(154, 154, 154)
                                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1)
                                     .addGroup(bgLayout.createSequentialGroup()
@@ -206,41 +210,48 @@ public class StaffReportsScreen extends javax.swing.JFrame {
                                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel5)
                                             .addComponent(jLabel6)))))
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(bgLayout.createSequentialGroup()
                                         .addComponent(monthly)
                                         .addGap(18, 18, 18)
                                         .addComponent(quarterly)
                                         .addGap(17, 17, 17)
-                                        .addComponent(yearly))))))
+                                        .addComponent(yearly))
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(45, 45, 45))))
                     .addGroup(bgLayout.createSequentialGroup()
                         .addGap(344, 344, 344)
                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cancelButton)
                             .addComponent(createButton))))
-                .addContainerGap(238, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(198, 198, 198))
         );
         bgLayout.setVerticalGroup(
             bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bgLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(backButton)
-                        .addGap(73, 73, 73))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(68, 68, 68)
                         .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(monthly)
                             .addComponent(quarterly)
                             .addComponent(yearly))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(bgLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(backButton)
+                        .addGap(73, 73, 73)))
                 .addComponent(custom)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -300,6 +311,8 @@ public class StaffReportsScreen extends javax.swing.JFrame {
             try {
                 rp.createMonthlyReport(sDate, currentDate);
             } catch (IOException ex) {
+                Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (PrinterException ex) {
                 Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
             }
                
@@ -422,6 +435,8 @@ public class StaffReportsScreen extends javax.swing.JFrame {
                       JOptionPane.showMessageDialog(null, "Report Created in Reports Directory ","Backup successful.",JOptionPane.OK_OPTION);
                       this.dispose();
                   } catch (IOException ex) {
+                      Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
+                  } catch (PrinterException ex) {
                       Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
                   }
             }
@@ -551,6 +566,7 @@ public class StaffReportsScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton monthly;
