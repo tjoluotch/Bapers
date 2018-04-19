@@ -5,11 +5,7 @@
  */
 package solsoftbapers2;
 
-import data.*;
-import domain.Customer;
 import gui.Login;
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
 
 
 public class SolSoftBapers2 {
