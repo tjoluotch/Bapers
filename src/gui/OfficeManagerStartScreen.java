@@ -67,6 +67,7 @@ public class OfficeManagerStartScreen extends javax.swing.JFrame {
         jobCentreButton = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -89,7 +90,7 @@ public class OfficeManagerStartScreen extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/adminicon.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/admintoolsicon.png"))); // NOI18N
 
         jLabel2.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -125,7 +126,7 @@ public class OfficeManagerStartScreen extends javax.swing.JFrame {
             }
         });
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/taskhistoryicon.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/paysettingsicon.png"))); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -199,7 +200,7 @@ public class OfficeManagerStartScreen extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/taskicon.png"))); // NOI18N
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/accmanagementicon.png"))); // NOI18N
 
         jLabel9.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -235,7 +236,7 @@ public class OfficeManagerStartScreen extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/taskhistoryicon.png"))); // NOI18N
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/reporticon.png"))); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
@@ -273,7 +274,7 @@ public class OfficeManagerStartScreen extends javax.swing.JFrame {
             }
         });
 
-        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/taskhistoryicon.png"))); // NOI18N
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/jobicon.png"))); // NOI18N
 
         jLabel13.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
@@ -310,21 +311,21 @@ public class OfficeManagerStartScreen extends javax.swing.JFrame {
             spLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(adminToolButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(LogoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(spLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jLabel7)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(manageCustButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(reportsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(payManButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jobCentreButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(spLayout.createSequentialGroup()
+                .addGap(81, 81, 81)
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         spLayout.setVerticalGroup(
             spLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(spLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(14, 14, 14)
                 .addComponent(jLabel7)
-                .addGap(30, 30, 30)
+                .addGap(31, 31, 31)
                 .addComponent(adminToolButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(payManButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -338,17 +339,27 @@ public class OfficeManagerStartScreen extends javax.swing.JFrame {
                 .addComponent(LogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        jLabel14.setFont(new java.awt.Font("Lucida Grande", 1, 48)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Homepage");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(sp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 705, Short.MAX_VALUE))
+                .addGap(216, 216, 216)
+                .addComponent(jLabel14)
+                .addContainerGap(226, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(jLabel14)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -384,15 +395,15 @@ public class OfficeManagerStartScreen extends javax.swing.JFrame {
 
     private void adminToolButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_adminToolButtonMouseClicked
         // TODO add your handling code here:
-        SelectTaskScreen st = new SelectTaskScreen();
-        st.setVisible(true);
+        AdminToolsScreen at = new AdminToolsScreen();
+        at.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_adminToolButtonMouseClicked
 
     private void payManButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_payManButtonMouseClicked
         // TODO add your handling code here:
-        TaskHistoryScreen th = new TaskHistoryScreen();
-        th.setVisible(true);
+        PaymentManagementScreen pm = new PaymentManagementScreen();
+        pm.setVisible(true);
         setVisible(false);
     }//GEN-LAST:event_payManButtonMouseClicked
 
@@ -405,14 +416,23 @@ public class OfficeManagerStartScreen extends javax.swing.JFrame {
 
     private void manageCustButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_manageCustButtonMouseClicked
         // TODO add your handling code here:
+        ModifyCustomerAccount mc = new ModifyCustomerAccount();
+        mc.setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_manageCustButtonMouseClicked
 
     private void reportsButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportsButtonMouseClicked
         // TODO add your handling code here:
+        ReportScreen rs = new ReportScreen();
+        rs.setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_reportsButtonMouseClicked
 
     private void jobCentreButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jobCentreButtonMouseClicked
         // TODO add your handling code here:
+        JobsCenterScreen js = new JobsCenterScreen();
+        js.setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_jobCentreButtonMouseClicked
 
     /**
@@ -458,6 +478,7 @@ public class OfficeManagerStartScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
