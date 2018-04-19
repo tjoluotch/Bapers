@@ -45,7 +45,6 @@ public class BAPCUST {
         //set Task ID to 0 indicating this is fixed and therefore not attached to a particular task
         
         
-        d.setIsFlexible(isFlexible);
         d.setRate(rate);
         d.setAccountNo(c);
         dm.saveDiscountRate(d);

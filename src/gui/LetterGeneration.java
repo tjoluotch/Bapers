@@ -5,6 +5,11 @@
  */
 package gui;
 
+import Controllers.BAPPAYM;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author tjay
@@ -14,6 +19,8 @@ public class LetterGeneration extends javax.swing.JFrame {
     /**
      * Creates new form LetterGeneration
      */
+    BAPPAYM p = new BAPPAYM();
+        
     public LetterGeneration() {
         initComponents();
     }
@@ -27,17 +34,63 @@ public class LetterGeneration extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         letterGenerated = new javax.swing.JButton();
+        reminderButton = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        prtByCustomer = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jButton1.setText("jButton1");
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        letterGenerated.setText("View Letter");
+        letterGenerated.setText("Print All Reminders");
         getContentPane().add(letterGenerated);
-        letterGenerated.setBounds(120, 220, 97, 29);
+        letterGenerated.setBounds(90, 60, 210, 29);
+
+        reminderButton.setText("Print All First Reminders");
+        reminderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reminderButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(reminderButton);
+        reminderButton.setBounds(90, 100, 210, 29);
+
+        jButton2.setText("Print All Second Reminders");
+        getContentPane().add(jButton2);
+        jButton2.setBounds(90, 140, 210, 29);
+
+        prtByCustomer.setText("Print Customer Reminders");
+        prtByCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                prtByCustomerActionPerformed(evt);
+            }
+        });
+        getContentPane().add(prtByCustomer);
+        prtByCustomer.setBounds(80, 240, 220, 29);
+        getContentPane().add(jTextField1);
+        jTextField1.setBounds(110, 200, 170, 26);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void prtByCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prtByCustomerActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_prtByCustomerActionPerformed
+
+    private void reminderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reminderButtonActionPerformed
+        try {
+            // TODO add your handling code here:
+
+            p.checkCompletionDate();
+        } catch (IOException ex) {
+            Logger.getLogger(LetterGeneration.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_reminderButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -75,6 +128,11 @@ public class LetterGeneration extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton letterGenerated;
+    private javax.swing.JButton prtByCustomer;
+    private javax.swing.JButton reminderButton;
     // End of variables declaration//GEN-END:variables
 }

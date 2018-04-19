@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author tjay
  */
 @Entity
-@Table(name = "job_task-bridge")
+@Table(name = "job_task_bridge")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "JobTaskBridge.findAll", query = "SELECT j FROM JobTaskBridge j")
@@ -43,9 +43,9 @@ public class JobTaskBridge implements Serializable {
     @NotNull
     @Column(name = "version")
     private long version;
-    @JoinColumn(name = "code", referencedColumnName = "code")
+    @JoinColumn(name = "jobCode", referencedColumnName = "code")
     @ManyToOne(optional = false)
-    private Job code;
+    private Job jobCode;
     @JoinColumn(name = "taskID", referencedColumnName = "taskID")
     @ManyToOne(optional = false)
     private Task taskID;
@@ -78,12 +78,12 @@ public class JobTaskBridge implements Serializable {
         this.version = version;
     }
 
-    public Job getCode() {
-        return code;
+    public Job getJobCode() {
+        return jobCode;
     }
 
-    public void setCode(Job code) {
-        this.code = code;
+    public void setJobCode(Job jobCode) {
+        this.jobCode = jobCode;
     }
 
     public Task getTaskID() {

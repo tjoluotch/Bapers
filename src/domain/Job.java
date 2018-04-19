@@ -53,7 +53,7 @@ public class Job implements Serializable {
     @NotNull
     @Column(name = "version")
     private long version;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "code")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "jobCode")
     private Collection<JobTaskBridge> jobTaskBridgeCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "jobCode")
     private Collection<JobLine> jobLineCollection;

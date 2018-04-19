@@ -20,12 +20,17 @@ public class Controller {
     Staff staff;
     DataManagerImpl dm;
     
+    
+    
     public Controller() {
     }
     
     //not yet tested by michal standards
-    public void loginSystem(JTextField username, JPasswordField password, JComboBox box) {
-        
+    // return int 1 if office manager logs in, return 
+    public int loginSystem(JTextField username, JPasswordField password, JComboBox box) {
+       
+       int logCode = 0;
+       
        dm = new DataManagerImpl();
        String user = username.getText();
        String pass = new String (password.getPassword());
@@ -37,20 +42,27 @@ public class Controller {
             if (staff.getPassword().compareTo(pass) == 0&& staff.getRole().compareTo(role) == 0) {
                 JOptionPane.showMessageDialog(null, "Welcome");
                 //Code for changing to the next page
+                //boolean for login successful
+                
                 
                 if(role.compareToIgnoreCase("Office Manager")==0){
+                   
                     OfficeManagerStartScreen screen = new OfficeManagerStartScreen(staff);
-                    screen.setVisible(true);
+                    //wait to see what the letter generation result is
                     
+                    screen.setVisible(true);
+                     logCode = 1;
+                     return logCode;
                 }
-                //Welcome w=new Welcome ();
-                //w.setVisible(true);
+                
             } else {
                 JOptionPane.showMessageDialog(null,"Invalid credentials, Please enter correct credentials!", "Access Denied", JOptionPane.ERROR_MESSAGE);
+                return logCode;
             } 
         } catch (Exception ex) {
         JOptionPane.showMessageDialog(null, ex);  
         }
+        return logCode;
     }
     
     public void logoutSystem(){

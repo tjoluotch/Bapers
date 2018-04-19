@@ -38,6 +38,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "JobLine.findAll", query = "SELECT j FROM JobLine j")
     , @NamedQuery(name = "JobLine.findByJoblineID", query = "SELECT j FROM JobLine j WHERE j.joblineID = :joblineID")
+    , @NamedQuery(name = "JobLine.findByOrderID", query = "SELECT j FROM JobLine j WHERE j.orderID = :orderID")   
     , @NamedQuery(name = "JobLine.findByJobDeadline", query = "SELECT j FROM JobLine j WHERE j.jobDeadline = :jobDeadline")
     , @NamedQuery(name = "JobLine.findBySpecialInstructions", query = "SELECT j FROM JobLine j WHERE j.specialInstructions = :specialInstructions")
     , @NamedQuery(name = "JobLine.findByReminderStatus", query = "SELECT j FROM JobLine j WHERE j.reminderStatus = :reminderStatus")
@@ -51,7 +52,7 @@ public class JobLine implements Serializable {
     @Column(name = "job_lineID")
     private Integer joblineID;
     @Column(name = "job_deadline")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date jobDeadline;
     @Size(max = 100)
     @Column(name = "special_instructions")
@@ -189,12 +190,6 @@ public class JobLine implements Serializable {
             return false;
         }
         return true;
-    }
-    
-        public boolean isPaidFor(){
-        if(paymentdetailID != null){
-            return true;
-        } else { return false; }
     }
 
     @Override

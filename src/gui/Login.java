@@ -15,6 +15,7 @@ import Controllers.*;
 public class Login extends javax.swing.JFrame {
 
 Controller c = new Controller();
+BAPPAYM p = new BAPPAYM(this);
 
     public Login() {
         initComponents();
@@ -176,7 +177,17 @@ Controller c = new Controller();
 
     //Login Button:
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
-        c.loginSystem(txtusername, txtpassword,DropDown);
+        int log = c.loginSystem(txtusername, txtpassword,DropDown);
+        
+        // if this returns true then open GUI that shows Letter generation options
+        boolean checkOffManager = p.officeManagerIsLoggedIn(log);
+        
+        if(checkOffManager == true){
+            setVisible(false);
+            LetterGeneration lg = new LetterGeneration();
+            setVisible(false);
+        }
+        
         setVisible(false);
     }//GEN-LAST:event_LoginButtonActionPerformed
 

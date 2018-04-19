@@ -21,6 +21,17 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
+import Controllers.Controller;
+import domain.Customer;
+import domain.TaskLine;
+import gui.LetterGeneration;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Collection;
+import static java.util.Collections.list;
+import java.util.Iterator;
+import static org.eclipse.persistence.jpa.jpql.utility.CollectionTools.list;
 
 /**
  *
@@ -35,9 +46,18 @@ public class BAPPAYM {
         this.dm = dm;
     }
     
+    public BAPPAYM(){
+        dm = new DataManagerImpl();
+    }
+    
     public BAPPAYM(DataManagerImpl dm, JFrame frame){
         this.dm = dm;
         this.frame = frame;
+    }
+    
+    public BAPPAYM(JFrame frame){
+        this.frame = frame;
+        DataManagerImpl dm = new DataManagerImpl();
     }
     
     //CREATE PAYMENTDETAIL METHODS
@@ -155,31 +175,28 @@ public class BAPPAYM {
         return lastAmount;
     }
     
-    public void firstLetterGeneration() throws IOException{
+    public void firstLetterGeneration(String name, String address, String city1, String postcode1, String date, String orderID, String jobID, String amountDue, String dayOrderWasRecorded) throws IOException{
         //HardCoded
-        String name = "David Rhind";
-        String address = "Northampton Square";
-        String city1 = "London";
-        String postcode1 = "EC1V 0HB";
+        //String name = "David Rhind";
+        //String address = "Northampton Square";
+        //String city1 = "London";
+        //String postcode1 = "EC1V 0HB";
         
-        String filename = "/Users/tjay/NetBeansProjects/" + name + "LatePaymLetter1.pdf";
         
-        //String name = forename + " " + surname;
-        //String accountHolder = accountHolderName;
-        //String address = address1 + ", " + city + ", " + postcode;
-        //String phoneNumber = "Phone: " + telephone;
+        String filename =  name + new Date(System.currentTimeMillis()).toString()+ "LatePaymLetter1.pdf";
         
         
         
-        String date= "18th February 2018";
+        
+        //String date= "18th February 2018";
         
         String greet = "Dear " + name;
         
-        String orderID = "1111";
+        //String orderID = "1111";
         
-        String jobID = "4555";
+        //String jobID = "4555";
         
-        String amountDue = "456.78";
+        //String amountDue = "456.78";
         
         String reminder = "REMINDER-INVOICE NO: " + orderID;
         
@@ -228,7 +245,7 @@ try
     float startY = mediabox.getUpperRightY() - margin;
 
     contentStream.beginText();
-    contentStream.setFont(pdfFont, fontSize);
+    contentStream.setFont(pdfFont, 12);
     contentStream.newLineAtOffset(startX, startY);
     for (String line: customerLines)
     {
@@ -236,16 +253,17 @@ try
         contentStream.newLineAtOffset(0, -leading);
     }
       
-    contentStream.setFont(PDType1Font.HELVETICA_BOLD, fontSize);
+    contentStream.setFont(PDType1Font.HELVETICA_BOLD, 12);
     contentStream.newLineAtOffset(220, 85);
     
     for(String line: labLines){
       
         contentStream.showText(line);
         contentStream.newLineAtOffset(0, -leading);
-        contentStream.setFont(pdfFont, fontSize);
+        contentStream.setFont(pdfFont, 12);
     }
     
+    contentStream.setFont(PDType1Font.HELVETICA, fontSize);
     contentStream.newLineAtOffset(-230, -50);
     contentStream.showText(date);
     
@@ -267,7 +285,7 @@ try
     contentStream.newLineAtOffset(-170, -2*leading);
     contentStream.showText(paragraphL1);
     
-    String dayOrderWasRecorded = "18th December 2017";
+    //String dayOrderWasRecorded = "18th December 2017";
     String paragraphL2 = "invoice, which was posted to you on " + dayOrderWasRecorded + ", for photographic work done in";
     
     contentStream.newLineAtOffset(0, -leading);
@@ -306,6 +324,88 @@ finally
     }
 }
     }
+    
+    // if true then affect the GUI
+    public boolean officeManagerIsLoggedIn(int logCode){
+            boolean popupForLetter = false;
+            //if office manager is logged in
+            if(logCode == 1){
+                 // display the showOptionDialog
+            int choice = JOptionPane.showOptionDialog(null, 
+             "Click Yes to view more options on", 
+               "Some Reminder Letters have been generated", 
+              JOptionPane.YES_NO_OPTION, 
+              JOptionPane.QUESTION_MESSAGE, 
+               null, null, null);
+            
+            // if user selects yes open letter generation
+            if (choice == JOptionPane.YES_OPTION){
+                LetterGeneration lg = new LetterGeneration();
+                lg.setVisible(true);
+                }
+            } else {
+               return popupForLetter;
+            }
+            return popupForLetter;
+    }
+    
+            public List<OrderTable> unpaidOrders(){
+           
+            List <OrderTable> resultList= dm.allOrdersUnpaidTablesforCustomer();
+            OrderTable current;
+            for (Iterator<OrderTable> it = resultList.iterator(); it.hasNext();) {
+            current = it.next();
+            current.getAccountNo();
+            System.out.println(current);
+        }
+         
+            return resultList;
+    }
+            
+            public void checkCompletionDate() throws IOException{
+                Date highestDate = new Date(0);
+                Customer cust;
+                Date presentDay = new Date();
+                List<OrderTable> checkList = this.unpaidOrders();
+                     for (OrderTable current : checkList) {
+                    Collection<JobLine> allJobsInTheOrder = current.getJobLineCollection();
+                        for (JobLine job : allJobsInTheOrder){
+                            Collection <TaskLine> tasks = job.getTaskLineCollection();
+                            for(TaskLine task : tasks){
+                                
+                                if(task.getEndTime().after(highestDate)){
+                                          highestDate  = task.getEndTime();
+                                          
+                                    LocalDate ld = highestDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                                    int test_month = ld.getMonthValue();
+                                    LocalDate currentDate = presentDay.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                                    int current_month = currentDate.getMonthValue();
+                                    int currentDay = currentDate.getDayOfMonth();
+                                    if (current_month - test_month >= 1) {
+                                        SimpleDateFormat formatter = new SimpleDateFormat("EEE MMM d yyyy"); 
+                                        
+                                        String highestDateFormatted = formatter.format(highestDate);
+                                        String presentDateFormatted = formatter.format(presentDay);
+                                        
+                                      String pk =  current.getAccountNo().getAccountNo();
+                                       cust = dm.getEm().find(Customer.class, pk);
+                                       
+                                        System.out.println(cust);
+                                       String fullname = cust.getForename() + " " + cust.getSurname();
+                                        System.out.println(fullname);
+                                       this.firstLetterGeneration(fullname, cust.getAddress1(), cust.getCity(), 
+                                                                    cust.getPostcode(), presentDateFormatted, current.getOrderID().toString(), job.getJoblineID().toString(), 
+                                                                        current.getTotalPrice().toString(),highestDateFormatted);
+                                    }
+                                }
+                                 
+                                
+                            }
+                        }
+                     }
+                
+            }
+          
 	
 }
 

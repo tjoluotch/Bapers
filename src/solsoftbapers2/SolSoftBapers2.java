@@ -8,11 +8,18 @@ package solsoftbapers2;
 import Controllers.*;
 import data.*;
 import domain.Customer;
+import gui.*;
+import java.awt.Panel;
 
 import java.io.IOException; 
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import org.apache.pdfbox.pdmodel.PDDocument;
+import Controllers.*;
+import data.*;
+import domain.*;
+import java.util.Date;
 
 
 
@@ -28,14 +35,16 @@ public class SolSoftBapers2 {
     
     
     public static void main(String[] args) throws IOException {
-        //Controller controller = new Controller();
-        String test = "(trevor12345)";
-        BAPCUST b = new BAPCUST();
-        b.discountRegexp(test);
         
-        DataManagerImpl dm = new DataManagerImpl();
-        BAPPAYM p = new BAPPAYM(dm);
-        p.firstLetterGeneration();
+       
+        
+       //GUI's 
+        //Login loginPage = new Login();
+        //loginPage.setVisible(true);
+        BAPPAYM p = new BAPPAYM();
+        p.checkCompletionDate();
+      
+       
          
     }
     

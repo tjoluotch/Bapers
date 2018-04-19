@@ -11,6 +11,7 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -33,7 +34,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Staff.findByPassword", query = "SELECT s FROM Staff s WHERE s.password = :password")
     , @NamedQuery(name = "Staff.findByForename", query = "SELECT s FROM Staff s WHERE s.forename = :forename")
     , @NamedQuery(name = "Staff.findBySurname", query = "SELECT s FROM Staff s WHERE s.surname = :surname")
-    , @NamedQuery(name = "Staff.findByRole", query = "SELECT s FROM Staff s WHERE s.role = :role")
     , @NamedQuery(name = "Staff.findByVersion", query = "SELECT s FROM Staff s WHERE s.version = :version")
     , @NamedQuery(name = "Staff.findByLoggedOn", query = "SELECT s FROM Staff s WHERE s.loggedOn = :loggedOn")})
 public class Staff implements Serializable {
@@ -56,7 +56,10 @@ public class Staff implements Serializable {
     @Size(max = 30)
     @Column(name = "surname")
     private String surname;
-    @Size(max = 20)
+    @Basic(optional = false)
+    @NotNull
+    @Lob
+    @Size(min = 1, max = 2147483647)
     @Column(name = "role")
     private String role;
     @Basic(optional = false)
@@ -75,9 +78,10 @@ public class Staff implements Serializable {
         this.username = username;
     }
 
-    public Staff(String username, String password, long version) {
+    public Staff(String username, String password, String role, long version) {
         this.username = username;
         this.password = password;
+        this.role = role;
         this.version = version;
     }
 

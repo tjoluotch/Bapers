@@ -82,10 +82,6 @@ public class PaymentDetail implements Serializable {
     public Integer getPaymentdetailID() {
         return paymentdetailID;
     }
-    
-        public void addJobLine(JobLine jobLine){
-        jobLineCollection.add(jobLine);
-    }
 
     public void setPaymentdetailID(Integer paymentdetailID) {
         this.paymentdetailID = paymentdetailID;

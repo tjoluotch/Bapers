@@ -9,6 +9,7 @@ import java.util.List;
 import domain.*;
 import java.sql.Date;
 
+
 /**
  *
  * @author DanTe
@@ -53,6 +54,14 @@ public interface DataManager {
     void savePayment(PaymentDetail payment);
     
         void saveDiscountRate(DiscountPlan d);
+        
+      public List<OrderTable> allOrdersUnpaidTablesforCustomer(); 
+      
+      public List<Customer> inDefaultList();
+      
+      public List<JobLine> allJobLines();
+      
+      public List<JobLine> allJobsInTheOrder(OrderTable o);
         
         
 

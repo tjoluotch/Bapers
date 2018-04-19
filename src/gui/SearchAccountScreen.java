@@ -251,6 +251,7 @@ public class SearchAccountScreen extends javax.swing.JFrame {
 
     private void srcAccNameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srcAccNameButtonActionPerformed
            Customer c = bapacct.searchCustomerByName(srcAccNameTxtField);
+           //ray was here
             
             DefaultTableModel model = (DefaultTableModel) jTable1.getModel();                       
             

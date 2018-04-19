@@ -57,7 +57,7 @@ public class OrderTable implements Serializable {
     @Column(name = "payment_status")
     private String paymentStatus;
     @Column(name = "date_submitted")
-    @Temporal(TemporalType.DATE)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date dateSubmitted;
     @Basic(optional = false)
     @NotNull
