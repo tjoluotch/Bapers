@@ -6,6 +6,7 @@
 package TableModels;
 
 import domain.OrderTable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 
@@ -34,6 +35,9 @@ public class OrderTableModel extends AbstractTableModel{
 
     public OrderTableModel(List<OrderTable> li) {
         this.li = li;
+    }
+    public OrderTableModel(){
+        li = new ArrayList();
     }
 
     @Override

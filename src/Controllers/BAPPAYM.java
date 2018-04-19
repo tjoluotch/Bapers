@@ -10,17 +10,16 @@ import domain.DiscountPlan;
 import domain.JobLine;
 import domain.OrderTable;
 import domain.PaymentDetail;
+import domain.TaskLine;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
+import java.util.regex.*;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import org.apache.pdfbox.io.MemoryUsageSetting;
-import org.apache.pdfbox.jbig2.util.log.LoggerFactory;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
@@ -43,119 +42,85 @@ public class BAPPAYM {
     }
     
     //CREATE PAYMENTDETAIL METHODS
-    //card payments
-    //for whole order
-    public void createPayment(OrderTable order, String last4, Date expiryDate){
+    //card payments    
+     public void createPayment(Collection<JobLine> jobs, String last4, Date expiryDate, float amount){ //NEED TO UPDATE EXPIRY DATE
         PaymentDetail payment = new PaymentDetail();
         payment.setType("Card");
         payment.setExpiryDate(expiryDate);
         payment.setLast4digits(last4);
-        
-        payment.setJobLineCollection(order.getJobLineCollection());
-        //order.addPaymentDetail(payment);
-        for(JobLine job : order.getJobLineCollection()){
-            
-            job.setPaymentdetailID(payment);
-        }
-        
-        
-         //calculating discounted total
-        
-     
-         //after discount calculated
-         DiscountPlan d = new DiscountPlan();
-        float pd = calculateDiscount(payment,d);
-        payment.setAmount(pd);
-        dm.savePayment(payment);
-    }
-    
-    
-    
-    
-    //for jobs
-     public void createPayment(List<JobLine> jobs, String last4, Date expiryDate){ //NEED TO UPDATE EXPIRY DATE
-        PaymentDetail payment = new PaymentDetail();
-        payment.setType("Card");
-        //payment.setExpiryDate(java.sql.Date.valueOf(expiryDate));
-        payment.setExpiryDate(expiryDate);
-        payment.setLast4digits(last4);
-        payment.setJobLineCollection(jobs);
-        
-        
+        payment.setJobLineCollection(jobs);    
+        payment.setAmount(amount);
         for(JobLine job : jobs){
-            
             job.setPaymentdetailID(payment);
-            
-           
         }
-        
-        
-        
-         //calculating discounted total
-        DiscountPlan d = new DiscountPlan();
-     
-         //after discount calculated
-        float pd = calculateDiscount(payment,d);
-        payment.setAmount(pd);
         dm.savePayment(payment);
     } 
-    
     //cash payments
-    //for whole order
-    public void createPayment(OrderTable order){
+    public void createPayment(Collection<JobLine> jobs, float amount){
         PaymentDetail payment = new PaymentDetail();
         payment.setType("Cash");
         payment.setExpiryDate(null);
         payment.setLast4digits(null);
-        
-        payment.setJobLineCollection(order.getJobLineCollection());
-        //order.addPaymentDetail(payment);
-        for(JobLine job : order.getJobLineCollection()){
-            job.setPaymentdetailID(payment);
-        }
-        
-        
-        
-         //calculating discounted total
-        DiscountPlan d = new DiscountPlan();
-     
-         //after discount calculated
-        float pd = calculateDiscount(payment,d);
-        payment.setAmount(pd);
-        dm.savePayment(payment);
-    }
-    //for jobs
-    public void createPayment(List<JobLine> jobs){
-        PaymentDetail payment = new PaymentDetail();
-        payment.setType("Cash");
-        payment.setExpiryDate(null);
-        payment.setLast4digits(null);
-        
+        payment.setJobLineCollection(jobs);
+        payment.setAmount(amount);
         for(JobLine job : jobs){
-            payment.addJobLine(job);
-            job.setPaymentdetailID(payment);
-            
-        }
-        
-        
-        
-        //calculating discounted total
-        DiscountPlan d = new DiscountPlan();
-     
-         //after discount calculated
-        float pd = calculateDiscount(payment,d);
-        payment.setAmount(pd);
+            job.setPaymentdetailID(payment);   
+        }        
         dm.savePayment(payment);
     }
     
-     //calculate discount for saving payment
-    public float calculateDiscount(PaymentDetail p, DiscountPlan d){
-        float subTotal = p.getAmount();
-        float percentage = d.getRate() * subTotal;
-        float lastAmount = subTotal - percentage;
-        
-        return lastAmount;
+    //calculates actual price of
+    //method to calcuate price for VARIABLE (task specific) & fixed discounts FOR LIST OF JOBS
+    public float getDiscountedPrice(Collection<JobLine> jobs, Collection<DiscountPlan> discounts){
+        float price = 0;
+        Collection<DiscountPlan> flexibleDiscounts = new ArrayList();
+        if(discounts.isEmpty()){ price = getNormalPrice(jobs); } 
+        else {
+            for(JobLine job : jobs){
+                for(DiscountPlan discount : discounts){
+                    //Variable
+                    if(discount.getTaskID() != null){
+                        for(TaskLine task : job.getTaskLineCollection()){
+                            if(discount.getTaskID() == task.getTaskID()){
+                                price += task.getPrice()*discount.getRate();
+                            }
+                        }
+                    //Fixed
+                    } else if (discount.getFlexibleRate() == null && discount.getTaskID() == null) {
+                        price += (job.getJobCode().getPrice()) * discount.getRate();
+                    } else 
+                    //Flexible
+                    if (discount.getFlexibleRate() != null){
+                        //adds the DiscountsTable with flexible discounts
+                        flexibleDiscounts.add(discount);
+                    }
+                }
+            }
+            if(!flexibleDiscounts.isEmpty() && flexibleDiscounts.size() == 1){
+                String flexibleDiscountString = flexibleDiscounts.iterator().next().getFlexibleRate();
+                Pattern flexiblePattern = Pattern.compile(flexibleDiscountString);
+                //regular expression stuff here
+            } else if (flexibleDiscounts.size() > 1) { 
+                System.out.println("Customer has " + flexibleDiscounts.size() + " variable discounts!"); }
+        }
+        return price;
     }
+    
+    //calculates normal price of a list of jobs
+    public float getNormalPrice(Collection<JobLine> jobs){
+        float price = 0;
+        for(JobLine job : jobs){
+            price += job.getJobCode().getPrice();
+        }
+        return price;
+    }
+    
+    //method to calculate the surcharge of a job based on urgency
+    public void calculateSurcharge(JobLine job){
+        
+    }
+    
+    
     
     public void firstLetterGeneration(String forename, String surname, String accountHolderName, String address1, String city, String postcode, String telephone, String dateSubmitted) throws IOException{
         String filename = "/Users/tjay/NetBeansProjects/" + /*c.getAccountHolderName()*/"DavidRhind" + "LatePaymLetter1.pdf";
