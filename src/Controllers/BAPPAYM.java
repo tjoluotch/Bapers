@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.regex.*;
 import javax.swing.JFrame;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -73,7 +74,7 @@ public class BAPPAYM {
     public float getDiscountedPrice(Collection<JobLine> jobs, Collection<DiscountPlan> discounts){
         float price = 0;
         Collection<DiscountPlan> flexibleDiscounts = new ArrayList();
-        if(discounts.isEmpty()){ price = getJobsNormalPrice(jobs); } 
+        if(discounts.isEmpty()){ price = getNormalPrice(jobs); } 
         else {
             for(JobLine job : jobs){
                 for(DiscountPlan discount : discounts){
@@ -96,6 +97,8 @@ public class BAPPAYM {
                 }
             }
             if(!flexibleDiscounts.isEmpty() && flexibleDiscounts.size() == 1){
+                String flexibleDiscountString = flexibleDiscounts.iterator().next().getFlexibleRate();
+                Pattern flexiblePattern = Pattern.compile(flexibleDiscountString);
                 //regular expression stuff here
             } else if (flexibleDiscounts.size() > 1) { 
                 System.out.println("Customer has " + flexibleDiscounts.size() + " variable discounts!"); }
