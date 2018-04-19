@@ -72,7 +72,7 @@ public class OrderTable implements Serializable {
     @ManyToOne
     private Customer accountNo;
 
-    public OrderTable() {
+    public OrderTable(){
     }
 
     public OrderTable(Integer orderID) {
