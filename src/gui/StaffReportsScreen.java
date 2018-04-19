@@ -318,6 +318,8 @@ public class StaffReportsScreen extends javax.swing.JFrame {
                 this.dispose();
             } catch (IOException ex) {
                 Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (PrinterException ex) {
+                Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
             }
                
             
@@ -443,6 +445,8 @@ public class StaffReportsScreen extends javax.swing.JFrame {
                       this.dispose();
                       this.dispose();
                   } catch (IOException ex) {
+                      Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
+                  } catch (PrinterException ex) {
                       Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
                   }
             }

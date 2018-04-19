@@ -7,6 +7,14 @@ package gui;
 import java.sql.*;
 import javax.swing.*;
 import Controllers.*;
+import data.DataManagerImpl;
+import domain.Customer;
+import domain.DiscountPlan;
+import domain.JobLine;
+import domain.OrderTable;
+
+import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -15,12 +23,31 @@ import Controllers.*;
 public class Login extends javax.swing.JFrame {
 
 Controller c = new Controller();
-
+ 
     public Login() {
         initComponents();
         this.setLocationRelativeTo(null);
-        BAPPROC bp = new BAPPROC();
-        bp.getactiveTasks();
+//        BAPPROC bp = new BAPPROC();
+//        bp.getactiveTasks();
+        DataManagerImpl dm = new DataManagerImpl();
+        Customer c = dm.findCustomerByAccountNumber("ACC0001");
+       List<OrderTable> o = dm.findOrderByAccountNumber(c);
+       BAPPAYM bg = new BAPPAYM();
+       
+       for(OrderTable of : o){
+           List<JobLine> jl = (List<JobLine>) of.getJobLineCollection();
+            Collection<DiscountPlan> dt = of.getAccountNo().getDiscountPlanCollection();
+            bg.flexibleCalculate(jl, dt);
+           
+           
+           
+       }
+       
+        
+        
+       
+        
+        
     }
 
     /**
@@ -178,6 +205,8 @@ Controller c = new Controller();
 
     //Login Button:
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
+        
+        
         c.loginSystem(txtusername, txtpassword,DropDown);
         setVisible(false);
     }//GEN-LAST:event_LoginButtonActionPerformed

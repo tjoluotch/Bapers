@@ -31,7 +31,7 @@ public interface DataManager {
     
     
     OrderTable findOrderByID(int ID);
-    OrderTable findOrderByAccountNumber(String AccountNumber);
+   List<OrderTable>  findOrderByAccountNumber(Customer AccountNumber);
     
     Job findJobByCode(String code);
     Job findJobByOrderID(int ID);

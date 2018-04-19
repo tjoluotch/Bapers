@@ -6,6 +6,7 @@
 package gui;
 
 import Controllers.BAPREPT;
+import java.awt.print.PrinterException;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -257,6 +258,8 @@ public class CustomerReportsScreen extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(CustomerReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
+            Logger.getLogger(CustomerReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (PrinterException ex) {
             Logger.getLogger(CustomerReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
         }
       

@@ -128,6 +128,7 @@ public class BAPPROC {
                         
                         taskss.add(secondfg);
                         eg = eg2;
+                        gbt = 10;
                         
                     }
                     
