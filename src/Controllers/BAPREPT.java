@@ -35,13 +35,9 @@ import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import print.DocPrinter;
 
-/**
- *
- * @author Daniel
- */
+//Class containing all methods for BAPREPT subsystem
 public class BAPREPT {
-    
-    long copyd1 = 0;
+        long copyd1 = 0;
         long developmentd1 = 0; 
         long packingd1 = 0;
         long finishingd1 = 0;

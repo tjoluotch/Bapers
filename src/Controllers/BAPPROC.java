@@ -12,10 +12,7 @@ import gui.JobsCenterScreen;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- *
- * @author Daniel
- */
+//Class containing all methods for BAPPROC subsystem
 public class BAPPROC {
     
     DataManagerImpl dm = new DataManagerImpl();

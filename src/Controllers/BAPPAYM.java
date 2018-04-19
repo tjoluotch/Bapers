@@ -32,10 +32,7 @@ import org.apache.pdfbox.pdmodel.common.PDRectangle;
 import org.apache.pdfbox.pdmodel.font.PDFont;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
-/**
- *
- * @author Daniel
- */
+//Class containing all methods for BAPPAYM subsystem
 public class BAPPAYM {
     
     DataManagerImpl dm;

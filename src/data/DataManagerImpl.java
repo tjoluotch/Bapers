@@ -14,10 +14,7 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-/**
- *
- * @author DanTe
- */
+//DataManager class to manage the program's access to the database entities.
 public class DataManagerImpl implements DataManager{
 
     public EntityManager getEm() {
