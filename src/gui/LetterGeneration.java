@@ -9,6 +9,7 @@ import Controllers.BAPPAYM;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,20 +36,13 @@ public class LetterGeneration extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        letterGenerated = new javax.swing.JButton();
         reminderButton = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        prtByCustomer = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
 
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
-
-        letterGenerated.setText("Print All Reminders");
-        getContentPane().add(letterGenerated);
-        letterGenerated.setBounds(90, 60, 210, 29);
 
         reminderButton.setText("Print All First Reminders");
         reminderButton.addActionListener(new java.awt.event.ActionListener() {
@@ -57,40 +51,42 @@ public class LetterGeneration extends javax.swing.JFrame {
             }
         });
         getContentPane().add(reminderButton);
-        reminderButton.setBounds(90, 100, 210, 29);
+        reminderButton.setBounds(90, 110, 210, 29);
 
         jButton2.setText("Print All Second Reminders");
-        getContentPane().add(jButton2);
-        jButton2.setBounds(90, 140, 210, 29);
-
-        prtByCustomer.setText("Print Customer Reminders");
-        prtByCustomer.addActionListener(new java.awt.event.ActionListener() {
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                prtByCustomerActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(prtByCustomer);
-        prtByCustomer.setBounds(80, 240, 220, 29);
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(110, 200, 170, 26);
+        getContentPane().add(jButton2);
+        jButton2.setBounds(90, 150, 210, 29);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void prtByCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prtByCustomerActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_prtByCustomerActionPerformed
 
     private void reminderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reminderButtonActionPerformed
         try {
             // TODO add your handling code here:
 
             p.checkCompletionDate();
+            JOptionPane.showMessageDialog(rootPane, "1st reminder letter generated, check files");
         } catch (IOException ex) {
             Logger.getLogger(LetterGeneration.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_reminderButtonActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+                try {
+            // TODO add your handling code here:
+
+            p.checkCompletionDateWithPrint2();
+            JOptionPane.showMessageDialog(rootPane, "2nd reminder letter generated, check files");
+        } catch (IOException ex) {
+            Logger.getLogger(LetterGeneration.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -130,9 +126,6 @@ public class LetterGeneration extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JButton letterGenerated;
-    private javax.swing.JButton prtByCustomer;
     private javax.swing.JButton reminderButton;
     // End of variables declaration//GEN-END:variables
 }
