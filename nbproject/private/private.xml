@@ -3,19 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Documents/GitHub/Bapers/src/print/DocPrinter.java</file>
-            <file>file:/E:/Documents/GitHub/Bapers/src/gui/AddPaymentForJobsScreen.java</file>
-            <file>file:/E:/Documents/GitHub/Bapers/src/gui/Login.java</file>
-            <file>file:/E:/Documents/GitHub/Bapers/src/gui/CreateAccountScreen.java</file>
-            <file>file:/E:/Documents/GitHub/Bapers/src/gui/AddUserAccountScreen.java</file>
-            <file>file:/E:/Documents/GitHub/Bapers/src/gui/AddPaymentStartScreen.java</file>
-            <file>file:/E:/Documents/GitHub/Bapers/src/gui/AddPaymentForOrderScreen.java</file>
-            <file>file:/E:/Documents/GitHub/Bapers/src/domain/JobLine.java</file>
-            <file>file:/E:/Documents/GitHub/Bapers/src/gui/CreateAccountScreenPriviliged.java</file>
-            <file>file:/E:/Documents/GitHub/Bapers/src/Controllers/BAPPAYM.java</file>
-            <file>file:/E:/Documents/GitHub/Bapers/src/domain/OrderTable.java</file>
-            <file>file:/E:/Documents/GitHub/Bapers/src/gui/AlertScreen.java</file>
-            <file>file:/E:/Documents/GitHub/Bapers/src/domain/Customer.java</file>
+            <file>file:/Users/redwan/Documents/GitHub/Bapers/src/gui/StaffReportsScreen.java</file>
+            <file>file:/Users/redwan/Documents/GitHub/Bapers/src/gui/SummaryReportScreen.java</file>
+            <file>file:/Users/redwan/Documents/GitHub/Bapers/src/gui/ShiftManagerStartScreen.java</file>
+            <file>file:/Users/redwan/Documents/GitHub/Bapers/src/gui/CreateAccountScreen.java</file>
+            <file>file:/Users/redwan/Documents/GitHub/Bapers/src/gui/CustomerReportsScreen.java</file>
+            <file>file:/Users/redwan/Documents/GitHub/Bapers/src/gui/ReportScreen.java</file>
         </group>
     </open-files>
 </project-private>
