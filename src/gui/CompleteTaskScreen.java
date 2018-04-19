@@ -7,11 +7,6 @@ package gui;
 import java.sql.*;
 import javax.swing.*;
 import Controllers.*;
-import data.DataManagerImpl;
-import domain.Customer;
-import domain.Staff;
-import domain.TaskLine;
-import javax.persistence.LockModeType;
 
 /**
  *
@@ -19,8 +14,6 @@ import javax.persistence.LockModeType;
  */
 public class CompleteTaskScreen extends javax.swing.JFrame {
     Controller c = new Controller();
-    Staff staff;
-    TaskLine tl;
 
     /**
      * Creates new form SelectTaskScreen
@@ -29,15 +22,6 @@ public class CompleteTaskScreen extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    
-    public CompleteTaskScreen(Staff staff, TaskLine tl) {
-        this.staff = staff;
-        this.tl = tl;
-        initComponents();
-        this.setLocationRelativeTo(null);
-    }
-    
-  
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -65,6 +49,7 @@ public class CompleteTaskScreen extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         txtTaskID = new javax.swing.JTextField();
         txtDur = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
         txtComm = new javax.swing.JTextField();
         txtDescr = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -72,7 +57,10 @@ public class CompleteTaskScreen extends javax.swing.JFrame {
         sp = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        txtEndTime = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
         jLabel6.setText("Shelf:");
 
@@ -86,14 +74,9 @@ public class CompleteTaskScreen extends javax.swing.JFrame {
 
         bg.setBackground(new java.awt.Color(255, 204, 102));
 
-        txtDept.setEditable(false);
-        txtDept.setText(tl.getTaskID().getDepartment());
-
         jLabel12.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel12.setText("Task Line ID:");
 
-        txtTaskLineID.setEditable(false);
-        txtTaskLineID.setText(tl.getTasklineID().toString());
         txtTaskLineID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTaskLineIDActionPerformed(evt);
@@ -103,8 +86,6 @@ public class CompleteTaskScreen extends javax.swing.JFrame {
         jLabel13.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel13.setText("Job Line ID:");
 
-        txtJobLineID.setEditable(false);
-        txtJobLineID.setText(tl.getJoblineID().getJoblineID().toString());
         txtJobLineID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtJobLineIDActionPerformed(evt);
@@ -123,11 +104,6 @@ public class CompleteTaskScreen extends javax.swing.JFrame {
         addCommentsButton.setText("Add Comments");
 
         startTaskButton.setText("Complete Task");
-        startTaskButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startTaskButtonActionPerformed(evt);
-            }
-        });
 
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel3.setText("Description:");
@@ -138,21 +114,20 @@ public class CompleteTaskScreen extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel10.setText("Comments:");
 
-        txtTaskID.setEditable(false);
-        txtTaskID.setText(tl.getTaskID().getTaskID().toString());
         txtTaskID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTaskIDActionPerformed(evt);
             }
         });
 
-        txtDur.setEditable(false);
-        txtDur.setText(tl.getStartTime().toString());
         txtDur.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDurActionPerformed(evt);
             }
         });
+
+        jLabel8.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel8.setText("Duration (min):");
 
         txtComm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -160,8 +135,6 @@ public class CompleteTaskScreen extends javax.swing.JFrame {
             }
         });
 
-        txtDescr.setEditable(false);
-        txtDescr.setText(tl.getTaskID().getDescription());
         txtDescr.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDescrActionPerformed(evt);
@@ -210,6 +183,9 @@ public class CompleteTaskScreen extends javax.swing.JFrame {
                 .addContainerGap(12, Short.MAX_VALUE))
         );
 
+        jLabel14.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel14.setText("End Time:");
+
         jLabel5.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel5.setText("Shelf:");
 
@@ -225,14 +201,17 @@ public class CompleteTaskScreen extends javax.swing.JFrame {
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
+                    .addComponent(jLabel8)
                     .addComponent(jLabel10)
                     .addComponent(jLabel2)
                     .addComponent(jLabel12)
                     .addComponent(jLabel13)
                     .addComponent(jLabel9)
+                    .addComponent(jLabel14)
                     .addComponent(jLabel5))
-                .addGap(16, 16, 16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTextField1)
                     .addComponent(txtJobLineID, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                     .addComponent(txtTaskLineID)
                     .addComponent(txtTaskID)
@@ -240,6 +219,7 @@ public class CompleteTaskScreen extends javax.swing.JFrame {
                     .addComponent(txtDescr)
                     .addComponent(txtDept)
                     .addComponent(txtStartTime)
+                    .addComponent(txtEndTime)
                     .addComponent(txtComm))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addCommentsButton)
@@ -283,13 +263,21 @@ public class CompleteTaskScreen extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDur, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
+                    .addComponent(jLabel8)
+                    .addComponent(txtDur, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtEndTime, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
+                    .addComponent(jLabel14))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(startTaskButton)
                 .addGap(8, 8, 8))
         );
@@ -348,28 +336,6 @@ public class CompleteTaskScreen extends javax.swing.JFrame {
     private void txtStartTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStartTimeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtStartTimeActionPerformed
-
-    private void startTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startTaskButtonActionPerformed
-        // TODO add your handling code here:
-        
-        DataManagerImpl dm = new DataManagerImpl();
-        dm.getEm().getTransaction().begin();
-        tl = dm.getEm().merge(tl);
-        dm.getEm().lock(tl, LockModeType.OPTIMISTIC_FORCE_INCREMENT);
-        dm.getEm().flush();
-        tl.setEndTime(new Date(System.currentTimeMillis()));
-        tl.setShelf(txtStartTime.getText());
-        if(txtComm.getText()!= null | txtComm.getText().compareTo("")!=0){
-            tl.setComments(txtComm.getText());
-        }
-        
-        dm.getEm().getTransaction().commit();
-        
-        JOptionPane.showMessageDialog(this,"Completion of task confirmed at " + new Date(System.currentTimeMillis()).toString(),"",JOptionPane.INFORMATION_MESSAGE);
-        
-        this.dispose();
-        
-    }//GEN-LAST:event_startTaskButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -430,12 +396,15 @@ public class CompleteTaskScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JPanel sp;
     private javax.swing.JButton startTaskButton;
@@ -443,6 +412,7 @@ public class CompleteTaskScreen extends javax.swing.JFrame {
     private javax.swing.JTextField txtDept;
     private javax.swing.JTextField txtDescr;
     private javax.swing.JTextField txtDur;
+    private javax.swing.JTextField txtEndTime;
     private javax.swing.JTextField txtJobLineID;
     private javax.swing.JTextField txtStartTime;
     private javax.swing.JTextField txtTaskID;

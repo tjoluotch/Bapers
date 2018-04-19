@@ -340,35 +340,6 @@ public class DataManagerImpl implements DataManager{
         return query.getResultList();
     }
     
-        @Override
-    public JobTaskBridge findtb( Job code, Task id) {
-        TypedQuery<JobTaskBridge> query = em.createNamedQuery("JobTaskBridge.findOrder", JobTaskBridge.class);
-        query.setParameter("jobCode", code);
-        query.setParameter("taskID", id);
-        return query.getSingleResult();
-    }
-    
-         @Override
-    public List<JobLine> allJobs(){
-        TypedQuery<JobLine> query = em.createNamedQuery("JobLine.findAll", JobLine.class);
-        
-        return query.getResultList();
-    }
-    
-        @Override
-    public List<TaskLine> searchCommencedJobs(Staff staff){
-        TypedQuery<TaskLine> query = em.createNamedQuery("TaskLine.findByStarted", TaskLine.class);
-        query.setParameter("completedBy", staff);
-        return query.getResultList();
-    }
-    
-        @Override
-    public TaskLine findTaskLineByCode(int tid) {
-        TypedQuery<TaskLine> query = em.createNamedQuery("TaskLine.findByTasklineID", TaskLine.class);
-        query.setParameter("tasklineID", tid);
-        return query.getSingleResult();
-    }
-    
     
             
    

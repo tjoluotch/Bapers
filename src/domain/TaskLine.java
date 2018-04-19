@@ -21,14 +21,13 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Tweetie Pie
+ * @author redwan
  */
 @Entity
 @Table(name = "task_line")
@@ -38,16 +37,16 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "TaskLine.findByTasklineID", query = "SELECT t FROM TaskLine t WHERE t.tasklineID = :tasklineID ")
     , @NamedQuery(name = "TaskLine.findByStartTime", query = "SELECT t FROM TaskLine t WHERE t.startTime = :startTime")
     , @NamedQuery(name = "TaskLine.findByNullStartTime", query = "SELECT t FROM TaskLine t WHERE t.startTime IS NULL")
-   // , @NamedQuery(name = "TaskLine.findBySequence", query = "SELECT t FROM TaskLine t JOIN t.joblineID j WHERE t.startTime IS NULL GROUP BY k.code ")  
-    , @NamedQuery(name = "TaskLine.findByEndTime", query = "SELECT t FROM TaskLine t WHERE t.endTime = :endTime")    
+   // , @NamedQuery(name = "TaskLine.findBySequence", query = "SELECT t FROM TaskLine t JOIN t.joblineID j WHERE t.startTime IS NULL GROUP BY k.code ")
+    , @NamedQuery(name = "TaskLine.findByEndTime", query = "SELECT t FROM TaskLine t WHERE t.endTime = :endTime")
     , @NamedQuery(name = "TaskLine.findByShelf", query = "SELECT t FROM TaskLine t WHERE t.shelf = :shelf")
     , @NamedQuery(name = "TaskLine.findByStarted", query = "SELECT t FROM TaskLine t WHERE t.completedBy = :completedBy AND t.endTime IS NULL")
     , @NamedQuery(name = "TaskLine.findByVersion", query = "SELECT t FROM TaskLine t WHERE t.version = :version")
     , @NamedQuery(name = "TaskLine.findPerformanceReport", query = "SELECT j FROM TaskLine j  WHERE j.startTime = :startTime ORDER BY j.completedBy ASC, j.startTime ASC ")
-    , @NamedQuery(name = "TaskLine.findBetweenDates", query = "SELECT t FROM TaskLine t WHERE t.startTime BETWEEN :startDate AND :endDate AND t.endTime IS NOT NULL ORDER BY t.completedBy ASC,  t.startTime ASC ")
+    , @NamedQuery(name = "TaskLine.findBetweenDates", query = "SELECT t FROM TaskLine t WHERE t.startTime BETWEEN :startDate AND :endDate ORDER BY t.completedBy ASC,  t.startTime ASC")
     , @NamedQuery(name = "TaskLine.findBetweenDates2", query = "SELECT t FROM TaskLine t WHERE t.startTime BETWEEN :startDate AND :endDate ORDER BY   t.startTime ASC")
      , @NamedQuery(name = "TaskLine.findByPrice", query = "SELECT t FROM TaskLine t WHERE t.price = :price")})
-public class TaskLine implements Serializable, Comparable<TaskLine> {
+public class TaskLine implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -66,7 +65,6 @@ public class TaskLine implements Serializable, Comparable<TaskLine> {
     private String shelf;
     @Basic(optional = false)
     @NotNull
-    @Version
     @Column(name = "version")
     private long version;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -201,13 +199,6 @@ public class TaskLine implements Serializable, Comparable<TaskLine> {
     @Override
     public String toString() {
         return "domain.TaskLine[ tasklineID=" + tasklineID + " ]";
-    }
-
-    @Override
-    public int compareTo(TaskLine o) {
-        
-        return this.getJoblineID().getJobCode().getCode().compareTo(o.getJoblineID().getJobCode().getCode());
-        
     }
     
 }

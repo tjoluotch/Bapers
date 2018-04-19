@@ -64,11 +64,6 @@ public interface DataManager {
      public List<OrderTable> allOrdersUnpaidTablesforCustomer(); 
      public List<Customer> inDefaultList();
      public List<JobLine> allJobLines();
-     public JobTaskBridge findtb( Job code, Task id);
-     public List<JobLine> allJobs();
-     public List<TaskLine> searchCommencedJobs(Staff staff);
-     public TaskLine findTaskLineByCode(int tid);
-      
        
      
 }
