@@ -44,7 +44,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "TaskLine.findByStarted", query = "SELECT t FROM TaskLine t WHERE t.completedBy = :completedBy AND t.endTime IS NULL")
     , @NamedQuery(name = "TaskLine.findByVersion", query = "SELECT t FROM TaskLine t WHERE t.version = :version")
     , @NamedQuery(name = "TaskLine.findPerformanceReport", query = "SELECT j FROM TaskLine j  WHERE j.startTime = :startTime ORDER BY j.completedBy ASC, j.startTime ASC ")
-    , @NamedQuery(name = "TaskLine.findBetweenDates", query = "SELECT t FROM TaskLine t WHERE t.startTime BETWEEN :startDate AND :endDate ORDER BY t.completedBy ASC,  t.startTime ASC")
+    , @NamedQuery(name = "TaskLine.findBetweenDates", query = "SELECT t FROM TaskLine t WHERE t.startTime BETWEEN :startDate AND :endDate AND t.endTime IS NOT NULL ORDER BY t.completedBy ASC,  t.startTime ASC ")
     , @NamedQuery(name = "TaskLine.findBetweenDates2", query = "SELECT t FROM TaskLine t WHERE t.startTime BETWEEN :startDate AND :endDate ORDER BY   t.startTime ASC")
      , @NamedQuery(name = "TaskLine.findByPrice", query = "SELECT t FROM TaskLine t WHERE t.price = :price")})
 public class TaskLine implements Serializable, Comparable<TaskLine> {

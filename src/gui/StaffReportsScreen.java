@@ -314,6 +314,8 @@ public class StaffReportsScreen extends javax.swing.JFrame {
             BAPREPT rp = new BAPREPT();
             try {
                 rp.createMonthlyReport(sDate, currentDate);
+                JOptionPane.showMessageDialog(null, "Report Created in Reports Directory ","Backup successful.",JOptionPane.OK_OPTION);
+                this.dispose();
             } catch (IOException ex) {
                 Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -373,6 +375,7 @@ public class StaffReportsScreen extends javax.swing.JFrame {
             BAPREPT rp = new BAPREPT();
             try {
                 rp.createQuarterlyReport(sDate, currentDate,quarter,q);
+                JOptionPane.showMessageDialog(null, "Report Created in Reports Directory ","Backup successful.",JOptionPane.OK_OPTION);
             } catch (IOException ex) {
                 Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
             } catch (PrinterException ex) {
@@ -391,6 +394,8 @@ public class StaffReportsScreen extends javax.swing.JFrame {
             BAPREPT rp = new BAPREPT();
             try {
                 rp.createYearlyReport(sDate, currentDate);
+                JOptionPane.showMessageDialog(null, "Report Created in Reports Directory ","Backup successful.",JOptionPane.OK_OPTION);
+                this.dispose();
             } catch (IOException ex) {
                 Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);
             } catch (PrinterException ex) {
@@ -435,6 +440,7 @@ public class StaffReportsScreen extends javax.swing.JFrame {
                   try {
                       rp.createIndividualReport(startDate.getText(), endDate.getText());
                       JOptionPane.showMessageDialog(null, "Report Created in Reports Directory ","Backup successful.",JOptionPane.OK_OPTION);
+                      this.dispose();
                       this.dispose();
                   } catch (IOException ex) {
                       Logger.getLogger(StaffReportsScreen.class.getName()).log(Level.SEVERE, null, ex);

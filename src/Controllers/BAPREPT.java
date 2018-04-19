@@ -81,7 +81,7 @@ public class BAPREPT {
     public BAPREPT() {
     }
 
-    public void createIndividualReport(String date1, String date2) throws IOException {
+    public void createIndividualReport(String date1, String date2) throws IOException, PrinterException {
         String day1 = date1.substring(0, 2);
         String month1 = date1.substring(3, 5);
         String year1 = date1.substring(6, 10);
@@ -244,6 +244,8 @@ public class BAPREPT {
         contentStream.close();
         doc.addPage(page);
         doc.save(day1 + "_" + month1 + "_" + year1 + "_-_" + day2 + "_" + month2 + "_" + year2 + "_" + "Individualreport.pdf");
+        DocPrinter dp = new DocPrinter();
+        dp.printFile(doc);
         doc.close();
     }
 
@@ -607,7 +609,7 @@ public class BAPREPT {
         doc.close();
     }
 
-    public void createMonthlyReport(String date1, String date2) throws IOException {
+    public void createMonthlyReport(String date1, String date2) throws IOException, PrinterException {
         
         //Reconstruct Inputed dates to Date format
         String day1 = date1.substring(0, 2);
@@ -804,6 +806,8 @@ public class BAPREPT {
         table.draw();
         //save document
         doc.save(monthName + "_" + "Individualreport.pdf");
+        DocPrinter dp = new DocPrinter();
+        dp.printFile(doc);
         doc.close();
     }
 
@@ -1028,8 +1032,10 @@ public class BAPREPT {
            
                 if(comparatorDate.compareTo(tempDate)==0){
                     
+                    if(t.getEndTime() !=null){
+                        groupDep(t);
                     
-                    groupDep(t);
+                    }
                     
                     
                     
@@ -1042,10 +1048,13 @@ public class BAPREPT {
                         
                     
                         
+                        if(t.getEndTime() != null){
                         groupDep(t);
+                    createGroupingList(t, listd1, listd2, listn);
+                    }
             
                     
-                        createGroupingList(t, listd1, listd2, listn);
+                        
                         
                         
 //                       System.out.println(sdot[0] + " :: " + sdot[1] + " :: " + sdot[2] + " :: " + sdot[3] + " :: " + sdot[4]);
@@ -1056,8 +1065,14 @@ public class BAPREPT {
                     
                     
                     else{
+                        
+                        
+                        if(t.getEndTime()!= null){
                         groupDep(t);
-                       createGroupingList(t, listd1, listd2, listn);
+                        createGroupingList(t, listd1, listd2, listn);
+                    
+                    }
+                       
                         
 
                         
@@ -1112,11 +1127,12 @@ public class BAPREPT {
         
         contentStream.close();
        
+       
         doc.save( "Summaryreport.pdf");
         DocPrinter dp = new DocPrinter();
         dp.printFile(doc);
         doc.close();
-        
+       
         
         
         
@@ -1604,6 +1620,7 @@ public class BAPREPT {
 
         doc.addPage(page);
         table.draw();
+        contentStream.close();
         
        
         
@@ -1695,7 +1712,7 @@ public class BAPREPT {
         
     }
     
-    public void createCustomerReport(String accNo, String date1, String date2) throws IOException, ParseException{
+    public void createCustomerReport(String accNo, String date1, String date2) throws IOException, ParseException, PrinterException{
         
         
         String day1 = date1.substring(1, 2);
@@ -1828,6 +1845,10 @@ public class BAPREPT {
         
        
         doc.save( "customerReport.pdf");
+        DocPrinter dp = new DocPrinter();
+        dp.printFile(doc);
+       
+        doc.close();
         
         
         
