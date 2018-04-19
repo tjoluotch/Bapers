@@ -75,6 +75,8 @@ TaskLine selectedTask;
         jLabel6 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        completeTaskButton = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -200,6 +202,38 @@ TaskLine selectedTask;
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/SolSoft.png"))); // NOI18N
 
+        completeTaskButton.setBackground(new java.awt.Color(250, 190, 100));
+        completeTaskButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                completeTaskButtonMouseClicked(evt);
+            }
+        });
+
+        jLabel11.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Complete Task");
+
+        javax.swing.GroupLayout completeTaskButtonLayout = new javax.swing.GroupLayout(completeTaskButton);
+        completeTaskButton.setLayout(completeTaskButtonLayout);
+        completeTaskButtonLayout.setHorizontalGroup(
+            completeTaskButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(completeTaskButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(completeTaskButtonLayout.createSequentialGroup()
+                    .addGap(37, 37, 37)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(37, Short.MAX_VALUE)))
+        );
+        completeTaskButtonLayout.setVerticalGroup(
+            completeTaskButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 58, Short.MAX_VALUE)
+            .addGroup(completeTaskButtonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(completeTaskButtonLayout.createSequentialGroup()
+                    .addGap(18, 18, 18)
+                    .addComponent(jLabel11)
+                    .addContainerGap(18, Short.MAX_VALUE)))
+        );
+
         javax.swing.GroupLayout spLayout = new javax.swing.GroupLayout(sp);
         sp.setLayout(spLayout);
         spLayout.setHorizontalGroup(
@@ -211,6 +245,7 @@ TaskLine selectedTask;
                 .addGap(57, 57, 57)
                 .addComponent(jLabel7)
                 .addContainerGap(58, Short.MAX_VALUE))
+            .addComponent(completeTaskButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         spLayout.setVerticalGroup(
             spLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -221,7 +256,9 @@ TaskLine selectedTask;
                 .addComponent(SelectTaskButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TaskHistoryButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 473, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(completeTaskButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(LogoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -325,7 +362,7 @@ TaskLine selectedTask;
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -394,6 +431,11 @@ TaskLine selectedTask;
         
     }//GEN-LAST:event_jTabbedPane1MouseClicked
 
+    private void completeTaskButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_completeTaskButtonMouseClicked
+        // TODO add your handling code here:
+        new CompleteTaskScreen(staff, selectedTask);
+    }//GEN-LAST:event_completeTaskButtonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -435,7 +477,11 @@ TaskLine selectedTask;
     private javax.swing.JPanel LogoutButton;
     private javax.swing.JPanel SelectTaskButton;
     private javax.swing.JPanel TaskHistoryButton;
+    private javax.swing.JPanel TaskHistoryButton1;
+    private javax.swing.JPanel completeTaskButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -443,6 +489,7 @@ TaskLine selectedTask;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

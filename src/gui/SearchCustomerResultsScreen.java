@@ -26,6 +26,7 @@ public class SearchCustomerResultsScreen extends javax.swing.JFrame {
      */
     BAPACCT bapacct = new BAPACCT();
     BAPCUST bapcust = new BAPCUST();
+    Customer c ;
    
     public SearchCustomerResultsScreen() {
         initComponents();
@@ -220,6 +221,11 @@ public class SearchCustomerResultsScreen extends javax.swing.JFrame {
         jLabel14.setText("City:");
 
         jButton1.setText("Select");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
         bg.setLayout(bgLayout);
@@ -461,6 +467,17 @@ public class SearchCustomerResultsScreen extends javax.swing.JFrame {
     private void phoneTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_phoneTextFieldActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        int row = jTable1.getSelectedRow();
+        String accountNo = jTable1.getValueAt(row, 0).toString();
+        
+        DataManagerImpl dm = new DataManagerImpl();
+        c = dm.findCustomerByAccountNumber(accountNo);
+        new CreateNewOrderScreen(c);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
