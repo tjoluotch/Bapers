@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.*;
 import javax.swing.JFrame;
@@ -655,114 +654,6 @@ finally
                         }
                      }
                 
-        
-    }
-              
-                 public float flexCalc(float total, String bound){
-        
-        
-        
-          List<String> allMatches = new ArrayList<String>();
-                ;
-                 String ls = bound.substring(0, bound.indexOf(","));
-                 String hs = bound.substring(bound.indexOf(",")+1, bound.indexOf("-"));
-                 String rs = bound.substring(bound.indexOf("-") + 1);
-                 int lower = Integer.parseInt(ls.trim());
-                int higher= Integer.parseInt(hs.trim());
-                float rate = Float.parseFloat(rs.trim());
-                if(total < higher && total > lower ){
-                    total = (total - lower) * rate; 
-                }
-                else if(total > higher && total > lower ){
-                    total = (higher - lower) * rate; 
-                }
-                
-                else if(total < lower){
-                    
-                   return 0;
-                }
-        
-        return total;
-        
-        
-        
-    }
-                 
-                   //calculates actual price of
-    //method to calcuate price for VARIABLE (task specific) & fixed discounts FOR LIST OF JOBS
-    public float flexibleCalculate(Collection<JobLine> jobs, Collection<DiscountPlan> discounts){
-        float price = 0;
-        List<DiscountPlan> flexibleDiscounts = new LinkedList(discounts);
-        if(discounts.isEmpty()){ price = getNormalPrice(jobs); } 
-        
-        else{
-
-                DiscountPlan dp = flexibleDiscounts.get(0);
-                
-                String discountString = dp.getFlexibleRate();
-                String rate ;
-                
-                List<String> allMatches = new ArrayList<String>();
-                 Matcher m = Pattern.compile("\\[([^]]+)\\]").matcher(discountString);
-                 float x = 0 ;
-                while (m.find()) {
-                allMatches.add(m.group(1));
-                
-                rate = m.group(1);
-                
-                
-                
-                
-                }
-                
-                for(JobLine j : jobs){
-                    x += j.getJobCode().getPrice();
-                }
-                
-                for (String sd : allMatches){
-                    
-                price += flexCalc(x,sd);
-                }
-                
-                
-                        
-                
-                
-                
-        }
-                
-                //regular expression stuff here
-             
-        
-        return price;
-    }
-    
-    
-    public float variableCalculate(Collection<JobLine> jobs, Collection<DiscountPlan> discounts){
-        float totalPrice = 0;
-        for (JobLine j : jobs){
-            List<TaskLine> tl = (List<TaskLine>) j.getTaskLineCollection();
-            for(TaskLine t : tl){
-                for(DiscountPlan d : discounts){
-                    if(d.getTaskID() == t.getTaskID()){
-                       float b = t.getTaskID().getPrice()*d.getRate();
-                       t.setPrice(b);
-                       totalPrice+= b;
-                        
-                    }
-                }
-            }
-        }
-        
-        return totalPrice;
-    }
-    
-    public float fixedPrice(float total, Collection<DiscountPlan> discounts){
-        List<DiscountPlan> fixed = new LinkedList(discounts);
-        DiscountPlan d = fixed.get(0);
-        float totalRate = total*d.getRate();
-        
-        return totalRate;
         
     }
 	
