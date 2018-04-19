@@ -171,14 +171,6 @@ public class JobLine implements Serializable {
         this.paymentdetailID = paymentdetailID;
     }
 
-    public boolean isPaidFor(){
-        if(this.paymentdetailID == null){
-            return false;
-        } else {
-            return true;
-        }
-    }
-    
     @Override
     public int hashCode() {
         int hash = 0;
