@@ -318,6 +318,28 @@ public class DataManagerImpl implements DataManager{
         return query.getResultList();
     }
     
+        @Override
+    public List <OrderTable> allOrdersUnpaidTablesforCustomer(){
+           String noPayment = "unpaid";
+          TypedQuery<OrderTable> query = em.createNamedQuery("OrderTable.findByPaymentStatus", OrderTable.class);
+          query.setParameter("paymentStatus", noPayment);
+          return query.getResultList(); 
+    }
+    
+        @Override
+    public List<Customer> inDefaultList(){
+        String inDefault = "default";
+        TypedQuery<Customer> query = em.createNamedQuery("Customer.findByStatus", Customer.class);
+        query.setParameter("default", inDefault);
+        return query.getResultList();
+    }
+    
+        @Override
+    public List<JobLine> allJobLines(){
+        TypedQuery<JobLine> query = em.createNamedQuery("JobLine.findAll", JobLine.class);
+        return query.getResultList();
+    }
+    
     
             
    

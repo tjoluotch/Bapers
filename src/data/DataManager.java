@@ -44,9 +44,9 @@ public interface DataManager {
     
     void saveTask(Task task);
     
-    public void saveOrder(OrderTable order);
-    public boolean updateStaffRecord(String username, String firstName, String surname, String password, String role);
-    public List <TaskLine> individualReport(Date date);
+     public void saveOrder(OrderTable order);
+     public boolean updateStaffRecord(String username, String firstName, String surname, String password, String role);
+     public List <TaskLine> individualReport(Date date);
      public List <TaskLine> individualReportBetween(Date startDate, Date endDate);
      public List<TaskLine> summaryReports(Date startDate, Date endDate);
      public List<TaskLine> searchbyStartTime();
@@ -60,7 +60,10 @@ public interface DataManager {
      public void deleteCustomer(Customer customer);
      public void saveDiscountRate(DiscountPlan d);
      public void savePayment(PaymentDetail payment);
-     public DiscountPlan findDiscountByID(int ID) ;
-      
+     public DiscountPlan findDiscountByID(int ID) ;      
+     public List<OrderTable> allOrdersUnpaidTablesforCustomer(); 
+     public List<Customer> inDefaultList();
+     public List<JobLine> allJobLines();
+       
      
 }

@@ -445,9 +445,9 @@ public class ModifyCustomerAccount extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
-//        ReceptionistStartScreen rsc = new ReceptionistStartScreen();
-//        rsc.setVisible(true);
-//        setVisible(false);
+        OfficeManagerStartScreen rsc = new OfficeManagerStartScreen();
+        rsc.setVisible(true);
+        setVisible(false);
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void srcAccNoTxtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_srcAccNoTxtFieldActionPerformed
