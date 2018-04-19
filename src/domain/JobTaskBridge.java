@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author redwan
+ * @author Tweetie Pie
  */
 @Entity
 @Table(name = "job_task_bridge")
@@ -30,7 +30,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "JobTaskBridge.findAll", query = "SELECT j FROM JobTaskBridge j")
     , @NamedQuery(name = "JobTaskBridge.findByBridgeID", query = "SELECT j FROM JobTaskBridge j WHERE j.bridgeID = :bridgeID")
-    , @NamedQuery(name = "JobTaskBridge.findByVersion", query = "SELECT j FROM JobTaskBridge j WHERE j.version = :version")})
+     , @NamedQuery(name = "JobTaskBridge.findByJobCode", query = "SELECT j FROM JobTaskBridge j WHERE j.jobCode = :jobCode")
+    , @NamedQuery(name = "JobTaskBridge.findOrder", query = "SELECT j FROM JobTaskBridge j WHERE j.jobCode = :jobCode AND j.taskID = :taskID")
+    , @NamedQuery(name = "JobTaskBridge.findByVersion", query = "SELECT j FROM JobTaskBridge j WHERE j.version = :version")
+    , @NamedQuery(name = "JobTaskBridge.findByTaskSequence", query = "SELECT j FROM JobTaskBridge j WHERE j.taskSequence = :taskSequence")})
 public class JobTaskBridge implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,6 +46,10 @@ public class JobTaskBridge implements Serializable {
     @NotNull
     @Column(name = "version")
     private long version;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "taskSequence")
+    private int taskSequence;
     @JoinColumn(name = "jobCode", referencedColumnName = "code")
     @ManyToOne(optional = false)
     private Job jobCode;
@@ -57,9 +64,10 @@ public class JobTaskBridge implements Serializable {
         this.bridgeID = bridgeID;
     }
 
-    public JobTaskBridge(Long bridgeID, long version) {
+    public JobTaskBridge(Long bridgeID, long version, int taskSequence) {
         this.bridgeID = bridgeID;
         this.version = version;
+        this.taskSequence = taskSequence;
     }
 
     public Long getBridgeID() {
@@ -76,6 +84,14 @@ public class JobTaskBridge implements Serializable {
 
     public void setVersion(long version) {
         this.version = version;
+    }
+
+    public int getTaskSequence() {
+        return taskSequence;
+    }
+
+    public void setTaskSequence(int taskSequence) {
+        this.taskSequence = taskSequence;
     }
 
     public Job getJobCode() {
