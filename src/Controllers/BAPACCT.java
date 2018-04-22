@@ -14,42 +14,24 @@ import domain.OrderTable;
 import domain.PaymentDetail;
 import domain.Task;
 import domain.TaskLine;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Spliterator;
-import java.util.function.Consumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.*;
 
-/**
- * @author Daniel
- */
-//Accept Job at reception
-//Assign Job number
+//Class containing all methods for BAPACCT subsystem
 public class BAPACCT {
   
     Collection<TaskLine> tLines = new LinkedList();
     Collection<JobLine> jCollection = new LinkedList();
     DataManagerImpl dm = new DataManagerImpl();
-     public BAPACCT(){
-        
-    }
+     public BAPACCT(){}
     
-     
-//      public void deleteCustomer(Customer c){
-//          DataManagerImpl dm = new DataManagerImpl();
-//       c = new Customer();
-//        
-//        
-//        dm.deleteCustomer(c);
-//        System.out.println("Customer " + c.getForename() + " " + c.getSurname() + " has been deleted from the database.");
-//    }
         public boolean deleteCustomer(String id){
         boolean deleted;
         Customer c = dm.getEm().find(Customer.class, id); 

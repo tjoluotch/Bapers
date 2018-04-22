@@ -5,18 +5,15 @@
  */
 package TableModels;
 
-import domain.OrderTable;
-import java.util.ArrayList;
+import domain.Customer;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-
 /**
  *
- * @author Tweetie Pie
+ * @author tjay
  */
-public class OrderTableModel extends AbstractTableModel{
-    
-    @Override
+public class DefaultTableModel extends AbstractTableModel {
+      @Override
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex){
              case 0:
@@ -25,19 +22,19 @@ public class OrderTableModel extends AbstractTableModel{
                return String.class;
              case 2:
                return String.class;
+             case 3:
+               return String.class;
+             
              }
              return null;
          //To change body of generated methods, choose Tools | Templates.
     }
     
-    private List<OrderTable> li;
-    private String[] columnNames = {"Order ID", "Total Price", "Payment Status"};
+    private List<Customer> cust;
+    private String[] columnNames = {"First Name", "Last Name", "Account Number", "Status"};
 
-    public OrderTableModel(List<OrderTable> li) {
-        this.li = li;
-    }
-    public OrderTableModel(){
-        li = new ArrayList();
+    public DefaultTableModel(List<Customer> cust) {
+        this.cust = cust;
     }
 
     @Override
@@ -47,27 +44,28 @@ public class OrderTableModel extends AbstractTableModel{
 
     @Override
     public int getRowCount() {
-       return li.size(); //To change body of generated methods, choose Tools | Templates.
+       return cust.size(); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public int getColumnCount() {
-        return 3; //To change body of generated methods, choose Tools | Templates.
+        return 4; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        OrderTable o = li.get(rowIndex);
+        Customer c = cust.get(rowIndex);
         switch(columnIndex){
             case 0:
-                return o.getOrderID();
+                return c.getForename();
             case 1:
-                return o.getTotalPrice();
-            case 2:
-                return o.getPaymentStatus();
+                return c.getSurname();
+            case 2: 
+                return c.getAccountNo();
+            case 3:
+                return c.getStatus();
         }
         
        return null;
     }
-    
 }

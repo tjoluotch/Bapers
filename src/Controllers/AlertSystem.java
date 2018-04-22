@@ -16,10 +16,7 @@ import java.util.LinkedList;
 import java.util.List;
 import javax.swing.Timer;
 
-/**
- *
- * @author Tweetie Pie
- */
+//alert system for BAPERS
 public class AlertSystem {
     public void beginAlerts(){
        searchFirstReminder();

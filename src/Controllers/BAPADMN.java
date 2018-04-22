@@ -5,37 +5,16 @@
  */
 package Controllers;
 
-import be.quodlibet.boxable.BaseTable;
-import be.quodlibet.boxable.Cell;
-import be.quodlibet.boxable.Row;
 import data.DataManagerImpl;
-import domain.JobLine;
 import domain.Staff;
 import gui.ManageUsersSearchScreen;
-import java.awt.Color;
-import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.LockModeType;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import org.apache.pdfbox.io.MemoryUsageSetting;
-import org.apache.pdfbox.jbig2.util.log.LoggerFactory;
-import org.apache.pdfbox.pdmodel.PDDocument;
-import org.apache.pdfbox.pdmodel.PDPage;
-import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.common.PDRectangle;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
 
-/**
- *
- * @author Daniel
- */
+//Class containing all methods for BAPADMN subsystem
 public class BAPADMN {
     
     DataManagerImpl dm;

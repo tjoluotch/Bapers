@@ -14,10 +14,7 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-/**
- *
- * @author DanTe
- */
+//DataManager class to manage the program's access to the database entities.
 public class DataManagerImpl implements DataManager{
 
     public EntityManager getEm() {
@@ -315,6 +312,28 @@ public class DataManagerImpl implements DataManager{
         TypedQuery<OrderTable> query = em.createNamedQuery("OrderTable.findByAccountNo", OrderTable.class);
         query.setParameter("accountNo", false);
         
+        return query.getResultList();
+    }
+    
+        @Override
+    public List <OrderTable> allOrdersUnpaidTablesforCustomer(){
+           String noPayment = "unpaid";
+          TypedQuery<OrderTable> query = em.createNamedQuery("OrderTable.findByPaymentStatus", OrderTable.class);
+          query.setParameter("paymentStatus", noPayment);
+          return query.getResultList(); 
+    }
+    
+        @Override
+    public List<Customer> inDefaultList(){
+        String inDefault = "default";
+        TypedQuery<Customer> query = em.createNamedQuery("Customer.findByStatus", Customer.class);
+        query.setParameter("default", inDefault);
+        return query.getResultList();
+    }
+    
+        @Override
+    public List<JobLine> allJobLines(){
+        TypedQuery<JobLine> query = em.createNamedQuery("JobLine.findAll", JobLine.class);
         return query.getResultList();
     }
     

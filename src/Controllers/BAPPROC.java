@@ -9,15 +9,10 @@ import data.DataManagerImpl;
 
 import domain.TaskLine;
 import gui.JobsCenterScreen;
-import gui.ManageUsersSearchScreen;
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- *
- * @author Daniel
- */
+//Class containing all methods for BAPPROC subsystem
 public class BAPPROC {
     
     DataManagerImpl dm = new DataManagerImpl();

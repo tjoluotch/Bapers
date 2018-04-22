@@ -5,18 +5,16 @@
  */
 package TableModels;
 
-import domain.OrderTable;
-import java.util.ArrayList;
 import java.util.List;
+import domain.JobLine;
 import javax.swing.table.AbstractTableModel;
-
 /**
  *
- * @author Tweetie Pie
+ * @author tjay
  */
-public class OrderTableModel extends AbstractTableModel{
+public class AllJobLineTableModel extends AbstractTableModel {
     
-    @Override
+        @Override
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex){
              case 0:
@@ -25,19 +23,22 @@ public class OrderTableModel extends AbstractTableModel{
                return String.class;
              case 2:
                return String.class;
+             case 3:
+               return String.class;
+             case 4:
+               return String.class;
+             case 5:
+               return String.class;
              }
              return null;
          //To change body of generated methods, choose Tools | Templates.
     }
     
-    private List<OrderTable> li;
-    private String[] columnNames = {"Order ID", "Total Price", "Payment Status"};
+    private List<JobLine> job;
+    private String[] columnNames = {"Job Line ID", "Job Code", "Job Deadline", "Special Instructions", "reminder status", "Order Id"};
 
-    public OrderTableModel(List<OrderTable> li) {
-        this.li = li;
-    }
-    public OrderTableModel(){
-        li = new ArrayList();
+    public AllJobLineTableModel(List<JobLine> job) {
+        this.job = job;
     }
 
     @Override
@@ -47,27 +48,32 @@ public class OrderTableModel extends AbstractTableModel{
 
     @Override
     public int getRowCount() {
-       return li.size(); //To change body of generated methods, choose Tools | Templates.
+       return job.size();//To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public int getColumnCount() {
-        return 3; //To change body of generated methods, choose Tools | Templates.
+        return 6; //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        OrderTable o = li.get(rowIndex);
+        JobLine jl = job.get(rowIndex);
         switch(columnIndex){
             case 0:
-                return o.getOrderID();
+                return jl.getJoblineID();
             case 1:
-                return o.getTotalPrice();
-            case 2:
-                return o.getPaymentStatus();
+                return jl.getJobCode();
+            case 2: 
+                return jl.getJobDeadline();
+            case 3:
+                return jl.getSpecialInstructions();
+            case 4:
+                return jl.getReminderStatus();
+            case 5:
+                return jl.getOrderID();
         }
         
        return null;
     }
-    
 }
