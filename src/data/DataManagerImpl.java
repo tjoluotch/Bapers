@@ -79,6 +79,13 @@ public class DataManagerImpl implements DataManager{
         query.setParameter("account_holder_name", AccountHolderName);
         return query.getSingleResult();
     }
+    
+    @Override
+    public List<Customer> findCustomerByStatus(String status) {
+        TypedQuery<Customer> query = em.createNamedQuery("Customer.findByStatus", Customer.class);
+        query.setParameter("status", status);
+        return query.getResultList();
+    }
 
     @Override
     public Customer findCustomerByAccountNumber(String AccountNumber) {

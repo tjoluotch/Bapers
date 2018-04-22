@@ -69,6 +69,7 @@ public interface DataManager {
       
       public List<JobLine> allJobs();
       public JobTaskBridge findtb( Job code, Task id);
+      public List<Customer> findCustomerByStatus(String status);
       
      
 }

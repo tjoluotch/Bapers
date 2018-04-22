@@ -67,12 +67,17 @@ public class BAPPAYM {
         PaymentDetail payment = new PaymentDetail();
         payment.setType("Cash");
         payment.setExpiryDate(null);
+        
         payment.setLast4digits(null);
         payment.setJobLineCollection(jobs);
+        
+        
         payment.setAmount(amount);
         for(JobLine job : jobs){
             job.setPaymentdetailID(payment);   
         }        
+        
+        
         dm.savePayment(payment);
     }
     
@@ -169,74 +174,7 @@ public class BAPPAYM {
     }
     
     
-    
-    public void firstLetterGeneration(String forename, String surname, String accountHolderName, String address1, String city, String postcode, String telephone, String dateSubmitted) throws IOException{
-        String filename = "/Users/tjay/NetBeansProjects/" + /*c.getAccountHolderName()*/"DavidRhind" + "LatePaymLetter1.pdf";
-        
-        String name = forename + " " + surname;
-        String accountHolder = accountHolderName;
-        String address = address1 + ", " + city + ", " + postcode;
-        String phoneNumber = "Phone: " + telephone;
-        
-        String wording = "According to our records, it appears that we have not yet received payment of the order you made on the , which was posted"; 
-        String wording2 = "to you on" + dateSubmitted + ", for photographic work done in our laboratory.";
-        String wording3 = "We would appreciate payment at your earliest convenience.";
-        String wording4 = "If you have already sent a payment to us recently, please accept our apologies.";
-        String wording5 = "Yours sincerely,";
-        String wording6 = "G. Lancaster";
-        
-        PDDocument doc = new PDDocument();
-        try {
-            PDPage page = new PDPage();
-            doc.addPage(page);
-            
-            PDFont LabNamefont = PDType1Font.HELVETICA_BOLD;
-            PDFont StandardFont = PDType1Font.HELVETICA;
-            PDPageContentStream contents = new PDPageContentStream(doc, page);
-            contents.beginText();
-            contents.setFont(LabNamefont, 30);
-            contents.newLineAtOffset(300, 700);
-            contents.showText(name);
-            
-            
-            
-            contents.setFont(StandardFont, 15);
-            contents.newLineAtOffset(300, 680);
-            contents.showText(name);
-            
-            contents.newLine();
-            contents.showText(address);
-            
-            contents.newLine();
-            contents.showText(phoneNumber);
-            
-            
-            
-            
-            
-            contents.newLineAtOffset(100, 610);
-            contents.showText(wording);
-            contents.newLine();
-            contents.showText(wording2);
-            contents.newLine();
-            contents.showText(wording3);
-            contents.newLine();
-            contents.showText(wording4);
-            contents.newLine();
-            contents.showText(wording5);
-            contents.newLine();
-            contents.showText(wording6);
-            
-           
-                    
-            contents.endText();
-            contents.close();
-           
-            doc.save(filename);
-        } finally {
-            doc.close();
-        }
-    }
+  
     
     
     public float flexCalc(float total, String bound){
@@ -268,6 +206,9 @@ public class BAPPAYM {
         
         
     }
+    
+    
+   
 	
 }
 
