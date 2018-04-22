@@ -5,14 +5,28 @@
  */
 package gui;
 
+import Controllers.BAPPROC;
+import TableModels.TasksTableModel;
+import data.DataManagerImpl;
 import domain.Staff;
+import domain.TaskLine;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+import javax.swing.Timer;
 
 /**
  *
  * @author Tweetie Pie
  */
+
 public class TechnicianStartScreen extends javax.swing.JFrame {
 Staff staff;
+DataManagerImpl dm = new DataManagerImpl();
+BAPPROC bp = new BAPPROC();
+List<TaskLine> tl = bp.getactiveTasks();
+List<TaskLine> tl2 ;
+TaskLine selectedTask;
     /**
      * Creates new form TechnicianSHomeScreen
      */
@@ -21,6 +35,23 @@ Staff staff;
     }
     public TechnicianStartScreen(Staff staff) {
         this.staff = staff;
+        
+        Timer timer = new Timer(60000, new ActionListener() {
+           @Override
+           public void actionPerformed(ActionEvent e) {
+               
+               BAPPROC bp = new BAPPROC();
+                
+                
+                JobTable.setModel(new TasksTableModel(tl));
+               
+               
+           }
+       });
+        
+        timer.start(); 
+        
+        
         initComponents();
     } 
     /**
@@ -199,20 +230,20 @@ Staff staff;
         jLabel8.setText("Homepage");
 
         jTabbedPane1.setBackground(new java.awt.Color(255, 204, 102));
+        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTabbedPane1MouseClicked(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 204, 102));
 
-        JobTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Job Line ID", "Job Code", "Job Deadline", "Special Instructions", "Order ID"
+        JobTable.setModel(new TasksTableModel(tl));
+        JobTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                JobTableMouseClicked(evt);
             }
-        ));
+        });
         jScrollPane2.setViewportView(JobTable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -247,6 +278,11 @@ Staff staff;
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -277,7 +313,7 @@ Staff staff;
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 877, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(30, Short.MAX_VALUE))
+                        .addContainerGap(33, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel8)
@@ -291,7 +327,7 @@ Staff staff;
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 641, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
+                .addGap(21, 21, 21))
         );
 
         jTabbedPane1.getAccessibleContext().setAccessibleName("Inactive Jobs");
@@ -326,10 +362,37 @@ Staff staff;
 
     private void SelectTaskButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SelectTaskButtonMouseClicked
         // TODO add your handling code here:
-        SelectTaskScreen st = new SelectTaskScreen();
-        st.setVisible(true);
-        setVisible(false);
+       StartTaskScreen st = new StartTaskScreen(selectedTask, staff);
+            st.setVisible(true);
+            setVisible(false);
     }//GEN-LAST:event_SelectTaskButtonMouseClicked
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow();
+        String tID = jTable1.getValueAt(row, 0).toString();
+        int tlID = Integer.parseInt(tID);
+        DataManagerImpl dm = new DataManagerImpl();
+        selectedTask = dm.findTaskLineByCode(tlID);
+        
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void JobTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JobTableMouseClicked
+        // TODO add your handling code here:
+        int row = JobTable.getSelectedRow();
+        String tID = JobTable.getValueAt(row, 0).toString();
+        int tlID = Integer.parseInt(tID);
+        DataManagerImpl dm = new DataManagerImpl();
+        selectedTask = dm.findTaskLineByCode(tlID);
+    }//GEN-LAST:event_JobTableMouseClicked
+
+    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
+        // TODO add your handling code here:
+        DataManagerImpl dm = new DataManagerImpl();
+        tl2 = dm.searchCommencedJobs(staff);
+        jTable1.setModel(new TasksTableModel(tl2));
+        
+    }//GEN-LAST:event_jTabbedPane1MouseClicked
 
     /**
      * @param args the command line arguments
