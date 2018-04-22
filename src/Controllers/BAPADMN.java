@@ -14,7 +14,10 @@ import javax.persistence.LockModeType;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-//Class containing all methods for BAPADMN subsystem
+/**
+ *
+ * @author Daniel
+ */
 public class BAPADMN {
     
     DataManagerImpl dm;

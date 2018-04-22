@@ -13,7 +13,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JTextField;
 
-//Class containing all methods for BAPCUST subsystem
+/**
+ *
+ * @author Daniel
+ */
 public class BAPCUST {
     
     DataManagerImpl dm = new  DataManagerImpl();

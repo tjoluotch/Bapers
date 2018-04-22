@@ -24,14 +24,29 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.*;
 
-//Class containing all methods for BAPACCT subsystem
+/**
+ * @author Daniel
+ */
+//Accept Job at reception
+//Assign Job number
 public class BAPACCT {
   
     Collection<TaskLine> tLines = new LinkedList();
     Collection<JobLine> jCollection = new LinkedList();
     DataManagerImpl dm = new DataManagerImpl();
-     public BAPACCT(){}
+     public BAPACCT(){
+        
+    }
     
+     
+//      public void deleteCustomer(Customer c){
+//          DataManagerImpl dm = new DataManagerImpl();
+//       c = new Customer();
+//        
+//        
+//        dm.deleteCustomer(c);
+//        System.out.println("Customer " + c.getForename() + " " + c.getSurname() + " has been deleted from the database.");
+//    }
         public boolean deleteCustomer(String id){
         boolean deleted;
         Customer c = dm.getEm().find(Customer.class, id); 

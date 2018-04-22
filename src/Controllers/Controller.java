@@ -10,7 +10,10 @@ import domain.Staff;
 import javax.swing.*;
 import gui.*;
 
-//Generic controller class
+/**
+ *
+ * @author tjay
+ */
 public class Controller {
     //Empty Staff object to be "filled" by the staff member typing in their username
     Staff staff;
@@ -18,7 +21,7 @@ public class Controller {
     
     public Controller() {
     }
-    //back end for login GUI screen
+       // return int 1 if office manager logs in, return 
     public int loginSystem(JTextField username, JPasswordField password) {
        
        int logCode = 0;

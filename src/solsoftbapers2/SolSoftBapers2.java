@@ -11,9 +11,9 @@ import gui.Login;
 public class SolSoftBapers2 {
 
     public static void main(String[] args) {
-        //opens the first screen of the BAPERS system
         Login login = new Login();
         login.setVisible(true);
+        
     }
     
 }
